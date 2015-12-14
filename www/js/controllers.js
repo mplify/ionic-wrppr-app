@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $timeout, Auth) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -29,9 +29,18 @@ angular.module('starter.controllers', [])
             $scope.modal.show();
         };
 
+        $rootScope.$on('check-authorization', function(){
+            if (!Auth.isAuthorized()){
+                $scope.login();
+            }
+        });
+
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
             console.log('Doing login', $scope.loginData);
+
+            Auth.setCredentials($scope.loginData.username, $scope.loginData.password);
+
 
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
@@ -39,6 +48,30 @@ angular.module('starter.controllers', [])
                 $scope.closeLogin();
             }, 1000);
         };
+
+        var deploy = new Ionic.Deploy();
+
+        // Update app code with new release from Ionic Deploy
+        $scope.doUpdate = function() {
+            deploy.update().then(function(res) {
+                console.log('Ionic Deploy: Update Success! ', res);
+            }, function(err) {
+                console.log('Ionic Deploy: Update error! ', err);
+            }, function(prog) {
+                console.log('Ionic Deploy: Progress... ', prog);
+            });
+        };
+
+        // Check Ionic Deploy for new code
+        $scope.checkForUpdates = function() {
+            console.log('Ionic Deploy: Checking for updates');
+            deploy.check().then(function(hasUpdate) {
+                console.log('Ionic Deploy: Update available: ' + hasUpdate);
+                $scope.hasUpdate = hasUpdate;
+            }, function(err) {
+                console.error('Ionic Deploy: Unable to check for updates', err);
+            });
+        }
     })
 
     .controller('PlaylistsCtrl', function ($scope) {
@@ -80,5 +113,10 @@ angular.module('starter.controllers', [])
             { title: 'Mobile Bank', id: 1 },
             { title: 'Cards', id: 2 }
         ];
-    });
+    })
+    .controller('DashCtrl', function($scope) {
+
+
+    })
+;
 

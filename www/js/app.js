@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'App.services'])
+angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -22,7 +22,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $stateProvider
 
             .state('app', {
@@ -103,4 +103,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/organizations');
+
+        $httpProvider.interceptors.push('APIInterceptor');
+
     });

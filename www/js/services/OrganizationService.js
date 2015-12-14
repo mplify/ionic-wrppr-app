@@ -1,15 +1,13 @@
 var services = angular.module('App.services');
 
-services.service('OrganizationService', function($http, $q, api, Base64) {
+services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
     return {
         'getOrganizations': function() {
             $http.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
             $http.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+            Auth.isAuthorized();
 
-            var encoded = Base64.encode('marykiselova' + ':' + '123456');
-            $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
-
-
+            console.log($http.defaults.headers.common.Authorization);
 
             var url = api.byName('base-url') + api.byName('organization-url');
             var defer = $q.defer();

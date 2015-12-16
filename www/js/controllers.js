@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $timeout, Auth) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $timeout, Auth) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -17,7 +17,8 @@ angular.module('App.controllers', [])
             scope: $scope
         }).then(function (modal) {
                 $scope.modal = modal;
-            });
+        });
+
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
@@ -49,6 +50,12 @@ angular.module('App.controllers', [])
             }, 1000);
         };
 
+        $scope.logout = function(){
+            Auth.clearCredentials();
+            $state.go($state.current, {}, {reload: true});
+
+        };
+
         var deploy = new Ionic.Deploy();
 
         // Update app code with new release from Ionic Deploy
@@ -74,49 +81,11 @@ angular.module('App.controllers', [])
         }
     })
 
-    .controller('PlaylistsCtrl', function ($scope) {
-        $scope.playlists = [
-            { title: 'Reggae', id: 1 },
-            { title: 'Chill', id: 2 },
-            { title: 'Dubstep', id: 3 },
-            { title: 'Indie', id: 4 },
-            { title: 'Rap', id: 5 },
-            { title: 'Cowbell', id: 6 }
-        ];
-    })
-
-    .controller('PlaylistCtrl', function ($scope, $stateParams) {
-    })
 
     .controller('RegistrationCtrl', function ($scope, $stateParams) {
     })
 
-    .controller('OrganizationsCtrl', function ($scope, OrganizationService) {
-        $scope.organizations = [
-            { title: 'ABN Amro', id: 1 },
-            { title: 'KPN', id: 2 }
-        ];
-
-        $scope.load = function(){
-            $scope.isLoading = true;
-
-            OrganizationService.getOrganizations().then(function(response) {
-                $scope.organizations = response;
-                $scope.isLoading = false;
-
-            });
-        };
-    })
-
-    .controller('OptionsCtrl', function ($scope, $rootScope) {
-        $scope.options = [
-            { title: 'Mobile Bank', id: 1 },
-            { title: 'Cards', id: 2 }
-        ];
-    })
-    .controller('DashCtrl', function($scope) {
 
 
-    })
 ;
 

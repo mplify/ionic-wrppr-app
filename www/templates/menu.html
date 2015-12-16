@@ -14,28 +14,29 @@
 
     <ion-side-menu side="left">
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Left</h1>
+            <h1 class="title">Wrppr App</h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>
                 <ion-item menu-close ng-click="login()">
                     Login
                 </ion-item>
+
+                <ion-item menu-close href="#/app/search">
+                    Search
+                </ion-item>
+
+
                 <ion-item menu-close href="#/app/register">
                     Register
                 </ion-item>
-
-                <ion-item menu-close href="#/app/organizations">
-                    Organizations
+                <ion-item menu-close ng-click="logout()">
+                    Logout
+                </ion-item>
+                <ion-item menu-close href="#/app/dashboard">
+                    Dashboard
                 </ion-item>
             </ion-list>
-            <button class="button button-primary button-block " ng-click="checkForUpdates()">
-                Check for updates
-            </button>
-            <button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
-                download update
-            </button>
-
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

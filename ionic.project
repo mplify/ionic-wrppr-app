@@ -1,4 +1,10 @@
 {
   "name": "wrapper",
-  "app_id": "f44adf11"
+  "app_id": "f44adf11",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://wrppr-core.herokuapp.com"
+    }
+  ]
 }

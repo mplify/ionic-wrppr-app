@@ -1,8 +1,8 @@
-<ion-view view-title="{{currentOrganization.title}}" ng-controller="OptionsCtrl">
+<ion-view view-title="{{currentOrganization}}" ng-controller="OptionsCtrl">
     <ion-content>
 
         <ion-list>
-            <ion-item ng-repeat="option in options" href="#/app/actions">
+            <ion-item ng-repeat="option in options" ng-click="selectOption(option);">
                 {{option.title}}
             </ion-item>
         </ion-list>

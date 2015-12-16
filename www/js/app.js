@@ -22,17 +22,26 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
         $stateProvider
 
-            .state('app', {
-                url: '/app',
+            .state('intro', {
+                url: '/intro',
                 abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl'
+                templateUrl: 'templates/tabs.html'
             })
 
-            .state('app.register', {
+            .state('intro.login', {
+                url: '/login',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/login.html'
+                    }
+                },
+                controller : 'RegistrationCtrl'
+            })
+
+            .state('intro.register', {
                 url: '/register',
                 views: {
                     'menuContent': {
@@ -42,8 +51,27 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'RegistrationCtrl'
             })
 
+            .state('app', {
+                url: '/app',
+                abstract: true,
+                templateUrl: 'templates/menu.html',
+                controller: 'AppCtrl'
+            })
+
+            .state('app.dashboard', {
+                url: '/dashboard',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/dashboard.html'
+                    }
+                },
+                controller : 'RegistrationCtrl'
+            })
+
+
+
             .state('app.organizations', {
-                url: '/organizations',
+                url: '/search',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/organization-list.html'
@@ -53,7 +81,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             })
 
             .state('app.options', {
-                url: '/options',
+                url: '/options/:orgName/:optionId',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/option-list.html'
@@ -63,36 +91,18 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             })
 
 
-
-
-            .state('app.search', {
-                url: '/search',
+            .state('app.actions', {
+                url: '/actions/:orgName',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search.html'
+                        templateUrl: 'templates/actions.html'
                     }
-                }
+                },
+                controller : 'OptionsCtrl'
             })
 
-            .state('app.browse', {
-                url: '/browse',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/browse.html'
-                    }
-                }
-            })
-            .state('app.playlists', {
-                url: '/playlists',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlists.html',
-                        controller: 'PlaylistsCtrl'
-                    }
-                }
-            })
 
-            .state('app.single', {
+            /*.state('app.single', {
                 url: '/playlists/:playlistId',
                 views: {
                     'menuContent': {
@@ -100,10 +110,18 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                         controller: 'PlaylistCtrl'
                     }
                 }
-            });
+            });*/
+
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/organizations');
+        $urlRouterProvider.otherwise('/app/dashboard');
 
         $httpProvider.interceptors.push('APIInterceptor');
+        $httpProvider.defaults.withCredentials = true;
+
+
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+
+        $ionicConfigProvider.views.swipeBackEnabled(true);
 
     });

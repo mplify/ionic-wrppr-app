@@ -96,7 +96,8 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
         },
         isAuthorized : function(){
             var token = localStorageService.get('authorizationToken');
-            console.log('token ' + token);
+            console.log('authorization check: ' + token);
+
             if (token !== null) {
                 $http.defaults.headers.common.Authorization = 'Basic ' + token;
             }
@@ -114,7 +115,6 @@ services.service('APIInterceptor', function($rootScope) {
     var service = this;
 
     service.request = function(config) {
-
         $rootScope.$broadcast('check-authorization');
         var access_token = "";
         if (access_token) {
@@ -124,7 +124,6 @@ services.service('APIInterceptor', function($rootScope) {
     };
 
     service.response = function(config) {
-        // FIXME
         return config;
     }
 

@@ -41,14 +41,14 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'RegistrationCtrl'
             })
 
-            .state('intro.register', {
+            .state('app.register', {
                 url: '/register',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/register.html'
                     }
                 },
-                controller : 'RegistrationCtrl'
+                controller : 'AuthorizationCtrl'
             })
 
             .state('app', {
@@ -113,15 +113,17 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             });*/
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/dashboard');
+        $urlRouterProvider.otherwise('/app/search');
 
         $httpProvider.interceptors.push('APIInterceptor');
-        $httpProvider.defaults.withCredentials = true;
+       // $httpProvider.defaults.withCredentials = true;
 
 
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+        //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+        //$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
         $ionicConfigProvider.views.swipeBackEnabled(true);
+
+
 
     });

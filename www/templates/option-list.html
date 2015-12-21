@@ -1,9 +1,12 @@
 <ion-view view-title="{{currentOrganization}}" ng-controller="OptionsCtrl">
     <ion-content>
-
-        <ion-list>
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="load();">
+        </ion-refresher>
+        <ion-list ng-init="load();">
             <ion-item ng-repeat="option in options" ng-click="selectOption(option);">
-                {{option.title}}
+                {{option.nodeName}}
             </ion-item>
         </ion-list>
     </ion-content>

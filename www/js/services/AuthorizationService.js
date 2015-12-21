@@ -94,7 +94,7 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
 
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
         },
-        isAuthorized : function(){
+        isAuthorized: function () {
             var token = localStorageService.get('authorizationToken');
             console.log('authorization check: ' + token);
 
@@ -111,10 +111,10 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
     };
 }]);
 
-services.service('APIInterceptor', function($rootScope) {
+services.service('APIInterceptor', function ($rootScope) {
     var service = this;
 
-    service.request = function(config) {
+    service.request = function (config) {
         $rootScope.$broadcast('check-authorization');
         var access_token = "";
         if (access_token) {
@@ -123,12 +123,12 @@ services.service('APIInterceptor', function($rootScope) {
         return config;
     };
 
-    service.response = function(config) {
+    service.response = function (config) {
         return config;
     }
 
 
-    service.responseError = function(response) {
+    service.responseError = function (response) {
         if (response.status === 401) {
             $rootScope.$broadcast('unauthorized');
 
@@ -136,3 +136,24 @@ services.service('APIInterceptor', function($rootScope) {
         return response;
     };
 })
+
+services.service('AuthorizationService', function ($http, $q, api, Base64, Auth) {
+    return {
+        'createUser': function (userData) {
+            console.log('create user' + userData);
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+            $http.post(url, userData)
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        }
+    }
+
+});

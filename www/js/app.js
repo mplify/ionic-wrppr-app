@@ -25,48 +25,45 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
         $stateProvider
 
-            .state('intro', {
-                url: '/intro',
-                abstract: true,
-                templateUrl: 'templates/tabs.html'
+            .state('root', {
+                url: '/root',
+                templateUrl: 'templates/dashboard.html'
             })
 
-            .state('intro.login', {
+
+
+
+            .state('login', {
                 url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html'
-                    }
-                },
-                controller : 'RegistrationCtrl'
+                templateUrl: 'templates/login.html',
+                controller : 'AppCtrl'
             })
 
-            .state('app.register', {
+            .state('register', {
                 url: '/register',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/register.html'
-                    }
-                },
+                templateUrl: 'templates/register.html',
                 controller : 'AuthorizationCtrl'
             })
 
+
             .state('app', {
-                url: '/app',
-                abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl'
+                url : '/app',
+                templateUrl : 'templates/menu.html',
+                abstract : true,
+                controller : 'AppCtrl'
             })
 
-            .state('app.dashboard', {
-                url: '/dashboard',
+            .state('app.search', {
+                url: '/search',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/dashboard.html'
+                        templateUrl: 'templates/organization-list.html',
+                        controller : 'OrganizationsCtrl'
                     }
-                },
-                controller : 'RegistrationCtrl'
+                }
             })
+
+
 
 
 
@@ -113,7 +110,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             });*/
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/search');
+        $urlRouterProvider.otherwise('/root');
 
         $httpProvider.interceptors.push('APIInterceptor');
        // $httpProvider.defaults.withCredentials = true;

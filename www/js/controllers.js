@@ -132,9 +132,10 @@ angular.module('App.controllers', [])
         };
 
         $rootScope.$on('check-authorization', function(){
-            if (!Auth.isAuthorized()){
+            var state = $state.current.name;
+            if (!Auth.isAuthorized() && state.indexOf("app") > -1){
 
-                $scope.login();
+               // $scope.login();
             }
         });
 
@@ -143,17 +144,16 @@ angular.module('App.controllers', [])
             console.log('Doing login', $scope.loginData);
 
             Auth.setCredentials($scope.loginData.username, $scope.loginData.password);
+            $scope.closeLogin();
 
+            $state.go('app.search');
 
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            $timeout(function () {
-                $scope.closeLogin();
-            }, 1000);
         };
 
         $scope.logout = function(){
             Auth.clearCredentials();
+
+            if(facebookConnectPlugin !== undefined){
 
             facebookConnectPlugin.logout(function(){
                     $ionicLoading.hide();
@@ -162,9 +162,9 @@ angular.module('App.controllers', [])
                 function(fail){
                     $ionicLoading.hide();
                 });
+            }
 
-            $state.go($state.current, {}, {reload: true});
-
+            $state.go('root');
 
 
         };

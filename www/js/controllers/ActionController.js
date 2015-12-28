@@ -3,7 +3,13 @@ var controllers = angular.module('App.controllers');
 
 controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window) {
 
-    $scope.currentOrganization = $stateParams.orgName;
+    console.log('init action controller');
+    console.log($rootScope.sessionData);
+    if(!$rootScope.sessionData.organization){
+        $state.go('app.organizations');
+    }
+
+    $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
 
     $scope.call = function(){
         console.log('make a call');

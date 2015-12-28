@@ -1,6 +1,29 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $rootScope, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService) {
+        $rootScope.sessionData = {};
+
+        // company styling
+        $scope.$on('$ionicView.beforeEnter', function() {
+            if($rootScope.sessionData.organization){
+                if($rootScope.sessionData.organization.orgName == "ABN Amro"){
+                $rootScope.brandingColor = '#009286';
+                $rootScope.brandingColor2 = '#F2C000';
+                }
+                else if($rootScope.sessionData.organization.orgName == "Aegon"){
+                    $rootScope.brandingColor = '';
+                    $rootScope.brandingColor2 = '#0C7CC2';
+                }
+                else if($rootScope.sessionData.organization.orgName == "Rabobank"){
+                    $rootScope.brandingColor = '#0f238c';
+                    $rootScope.brandingColor2 = '#ff8700';
+                }
+            }
+            else {
+               // delete($rootScope.brandingColor);
+            }
+        });
+
         // This is the success callback from the login method
         var fbLoginSuccess = function(response) {
             if (!response.authResponse){
@@ -146,7 +169,7 @@ angular.module('App.controllers', [])
             Auth.setCredentials($scope.loginData.username, $scope.loginData.password);
             $scope.closeLogin();
 
-            $state.go('app.search');
+            $state.go('app.intro');
 
         };
 

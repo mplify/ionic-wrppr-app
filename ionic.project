@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://localhost:1986"
+      "proxyUrl": "https://wrppr-core-tmp.herokuapp.com"
     }
   ]
 }

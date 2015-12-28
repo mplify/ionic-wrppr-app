@@ -1,24 +1,36 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, OptionService) {
-    $scope.options = [
-        { title: 'Mobile Bank', id: 1 },
-        { title: 'Cards', id: 2 }
 
+
+    $scope.showOptions = true;
+
+    $scope.options = [
 
     ];
 
+    $rootScope.sessionData.options = [];
 
-    $scope.load = function(searchText){
+
+    $scope.load = function(){
+
 
         $ionicLoading.show({
             template: 'Loading...'
         });
 
-        OptionService.getOptions(searchText).then(function(response) {
+        OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function(response) {
             $scope.options = response;
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
+
+            // if no options redirect to actions
+            if($scope.options.length == 0){
+                $scope.showOptions = false;
+            }
+            else {
+                $scope.showOptions = true;
+            }
 
         });
     };
@@ -27,8 +39,11 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
     $scope.currentOrganization = $stateParams.orgName;
 
     $scope.selectOption = function(option){
-        //$state.go('app.options', {"optionId" : option.title});
-        $state.go('app.actions', {'orgName': $stateParams.orgName});
+        console.log(option);
+
+        $rootScope.sessionData.options.push(option);
+
+        $state.go('app.options', { 'orgID' : $stateParams.orgID , 'parentID' : option.NodeID});
     }
 
 });

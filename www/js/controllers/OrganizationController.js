@@ -1,12 +1,15 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $ionicLoading, $state, OrganizationService) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, OrganizationService) {
+
     $scope.organizations = [
 
     ];
 
 
-    $scope.search = {};
+    $scope.search = {
+        model : ""
+    };
 
     $scope.load = function(searchText){
 
@@ -22,10 +25,12 @@ controllers.controller('OrganizationsCtrl', function ($scope, $ionicLoading, $st
         });
     };
 
-    $scope.selectOrganisation = function(organisation){
-        console.log('organisation selected ' + organisation.orgName);
+    $scope.selectOrganisation = function(organization){
+        $rootScope.sessionData.organization = organization;
+        console.log('organisation selected ' + organization.orgName);
+        console.log(organization);
 
-        $state.go('app.options', { 'orgName' : organisation.orgName });
+        $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
     }
 
     $scope.$watch('search.model', function(newVal, oldVal){

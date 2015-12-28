@@ -7,6 +7,9 @@
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services'])
 
     .run(function ($ionicPlatform) {
+
+
+
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -53,6 +56,15 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'AppCtrl'
             })
 
+            .state('app.intro', {
+                url: '/intro',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/intro.html'
+                    }
+                }
+            })
+
             .state('app.search', {
                 url: '/search',
                 views: {
@@ -62,10 +74,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                     }
                 }
             })
-
-
-
-
 
             .state('app.organizations', {
                 url: '/search',
@@ -78,7 +86,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             })
 
             .state('app.options', {
-                url: '/options/:orgName/:optionId',
+                url: '/options/:orgID/:parentID',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/option-list.html'
@@ -98,26 +106,15 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'OptionsCtrl'
             })
 
-
-            /*.state('app.single', {
-                url: '/playlists/:playlistId',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
-                    }
-                }
-            });*/
-
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/root');
 
         $httpProvider.interceptors.push('APIInterceptor');
-       // $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.withCredentials = true;
 
 
-        //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-        //$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
         $ionicConfigProvider.views.swipeBackEnabled(true);
 

@@ -4,7 +4,12 @@
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
                 <input type="search" placeholder="Search" ng-model="search.model">
+                <a ng-if="search.model != ''"
+                   on-touch="search.model=''">
+                    <i class="icon ion-ios-close placeholder-icon"></i>
+                </a>
             </label>
+
 
         </div>
         <ion-refresher

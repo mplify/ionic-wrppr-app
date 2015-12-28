@@ -4,6 +4,7 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
     return {
         'getOrganizations': function(searchText) {
             console.log('load organisations: ' + searchText);
+            console.log($http.defaults.headers.common.Authorization);
 
             var url =  api.byName('base-url') + api.byName('organization-url');
             var defer = $q.defer();
@@ -11,8 +12,12 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
 
             var params = {};
             if(searchText != undefined && searchText.length > 0){
-               params = { orgName: searchText };
+               params = {
+                   where : '{"orgName":{"contains":"'+searchText+'"}}'
+               };
             }
+
+
 
             $http.get(url,
             {
@@ -20,10 +25,10 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
             })
             .success(function (resp) {
                     defer.resolve(resp);
-                })
+            })
             .error(function (err) {
                     defer.reject(err);
-                });
+            });
             return defer.promise;
         }
     }});

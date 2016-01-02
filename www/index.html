@@ -22,10 +22,11 @@
 
 
     <!-- cordova script (this will be a 404 during development) -->
-    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
-    <!-- <script src="cordova.js"></script> -->
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client...
+      <script src="lib/ng-cordova/dist/ng-cordova.min.js"></script>
+      <script src="cordova.js"></script>    -->
 
-    <script src="lib/facebookConnectPlugin.js"></script>
+      <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -43,11 +44,13 @@
     <script src="js/controllers/OrganizationController.js"></script>
     <script src="js/controllers/OptionsController.js"></script>
     <script src="js/controllers/ActionController.js"></script>
+    <script src="js/controllers/UserController.js"></script>
 
 
   </head>
 
   <body ng-app="starter">
+
   <!-- fb-root is needed by the FB API. -->
   <div id="fb-root"></div>
     <ion-nav-view>

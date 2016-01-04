@@ -1,6 +1,12 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $rootScope, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $rootScope, $ionicPlatform, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService) {
+
+
+
+
+
+
         $rootScope.sessionData = {};
 
         // company styling

@@ -1,7 +1,8 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $cordovaAppAvailability) {
+
 
     console.log('init action controller');
     console.log($rootScope.sessionData);
@@ -21,8 +22,33 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $window.location = 'mailto:marykiselova@gmail.com?subject=This is a sample subject';
     }
 
+    $scope.hasTwitterApp = false;
+
     $scope.tweet = function(){
         console.log('tweet');
-        $window.location = 'http://www.twitter.com/' + $scope.currentOrganization;
+
+        if($scope.hasTwitterApp) {
+            window.open('twitter://user?screen_name=marykiselova', '_system', 'location=no');
+        }
+        else {
+            window.open('https://twitter.com/intent/tweet?screen_name=marykiselova', '_system', 'location=no');
+        }
     }
+
+
+    $ionicPlatform.ready(function() {
+
+        $cordovaAppAvailability.check('twitter://')
+            .then(function() {
+                // is available
+                console.log('Twitter is available');
+                $scope.hasTwitterApp = true;
+
+            }, function () {
+                // not available
+                console.log('Twitter is not available');
+                $scope.hasTwitterApp = false;
+            });
+    });
+
 });

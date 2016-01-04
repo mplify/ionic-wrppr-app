@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'ngCordovaOauth', 'App.controllers', 'App.services'])
+angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
     .run(function ($ionicPlatform) {
 
@@ -22,6 +22,8 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+
         });
     })
 

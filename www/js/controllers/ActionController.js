@@ -10,7 +10,9 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $state.go('app.organizations');
     }
 
-    $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
+    if($rootScope.sessionData.organization != undefined) {
+        $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
+    }
 
     $scope.call = function(){
         console.log('make a call');
@@ -23,6 +25,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     }
 
     $scope.hasTwitterApp = false;
+
 
     $scope.tweet = function(){
         console.log('tweet');
@@ -38,7 +41,20 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
     $ionicPlatform.ready(function() {
 
-        $cordovaAppAvailability.check('twitter://')
+        if(!window.cordova){
+            return;
+        }
+
+        $scope.scheme = 'twitter://';
+
+        if(device.platform === 'iOS') {
+            $scope.scheme = 'twitter://';
+        }
+        else if(device.platform === 'Android') {
+            $scope.scheme = 'com.twitter.android';
+        }
+
+        $cordovaAppAvailability.check($scope.scheme)
             .then(function() {
                 // is available
                 console.log('Twitter is available');

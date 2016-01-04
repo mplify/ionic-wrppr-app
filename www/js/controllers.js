@@ -88,6 +88,7 @@ angular.module('App.controllers', [])
         };
 
         $scope.facebookLogin = function(){
+
             console.log(window.cordova);
 
             $cordovaOauth.facebook("1000113900051105", ["email", "public_profile"]).then(function(result){

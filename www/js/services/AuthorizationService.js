@@ -94,6 +94,9 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
 
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
         },
+        getCredentials : function (){
+            return localStorageService.get('authorizationToken');
+        },
         isAuthorized: function () {
             var token = localStorageService.get('authorizationToken');
             console.log('authorization check: ' + token);
@@ -108,6 +111,7 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
             localStorageService.remove('authorizationToken');
             $http.defaults.headers.common.Authorization = 'Basic ';
         }
+
     };
 }]);
 

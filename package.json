@@ -17,10 +17,12 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "ionic-plugin-deploy"
+    "ionic-plugin-deploy",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }

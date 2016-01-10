@@ -1,17 +1,41 @@
 var services = angular.module('App.services');
 
-services.service('UserService', function() {
-    // For the purpose of this example I will store user data on ionic local storage but you should save it on a database
+services.service('UserService', function($http, $q, api) {
+
+
     var setUser = function(user_data) {
-        window.localStorage.starter_facebook_user = JSON.stringify(user_data);
+        window.localStorage.wrapper_user = JSON.stringify(user_data);
     };
 
     var getUser = function(){
-        return JSON.parse(window.localStorage.starter_facebook_user || '{}');
+        return JSON.parse(window.localStorage.wrapper_user || '{}');
     };
 
+
+    var setTwitterUser = function(user_data) {
+        window.localStorage.wrapper_twitter_user = JSON.stringify(user_data);
+    };
+
+    var getTwitterUser = function(){
+        return JSON.parse(window.localStorage.wrapper_twitter_user || '{}');
+    };
+
+
+    var setFacebookUser = function(user_data) {
+        window.localStorage.wrapper_facebook_user = JSON.stringify(user_data);
+    };
+
+    var getFacebookUser = function(){
+        return JSON.parse(window.localStorage.wrapper_facebook_user || '{}');
+    };
+
+
     return {
-        getUser: getUser,
-        setUser: setUser
+        setUser : setUser,
+        getUser : getUser,
+        getTwitterUser: getTwitterUser,
+        setTwitterUser: setTwitterUser,
+        getFacebookUser: getFacebookUser,
+        setFacebookUser: setFacebookUser
     };
 });

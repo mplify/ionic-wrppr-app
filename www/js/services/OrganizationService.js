@@ -13,7 +13,7 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
             var params = {};
             if(searchText != undefined && searchText.length > 0){
                params = {
-                   where : '{"orgName":{"contains":"'+searchText+'"}}'
+                   where : '{"orgName":{"startsWith":"'+searchText+'"}}'
                };
             }
 

@@ -146,7 +146,8 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
         'createUser': function (userData) {
             console.log('create user' + userData);
 
-            var url = api.byName('base-url') + api.byName('user-url');
+            var url = api.byName('base-url') + api.byName('user-url') + api.byName('create');
+
             var defer = $q.defer();
 
             $http.post(url, userData)
@@ -157,6 +158,24 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
                     defer.reject(err);
                 });
             return defer.promise;
+
+        },
+        'login' : function (loginData){
+            console.log('login');
+
+            var url = api.byName('base-url') + api.byName('login-url');
+
+            var defer = $q.defer();
+
+            $http.post(url, loginData)
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+
         }
     }
 

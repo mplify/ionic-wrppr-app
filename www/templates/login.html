@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-controller="AuthorizationCtrl">
   <ion-header-bar>
     <h1 class="title">Login</h1>
     <div class="buttons">
@@ -6,22 +6,29 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="doLogin()">
+    <form name="loginForm" ng-submit="doLogin()" novalidate>
       <div class="list">
+
         <label class="item item-input">
           <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
+          <input type="text" name="username" ng-model="loginData.UserName" required>
+
         </label>
+        <label class="item item-input" ng-show="!loginForm.username.$pristine && loginForm.username.$invalid">
+            <p ng-show="loginForm.username.$error.required">* Username is required</p>
+        </label>
+
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+          <input type="password" name="password" ng-model="loginData.Password" required>
+        </label>
+        <label class="item item-input" ng-show="!loginForm.password.$pristine && loginForm.password.$invalid">
+              <p ng-show="loginForm.password.$error.required">* Password is required</p>
         </label>
         <label class="item">
-          <button class="button button-block button-stable" type="submit">Log in</button>
+          <button class="button button-block button-stable" ng-disabled="loginForm.$invalid" type="submit">Log in</button>
         </label>
-        <label class="item">
-            <button class="button button-block button-positive" ng-click="facebookLogin()">Log with Facebook</button>
-        </label>
+
       </div>
     </form>
 

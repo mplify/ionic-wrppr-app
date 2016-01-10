@@ -1,10 +1,57 @@
 <ion-view view-title="Current User" ng-controller="UserCtrl">
     <ion-content>
-        <div class="row">
-            Basic Auth: {{sessionKey}}
+
+        <ion-list >
+            <ion-item>
+                Basic Auth: {{sessionKey}}
+            </ion-item>
+
+            <div ng-controller="FacebookCtrl">
+                <ion-item>
+
+                    <button class="button button-block button-energized" ng-click="facebookProfile();">
+                        Facebook Profile
+                    </button>
+                </ion-item>
+                <ion-item>
+                    {{facebookKey}}
+                </ion-item>
+                <ion-item>
+                    {{facebookProfileInfo.id}}
+                </ion-item>
+                <ion-item>
+                    {{facebookProfileInfo.name}}
+                </ion-item>
+                <ion-item>
+                    {{facebookProfileInfo.email}}
+                </ion-item>
+                <ion-item>
+                    <img heigth="30" ng-src="{{facebookProfileInfo.photo}}" alt="profile image" />
+                </ion-item>
+            </div>
+            <div ng-controller="TwitterCtrl" ng-init="loadTwitterUser();" >
+                <ion-item>
+
+                    <button class="button button-block button-calm" ng-click="">
+                        Twitter Profile
+                    </button>
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.oauth_token}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.oauth_token_secret}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.user_id}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.screen_name}}
+                </ion-item>
+            </div>
+        </ion-list>
         </div>
-        <div class="row">
-            Facebook Auth: {{facebookKey}}
-        </div>
+
+
     </ion-content>
 </ion-view>

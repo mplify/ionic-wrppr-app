@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $rootScope, $ionicPlatform, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService) {
 
 
 
@@ -45,7 +45,7 @@ angular.module('App.controllers', [])
             scope: $scope
         }).then(function (modal) {
                 $scope.modal = modal;
-        });
+            });
 
 
         // Triggered in the login modal to close it
@@ -58,52 +58,36 @@ angular.module('App.controllers', [])
             $scope.modal.show();
         };
 
-        $rootScope.$on('check-authorization', function(){
-            var state = $state.current.name;
-            if (!Auth.isAuthorized() && state.indexOf("app") > -1){
 
-               // $scope.login();
-            }
-        });
 
-        // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
 
-            Auth.setCredentials($scope.loginData.username, $scope.loginData.password);
-            $scope.closeLogin();
-
-            $state.go('app.intro');
-
-        };
 
         $scope.logout = function(){
             Auth.clearCredentials();
 
+            var url =  api.byName('base-url') + api.byName('logout-url');
 
+
+            $http.get(url,
+                {
+
+                })
+                .success(function (resp) {
+                    console.log('logout done');
+                })
+                .error(function (err) {
+
+                });
 
             $state.go('root');
 
 
         };
 
-        $scope.facebookLogin = function(){
-
-            console.log(window.cordova);
-
-            $cordovaOauth.facebook("1000113900051105", ["email", "public_profile"]).then(function(result){
-                console.log(result.access_token);
-                localStorageService.set('facebookToken', result.access_token);
-
-            },  function(error){
-                alert("Error: " + error);
-            });
-        }
     })
 
 
-    .controller('RegistrationCtrl', function ($scope, $stateParams) {
-    })
+
 
 
 

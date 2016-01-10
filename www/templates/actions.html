@@ -2,11 +2,11 @@
 
     <ion-content>
         <div style="height: 5px;" ng-style="{'background-color': brandingColor}"></div>
-        <div class="row">
+        <div class="row" style="height: 20%; padding-left: 20px; padding-right: 20px;">
             <h3 style="text-align: center; width: 100%;">{{currentOrganization}}</h3>
         </div>
 
-        <div class="row">
+        <div class="row" style="height: 40%; padding-left: 20px; padding-right: 20px;">
             <div class="col">
                 <div class="features-box-icon" ng-style="{'background-color': brandingColor2}" ng-click="call();">
                     <span aria-hidden="true" class="icon_phone"></span>
@@ -18,12 +18,6 @@
             </div>
 
             <div class="col">
-                <div class="features-box-icon" ng-style="{'background-color': brandingColor2}" ng-click="mail();">
-                    <span aria-hidden="true" class="icon_mail"></span>
-                    <button class="button button-clear">
-                        MAIL
-                    </button>
-                </div>
 
             </div>
 
@@ -38,8 +32,21 @@
             </div>
 
         </div>
+        <div class="row" style="height: 40%; padding-left: 20px; padding-right: 20px;">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="features-box-icon" ng-style="{'background-color': brandingColor2}" ng-click="mail();">
+                    <span aria-hidden="true" class="icon_mail"></span>
+                    <button class="button button-clear">
+                        MAIL
+                    </button>
+                </div>
 
-
+            </div>
+            <div class="col">
+            </div>
+        </div>
 
 
     </ion-content>

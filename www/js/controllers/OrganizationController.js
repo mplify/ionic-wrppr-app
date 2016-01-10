@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, OrganizationService) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, OrganizationService, Auth, $http) {
 
     $scope.organizations = [
 
@@ -16,6 +16,8 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
         $ionicLoading.show({
             template: 'Loading...'
         });
+
+
 
         OrganizationService.getOrganizations(searchText).then(function(response) {
             $scope.organizations = response;

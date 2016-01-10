@@ -6,11 +6,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, Auth, $http) {
 
 
 
         $ionicPlatform.ready(function () {
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,6 +26,10 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
         });
+
+
+
+        $http.defaults.headers.common.Authorization = 'Basic ' + Auth.getCredentials();
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
@@ -32,7 +37,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'templates/dashboard.html'
+                templateUrl: 'templates/dashboard2.html'
             })
 
 

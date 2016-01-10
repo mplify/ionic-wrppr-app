@@ -6,16 +6,22 @@ var App = angular.module('App.services');
 
 App.constant('API', {
     // the basis
-    'base-url':	 '/api',
+    'proxy-url':	 '/api',
+
+     // apiary
      //'base-url' : 'http://private-a8cff4-mplify.apiary-mock.com',
 
-    //'base-url' : 'http://localhost:1337',
-    //'base-url': 'https://wrppr-core.herokuapp.com',
-    //'base-url': 'https://wrppr-core-tmp.herokuapp.com',
+    // local sails
+     //'base-url' : 'http://localhost:1337',
+
+    // heroku
+    'base-url': 'https://wrppr-core.herokuapp.com',
+
 
 
     // login
     'login-url':	 	   	   '/login',
+    'logout-url':	 	   	   '/logout',
 
     // organizations
     'organization-url':		   '/wrppr_organizations',
@@ -24,7 +30,10 @@ App.constant('API', {
     'routing-url' :            '/wrppr_routing',
 
     //users
-    'user-url' :                '/wrppr_user'
+    'user-url' :                '/wrppr_users',
+
+    //actions
+    'create' :                  '/create'
 
 });
 
@@ -32,6 +41,11 @@ App.constant('API', {
 App.factory('api', ['API', function(api) {
     return {
         byName: function(name) {
+            if(!window.cordova && name == "base-url"){
+                // for browser version replace base-url to proxied
+                name = "proxy-url";
+
+            }
             return (api[name]);
         }
     };

@@ -10,18 +10,26 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $state.go('app.organizations');
     }
 
+    $scope.contacts = {};
+
+
     if($rootScope.sessionData.organization != undefined) {
+
         $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
+
+        $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
+        $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
+        $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
     }
 
     $scope.call = function(){
         console.log('make a call');
-        $window.location = 'tel:+37126077635';
+        $window.location = 'tel:' + $scope.contacts.call;
     }
 
     $scope.mail = function(){
         console.log('send an email');
-        $window.location = 'mailto:marykiselova@gmail.com?subject=This is a sample subject';
+        $window.location = 'mailto:=' +$scope.contacts.email+ '?subject=This is a sample subject';
     }
 
     $scope.hasTwitterApp = false;
@@ -31,15 +39,15 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         console.log('tweet');
 
         if($scope.hasTwitterApp) {
-            window.open('twitter://user?screen_name=marykiselova', '_system', 'location=no');
+            window.open('twitter://user?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
         else {
-            window.open('https://twitter.com/intent/tweet?screen_name=marykiselova', '_system', 'location=no');
+            window.open('https://twitter.com/intent/tweet?screen_name='+ $scope.contacts.twitter, '_system', 'location=no');
         }
     }
 
 
-    $ionicPlatform.ready(function() {
+    /*$ionicPlatform.ready(function() {
 
         if(!window.cordova){
             return;
@@ -65,6 +73,6 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                 console.log('Twitter is not available');
                 $scope.hasTwitterApp = false;
             });
-    });
+    }); */
 
 });

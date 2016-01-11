@@ -8,13 +8,18 @@
 
             <div ng-controller="FacebookCtrl">
                 <ion-item>
-
                     <button class="button button-block button-energized" ng-click="facebookProfile();">
                         Facebook Profile
                     </button>
+                    <button class="button button-block button-energized" ng-click="facebookLogout();">
+                        Facebook Logout
+                    </button>
                 </ion-item>
                 <ion-item>
-                    {{facebookKey}}
+                    {{facebookProfileInfo.accessToken}}
+                </ion-item>
+                <ion-item>
+                    {{facebookLoginStatus}}
                 </ion-item>
                 <ion-item>
                     {{facebookProfileInfo.id}}

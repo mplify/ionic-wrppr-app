@@ -57,3 +57,7 @@
 .nav-bar-block, .bar {
     background-color: inherit !important;
 }
+
+.icon .ion-ios-close {
+    font-size: 24px;
+}

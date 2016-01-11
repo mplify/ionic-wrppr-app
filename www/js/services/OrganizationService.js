@@ -30,5 +30,28 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
                     defer.reject(err);
             });
             return defer.promise;
+        },
+        'getOrganization' : function(organizationID){
+            console.log('load organisation details: ' + organizationID);
+
+
+            var url =  api.byName('base-url') + api.byName('organization-url') + '/' + organizationID;
+            var defer = $q.defer();
+
+
+            var params = {};
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+
         }
     }});

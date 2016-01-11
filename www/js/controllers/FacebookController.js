@@ -1,9 +1,12 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $cordovaOauth, localStorageService, UserService) {
+controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $ionicLoading, $cordovaOauth, localStorageService, UserService) {
 
     $scope.facebookProfileInfo = {};
+    $scope.facebookLoginStatus = "";
+    $scope.facebookKey = "";
 
+    // auth in browser, not used now !
     $scope.facebookLogin = function(){
 
         console.log(window.cordova);
@@ -17,6 +20,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         });
     }
 
+
     // This is the success callback from the login method
     var fbLoginSuccess = function(response) {
         if (!response.authResponse){
@@ -25,8 +29,9 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         }
 
         var authResponse = response.authResponse;
+        $scope.facebookKey = authResponse.accessToken;
 
-        getFacebookProfileInfo(authResponse)
+        $scope.getFacebookProfileInfo(authResponse)
             .then(function(profileInfo) {
                 // For the purpose of this example I will store user data on local storage
                 UserService.setFacebookUser({
@@ -37,7 +42,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                     picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                 });
                 $ionicLoading.hide();
-                $state.go('app.home');
+                $state.go('app.intro');
             }, function(fail){
                 // Fail get profile info
                 console.log('profile info fail', fail);
@@ -51,12 +56,18 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     };
 
     // This method is to get the user profile info from the facebook api
-    var getFacebookProfileInfo = function (authResponse) {
+    $scope.getFacebookProfileInfo = function (accessToken) {
         var info = $q.defer();
 
-        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + accessToken, null,
             function (response) {
                 console.log(response);
+
+                $scope.facebookProfileInfo = response;
+                console.log(accessToken);
+                $scope.facebookProfileInfo.accessToken = accessToken;
+                $scope.facebookProfileInfo.photo = "http://graph.facebook.com/" + response.id + "/picture?type=large";
+
                 info.resolve(response);
             },
             function (response) {
@@ -70,7 +81,10 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     //This method is executed when the user press the "Login with facebook" button
     $scope.facebookSignIn = function() {
+        console.log('facebook login');
         facebookConnectPlugin.getLoginStatus(function(success){
+            $scope.facebookLoginStatus = success.status;
+
             if(success.status === 'connected'){
                 // The user is logged in and has authenticated your app, and response.authResponse supplies
                 // the user's ID, a valid access token, a signed request, and the time the access token
@@ -81,7 +95,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 var user = UserService.getFacebookUser('facebook');
 
                 if(!user.userID){
-                    getFacebookProfileInfo(success.authResponse)
+                    getFacebookProfileInfo(success.authResponse.accessToken)
                         .then(function(profileInfo) {
                             // For the purpose of this example I will store user data on local storage
                             UserService.setFacebookUser({
@@ -92,13 +106,13 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                                 picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                             });
 
-                            $state.go('app.home');
+                            $state.go('app.intro');
                         }, function(fail){
                             // Fail get profile info
                             console.log('profile info fail', fail);
                         });
                 }else{
-                    $state.go('app.home');
+                    $state.go('app.intro');
                 }
             } else {
                 // If (success.status === 'not_authorized') the user is logged in to Facebook,
@@ -119,10 +133,19 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         });
     };
 
+    $scope.facebookLogout = function(){
+        facebookConnectPlugin.logout();
+
+        UserService.setFacebookUser({});
+    }
+
     $scope.facebookProfile = function(){
+        var user = UserService.getFacebookUser();
 
 
-        var token = localStorageService.get('facebookToken');
+        $scope.getFacebookProfileInfo(user.authResponse.accessToken);
+
+        /*var token = localStorageService.get('facebookToken');
 
         facebookConnectPlugin.api('/me?fields=email,name&access_token=' + token, null,
             function (response) {
@@ -134,6 +157,6 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 console.log(response);
 
             }
-        );
+        );*/
     }
 });

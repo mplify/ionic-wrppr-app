@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $state, AuthorizationService, Auth, UserService) {
+controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, AuthorizationService, Auth, UserService) {
     $scope.currentUser = {};
     $scope.registerData = {};
 
@@ -22,28 +22,30 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             if(result.wrppr_users == false){
                 console.log('login failed: ' + result.message);
 
-                //FIXME implement cute error message
-                alert(result.message);
+                $ionicPopup.alert({
+                    title: 'Login failed',
+                    template: result.message
+                });
+
                 return;
             }
+
+
 
             var user = result.wrppr_users;
             UserService.setUser(user);
 
             Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
             $scope.closeLogin();
+            $scope.loginData = {};
 
-
-            $state.go('app.intro');
+            $state.go('app.search');
 
 
         });
 
 
     };
-
-
-
 
 
     $scope.doRegister = function(){
@@ -54,6 +56,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         console.log('start registration');
 
         AuthorizationService.createUser($scope.registerData).then(function(response) {
+
            $scope.currentUser = response;
 
             var user = response;
@@ -64,7 +67,9 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
           $state.go('app.intro');
 
-       });
+       }, function(error){
+            alert('error');
+        });
     }
 });
 

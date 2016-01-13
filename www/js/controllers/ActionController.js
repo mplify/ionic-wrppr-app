@@ -29,7 +29,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
     $scope.mail = function(){
         console.log('send an email');
-        $window.location = 'mailto:=' +$scope.contacts.email+ '?subject=This is a sample subject';
+        $window.location = 'mailto:' +$scope.contacts.email+ '?subject=This is a sample subject';
     }
 
     $scope.hasTwitterApp = false;

@@ -41,8 +41,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             })
 
 
-
-
             .state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
@@ -135,6 +133,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         $urlRouterProvider.otherwise('/root');
 
         $httpProvider.interceptors.push('APIInterceptor');
+
         $httpProvider.defaults.withCredentials = true;
 
 

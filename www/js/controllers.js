@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService) {
 
 
 
@@ -12,17 +12,12 @@ angular.module('App.controllers', [])
         // company styling
         $scope.$on('$ionicView.beforeEnter', function() {
             if($rootScope.sessionData.organization){
-                if($rootScope.sessionData.organization.orgName == "ABN Amro"){
-                $rootScope.brandingColor = '#009286';
-                $rootScope.brandingColor2 = '#F2C000';
+                if($rootScope.sessionData.organization.BrandingColor1 !== undefined){
+                    $rootScope.brandingColor = $rootScope.sessionData.organization.BrandingColor1;
                 }
-                else if($rootScope.sessionData.organization.orgName == "Aegon"){
-                    $rootScope.brandingColor = '';
-                    $rootScope.brandingColor2 = '#0C7CC2';
-                }
-                else if($rootScope.sessionData.organization.orgName == "Rabobank"){
-                    $rootScope.brandingColor = '#0f238c';
-                    $rootScope.brandingColor2 = '#ff8700';
+
+                if($rootScope.sessionData.organization.BrandingColor2 !== undefined){
+                    $rootScope.brandingColor2 = $rootScope.sessionData.organization.BrandingColor2;
                 }
             }
             else {
@@ -55,6 +50,8 @@ angular.module('App.controllers', [])
 
         // Open the login modal
         $scope.login = function () {
+            alert('remove it is never used, all this modal stuff');
+
             $scope.modal.show();
         };
 
@@ -84,6 +81,13 @@ angular.module('App.controllers', [])
 
 
         };
+
+        $scope.$on('serverdown', function(){
+            $ionicPopup.alert({
+                title: 'Service is temporarily not available',
+                template: 'BUT we are working hard to fix it'
+            });
+        });
 
     })
 

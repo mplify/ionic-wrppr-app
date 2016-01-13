@@ -1,9 +1,12 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, AuthorizationService, Auth, UserService) {
-    $scope.currentUser = {};
-    $scope.registerData = {};
+controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, AuthorizationService, Auth, UserService) {
+    console.log('init auth controller');
 
+    $scope.registerData = {};
+    $scope.loginData = {};
+
+    $scope.loginSubmitted = false;
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
@@ -36,12 +39,19 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             UserService.setUser(user);
 
             Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
+
+
             $scope.closeLogin();
-            $scope.loginData = {};
+            $scope.loginData.UserName = "";
+            $scope.loginData.Password = "";
 
             $state.go('app.search');
 
 
+        },
+        function(result){
+            $ionicLoading.hide();
+            console.log('failed to login' + result);
         });
 
 
@@ -56,9 +66,6 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         console.log('start registration');
 
         AuthorizationService.createUser($scope.registerData).then(function(response) {
-
-           $scope.currentUser = response;
-
             var user = response;
             UserService.setUser(user);
 

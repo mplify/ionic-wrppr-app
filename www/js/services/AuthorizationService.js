@@ -109,13 +109,13 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
         clearCredentials: function () {
             document.execCommand("ClearAuthenticationCache");
             localStorageService.remove('authorizationToken');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            $http.defaults.headers.common.Authorization = '';
         }
 
     };
 }]);
 
-services.service('APIInterceptor', function ($rootScope) {
+services.service('APIInterceptor', function ($rootScope, $q) {
     var service = this;
 
     service.request = function (config) {
@@ -137,7 +137,11 @@ services.service('APIInterceptor', function ($rootScope) {
             $rootScope.$broadcast('unauthorized');
 
         }
-        return response;
+
+        if (response.status === 503) {
+            $rootScope.$broadcast('serverdown');
+        }
+        return $q.reject(response);
     };
 })
 

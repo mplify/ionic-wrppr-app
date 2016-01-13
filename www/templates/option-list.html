@@ -1,9 +1,7 @@
 
 <ion-view view-title="{{currentOrganization}}" ng-controller="OptionsCtrl">
-
-
     <ion-content ng-show="showOptions">
-        <div style="height: 5px;" ng-style="{'background-color': brandingColor}"></div>
+        <div style="height: 5px; background-color: #ff5642;" ng-style="{'background-color': brandingColor}"></div>
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="load();">

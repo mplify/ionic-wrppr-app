@@ -66,6 +66,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         console.log('start registration');
 
         AuthorizationService.createUser($scope.registerData).then(function(response) {
+            Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
+
             var user = response;
             UserService.setUser(user);
 
@@ -75,7 +77,12 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
           $state.go('app.intro');
 
        }, function(error){
-            alert('error');
+            $ionicLoading.hide();
+
+            $ionicPopup.alert({
+                title: 'Registration Failed',
+                template: error.message
+            });
         });
     }
 });

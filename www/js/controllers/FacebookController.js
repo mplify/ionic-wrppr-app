@@ -1,12 +1,13 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $ionicLoading, $cordovaOauth, localStorageService, UserService) {
+    $scope.facebookLoginEnabled = window.cordova;
 
     $scope.facebookProfileInfo = {};
     $scope.facebookLoginStatus = "";
     $scope.facebookKey = "";
 
-    // auth in browser, not used now !
+    /* auth in browser, not used now !
     $scope.facebookLogin = function(){
 
         console.log(window.cordova);
@@ -19,7 +20,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             alert("Error: " + error);
         });
     }
-
+    */
 
     // This is the success callback from the login method
     var fbLoginSuccess = function(response) {

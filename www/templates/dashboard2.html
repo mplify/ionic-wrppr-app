@@ -8,10 +8,10 @@
         <div class="row">
             <h2 style="text-align: center; width: 100%;">Search any business, choose your question and contact</h2>
         </div>
-        <div class="row" ng-controller="FacebookCtrl">
+        <div class="row" ng-controller="FacebookCtrl" ng-show="facebookLoginEnabled">
             <button class="button button-block button-positive" ng-click="facebookSignIn()">Sign in with Facebook</button>
         </div>
-        <div class="row" ng-controller="TwitterCtrl">
+        <div class="row" ng-controller="TwitterCtrl" ng-show="twitterLoginEnabled">
             <button class="button button-block button-calm" ng-click="twitterLogin()">Sign in with Twitter</button>
         </div>
         <div class="row">
@@ -25,6 +25,5 @@
         </div>
 
     </ion-content>
-
 
 </ion-view>

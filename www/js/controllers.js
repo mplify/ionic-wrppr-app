@@ -12,17 +12,22 @@ angular.module('App.controllers', [])
         // company styling
         $scope.$on('$ionicView.beforeEnter', function() {
             if($rootScope.sessionData.organization){
-                if($rootScope.sessionData.organization.BrandingColor1 !== undefined){
+                if($rootScope.sessionData.organization.BrandingColor1 !== null){
                     $rootScope.brandingColor = $rootScope.sessionData.organization.BrandingColor1;
                 }
+                else {
+                    $rootScope.brandingColor = '#ff5642';
+                }
 
-                if($rootScope.sessionData.organization.BrandingColor2 !== undefined){
+                if($rootScope.sessionData.organization.BrandingColor2 !== null){
                     $rootScope.brandingColor2 = $rootScope.sessionData.organization.BrandingColor2;
                 }
+                else {
+                    $rootScope.brandingColor2 = '#ff5642';
+                }
+
             }
-            else {
-               // delete($rootScope.brandingColor);
-            }
+
         });
 
         // With the new view caching in Ionic, Controllers are only called

@@ -17,6 +17,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
 
+        $scope.currentOptions = $rootScope.sessionData.options;
+
         $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
         $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
         $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
@@ -46,6 +48,13 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         }
     }
 
+    $scope.mailFeedback = function(){
+        $window.location = 'mailto:feedback@mplify.nl'+ '?subject=Feedback about wrapper app';
+    }
+
+    $scope.mailSupport = function(){
+        $window.location = 'mailto:support@mplify.nl'+ '?subject=Feedback about wrapper app';
+    }
 
     /*$ionicPlatform.ready(function() {
 

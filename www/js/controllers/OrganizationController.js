@@ -29,6 +29,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
 
     $scope.selectOrganisation = function(organization){
         $rootScope.sessionData.organization = organization;
+        $rootScope.sessionData.options = [];
         console.log('organisation selected ' + organization.orgName);
         console.log(organization);
 

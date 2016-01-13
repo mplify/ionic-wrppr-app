@@ -2,8 +2,20 @@
 
     <ion-content>
         <div style="height: 5px;" ng-style="{'background-color': brandingColor}"></div>
-        <div class="row" style="height: 20%; padding-left: 20px; padding-right: 20px;">
+        <div class="row" style="height: 10%; padding-left: 20px; padding-right: 20px;">
             <h3 style="text-align: center; width: 100%;">{{currentOrganization}}</h3>
+        </div>
+
+        <div class="row" ng-repeat="option in currentOptions">
+            <p style="text-align: center; width: 100%;">{{option.NodeName}}</p>
+        </div>
+
+        <div class="row button-block" style="text-align: center; display: block;"  ng-show="contacts.call == null && contacts.twitter == null && contacts.email == null">
+
+                <div class="ion-sad-outline" style="font-size: 86px; color: lightgray;"></div>
+            <h4 class="title" style="width: 100%; text-align: center;">We don't have any contacts for {{currentOrganization}}, please try later or contact our support</h4>
+
+
         </div>
 
         <div class="row" style="height: 40%; padding-left: 20px; padding-right: 20px;">
@@ -52,10 +64,10 @@
     </ion-content>
     <div class="bar bar-footer">
         <div class="button-bar">
-            <button class="button button-clear">
+            <button class="button button-clear" ng-click="mailFeedback();">
                 Feedback
             </button>
-            <button class="button button-clear">
+            <button class="button button-clear" ng-click="mailSupport();">
                 Support
             </button>
         </div>

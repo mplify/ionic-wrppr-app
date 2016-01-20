@@ -38,6 +38,9 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             var user = result.wrppr_users;
             UserService.setUser(user);
 
+            //$scope.loginData.UserName = "marykiselova@gmail.com";
+            //$scope.loginData.Password = "facebook CAAOJstuInwIBAPPtRGV1JP8nLxw47FhQzoejXMZA8CwP6uUyPgO6LHwHCLxtNydIiB8tVpdLQIanJY0QBpvZCLpxBgcdAseW7lhTSezBrWhGYe2Iv7CoEzkLy9ZAzF7dmOEF2LDO4hldORVnoc6DgNmBBdiHAl1ZBLVEZBwr59F9JYo7vc0Ihes2ZA2i7roNJllreDzkVcwCmZAU0S9GS9pOZA8OOKpC4JVpQrKGxzt5xQZDZD";
+
             Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
 
 

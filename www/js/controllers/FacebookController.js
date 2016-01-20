@@ -5,7 +5,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     $scope.facebookProfileInfo = {};
     $scope.facebookLoginStatus = "";
-    $scope.facebookKey = "";
+
 
     /* auth in browser, not used now !
     $scope.facebookLogin = function(){
@@ -31,14 +31,10 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         }
 
         var authResponse = response.authResponse;
-        $scope.facebookKey = authResponse.accessToken;
 
-        //FIXME
-        $http.defaults.headers.common.Authorization = 'facebook ' + authResponse.accessToken;
 
-        $scope.getFacebookProfileInfo(authResponse)
+        $scope.getFacebookProfileInfo(authResponse.accessToken)
             .then(function(profileInfo) {
-                UserService.loadUser(profileInfo.email);
                 // For the purpose of this example I will store user data on local storage
                 UserService.setFacebookUser({
                     authResponse: authResponse,
@@ -48,7 +44,8 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                     picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                 });
                 $ionicLoading.hide();
-                $state.go('app.intro');
+
+                $scope.facebookConnectedStateHandler(authResponse);
             }, function(fail){
                 // Fail get profile info
                 console.log('profile info fail', fail);
@@ -194,7 +191,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
                 UserService.updateUser(remoteFBUser).then(function(updatedUser){
                     $scope.finishFacebookLogin();
-                });;
+                });
             }
 
         });;
@@ -203,7 +200,10 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     $scope.finishFacebookLogin = function(){
          var localFBUser = UserService.getLocalFacebookUser();
-         Auth.setToken('Facebook ' + localFBUser.authResponse.accessToken);
+
+         var username = localFBUser.email;
+         var password = "facebook " + localFBUser.authResponse.accessToken;
+         Auth.setCredentials(username, password);
 
         $state.go('app.intro');
     }

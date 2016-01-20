@@ -88,7 +88,7 @@ services.factory('Base64', function () {
 services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Base64, $http, localStorageService) {
     return {
         setCredentials: function (username, password) {
-
+            console.log('set credentials');
             var encoded = Base64.encode(username + ':' + password);
             var token = 'Basic ' + encoded;
 

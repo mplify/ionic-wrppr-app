@@ -90,9 +90,17 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
         setCredentials: function (username, password) {
 
             var encoded = Base64.encode(username + ':' + password);
-            localStorageService.set('authorizationToken', encoded);
+            var token = 'Basic ' + encoded;
 
-            $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+            localStorageService.set('authorizationToken', token);
+            $http.defaults.headers.common.Authorization = token;
+
+
+        },
+        setToken : function(token){
+            console.log('update auth token ' + token);
+            localStorageService.set('authorizationToken', token);
+            $http.defaults.headers.common.Authorization = token;
         },
         getCredentials : function (){
             return localStorageService.get('authorizationToken');
@@ -102,7 +110,7 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
             console.log('authorization check: ' + token);
 
             if (token !== null) {
-                $http.defaults.headers.common.Authorization = 'Basic ' + token;
+                $http.defaults.headers.common.Authorization = token;
             }
             return (token !== null);
         },
@@ -111,7 +119,6 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
             localStorageService.remove('authorizationToken');
             $http.defaults.headers.common.Authorization = '';
         }
-
     };
 }]);
 

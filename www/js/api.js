@@ -33,7 +33,8 @@ App.constant('API', {
     'user-url' :                '/wrppr_users',
 
     //actions
-    'create' :                  '/create'
+    'create' :                  '/create',
+    'update' :                  '/update'
 
 });
 

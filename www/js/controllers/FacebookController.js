@@ -146,6 +146,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     }
 
     $scope.checkFacebookUser = function(localFBUser){
+        console.log('check facebook users in our DB');
         UserService.searchByFacebookAccount(localFBUser.email).then(function(facebookUsers) {
             console.log(facebookUsers);
 

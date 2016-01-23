@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService, UserService) {
 
 
 
@@ -65,6 +65,9 @@ angular.module('App.controllers', [])
 
         $scope.logout = function(){
             Auth.clearCredentials();
+
+            facebookConnectPlugin.logout();
+            UserService.setUser({});
 
             var url =  api.byName('base-url') + api.byName('logout-url');
 

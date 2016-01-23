@@ -20,9 +20,6 @@
                     {{localFBUser.authResponse}}
                 </ion-item>
                 <ion-item>
-                    <button class="button button-block button-energized" ng-click="facebookProfile();">
-                        Facebook Profile
-                    </button>
                     <button class="button button-block button-energized" ng-click="facebookLogout();">
                         Facebook Logout
                     </button>
@@ -31,24 +28,6 @@
                     <button class="button button-block button-energized" ng-click="clearLocalStorage();">
                         Clear local storage
                     </button>
-                </ion-item>
-                <ion-item>
-                    {{facebookProfileInfo.accessToken}}
-                </ion-item>
-                <ion-item>
-                    {{facebookLoginStatus}}
-                </ion-item>
-                <ion-item>
-                    {{facebookProfileInfo.id}}
-                </ion-item>
-                <ion-item>
-                    {{facebookProfileInfo.name}}
-                </ion-item>
-                <ion-item>
-                    {{facebookProfileInfo.email}}
-                </ion-item>
-                <ion-item>
-                    <img heigth="30" ng-src="{{facebookProfileInfo.photo}}" alt="profile image" />
                 </ion-item>
             </div>
             <div ng-controller="TwitterCtrl" ng-init="loadTwitterUser();" >

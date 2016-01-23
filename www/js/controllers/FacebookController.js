@@ -64,19 +64,26 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     };
 
     // This method is to get the user profile info from the facebook api
-    $scope.getFacebookProfileInfo = function (accessToken) {
+    $scope.getFacebookProfileInfo = function (authResponse) {
         var info = $q.defer();
 
-        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + accessToken, null,
-            function (response) {
-                console.log(response);
+        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+            function (profileInfo) {
+                console.log(profileInfo);
+                // For the purpose of this example I will store user data on local storage
+                UserService.setLocalFacebookUser({
+                    authResponse: authResponse,
+                    userID: profileInfo.id,
+                    name: profileInfo.name,
+                    email: profileInfo.email,
+                    picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+                });
+                $scope.localFBUser = UserService.getLocalFacebookUser();
 
-                $scope.facebookProfileInfo = response;
-                console.log(accessToken);
-                $scope.facebookProfileInfo.accessToken = accessToken;
-                $scope.facebookProfileInfo.photo = "http://graph.facebook.com/" + response.id + "/picture?type=large";
+                $scope.checkFacebookUser(profileInfo);
 
-                info.resolve(response);
+
+                info.resolve(profileInfo);
             },
             function (response) {
                 console.log(response);
@@ -101,7 +108,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 $scope.facebookConnectedStateHandler(success);
 
             } else {
-                alert('open facebookConnenct login');
+                $scope.debugMessage('open facebookConnenct login');
                 // If (success.status === 'not_authorized') the user is logged in to Facebook,
                 // but has not authenticated your app
                 // Else the person is not logged into Facebook,
@@ -172,6 +179,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
                 UserService.searchByEmail(localFBUser.email).then(function(matchedUsers){
                     if(matchedUsers.length == 0){
+                        $scope.debugMessage('create user in DB');
                         console.log('create user based on facebook profile info: ' + localFBUser);
 
                         var userData = {
@@ -187,7 +195,9 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                         });
                     }
                     else {
+                        $scope.debugMessage('update user in DB');
                         console.log('link facebook acoount to user with same email address');
+
                         var remoteFBUser = matchedUsers[0];
                         remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
                         remoteFBUser.FacebookAccount = localFBUser.email;
@@ -245,14 +255,4 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         }
     }
 
-
-
-
-    //FIXME for user testing screen, remove later
-    $scope.facebookProfile = function(){
-        var user = UserService.getLocalFacebookUser();
-        $scope.getFacebookProfileInfo(user.authResponse.accessToken);
-
-
-    }
 });

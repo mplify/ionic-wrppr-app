@@ -99,6 +99,7 @@ services.service('UserService', function ($http, $q, api) {
 
         $http.post(url, userData)
             .success(function (resp) {
+                setUser(resp);
                 defer.resolve(resp);
             })
             .error(function (err) {
@@ -123,6 +124,7 @@ services.service('UserService', function ($http, $q, api) {
 
         $http.put(url, data)
             .success(function (resp) {
+                setUser(resp);
                 defer.resolve(resp);
             })
             .error(function (err) {

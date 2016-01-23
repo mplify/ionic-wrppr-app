@@ -8,11 +8,28 @@
 
             <div ng-controller="FacebookCtrl">
                 <ion-item>
+                    {{localFBUser.email}}
+                </ion-item>
+                <ion-item>
+                    {{localFBUser.userID}}
+                </ion-item>
+                <ion-item>
+                    <img heigth="30" ng-src="{{localFBUser.picture}}" alt="profile image" />
+                </ion-item>
+                <ion-item>
+                    {{localFBUser.authResponse}}
+                </ion-item>
+                <ion-item>
                     <button class="button button-block button-energized" ng-click="facebookProfile();">
                         Facebook Profile
                     </button>
                     <button class="button button-block button-energized" ng-click="facebookLogout();">
                         Facebook Logout
+                    </button>
+                </ion-item>
+                <ion-item>
+                    <button class="button button-block button-energized" ng-click="clearLocalStorage();">
+                        Clear local storage
                     </button>
                 </ion-item>
                 <ion-item>

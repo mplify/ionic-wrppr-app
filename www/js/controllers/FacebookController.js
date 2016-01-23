@@ -1,6 +1,9 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $ionicLoading, $http, $cordovaOauth, localStorageService, UserService, Auth) {
+    $scope.log = 'debug';
+
+
     $scope.facebookLoginEnabled = window.cordova;
 
     $scope.facebookProfileInfo = {};
@@ -24,6 +27,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     // This is the success callback from the login method
     var fbLoginSuccess = function(response) {
+        $scope.debugMessage('fb login success');
 
         if (!response.authResponse){
             fbLoginError("Cannot find the authResponse");
@@ -36,7 +40,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         $scope.getFacebookProfileInfo(authResponse.accessToken)
             .then(function(profileInfo) {
                 // For the purpose of this example I will store user data on local storage
-                UserService.setFacebookUser({
+                UserService.setLocalFacebookUser({
                     authResponse: authResponse,
                     userID: profileInfo.id,
                     name: profileInfo.name,
@@ -49,6 +53,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             }, function(fail){
                 // Fail get profile info
                 console.log('profile info fail', fail);
+                $ionicLoading.hide();
             });
     };
 
@@ -88,12 +93,15 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
         facebookConnectPlugin.getLoginStatus(function(success){
             $scope.facebookLoginStatus = success.status;
+            console.log('facebook login status: '  + success.status);
+            $scope.debugMessage("fb status " + success.status);
 
             if(success.status === 'connected'){
 
                 $scope.facebookConnectedStateHandler(success);
 
             } else {
+                alert('open facebookConnenct login');
                 // If (success.status === 'not_authorized') the user is logged in to Facebook,
                 // but has not authenticated your app
                 // Else the person is not logged into Facebook,
@@ -115,14 +123,15 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     $scope.facebookConnectedStateHandler = function(connectedResponse) {
 
         // Check if we have our user saved
-        var localFBUser = UserService.getLocalFacebookUser();
+        $scope.localFBUser = UserService.getLocalFacebookUser();
+        console.log("load local fb user: " + $scope.localFBUser);
 
 
-        if(!localFBUser.userID){
+        if(!$scope.localFBUser.userID){
+            $scope.debugMessage("No local fb user");
+
             $scope.getFacebookProfileInfo(connectedResponse.authResponse.accessToken)
                 .then(function(profileInfo) {
-
-                    $scope.checkFacebookUser(profileInfo);
 
                     // For the purpose of this example I will store user data on local storage
                     UserService.setLocalFacebookUser({
@@ -132,13 +141,19 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                         email: profileInfo.email,
                         picture : "http://graph.facebook.com/" + connectedResponse.authResponse.userID + "/picture?type=large"
                     });
+                    $scope.localFBUser = UserService.getLocalFacebookUser();
+
+                    $scope.checkFacebookUser(profileInfo);
+
+
 
                 }, function(fail){
                     // Fail get profile info
                     console.log('profile info fail', fail);
                 });
         }else{
-            $scope.checkFacebookUser(localFBUser);
+            $scope.debugMessage("Has local user "+ $scope.localFBUser.email);
+            $scope.checkFacebookUser($scope.localFBUser);
 
         }
 
@@ -147,8 +162,10 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     $scope.checkFacebookUser = function(localFBUser){
         console.log('check facebook users in our DB');
+
         UserService.searchByFacebookAccount(localFBUser.email).then(function(facebookUsers) {
-            console.log(facebookUsers);
+            console.log("found FB users: " +  facebookUsers.length);
+
 
             if(facebookUsers.length == 0){
                 // try to find user with same email
@@ -184,6 +201,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
             }
             else {
+                $scope.debugMessage('Found matched FB user in DB: ' + $scope.localFBUser.userID);
                 console.log('update facebook token to existing facebook account');
                 var remoteFBUser = facebookUsers[0];
                 if(remoteFBUser.FacebookToken !== localFBUser.authResponse.accessToken) {
@@ -211,16 +229,28 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     $scope.facebookLogout = function(){
         facebookConnectPlugin.logout();
-        UserService.setFacebookUser({});
+        UserService.setLocalFacebookUser({});
+        $scope.localFBUser = UserService.getLocalFacebookUser();
     }
 
+
+    $scope.clearLocalStorage = function(){
+       delete(window.localStorage.wrapper_facebook_user);
+    }
+
+    $scope.debugMessage = function(message, data){
+        if($scope.log == 'debug'){
+         alert(message);
+         console.log(data);
+        }
+    }
 
 
 
 
     //FIXME for user testing screen, remove later
     $scope.facebookProfile = function(){
-        var user = UserService.getFacebookUser();
+        var user = UserService.getLocalFacebookUser();
         $scope.getFacebookProfileInfo(user.authResponse.accessToken);
 
 

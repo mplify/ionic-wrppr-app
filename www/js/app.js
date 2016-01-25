@@ -136,6 +136,15 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.messages', {
+                url: '/messages',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/message-list.html'
+                    }
+                }
+            })
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/root');
 

@@ -32,6 +32,9 @@ App.constant('API', {
     //users
     'user-url' :                '/wrppr_users',
 
+    //messages
+    'message-url':              '/wrppr_messages',
+
     //actions
     'create' :                  '/create',
     'update' :                  '/update'

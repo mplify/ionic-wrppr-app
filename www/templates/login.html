@@ -20,7 +20,7 @@
 
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" name="password" ng-model="loginData.Password" required>
+          <input type="password" name="password" ng-model="loginData.Password" required complex-password>
         </label>
         <label class="item item-input" ng-show="!loginForm.password.$pristine && loginForm.password.$invalid">
               <p ng-show="loginForm.password.$error.required">* Password is required</p>

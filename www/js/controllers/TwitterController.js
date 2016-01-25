@@ -15,6 +15,8 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
     $scope.twitterLogin = function () {
 
         $cordovaOauth.twitter($scope.consumerKey, $scope.consumerSecret, {}).then(function (result) {
+            alert(result.access_token);
+
             $scope.twitterProfileInfo = result;
             UserService.setUser(result);
             console.log(result);

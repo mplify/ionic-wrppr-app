@@ -66,7 +66,9 @@ angular.module('App.controllers', [])
         $scope.logout = function(){
             Auth.clearCredentials();
 
-            facebookConnectPlugin.logout();
+            if(window.cordova){
+                facebookConnectPlugin.logout();
+            }
             UserService.setUser({});
 
             var url =  api.byName('base-url') + api.byName('logout-url');
@@ -84,6 +86,7 @@ angular.module('App.controllers', [])
                 });
 
             $state.go('root');
+            window.location.reload();
 
 
         };

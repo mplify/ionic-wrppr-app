@@ -66,3 +66,24 @@
     background-color : #ff5642 !important;
 
 }
+
+
+.password-complexity {
+    height: 8px;
+    padding: 0px 0px 2px 0px;
+}
+
+.password-complexity .red {
+    background-color: red;
+
+}
+
+.password-complexity .yellow {
+    background-color: yellow;
+
+}
+
+.password-complexity .green {
+    background-color: green;
+
+}

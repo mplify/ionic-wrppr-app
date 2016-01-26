@@ -90,6 +90,9 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
     }
 
     $scope.$watch('registerData.Password', function(password, oldValue) {
+        if(password == undefined){
+            password = "";
+        }
 
         var hasUpperCase = /[A-Z]/.test(password);
         var hasLowerCase = /[a-z]/.test(password);

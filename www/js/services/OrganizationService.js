@@ -2,7 +2,7 @@ var services = angular.module('App.services');
 
 services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
     return {
-        'getOrganizations': function(searchText) {
+        'getOrganizations': function(searchText, lastId) {
             console.log('load organisations: ' + searchText);
             console.log($http.defaults.headers.common.Authorization);
 
@@ -15,6 +15,11 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
                params = {
                    where : '{"orgName":{"startsWith":"'+searchText+'"}}'
                };
+            }
+
+            if(lastId){
+                console.log('use last id paging param ' + lastId);
+               // params.lastId = lastId;
             }
 
 

@@ -20,7 +20,7 @@
                     <input type="password" ng-model="registerData.Password" required>
 
                 </label>
-                <label class="item password-complexity row" ng-show="!registerForm.password.$pristine && registerForm.password.$invalid">
+                <label class="item password-complexity row" ng-show="!registerForm.password.$pristine">
                     <div class="col" ng-class="registerData.passwordComplexity"></div>
                 </label>
 

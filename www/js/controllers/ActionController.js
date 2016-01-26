@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $cordovaAppAvailability, MessageService, UserService) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, localStorageService, MessageService, UserService) {
 
 
     console.log('init action controller');
@@ -50,8 +50,9 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         console.log('tweet');
 
         $scope.logAction($scope.actionMessages.TWEET);
+        var hasTwitterApp = localStorageService.get('twitterApp');
 
-        if($scope.hasTwitterApp) {
+        if(hasTwitterApp) {
             window.open('twitter://user?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
         else {
@@ -85,32 +86,6 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $window.location = 'mailto:support@mplify.nl'+ '?subject=Feedback about wrapper app';
     }
 
-    /*$ionicPlatform.ready(function() {
 
-        if(!window.cordova){
-            return;
-        }
-
-        $scope.scheme = 'twitter://';
-
-        if(device.platform === 'iOS') {
-            $scope.scheme = 'twitter://';
-        }
-        else if(device.platform === 'Android') {
-            $scope.scheme = 'com.twitter.android';
-        }
-
-        $cordovaAppAvailability.check($scope.scheme)
-            .then(function() {
-                // is available
-                console.log('Twitter is available');
-                $scope.hasTwitterApp = true;
-
-            }, function () {
-                // not available
-                console.log('Twitter is not available');
-                $scope.hasTwitterApp = false;
-            });
-    }); */
 
 });

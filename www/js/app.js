@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
-    .run(function ($ionicPlatform, Auth, $http) {
+    .run(function ($ionicPlatform, Auth, $http, TwitterService) {
 
 
 
@@ -18,14 +18,19 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
 
+
+
             }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
 
+            TwitterService.checkTwitterApp();
 
         });
+
+
 
 
 

@@ -1,0 +1,58 @@
+<ion-view view-title="Current User" ng-controller="UserCtrl">
+    <ion-content>
+
+        <ion-list >
+            <ion-item>
+                Basic Auth: {{sessionKey}}
+            </ion-item>
+
+            <div ng-controller="FacebookCtrl">
+                <ion-item>
+                    {{localFBUser.email}}
+                </ion-item>
+                <ion-item>
+                    {{localFBUser.userID}}
+                </ion-item>
+                <ion-item>
+                    <img heigth="30" ng-src="{{localFBUser.picture}}" alt="profile image" />
+                </ion-item>
+                <ion-item>
+                    {{localFBUser.authResponse}}
+                </ion-item>
+                <ion-item>
+                    <button class="button button-block button-energized" ng-click="facebookLogout();">
+                        Facebook Logout
+                    </button>
+                </ion-item>
+                <ion-item>
+                    <button class="button button-block button-energized" ng-click="clearLocalStorage();">
+                        Clear local storage
+                    </button>
+                </ion-item>
+            </div>
+            <div ng-controller="TwitterCtrl" ng-init="loadTwitterUser();" >
+                <ion-item>
+
+                    <button class="button button-block button-calm" ng-click="">
+                        Twitter Profile
+                    </button>
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.oauth_token}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.oauth_token_secret}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.user_id}}
+                </ion-item>
+                <ion-item>
+                    {{twitterProfileInfo.screen_name}}
+                </ion-item>
+            </div>
+        </ion-list>
+        </div>
+
+
+    </ion-content>
+</ion-view>

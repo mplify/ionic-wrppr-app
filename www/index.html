@@ -45,6 +45,7 @@
       <script src="js/services/OrganizationService.js"></script>
       <script src="js/services/OptionService.js"></script>
       <script src="js/services/MessageService.js"></script>
+      <script src="js/services/DTMFService.js"></script>
 
 
     <script src="js/api.js"></script>
@@ -73,6 +74,12 @@
 
     </ion-nav-view>
   <script src="cordova.js"></script>
+  <script>
+      var handleOpenURL = function(url) {
+          window.localStorage.setItem("external_load", url);
+          alert("RECEIVED URL: " + url);
+      };
+  </script>
 
   </body>
 </html>

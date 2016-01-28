@@ -1,12 +1,11 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, localStorageService, MessageService, UserService) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, localStorageService, MessageService, UserService, DTMFService) {
+    $log.debug('init action controller');
 
-
-    console.log('init action controller');
-    console.log($rootScope.sessionData);
     if(!$rootScope.sessionData.organization){
+        $log.info('organization not selected, redirects to organization search');
         $state.go('app.organizations');
     }
 
@@ -31,13 +30,15 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     }
 
     $scope.call = function(){
-        console.log('make a call');
+        $log.info('make a call');
         $scope.logAction($scope.actionMessages.CALL);
-        $window.location = 'tel:' + $scope.contacts.call;
+
+        var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
+        $window.location = 'tel:' + number;
     }
 
     $scope.mail = function(){
-        console.log('send an email');
+        $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
         $window.location = 'mailto:' +$scope.contacts.email+ '?subject=This is a sample subject';
@@ -47,8 +48,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
 
     $scope.tweet = function(){
-        console.log('tweet');
-
+        $log.info('tweet');
         $scope.logAction($scope.actionMessages.TWEET);
         var hasTwitterApp = localStorageService.get('twitterApp');
 
@@ -70,7 +70,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         if($rootScope.sessionData.options.length > 0){
             var contactMenu = $rootScope.sessionData.options[$rootScope.sessionData.options.length -1];
-            console.log(contactMenu);
+            $log.debug('try to ' +action+ ' for menu: ',contactMenu);
 
             message.ChoiceMenuID = contactMenu.id;
         }

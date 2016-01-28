@@ -14,6 +14,9 @@ services.service('TwitterService', function($ionicPlatform, $log, localStorageSe
                 $log.info('check Twitter App is available: ' + availability);
                 localStorageService.set('twitterApp', availability);
             });
+
+
+
         }
 
 

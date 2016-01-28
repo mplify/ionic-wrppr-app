@@ -1,12 +1,13 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, OrganizationService, Auth, $http) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService, Auth, $http) {
 
     $scope.organizations = [
 
     ];
 
     $scope.noMoreItemsAvailable = false;
+    $scope.isLoading = false;
 
 
     $scope.search = {
@@ -20,22 +21,18 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             template: 'Loading...'
         });
 
-        //FIXME replace with real impl
-        if ( $scope.organizations.length >= 99 ) {
-            alert('done');
-            $scope.noMoreItemsAvailable = true;
-        }
-
-        if($scope.organizations.length > 0){
-            var lastId =  $scope.organizations[$scope.organizations.length -1].id ;
-        }
 
 
-        OrganizationService.getOrganizations(searchText, lastId).then(function(response) {
+        $scope.isLoading = true;
+        OrganizationService.getOrganizations(searchText, $scope.organizations.length).then(function(response) {
+            if(response.length == 0){
+               $scope.noMoreItemsAvailable = true;
+            }
 
             $scope.organizations = $scope.organizations.concat(response);
 
             $ionicLoading.hide();
+            $scope.isLoading = false;
 
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -44,10 +41,12 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     };
 
     $scope.loadNext = function(){
+        $log.debug('load organizations next page');
         $scope.load($scope.search.model);
     }
 
     $scope.reload = function(searchText){
+        $log.debug('reload organization list');
         $scope.organizations = [];
         $scope.noMoreItemsAvailable = false;
         $scope.load(searchText);
@@ -63,6 +62,12 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     }
 
     $scope.$watch('search.model', function(newVal, oldVal){
+        // wait till prev load done
+        if($scope.isLoading){
+            $log.debug('skipped loading organization, prev is not done');
+            return;
+        }
+
         console.log('search organization model changed');
         $scope.reload(newVal);
     });

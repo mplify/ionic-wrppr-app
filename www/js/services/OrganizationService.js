@@ -2,7 +2,7 @@ var services = angular.module('App.services');
 
 services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
     return {
-        'getOrganizations': function(searchText, lastId) {
+        'getOrganizations': function(searchText, skip) {
             console.log('load organisations: ' + searchText);
             console.log($http.defaults.headers.common.Authorization);
 
@@ -17,12 +17,13 @@ services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
                };
             }
 
-            if(lastId){
-                console.log('use last id paging param ' + lastId);
-               // params.lastId = lastId;
+            if(skip){
+               console.log('use last id paging param ' + skip);
+               params.skip = skip;
+
             }
 
-
+            params.limit = 10;
 
             $http.get(url,
             {

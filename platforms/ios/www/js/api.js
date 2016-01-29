@@ -48,7 +48,6 @@ App.factory('api', ['API', function(api) {
             if(!window.cordova && name == "base-url"){
                 // for browser version replace base-url to proxied
                 name = "proxy-url";
-
             }
             return (api[name]);
         }

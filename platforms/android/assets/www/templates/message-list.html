@@ -1,0 +1,15 @@
+
+<ion-view view-title="Messages History" ng-controller="MessageCtrl">
+    <ion-content>
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="load();">
+        </ion-refresher>
+        <ion-list ng-init="load();">
+            <ion-item ng-repeat="message in messages">
+                {{message.Question}} {{message.createdAt | date}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

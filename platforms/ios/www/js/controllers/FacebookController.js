@@ -27,7 +27,8 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     // This is the success callback from the login method
     var fbLoginSuccess = function(response) {
-        $scope.debugMessage('fb login success');
+        $scope.debugMessage('fb login success' + angular.toJson(response));
+
 
         if (!response.authResponse){
             fbLoginError("Cannot find the authResponse");
@@ -37,8 +38,10 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         var authResponse = response.authResponse;
 
 
-        $scope.getFacebookProfileInfo(authResponse.accessToken)
+
+        $scope.getFacebookProfileInfo(authResponse)
             .then(function(profileInfo) {
+                alert('loaded profile info');
                 // For the purpose of this example I will store user data on local storage
                 UserService.setLocalFacebookUser({
                     authResponse: authResponse,
@@ -60,16 +63,18 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     // This is the fail callback from the login method
     var fbLoginError = function(error){
         console.log('fbLoginError', error);
+
         $ionicLoading.hide();
     };
 
     // This method is to get the user profile info from the facebook api
     $scope.getFacebookProfileInfo = function (authResponse) {
+        $scope.debugMessage('load profile info' + authResponse.accessToken);
         var info = $q.defer();
 
-        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, ["public_profile"],
             function (profileInfo) {
-                console.log(profileInfo);
+                $scope.debugMessage('profile info success' + angular.toJson(profileInfo));
                 // For the purpose of this example I will store user data on local storage
                 UserService.setLocalFacebookUser({
                     authResponse: authResponse,
@@ -86,6 +91,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 info.resolve(profileInfo);
             },
             function (response) {
+                $scope.debugMessage('profile info failed' + angular.toJson(response));
                 console.log(response);
                 info.reject(response);
             }
@@ -167,11 +173,17 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     }
 
+    $scope.testFacebook = function(){
+        UserService.searchByFacebookAccount('marykiselova@gmail.com').then(function(facebookUsers) {
+            alert(facebookUsers.length);
+        });
+    }
+
     $scope.checkFacebookUser = function(localFBUser){
         console.log('check facebook users in our DB');
 
         UserService.searchByFacebookAccount(localFBUser.email).then(function(facebookUsers) {
-            console.log("found FB users: " +  facebookUsers.length);
+            $scope.debugMessage("found FB users: " +  facebookUsers.length);
 
 
             if(facebookUsers.length == 0){
@@ -223,11 +235,13 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 });
             }
 
-        });;
+        });
 
     }
 
     $scope.finishFacebookLogin = function(){
+        $scope.debugMessage('finish fb login');
+
          var localFBUser = UserService.getLocalFacebookUser();
 
          var username = localFBUser.email;

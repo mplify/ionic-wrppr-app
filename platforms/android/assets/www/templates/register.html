@@ -1,0 +1,44 @@
+<ion-view ng-controller="AuthorizationCtrl">
+    <ion-header-bar>
+        <h1 class="title">Register</h1>
+        <div class="buttons">
+            <button class="button button-clear" ui-sref="root">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form name="registerForm" ng-submit="doRegister()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" name="username" ng-model="registerData.UserName" required>
+                </label>
+                <label class="item item-input" ng-show="!registerForm.username.$pristine && registerForm.username.$invalid">
+                    <p ng-show="registerForm.username.$error.required">* Username is required</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" ng-model="registerData.Password" required>
+
+                </label>
+                <label class="item password-complexity row" ng-show="!registerForm.password.$pristine">
+                    <div class="col" ng-class="registerData.passwordComplexity"></div>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Mobile</span>
+                    <input type="tel" pattern="+[0-9]*" ng-model="registerData.mobile">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input type="email" ng-model="registerData.email">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="registerForm.$invalid" type="submit">Register</button>
+                </label>
+            </div>
+        </form>
+        <div>
+
+        </div>
+    </ion-content>
+</ion-view>

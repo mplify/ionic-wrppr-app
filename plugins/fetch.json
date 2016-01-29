@@ -1,0 +1,48 @@
+{
+    "cordova-plugin-facebook4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-facebook4"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "758543534250966",
+            "APP_NAME": "test"
+        }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser@~1.2.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-whitelist.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-appavailability": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-appavailability"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-customurlscheme": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-customurlscheme"
+        },
+        "is_top_level": true,
+        "variables": {
+            "URL_SCHEME": "wrppr"
+        }
+    }
+}

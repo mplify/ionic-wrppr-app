@@ -123,7 +123,7 @@ services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Ba
         setCredentials: function (username, password) {
             console.log('set credentials');
             var encoded = Base64.encode(username + ':' + password);
-            var token = encoded;
+            var token = "Basic " + encoded;
 
             localStorageService.set('authorizationToken', token);
             $http.defaults.headers.common.Authorization = token;

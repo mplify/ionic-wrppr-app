@@ -187,6 +187,22 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
                 });
             return defer.promise;
 
+        },
+        'restorePassword' : function(email){
+            console.log('send restore password email');
+
+            var url = api.byName('base-url') + api.byName('restore-password-url');
+
+            var defer = $q.defer();
+
+            $http.post(url, { emailaddress: email})
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
         }
     }
 

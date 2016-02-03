@@ -1,7 +1,9 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('RestorePasswordCtrl', function ($scope) {
+controllers.controller('RestorePasswordCtrl', function ($scope, AuthorizationService) {
+   $scope.email = "";
+
    $scope.doRestorePassword = function(){
-        alert('please implement restore password api');
+        AuthorizationService.restorePassword($scope.email).then(function(){alert('success');}, function(){alert('fail');});
    }
 });

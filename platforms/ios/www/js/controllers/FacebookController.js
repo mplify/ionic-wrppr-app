@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $ionicLoading, $http, $cordovaOauth, localStorageService, UserService, Auth) {
-    $scope.log = 'debug';
+    $scope.log =  'off'; //'debug';
 
 
     $scope.facebookLoginEnabled = window.cordova;
@@ -41,7 +41,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
         $scope.getFacebookProfileInfo(authResponse)
             .then(function(profileInfo) {
-                alert('loaded profile info');
+
                 // For the purpose of this example I will store user data on local storage
                 UserService.setLocalFacebookUser({
                     authResponse: authResponse,
@@ -173,11 +173,6 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     }
 
-    $scope.testFacebook = function(){
-        UserService.searchByFacebookAccount('marykiselova@gmail.com').then(function(facebookUsers) {
-            alert(facebookUsers.length);
-        });
-    }
 
     $scope.checkFacebookUser = function(localFBUser){
         console.log('check facebook users in our DB');

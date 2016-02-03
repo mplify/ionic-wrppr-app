@@ -86,8 +86,6 @@ angular.module('App.controllers', [])
                 });
 
             $state.go('root');
-            window.location.reload();
-
 
         };
 

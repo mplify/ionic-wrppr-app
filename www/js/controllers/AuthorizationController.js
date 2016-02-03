@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, AuthorizationService, Auth, UserService) {
+controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, AuthorizationService, Auth, UserService, PasswordComplexity) {
     console.log('init auth controller');
 
     $scope.registerData = {};
@@ -89,27 +89,10 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         });
     }
 
-    $scope.$watch('registerData.Password', function(password, oldValue) {
-        if(password == undefined){
-            password = "";
-        }
+    $scope.$watch('registerData.Password', function(password) {
+        var complexity = PasswordComplexity.check(password);
+        $scope.registerData.passwordComplexity = complexity;
 
-        var hasUpperCase = /[A-Z]/.test(password);
-        var hasLowerCase = /[a-z]/.test(password);
-        var hasNumbers = /\d/.test(password);
-        var hasNonalphas = /\W/.test(password);
-        var characterGroupCount = hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas;
-
-        console.log('test password complexity ' + characterGroupCount);
-        if((password.length >= 8) && (characterGroupCount >= 3)){
-            $scope.registerData.passwordComplexity = 'green';
-        }
-        else if((password.length >= 8) && (characterGroupCount >= 2)){
-            $scope.registerData.passwordComplexity = 'yellow col-67';
-        }
-        else {
-            $scope.registerData.passwordComplexity = 'red col-33';
-        }
     });
 });
 

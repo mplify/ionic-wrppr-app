@@ -64,7 +64,11 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'RestorePasswordCtrl'
             })
 
-
+            .state('changepassword', {
+                url: '/changepassword',
+                templateUrl: 'templates/change-password.html',
+                controller : 'RestorePasswordCtrl'
+            })
 
             .state('app', {
                 url : '/app',

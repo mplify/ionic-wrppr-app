@@ -74,6 +74,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             var user = response;
             UserService.setUser(user);
 
+            AuthorizationService.activateUser(user.id).then(function(response){});
+
            $ionicLoading.hide();
            $scope.$broadcast('scroll.refreshComplete');
 

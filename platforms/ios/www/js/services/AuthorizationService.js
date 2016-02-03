@@ -236,6 +236,22 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
                     defer.reject(err);
                 });
             return defer.promise;
+        },
+        'activateUser' : function(userID){
+            console.log('send activate password email');
+
+            var url = api.byName('base-url') + api.byName('restore-password-url');
+
+            var defer = $q.defer();
+
+            $http.get(url,{ params :  { type: 'createUser', 'userID' : userID} })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
         }
     }
 

@@ -55,6 +55,8 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
     });
 
     $scope.doChangePassword = function(){
+        $log.info('change password');
+
         alert($stateParams.key);
     }
 });

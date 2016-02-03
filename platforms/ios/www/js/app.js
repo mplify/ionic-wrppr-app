@@ -158,6 +158,16 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+
+            .state('app.documents', {
+                url: '/documents',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/capture-document.html'
+                    }
+                }
+            })
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/root');
 

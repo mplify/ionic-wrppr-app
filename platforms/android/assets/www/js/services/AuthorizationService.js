@@ -85,12 +85,45 @@ services.factory('Base64', function () {
     };
 });
 
+services.factory('PasswordComplexity', function(){
+    return {
+        check : function(password) {
+            if(password == undefined || password.length == 0){
+                return;
+            }
+
+            var complexity = "";
+            if(password == undefined){
+                password = "";
+            }
+
+            var hasUpperCase = /[A-Z]/.test(password);
+            var hasLowerCase = /[a-z]/.test(password);
+            var hasNumbers = /\d/.test(password);
+            var hasNonalphas = /\W/.test(password);
+            var characterGroupCount = hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas;
+
+            console.log('test password complexity ' + characterGroupCount);
+            if((password.length >= 8) && (characterGroupCount >= 3)){
+                complexity = 'green';
+            }
+            else if((password.length >= 8) && (characterGroupCount >= 2)){
+                complexity = 'yellow col-67';
+            }
+            else {
+                complexity = 'red col-33';
+            }
+            return complexity;
+        }
+    }
+});
+
 services.factory('Auth', ['Base64', '$http', 'localStorageService', function (Base64, $http, localStorageService) {
     return {
         setCredentials: function (username, password) {
             console.log('set credentials');
             var encoded = Base64.encode(username + ':' + password);
-            var token = 'Basic ' + encoded;
+            var token = "Basic " + encoded;
 
             localStorageService.set('authorizationToken', token);
             $http.defaults.headers.common.Authorization = token;
@@ -187,6 +220,62 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
                 });
             return defer.promise;
 
+        },
+        'restorePassword' : function(email){
+            console.log('send restore password email');
+
+            var url = api.byName('base-url') + api.byName('restore-password-url');
+
+            var defer = $q.defer();
+
+            $http.get(url,{ params :  { type: 'passwordRestore', emailaddress: email} })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
+        'activateUser' : function(userID){
+            console.log('send activate password email');
+
+            var url = api.byName('base-url') + api.byName('restore-password-url');
+
+            var defer = $q.defer();
+
+            $http.get(url,{ params :  { type: 'createUser', 'userID' : userID} })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        }
+    }
+
+});
+
+services.service('ExternalLoad', function(localStorageService,  $state, $log){
+    var getParameterByName = function(url, name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+    return {
+        checkExternalLoad : function(){
+           var url = window.localStorage.getItem('external_load');
+
+            if(url && url.indexOf('changepassword') > - 1){
+               $log.info('redirect to change password screen');
+
+               var key = getParameterByName(url, 'key');
+
+               $state.go('changepassword', {
+                   'key' : key
+               });
+               window.localStorage.removeItem('external_load');
+           }
         }
     }
 

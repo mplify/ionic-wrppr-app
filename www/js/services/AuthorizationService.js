@@ -240,3 +240,27 @@ services.service('AuthorizationService', function ($http, $q, api, Base64, Auth)
     }
 
 });
+
+services.service('ExternalLoad', function(localStorageService,  $state, $log){
+    var getParameterByName = function(url, name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+    return {
+        checkExternalLoad : function(){
+           var url = window.localStorage.getItem('external_load');
+
+            if(url && url.indexOf('changepassword') > - 1){
+               $log.info('redirect to change password screen');
+
+               var key = getParameterByName(url, 'key');
+
+               $state.go('changepassword', {
+                   'key' : key
+               });
+               window.localStorage.removeItem('external_load');
+           }
+        }
+    }
+
+});

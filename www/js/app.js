@@ -6,15 +6,17 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
-    .run(function ($ionicPlatform, Auth, $http, TwitterService) {
+    .run(function ($ionicPlatform, Auth, $http, TwitterService, ExternalLoad) {
 
 
+        console.log('run');
 
         $ionicPlatform.ready(function () {
+            console.log('ready');
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
 
@@ -27,14 +29,16 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
+            ExternalLoad.checkExternalLoad();
 
         });
 
+        $ionicPlatform.on('resume', function(){
+            ExternalLoad.checkExternalLoad();
+        });
 
 
-
-
-        $http.defaults.headers.common.Authorization = 'Basic ' + Auth.getCredentials();
+        $http.defaults.headers.common.Authorization = Auth.getCredentials();
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
@@ -65,7 +69,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             })
 
             .state('changepassword', {
-                url: '/changepassword',
+                url: '/changepassword/:key',
                 templateUrl: 'templates/change-password.html',
                 controller : 'RestorePasswordCtrl'
             })

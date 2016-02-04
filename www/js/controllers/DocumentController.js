@@ -57,6 +57,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera) {
             // 6
             function onCopySuccess(entry) {
                 $scope.$apply(function () {
+                    alert(entry.nativeURL);
                     $scope.images.push(entry.nativeURL);
                 });
             }

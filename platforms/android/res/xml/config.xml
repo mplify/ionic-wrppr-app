@@ -50,9 +50,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="*" />
     <access launch-external="yes" origin="tel:*" />
     <access launch-external="yes" origin="mailto:*" />
+    <allow-navigation href="*" />
+    <allow-navigation href="http://*/*" />
     <allow-intent href="tel:*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
@@ -62,5 +63,4 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <icon src="resources/ios/icon/icon-small@3x.png" />
-    <allow-navigation href="http://*/*" />
 </widget>

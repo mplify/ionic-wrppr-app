@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
-    .run(function ($ionicPlatform, Auth, $http, TwitterService, ExternalLoad) {
+    .run(function ($ionicPlatform, Auth, $http, $log, TwitterService, ExternalLoad) {
 
 
         console.log('run');
@@ -38,7 +38,10 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         });
 
 
-        $http.defaults.headers.common.Authorization = Auth.getCredentials();
+        if(Auth.getCredentials()){
+            $log.info('set default credentials');
+            $http.defaults.headers.common.Authorization = Auth.getCredentials();
+        }
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {

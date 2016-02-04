@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $ionicLoading, $http, $cordovaOauth, localStorageService, UserService, Auth) {
+controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $log, $ionicLoading, $http, $cordovaOauth, localStorageService, UserService, Auth) {
     $scope.log =  'off'; //'debug';
 
 
@@ -230,6 +230,9 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 });
             }
 
+        },
+        function(response){
+            $log.error('Failed to search users', response);
         });
 
     }

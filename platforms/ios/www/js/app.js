@@ -38,7 +38,10 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         });
 
 
-        $http.defaults.headers.common.Authorization = Auth.getCredentials();
+        if(Auth.getCredentials()){
+            $log.info('set default credentials');
+            $http.defaults.headers.common.Authorization = Auth.getCredentials();
+        }
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {

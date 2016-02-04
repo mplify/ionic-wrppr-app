@@ -10,10 +10,13 @@ services.service('TwitterService', function($ionicPlatform, $log, localStorageSe
                 urlSchema = 'com.twitter.android';
             }
 
-            appAvailability.checkBool(urlSchema, function(availability) {
-                $log.info('check Twitter App is available: ' + availability);
-                localStorageService.set('twitterApp', availability);
-            });
+
+            if(appAvailability){
+                appAvailability.checkBool(urlSchema, function(availability) {
+                    $log.info('check Twitter App is available: ' + availability);
+                    localStorageService.set('twitterApp', availability);
+                });
+            }
 
 
 

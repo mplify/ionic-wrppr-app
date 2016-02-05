@@ -186,4 +186,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
 
+
+
     });

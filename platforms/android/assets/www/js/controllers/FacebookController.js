@@ -198,7 +198,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                         }
 
                         UserService.createUser(userData).then(function(createdUser){
-                            $scope.finishFacebookLogin();
+                            $scope.finishFacebookLogin(createdUser);
                         });
                     }
                     else {
@@ -210,7 +210,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                         remoteFBUser.FacebookAccount = localFBUser.email;
 
                         UserService.updateUser(remoteFBUser).then(function(updatedUser){
-                            $scope.finishFacebookLogin();
+                            $scope.finishFacebookLogin(updatedUser);
                         });;
                     }
 
@@ -237,10 +237,11 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     }
 
-    $scope.finishFacebookLogin = function(){
+    $scope.finishFacebookLogin = function(user){
         $scope.debugMessage('finish fb login');
 
-         var localFBUser = UserService.getLocalFacebookUser();
+       // UserService.setUser(user);
+        var localFBUser = UserService.getLocalFacebookUser();
 
          var username = localFBUser.email;
          var password = "facebook " + localFBUser.authResponse.accessToken;

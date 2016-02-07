@@ -2,15 +2,16 @@
     <ion-content>
         <ion-list >
                 <ion-item class="item-avatar">
-                    <img ng-src="{{localUser.picture}}" src="../img/photo.png">
-                    <h2>{{localUser.UserName}}</h2>
-                    <p>{{localUser.createdAt | date:'medium' }}</p>
+                    <img ng-src="{{localUser.picture}}" src="../img/photo.jpg">
+                    <h2>{{user.UserName}}</h2>
+                    <p>{{user.email}}</p>
+                    <p>{{user.createdAt | date:'medium' }}</p>
                     <p>
                         Basic Auth: {{sessionKey}}
                     </p>
                 </ion-item>
                 <ion-item class="item-avatar">
-                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.png">
+                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.jpg">
                     <h2>{{localFBUser.name}}</h2>
                     <h2>{{localFBUser.email}}</h2>
                     <p>{{localFBUser.authResponse.expiresIn | date:'medium' }}</p>

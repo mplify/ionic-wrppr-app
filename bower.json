@@ -11,6 +11,8 @@
     "angular-cookies": "bower-angular-cookies#~1.2.26",
     "ng-cordova-oauth": "~0.2.0",
     "jsSHA": "~2.0.2",
-    "ng-cordova": "~0.0.3"
+    "ng-cordova": "~0.0.3",
+    "angular-translate": "~2.9.0",
+    "angular-translate-loader-static-files": "~2.9.0"
   }
 }

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
+angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate'])
 
     .run(function ($ionicPlatform, Auth, $http, $log, TwitterService, ExternalLoad, NetworkService) {
 
@@ -45,7 +45,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         }
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider) {
         $stateProvider
 
             .state('root', {
@@ -186,6 +186,19 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         $ionicConfigProvider.views.swipeBackEnabled(true);
 
 
+        $translateProvider
+            .useStaticFilesLoader({
+                prefix: 'locales/',
+                suffix: '.json'
+            })
+            .registerAvailableLanguageKeys(['en', 'nl'], {
+                'en' : 'en', 'en_GB': 'en', 'en_US': 'en',
+                'de' : 'nl', 'de_DE': 'nl', 'de_CH': 'nl'
+            })
+            .preferredLanguage('en')
+            .fallbackLanguage('nl')
+            //.determinePreferredLanguage()
+            .useSanitizeValueStrategy('escapeParameters');
 
 
 

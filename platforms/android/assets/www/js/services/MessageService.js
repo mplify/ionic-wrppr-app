@@ -34,8 +34,9 @@ services.service('MessageService', function($http, $q, api, Base64, Auth) {
                 };
             }
 
-            $http.get(url
-                )
+            $http.get(url, {
+                    'params' :params
+                })
                 .success(function (resp) {
                     defer.resolve(resp);
                 })

@@ -1,7 +1,9 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicHistory, MessageService, UserService) {
+controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, UserService) {
+    $log.info('init messages controller');
 
+    $scope.$on('$ionicView.enter', $scope.load);
 
     $scope.messages = [
 

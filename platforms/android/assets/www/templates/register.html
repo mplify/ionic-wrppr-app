@@ -1,27 +1,31 @@
-<ion-view ng-controller="AuthorizationCtrl">
+<ion-view>
     <ion-header-bar>
         <h1 class="title">Register</h1>
         <div class="buttons">
             <button class="button button-clear" ui-sref="root">Close</button>
         </div>
     </ion-header-bar>
-    <ion-content>
+    <ion-content ng-controller="AuthorizationCtrl">
         <form name="registerForm" ng-submit="doRegister()">
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Username</span>
-                    <input type="text" name="username" ng-model="registerData.UserName" required>
+                    <input type="text" name="UserName" ng-model="registerData.UserName" ng-change="resetValidators('UserName');" required>
                 </label>
-                <label class="item item-input" ng-show="!registerForm.username.$pristine && registerForm.username.$invalid">
-                    <p ng-show="registerForm.username.$error.required">* Username is required</p>
+                <label class="item item-input" ng-show="!registerForm.UserName.$pristine && registerForm.UserName.$invalid">
+                    <p ng-show="registerForm.UserName.$error.required">* Username is required</p>
+                    <p ng-show="registerForm.UserName.$error.unique">* Username is not unique</p>
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Password</span>
-                    <input type="password" ng-model="registerData.Password" required>
-
+                    <input type="password" name="Password" ng-model="registerData.Password" ng-change="resetValidators('Password');" ng-minlength="6" ng-maxlength="50" required>
                 </label>
                 <label class="item password-complexity row" ng-show="registerData.passwordComplexity">
                     <div class="col" ng-class="registerData.passwordComplexity"></div>
+                </label>
+                <label class="item item-input" ng-show="!registerForm.Password.$pristine && registerForm.Password.$invalid">
+                    <p ng-show="registerForm.Password.$error.minlength">* Password minimal length is 6</p>
+                    <p ng-show="registerForm.Password.$error.maxlength">* Password max length is 50</p>
                 </label>
 
                 <label class="item item-input">

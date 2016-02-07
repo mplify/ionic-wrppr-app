@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state,  $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService, UserService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, Auth, UserService, $cordovaOauth, localStorageService, api, $http, AuthorizationService, UserService) {
 
 
 
@@ -94,6 +94,13 @@ angular.module('App.controllers', [])
                 title: 'Service is temporarily not available',
                 template: 'BUT we are working hard to fix it'
             });
+        });
+
+        $scope.$on('unauthorized', function(){
+            $log.info('unauthorized, redirect to root');
+            if($state.current.name.indexOf('app') > -1){
+                $state.go('root');
+            }
         });
 
     })

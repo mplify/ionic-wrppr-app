@@ -1,8 +1,11 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('UserCtrl', function ($scope, $rootScope, Auth, localStorageService, UserService) {
-    var user = UserService.getUser();
-    $scope.userName = user.UserName;
+    $scope.localUser = UserService.getUser();
+
+    console.log($scope.localUser);
+
+    $scope.localFBUser = UserService.getLocalFacebookUser();
 
 
 

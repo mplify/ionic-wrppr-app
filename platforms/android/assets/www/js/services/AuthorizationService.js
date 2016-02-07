@@ -97,10 +97,13 @@ services.factory('PasswordComplexity', function(){
                 password = "";
             }
 
+
             var hasUpperCase = /[A-Z]/.test(password);
             var hasLowerCase = /[a-z]/.test(password);
             var hasNumbers = /\d/.test(password);
             var hasNonalphas = /\W/.test(password);
+
+
             var characterGroupCount = hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas;
 
             console.log('test password complexity ' + characterGroupCount);
@@ -168,6 +171,11 @@ services.service('APIInterceptor', function ($rootScope, $q) {
     };
 
     service.response = function (config) {
+        if(config.data && config.data.message){
+           if(config.data.wrppr_users != undefined && config.data.wrppr_users == false){
+               $rootScope.$broadcast('unauthorized');
+          }
+        }
         return config;
     }
 

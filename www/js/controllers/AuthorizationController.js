@@ -17,23 +17,23 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         });
 
 
-        AuthorizationService.login($scope.loginData).then(function(result) {
+        AuthorizationService.login($scope.loginData).then(function(loginResponse) {
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
 
 
-            if(result.wrppr_users == false){
-                console.log('login failed: ' + result.message);
+            if(loginResponse.wrppr_users == false){
+                console.log('login failed: ' + loginResponse.message);
 
                 $ionicPopup.alert({
                     title: 'Login failed',
-                    template: result.message
+                    template: loginResponse.message
                 });
 
                 return;
             }
 
-            var user = result.wrppr_users;
+            var user = loginResponse.wrppr_users;
             UserService.setUser(user);
 
             Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);

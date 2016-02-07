@@ -1,57 +1,26 @@
-<ion-view view-title="{{userName}}" ng-controller="UserCtrl">
+<ion-view view-title="{{localUser.UserName}}" ng-controller="UserCtrl">
     <ion-content>
-
         <ion-list >
-            <ion-item>
-                Basic Auth: {{sessionKey}}
-            </ion-item>
+                <ion-item class="item-avatar">
+                    <img ng-src="{{localUser.picture}}" src="../img/photo.png">
+                    <h2>{{localUser.UserName}}</h2>
+                    <p>{{localUser.createdAt | date:'medium' }}</p>
+                    <p>
+                        Basic Auth: {{sessionKey}}
+                    </p>
+                </ion-item>
+                <ion-item class="item-avatar">
+                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.png">
+                    <h2>{{localFBUser.name}}</h2>
+                    <h2>{{localFBUser.email}}</h2>
+                    <p>{{localFBUser.authResponse.expiresIn | date:'medium' }}</p>
+                    <p>
+                        {{localFBUser.authResponse.accessToken}}
+                    </p>
+                </ion-item>
 
-            <div ng-controller="FacebookCtrl">
-                <ion-item>
-                    {{localFBUser.email}}
-                </ion-item>
-                <ion-item>
-                    {{localFBUser.userID}}
-                </ion-item>
-                <ion-item>
-                    <img heigth="30" ng-src="{{localFBUser.picture}}" alt="profile image" />
-                </ion-item>
-                <ion-item>
-                    {{localFBUser.authResponse}}
-                </ion-item>
-                <ion-item>
-                    <button class="button button-block button-energized" ng-click="facebookLogout();">
-                        Facebook Logout
-                    </button>
-                </ion-item>
-                <ion-item>
-                    <button class="button button-block button-energized" ng-click="testFacebook();">
-                        Clear local storage
-                    </button>
-                </ion-item>
-            </div>
-            <div ng-controller="TwitterCtrl" ng-init="loadTwitterUser();" >
-                <ion-item>
 
-                    <button class="button button-block button-calm" ng-click="">
-                        Twitter Profile
-                    </button>
-                </ion-item>
-                <ion-item>
-                    {{twitterProfileInfo.oauth_token}}
-                </ion-item>
-                <ion-item>
-                    {{twitterProfileInfo.oauth_token_secret}}
-                </ion-item>
-                <ion-item>
-                    {{twitterProfileInfo.user_id}}
-                </ion-item>
-                <ion-item>
-                    {{twitterProfileInfo.screen_name}}
-                </ion-item>
-            </div>
         </ion-list>
-        </div>
 
 
     </ion-content>

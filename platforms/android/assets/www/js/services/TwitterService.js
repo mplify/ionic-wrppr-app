@@ -11,7 +11,7 @@ services.service('TwitterService', function($ionicPlatform, $log, localStorageSe
             }
 
 
-            if(appAvailability){
+            if(window.cordova){
                 appAvailability.checkBool(urlSchema, function(availability) {
                     $log.info('check Twitter App is available: ' + availability);
                     localStorageService.set('twitterApp', availability);

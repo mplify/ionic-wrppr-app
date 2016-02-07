@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth'])
 
-    .run(function ($ionicPlatform, Auth, $http, $log, TwitterService, ExternalLoad) {
+    .run(function ($ionicPlatform, Auth, $http, $log, TwitterService, ExternalLoad, NetworkService) {
 
 
         console.log('run');
@@ -30,6 +30,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             TwitterService.checkTwitterApp();
             ExternalLoad.checkExternalLoad();
+
 
         });
 

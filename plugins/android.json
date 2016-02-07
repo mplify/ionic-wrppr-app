@@ -30,6 +30,9 @@
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {}

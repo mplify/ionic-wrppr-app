@@ -13,6 +13,8 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, Auth, loc
 
 
     $scope.localUser = UserService.getUser();
+    $scope.networkStatus = localStorageService.get('networkOnline');
+    $scope.networkType = localStorageService.get('networkType');
 
     console.log($scope.localUser);
     if($scope.localUser.id){

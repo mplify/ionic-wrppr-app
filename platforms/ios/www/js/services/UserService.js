@@ -133,6 +133,27 @@ services.service('UserService', function ($http, $q, api) {
         return defer.promise;
     }
 
+
+    var loadUser = function (userID) {
+        console.log('load user details: ' + userID);
+
+
+        var url =  api.byName('base-url') + api.byName('user-url') + '/' + userID;
+        var defer = $q.defer();
+
+
+
+        $http.get(url,
+            {})
+            .success(function (resp) {
+                defer.resolve(resp);
+            })
+            .error(function (err) {
+                defer.reject(err);
+            });
+        return defer.promise;
+
+    }
     return {
         setUser: setUser,
         getUser: getUser,
@@ -143,6 +164,7 @@ services.service('UserService', function ($http, $q, api) {
 
         createUser: createUser,
         updateUser: updateUser,
+        loadUser : loadUser,
 
         searchByEmail : searchByEmail,
         searchByFacebookAccount: searchByFacebookAccount,

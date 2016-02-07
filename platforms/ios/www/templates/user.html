@@ -1,23 +1,25 @@
-<ion-view view-title="{{userName}}" ng-controller="UserCtrl">
+<ion-view view-title="{{localUser.UserName}}" ng-controller="UserCtrl">
     <ion-content>
         <ion-list >
                 <ion-item class="item-avatar">
-                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.png">
-                    <h2>{{localUser.UserName}}</h2>
-                    <p>{{localUser.createdAt | date:'medium' }}</p>
-                </ion-item>
-                <ion-item class="item-body">
-                    <h2>Facebook auth respose</h2>
-                    <p>
-                        {{localFBUser.authResponse}}
-                    </p>
-                    <h2>Basic Auth header</h2>
+                    <img ng-src="{{localUser.picture}}" src="../img/photo.jpg">
+                    <h2>{{user.UserName}}</h2>
+                    <p>{{user.email}}</p>
+                    <p>{{user.createdAt | date:'medium' }}</p>
                     <p>
                         Basic Auth: {{sessionKey}}
                     </p>
-                    {{localFBUser.userID}}
-                    {{localFBUser.email}}
                 </ion-item>
+                <ion-item class="item-avatar">
+                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.jpg">
+                    <h2>{{localFBUser.name}}</h2>
+                    <h2>{{localFBUser.email}}</h2>
+                    <p>{{localFBUser.authResponse.expiresIn | date:'medium' }}</p>
+                    <p>
+                        {{localFBUser.authResponse.accessToken}}
+                    </p>
+                </ion-item>
+
 
         </ion-list>
 

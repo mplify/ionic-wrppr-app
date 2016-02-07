@@ -22,7 +22,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             $scope.$broadcast('scroll.refreshComplete');
 
 
-            if(result.wrppr_users == false){
+            if(loginResponse.wrppr_users == false){
                 console.log('login failed: ' + loginResponse.message);
 
                 $ionicPopup.alert({

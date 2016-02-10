@@ -40,7 +40,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
 
-            $scope.closeLogin();
+
             $scope.loginData.UserName = "";
             $scope.loginData.Password = "";
 

@@ -1,6 +1,8 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('UserCtrl', function ($scope, $rootScope, $log, Auth, localStorageService, UserService) {
+controllers.controller('UserCtrl', function ($scope, $rootScope, $log, UserService, LocalDataService) {
+
+
     $scope.loadUserDetails = function(userId){
         UserService.loadUser(userId).then(function(userDetails){
             $scope.user = userDetails;
@@ -12,25 +14,24 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, Auth, loc
     }
 
 
-    $scope.localUser = UserService.getUser();
 
-    console.log($scope.localUser);
-    if($scope.localUser.id){
-        $scope.loadUserDetails($scope.localUser.id);
+    $scope.load = function(){
+        $log.info('load user details from local storage');
+
+        $scope.localUser = LocalDataService.loadUser();
+        $scope.localFBUser = LocalDataService.getFacebookResponse();
+        $scope.sessionKey = LocalDataService.getBaseToken();
+        $scope.networkStatus = LocalDataService.getNetworkState();
+        $scope.networkType = LocalDataService.getNetworkType();
+
+
+        if($scope.localUser.id){
+            $scope.loadUserDetails($scope.localUser.id);
+        }
     }
 
-
-    $scope.localFBUser = UserService.getLocalFacebookUser();
-
-
-
-
-    $scope.sessionKey = Auth.getCredentials();
-    $scope.facebookKey = localStorageService.get('facebookToken');
-
-    $scope.localFBUser = UserService.getLocalFacebookUser();
-    console.log($scope.localFBUser);
-
+    $scope.load();
+    $scope.$on('$ionicView.enter', function(){$scope.load()});
 
 });
 

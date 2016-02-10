@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, AuthorizationService, Auth, UserService, PasswordComplexity) {
+controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, LoginService, BasicAuthorizationService , UserService, PasswordComplexity, LocalDataService) {
     console.log('init auth controller');
 
     $scope.registerData = {};
@@ -17,7 +17,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         });
 
 
-        AuthorizationService.login($scope.loginData).then(function(loginResponse) {
+        LoginService.login($scope.loginData).then(function(loginResponse) {
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
 
@@ -34,9 +34,10 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             }
 
             var user = loginResponse.wrppr_users;
-            UserService.setUser(user);
+            LocalDataService.saveUser(user);
+            LocalDataService.saveFacebookResponse({});
 
-            Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
+            BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
 
             $scope.closeLogin();
@@ -63,13 +64,13 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
         console.log('start registration');
 
-        AuthorizationService.createUser($scope.registerData).then(function(response) {
-            Auth.setCredentials($scope.loginData.UserName, $scope.loginData.Password);
+        Loginc.createUser($scope.registerData).then(function(response) {
+            BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
             var user = response;
-            UserService.setUser(user);
+            LocalDataService.saveUser(user);
 
-            //AuthorizationService.activateUser(user.id).then(function(response){});
+            //LoginService.activateUser(user.id).then(function(response){});
 
            $ionicLoading.hide();
            $scope.$broadcast('scroll.refreshComplete');

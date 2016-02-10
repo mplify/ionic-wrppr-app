@@ -1,6 +1,6 @@
 var services = angular.module('App.services');
 
-services.service('TwitterService', function($ionicPlatform, $log, localStorageService) {
+services.service('TwitterService', function($ionicPlatform, $log, LocalDataService) {
     return {
         'checkTwitterApp' : function(){
             $log.info('check Twitter App availability');
@@ -14,7 +14,7 @@ services.service('TwitterService', function($ionicPlatform, $log, localStorageSe
             if(window.cordova){
                 appAvailability.checkBool(urlSchema, function(availability) {
                     $log.info('check Twitter App is available: ' + availability);
-                    localStorageService.set('twitterApp', availability);
+                    LocalDataService.setTwitterApp(availability);
                 });
             }
 

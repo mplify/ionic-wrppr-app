@@ -1,6 +1,6 @@
 var services = angular.module('App.services');
 
-services.service('MessageService', function($http, $q, api, Base64, Auth) {
+services.service('MessageService', function($http, $q, api) {
     return {
         'createMessage' : function(messageData){
             console.log('save message' + messageData);

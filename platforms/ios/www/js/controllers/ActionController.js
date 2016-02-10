@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, localStorageService, MessageService, UserService, DTMFService) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, LocalDataService, MessageService, UserService, DTMFService) {
     $log.debug('init action controller');
 
     if(!$rootScope.sessionData.organization){
@@ -50,7 +50,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     $scope.tweet = function(){
         $log.info('tweet');
         $scope.logAction($scope.actionMessages.TWEET);
-        var hasTwitterApp = localStorageService.get('twitterApp');
+        var hasTwitterApp = LocalDataService.hasTwitterApp();
 
         if(hasTwitterApp) {
             window.open('twitter://user?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
@@ -64,7 +64,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     $scope.logAction = function(action){
         var message = {
             'OrgID' : $rootScope.sessionData.organization.id,
-            'UserID' :  UserService.getUser().id,
+            'UserID' :  LocalDataService.loadUser().id,
             'Question' :  action+ ' "' + $scope.currentOrganization + '"'
         };
 

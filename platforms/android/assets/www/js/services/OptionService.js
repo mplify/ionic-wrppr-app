@@ -1,6 +1,6 @@
 var services = angular.module('App.services');
 
-services.service('OptionService', function($http, $q, api, Base64, Auth) {
+services.service('OptionService', function($http, $q, api) {
     return {
         'getOptions': function(organizationID, parentID) {
             console.log('load options:  organization'  + organizationID + ' parent node id' + parentID);

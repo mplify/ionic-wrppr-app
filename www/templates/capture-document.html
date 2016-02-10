@@ -1,4 +1,5 @@
 <ion-view class="has-header padding" view-title="Capture Document" ng-controller="DocumentCtrl">
+    <ion-content>
     <ion-scroll>
         <ion-list>
             <ion-item ng-repeat="image in images" class="item-body">
@@ -7,11 +8,12 @@
             </ion-item>
         </ion-list>
     </ion-scroll>
+    </ion-content>
 
-    <ion-footer-bar align-title="left" class="bar-assertive">
+    <div class="bar bar-footer">
         <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="addImage()">
             Add image
         </button>
-    </ion-footer-bar>
+    </div>
 
 </ion-view>

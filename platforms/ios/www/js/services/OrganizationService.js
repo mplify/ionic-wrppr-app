@@ -1,6 +1,6 @@
 var services = angular.module('App.services');
 
-services.service('OrganizationService', function($http, $q, api, Base64, Auth) {
+services.service('OrganizationService', function($http, $q, api) {
     return {
         'getOrganizations': function(searchText, skip) {
             console.log('load organisations: ' + searchText);

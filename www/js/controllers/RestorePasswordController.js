@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('RestorePasswordCtrl', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, AuthorizationService, PasswordComplexity) {
+controllers.controller('RestorePasswordCtrl', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, LoginService, PasswordComplexity) {
     $log.info('init restore password controller');
     $scope.userEmail = "";
     $scope.passwordMatch = true;
@@ -13,7 +13,7 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
         });
 
 
-        AuthorizationService.restorePassword($scope.userEmail).then(function () {
+        LoginService.restorePassword($scope.userEmail).then(function () {
             $ionicLoading.hide();
 
             $ionicPopup.alert({

@@ -1,8 +1,8 @@
 <ion-view ng-controller="AuthorizationCtrl">
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">{{'LOGIN_TITLE' | translate}}</h1>
     <div class="buttons">
-      <button class="button button-clear" ui-sref="root">Close</button>
+      <button class="button button-clear" ui-sref="root">{{'GENERIC_CLOSE' | translate}}</button>
     </div>
   </ion-header-bar>
   <ion-content>
@@ -10,26 +10,26 @@
       <div class="list">
 
         <label class="item item-input">
-          <span class="input-label">Username</span>
+          <span class="input-label">{{'USERNAME' | translate}}</span>
           <input type="text" name="username" ng-model="loginData.UserName" required>
 
         </label>
         <label class="item item-input" ng-show="!loginForm.username.$pristine && loginForm.username.$invalid">
-            <p ng-show="loginForm.username.$error.required">* Username is required</p>
+            <p ng-show="loginForm.username.$error.required">{{'USERNAME_REQUIRED_VALIDATOR' | translate}}</p>
         </label>
 
         <label class="item item-input">
-          <span class="input-label">Password</span>
+          <span class="input-label">{{'PASSWORD' | translate}}</span>
           <input type="password" name="password" ng-model="loginData.Password" required complex-password>
         </label>
         <label class="item item-input" ng-show="!loginForm.password.$pristine && loginForm.password.$invalid">
-              <p ng-show="loginForm.password.$error.required">* Password is required</p>
+              <p ng-show="loginForm.password.$error.required">{{'PASSWORD_REQUIRED_VALIDATOR' | translate}}</p>
         </label>
         <label class="item">
-          <button class="button button-block button-assertive wrppr-action-button" ng-disabled="loginForm.$invalid" type="submit">Log in</button>
+          <button class="button button-block button-assertive wrppr-action-button" ng-disabled="loginForm.$invalid" type="submit">{{'LOGIN_BUTTON' | translate}}</button>
         </label>
         <label class="">
-                <button class="button button-block button-clear" ui-sref="restorepassword">Forgot password/username?</button>
+                <button class="button button-block button-clear" ui-sref="restorepassword">{{'FORGOT_PASSWORD_BUTTON' | translate}}</button>
         </label>
 
       </div>

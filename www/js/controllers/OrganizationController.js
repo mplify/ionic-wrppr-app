@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService, Auth, $http) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService) {
 
     $scope.organizations = [
 

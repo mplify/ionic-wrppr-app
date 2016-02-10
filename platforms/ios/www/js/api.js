@@ -22,7 +22,7 @@ App.constant('API', {
     // login
     'login-url':	 	   	   '/login',
     'logout-url':	 	   	   '/logout',
-    'restore-password-url':    '/wrppr_pw_restoreEmail',
+    'restore-password-url':    '/wrppr_pwRestoreEmail',
 
     // organizations
     'organization-url':		   '/wrppr_organizations',

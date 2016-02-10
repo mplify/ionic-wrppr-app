@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, UserService) {
+controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService) {
     $log.info('init messages controller');
 
     $scope.$on('$ionicView.enter', $scope.load);
@@ -9,7 +9,7 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
 
     ];
 
-    $scope.userID = UserService.getUser().id;
+    $scope.userID = LocalDataService.loadUser().id;
 
     $scope.load = function(){
         $ionicLoading.show({

@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, localStorageService, UserService) {
+controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, localStorageService, UserService, LocalDataService) {
     $scope.twitterLoginEnabled = window.cordova;
 
     $scope.consumerKey = 'JVj33eTXGPxlVZxoT8htdqwNK';
@@ -18,7 +18,7 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
             alert(result.access_token);
 
             $scope.twitterProfileInfo = result;
-            UserService.setUser(result);
+            LocalDataService.saveUser(result);
             console.log(result);
 
             localStorageService.set('twitterToken', result.access_token);

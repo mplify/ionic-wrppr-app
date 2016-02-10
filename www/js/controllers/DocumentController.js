@@ -63,7 +63,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera) {
             }
 
             function fail(error) {
-                console.log("fail: " + error.code);
+                $log.error("fail: " + error.code);
             }
 
             function makeid() {
@@ -77,7 +77,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera) {
             }
 
         }, function(err) {
-            console.log(err);
+            $log.error(err);
         });
     }
 });

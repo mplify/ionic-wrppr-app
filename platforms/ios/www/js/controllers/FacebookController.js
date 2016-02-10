@@ -42,14 +42,14 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 $scope.facebookConnectedStateHandler(authResponse);
             }, function(fail){
                 // Fail get profile info
-                console.log('profile info fail', fail);
+                $log.error('profile info fail', fail);
                 $ionicLoading.hide();
             });
     };
 
     // This is the fail callback from the login method
     var fbLoginError = function(error){
-        console.log('fbLoginError', error);
+        $log.error('fbLoginError', error);
 
         $ionicLoading.hide();
     };
@@ -79,7 +79,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             },
             function (response) {
                 $scope.debugMessage('profile info failed' + angular.toJson(response));
-                console.log(response);
+                $log.error(response);
                 info.reject(response);
             }
         );
@@ -89,11 +89,11 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
     //This method is executed when the user press the "Login with facebook" button
     $scope.facebookSignIn = function() {
-        console.log('facebook login');
+        $log.info('facebook login');
 
         facebookConnectPlugin.getLoginStatus(function(success){
             $scope.facebookLoginStatus = success.status;
-            console.log('facebook login status: '  + success.status);
+            $log.info('facebook login status: '  + success.status);
             $scope.debugMessage("fb status " + success.status);
 
             if(success.status === 'connected'){
@@ -107,7 +107,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 // Else the person is not logged into Facebook,
                 // so we're not sure if they are logged into this app or not.
 
-                console.log('getLoginStatus', success.status);
+                $log.info('getLoginStatus', success.status);
 
                 $ionicLoading.show({
                     template: 'Logging in...'
@@ -124,7 +124,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
         // Check if we have our user saved
         $scope.localFBUser = LocalDataService.getFacebookResponse();
-        console.log("load local fb user: " + $scope.localFBUser);
+        $log.info("load local fb user: " + $scope.localFBUser);
 
 
         if(!$scope.localFBUser.userID){
@@ -149,7 +149,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
                 }, function(fail){
                     // Fail get profile info
-                    console.log('profile info fail', fail);
+                    $log.error('profile info fail', fail);
                 });
         }else{
             $scope.debugMessage("Has local user "+ $scope.localFBUser.email);
@@ -162,7 +162,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
 
     $scope.checkFacebookUser = function(localFBUser){
-        console.log('check facebook users in our DB');
+        $log.info('check facebook users in our DB');
 
         UserService.searchByFacebookAccount(localFBUser.email).then(function(facebookUsers) {
             $scope.debugMessage("found FB users: " +  facebookUsers.length);
@@ -174,7 +174,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                 UserService.searchByEmail(localFBUser.email).then(function(matchedUsers){
                     if(matchedUsers.length == 0){
                         $scope.debugMessage('create user in DB');
-                        console.log('create user based on facebook profile info: ' + localFBUser);
+                        $log.debug('create user based on facebook profile info: ' + localFBUser);
 
                         var userData = {
                             UserName : localFBUser.email,
@@ -190,7 +190,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                     }
                     else {
                         $scope.debugMessage('update user in DB');
-                        console.log('link facebook acoount to user with same email address');
+                        $log.debug('link facebook acoount to user with same email address');
 
                         var remoteFBUser = matchedUsers[0];
                         remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
@@ -206,13 +206,13 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             }
             else {
                 $scope.debugMessage('Found matched FB user in DB: ' + $scope.localFBUser.userID);
-                console.log('update facebook token to existing facebook account');
+                $log.debug('update facebook token to existing facebook account');
                 var remoteFBUser = facebookUsers[0];
                 if(!localFBUser.authResponse){
                     alert('fail');
                 }
                 if(remoteFBUser.FacebookToken !== localFBUser.authResponse.accessToken) {
-                    console.log('remote and locat facebook tokens are not equals');
+                    $log.debug('remote and locat facebook tokens are not equals');
                 }
                 remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
                 UserService.updateUser(remoteFBUser).then(function(updatedUser){
@@ -255,7 +255,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
     $scope.debugMessage = function(message, data){
         if($scope.log == 'debug'){
          alert(message);
-         console.log(data);
+         $log.debug(data);
         }
     }
 

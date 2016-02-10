@@ -15,7 +15,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     };
 
     $scope.load = function(searchText){
-        console.log('load organizations '+ searchText);
+        $log.info('load organizations '+ searchText);
 
         $ionicLoading.show({
             template: 'Loading...'
@@ -55,7 +55,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     $scope.selectOrganisation = function(organization){
         $rootScope.sessionData.organization = organization;
         $rootScope.sessionData.options = [];
-        console.log('organisation selected ' + organization.orgName);
+        $log.info('organisation selected ' + organization.orgName);
 
 
         $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
@@ -68,7 +68,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             return;
         }
 
-        console.log('search organization model changed');
+        $log.info('search organization model changed');
         $scope.reload(newVal);
     });
 

@@ -1,9 +1,9 @@
 var services = angular.module('App.services');
 
-services.service('LoginService', function ($http, $q, api) {
+services.service('LoginService', function ($http, $q, $log, api) {
     return {
         'login' : function (loginData){
-            console.log('login');
+            $log.info('login');
 
             var url = api.byName('base-url') + api.byName('login-url');
 
@@ -20,7 +20,7 @@ services.service('LoginService', function ($http, $q, api) {
 
         },
         'restorePassword' : function(email){
-            console.log('send restore password email');
+            $log.info('send restore password email');
 
             var url = api.byName('base-url') + api.byName('restore-password-url');
 
@@ -36,7 +36,7 @@ services.service('LoginService', function ($http, $q, api) {
             return defer.promise;
         },
         'activateUser' : function(userID){
-            console.log('send activate password email');
+            $log.info('send activate password email');
 
             var url = api.byName('base-url') + api.byName('restore-password-url');
 

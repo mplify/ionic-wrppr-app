@@ -1,9 +1,9 @@
 var services = angular.module('App.services');
 
-services.factory('BasicAuthorizationService', function (Base64, $http, LocalDataService) {
+services.factory('BasicAuthorizationService', function (Base64, $http, $log, LocalDataService) {
     return {
         generateToken : function (username, password) {
-            console.log('set credentials');
+            $log.info('set credentials');
             var encoded = Base64.encode(username + ':' + password);
             var token = "Basic " + encoded;
 
@@ -13,7 +13,7 @@ services.factory('BasicAuthorizationService', function (Base64, $http, LocalData
 
         },
         setToken : function(token){
-            console.log('update auth token ' + token);
+            $log.info('update auth token ' + token);
             LocalDataService.saveBaseToken(token);
             $http.defaults.headers.common.Authorization = token;
         },
@@ -22,7 +22,7 @@ services.factory('BasicAuthorizationService', function (Base64, $http, LocalData
         },
         isAuthorized: function () {
             var token = LocalDataService.getBaseToken();
-            console.log('authorization check: ' + token);
+            $log.info('authorization check: ' + token);
 
             if (token !== null) {
                 $http.defaults.headers.common.Authorization = token;

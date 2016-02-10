@@ -1,5 +1,5 @@
 <ion-view view-title="Search companies" ng-controller="OrganizationsCtrl" >
-    <ion-content class="has-header">
+    <ion-content>
         <div class="bar bar-header item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
@@ -17,7 +17,7 @@
                 on-refresh="reload();">
         </ion-refresher>
         <ion-list>
-            <ion-item ng-repeat="organisation in organizations" ng-click="selectOrganisation(organisation);">
+            <ion-item ng-repeat="organisation in organizations track by organisation.id" ng-click="selectOrganisation(organisation);">
                 {{organisation.orgName}}
             </ion-item>
         </ion-list>

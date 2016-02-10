@@ -51,7 +51,7 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
        else {
            $scope.passwordMatch = false;
        }
-       console.log('password match ' + $scope.passwordMatch);
+       $log.info('password match ' + $scope.passwordMatch);
     });
 
     $scope.doChangePassword = function(){

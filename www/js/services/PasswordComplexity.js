@@ -2,7 +2,7 @@ var services = angular.module('App.services');
 
 
 
-services.factory('PasswordComplexity', function(){
+services.factory('PasswordComplexity', function($log){
     return {
         check : function(password) {
             if(password == undefined || password.length == 0){
@@ -23,7 +23,7 @@ services.factory('PasswordComplexity', function(){
 
             var characterGroupCount = hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas;
 
-            console.log('test password complexity ' + characterGroupCount);
+            $log.info('test password complexity ' + characterGroupCount);
             if((password.length >= 8) && (characterGroupCount >= 3)){
                 complexity = 'green';
             }

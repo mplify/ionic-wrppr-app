@@ -1,8 +1,8 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicHistory, OptionService) {
-    console.log('init options controller');
-    console.log($rootScope.sessionData.options);
+controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $stateParams, $log, $ionicLoading, $ionicHistory, OptionService) {
+    $log.debug('init options controller', $rootScope.sessionData.options);
+
     $scope.showOptions = true;
 
 
@@ -46,7 +46,7 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
     $scope.currentOrganization = $stateParams.orgName;
 
     $scope.selectOption = function(option){
-        console.log('selected option ' + option);
+        $log.info('selected option ' + option);
 
         $rootScope.sessionData.options.push(option);
 

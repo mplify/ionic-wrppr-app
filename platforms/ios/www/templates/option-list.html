@@ -7,7 +7,7 @@
                 on-refresh="load();">
         </ion-refresher>
         <ion-list ng-init="load();">
-            <ion-item ng-repeat="option in options" ng-click="selectOption(option);">
+            <ion-item ng-repeat="option in options track by option.id" ng-click="selectOption(option);">
                 {{option.NodeName}}
             </ion-item>
         </ion-list>

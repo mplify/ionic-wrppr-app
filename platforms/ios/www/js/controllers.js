@@ -45,7 +45,7 @@ angular.module('App.controllers', [])
 
                 })
                 .success(function (resp) {
-                    console.log('logout done');
+                    $log.debug('logout done');
                 })
                 .error(function (err) {
 

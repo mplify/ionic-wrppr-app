@@ -185,6 +185,9 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         $ionicConfigProvider.views.swipeBackEnabled(true);
 
+        //FIXME
+        //$ionicConfigProvider.scrolling.jsScrolling(false);
+
 
         $translateProvider
             .useStaticFilesLoader({
@@ -202,4 +205,5 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
 
-    });
+    }
+);

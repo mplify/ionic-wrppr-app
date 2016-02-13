@@ -1,9 +1,9 @@
 var services = angular.module('App.services');
 
-services.service('OptionService', function($http, $q, api) {
+services.service('OptionService', function($http, $q, $log, api) {
     return {
         'getOptions': function(organizationID, parentID) {
-            console.log('load options:  organization'  + organizationID + ' parent node id' + parentID);
+            $log.info('load options:  organization'  + organizationID + ' parent node id' + parentID);
 
             var url =  api.byName('base-url') + api.byName('routing-url');
             var defer = $q.defer();

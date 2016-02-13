@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $stateParams, LoginService, BasicAuthorizationService , UserService, PasswordComplexity, LocalDataService) {
-    console.log('init auth controller');
+controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, LoginService, BasicAuthorizationService , UserService, PasswordComplexity, LocalDataService) {
+    $log.info('init auth controller');
 
     $scope.registerData = {};
     $scope.loginData = {};
@@ -10,7 +10,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
-        console.log('Doing login', $scope.loginData);
+        $log.info('Doing login', $scope.loginData);
 
         $ionicLoading.show({
             template: 'Loading...'
@@ -23,7 +23,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
 
             if(loginResponse.wrppr_users == false){
-                console.log('login failed: ' + loginResponse.message);
+                $log.error('login failed: ' + loginResponse.message);
 
                 $ionicPopup.alert({
                     title: 'Login failed',
@@ -40,7 +40,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
 
-            $scope.closeLogin();
+
             $scope.loginData.UserName = "";
             $scope.loginData.Password = "";
 
@@ -50,7 +50,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         },
         function(result){
             $ionicLoading.hide();
-            console.log('failed to login' + result);
+            $log.error('failed to login', result);
         });
 
 
@@ -62,9 +62,9 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             template: 'Loading...'
         });
 
-        console.log('start registration');
+        $log.info('start registration');
 
-        Loginc.createUser($scope.registerData).then(function(response) {
+        LoginService.createUser($scope.registerData).then(function(response) {
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
             var user = response;

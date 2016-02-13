@@ -19,7 +19,7 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
 
             $scope.twitterProfileInfo = result;
             LocalDataService.saveUser(result);
-            console.log(result);
+            $log.info(result);
 
             localStorageService.set('twitterToken', result.access_token);
 

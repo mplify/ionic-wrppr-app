@@ -1,10 +1,10 @@
 var services = angular.module('App.services');
 
-services.service('OrganizationService', function($http, $q, api) {
+services.service('OrganizationService', function($http, $q, $log, api) {
     return {
         'getOrganizations': function(searchText, skip) {
-            console.log('load organisations: ' + searchText);
-            console.log($http.defaults.headers.common.Authorization);
+            $log.info('load organisations: ' + searchText);
+            $log.debug($http.defaults.headers.common.Authorization);
 
             var url =  api.byName('base-url') + api.byName('organization-url');
             var defer = $q.defer();
@@ -18,12 +18,12 @@ services.service('OrganizationService', function($http, $q, api) {
             }
 
             if(skip){
-               console.log('use last id paging param ' + skip);
+               $log.info('use last id paging param ' + skip);
                params.skip = skip;
 
             }
 
-            params.limit = 10;
+            params.limit = 30;
 
             $http.get(url,
             {
@@ -38,7 +38,7 @@ services.service('OrganizationService', function($http, $q, api) {
             return defer.promise;
         },
         'getOrganization' : function(organizationID){
-            console.log('load organisation details: ' + organizationID);
+            $log.info('load organisation details: ' + organizationID);
 
 
             var url =  api.byName('base-url') + api.byName('organization-url') + '/' + organizationID;

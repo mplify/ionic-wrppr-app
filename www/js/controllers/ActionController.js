@@ -10,9 +10,10 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     }
 
     $scope.actionMessages = {
-        'CALL' : 'Called ',
-        'MAIL' : 'Send email to',
-        'TWEET' : 'Send tweet to'
+        'CALL' : {type : 1, message : "Called "},
+        'MAIL' : {type: 2, message : "Send email to"},
+        'TWEET' : {type : 3, message: "Send tweet to"},
+        'FACEBOOK' : {type: 4, message: "Send a facebook msg"}
     }
 
     $scope.contacts = {};
@@ -65,7 +66,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         var message = {
             'OrgID' : $rootScope.sessionData.organization.id,
             'UserID' :  LocalDataService.loadUser().id,
-            'Question' :  action+ ' "' + $scope.currentOrganization + '"'
+            'Question' :  action.message + ' "' + $scope.currentOrganization + '"',
+            'ChannelTypeID' : action.id
         };
 
         if($rootScope.sessionData.options.length > 0){

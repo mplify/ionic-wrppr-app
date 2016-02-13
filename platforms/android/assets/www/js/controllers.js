@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, UserService, LocalDataService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, UserService, LocalDataService, $timeout) {
 
 
 
@@ -28,40 +28,6 @@ angular.module('App.controllers', [])
 
         });
 
-        // With the new view caching in Ionic, Controllers are only called
-        // when they are recreated or on app start, instead of every page change.
-        // To listen for when this page is active (for example, to refresh data),
-        // listen for the $ionicView.enter event:
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
-
-        // Form data for the login modal
-        $scope.loginData = {};
-
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-                $scope.modal = modal;
-            });
-
-
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
-            $scope.modal.hide();
-        };
-
-        // Open the login modal
-        $scope.login = function () {
-            alert('remove it is never used, all this modal stuff');
-
-            $scope.modal.show();
-        };
-
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
 
         $scope.logout = function(){
             BasicAuthorizationService.clearCredentials();
@@ -79,7 +45,7 @@ angular.module('App.controllers', [])
 
                 })
                 .success(function (resp) {
-                    console.log('logout done');
+                    $log.debug('logout done');
                 })
                 .error(function (err) {
 
@@ -103,12 +69,7 @@ angular.module('App.controllers', [])
             }
         });
 
-    })
 
 
-
-
-
-
-;
+    });
 

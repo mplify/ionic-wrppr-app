@@ -1,9 +1,9 @@
 var services = angular.module('App.services');
 
-services.service('MessageService', function($http, $q, api) {
+services.service('MessageService', function($http, $q, $log, api) {
     return {
         'createMessage' : function(messageData){
-            console.log('save message' + messageData);
+            $log.info('save message' + messageData);
 
 
             var url = api.byName('base-url') + api.byName('message-url') + api.byName('create');
@@ -21,7 +21,7 @@ services.service('MessageService', function($http, $q, api) {
 
         },
         'getMessagesByUser' : function(userID){
-            console.log('load messages for user: ' + userID);
+            $log.info('load messages for user: ' + userID);
 
             var url =  api.byName('base-url') + api.byName('message-url');
             var defer = $q.defer();

@@ -1,10 +1,10 @@
 var services = angular.module('App.services');
 
-services.service('UserService', function ($http, $q, api) {
+services.service('UserService', function ($http, $q, $log, api) {
 
     return {
         'searchByFacebookAccount': function (username) {
-            console.log('search user by facebook account: ' + username);
+            $log.info('search user by facebook account: ' + username);
 
 
             var url = api.byName('base-url') + api.byName('user-url');
@@ -33,7 +33,7 @@ services.service('UserService', function ($http, $q, api) {
             return defer.promise;
         },
         'searchByEmail': function (email) {
-            console.log('search user by email: ' + email);
+            $log.info('search user by email: ' + email);
 
 
             var url = api.byName('base-url') + api.byName('user-url');
@@ -58,7 +58,7 @@ services.service('UserService', function ($http, $q, api) {
             return defer.promise;
         },
         'createUser': function (userData) {
-            console.log('create user' + userData);
+            $log.info('create user' + userData);
 
             var url = api.byName('base-url') + api.byName('user-url') + api.byName('create');
 
@@ -75,7 +75,7 @@ services.service('UserService', function ($http, $q, api) {
             return defer.promise;
         },
         'updateUser': function (userData) {
-            console.log('update user' + userData);
+            $log.info('update user' + userData);
 
             var url = api.byName('base-url') + api.byName('user-url') + api.byName('update') + '/' + userData.id;
 
@@ -97,7 +97,7 @@ services.service('UserService', function ($http, $q, api) {
             return defer.promise;
         },
         'loadUser': function (userID) {
-            console.log('load user details: ' + userID);
+            $log.info('load user details: ' + userID);
 
 
             var url = api.byName('base-url') + api.byName('user-url') + '/' + userID;

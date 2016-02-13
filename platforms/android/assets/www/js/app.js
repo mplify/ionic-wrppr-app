@@ -9,10 +9,10 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
     .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService) {
 
 
-        console.log('run');
+        $log.debug('run app');
 
         $ionicPlatform.ready(function () {
-            console.log('ready');
+            $log.debug('ionic platform ready');
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -45,7 +45,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         }
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider, $logProvider) {
         $stateProvider
 
             .state('root', {
@@ -185,6 +185,9 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         $ionicConfigProvider.views.swipeBackEnabled(true);
 
+        //FIXME
+        //$ionicConfigProvider.scrolling.jsScrolling(false);
+
 
         $translateProvider
             .useStaticFilesLoader({
@@ -201,5 +204,10 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             .useSanitizeValueStrategy('escapeParameters');
 
 
+        //Disable logging for production, set false
+        $logProvider.debugEnabled(true);
 
-    });
+
+
+    }
+);

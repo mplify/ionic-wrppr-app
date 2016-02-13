@@ -1,262 +1,103 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $log, $ionicLoading, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService) {
-    $scope.log =  'off'; //'debug';
-
-
+controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
     $scope.facebookLoginEnabled = window.cordova;
 
-    $scope.facebookProfileInfo = {};
-    $scope.facebookLoginStatus = "";
+    $scope.facebookManualLogin = function () {
+        $ionicLoading.show({
+            template: 'Logging in...'
+        });
 
+        FacebookService.getLoginStatus().then(
+            function (success) {
+                if (success.status === 'connected') {
+                    var accessToken = success.authResponse.accessToken;
 
+                    FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
+                        // sync with local user
+                        FacebookService.saveUser(profileSuccess, accessToken).then(function (saveSuccess) {
+                            $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
+                            $ionicLoading.hide();
 
+                        }, function (saveError) {
+                            $log.error('failed to save profile info');
+                            $ionicLoading.hide();
+                        });
 
-    // This is the success callback from the login method
-    var fbLoginSuccess = function(response) {
-        $scope.debugMessage('fb login success' + angular.toJson(response));
+                    }, function (error) {
+                        $log.error('failed to get profile info');
+                        $ionicLoading.hide();
+                    });
+                }
+                else {
+                    // show native login dialog
+                    $scope.openNativeLogin();
+                }
+            },
+            function (error) {
 
+            });
+    }
 
-        if (!response.authResponse){
-            fbLoginError("Cannot find the authResponse");
-            return;
-        }
+    $scope.nativeLoginSuccess = function (response) {
+        var accessToken = response.authResponse.accessToken;
 
-        var authResponse = response.authResponse;
-
-
-
-        $scope.getFacebookProfileInfo(authResponse)
-            .then(function(profileInfo) {
-
-                // For the purpose of this example I will store user data on local storage
-                LocalDataService.saveFacebookResponse({
-                    authResponse: authResponse,
-                    userID: profileInfo.id,
-                    name: profileInfo.name,
-                    email: profileInfo.email,
-                    picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-                });
+        FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
+            // sync with local user
+            FacebookService.saveUser(profileSuccess, accessToken).then(
+            function (saveSuccess) {
+                $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
                 $ionicLoading.hide();
-
-                $scope.facebookConnectedStateHandler(authResponse);
-            }, function(fail){
-                // Fail get profile info
-                $log.error('profile info fail', fail);
+            },
+            function (saveError) {
+                $log.error('failed to save user');
                 $ionicLoading.hide();
             });
-    };
 
-    // This is the fail callback from the login method
-    var fbLoginError = function(error){
-        $log.error('fbLoginError', error);
+        }, function (error) {
+            $log.error('failed to get profile info');
+            $ionicLoading.hide();
+        });
+    }
 
+    $scope.nativeLoginError = function (error) {
         $ionicLoading.hide();
-    };
-
-    // This method is to get the user profile info from the facebook api
-    $scope.getFacebookProfileInfo = function (authResponse) {
-        $scope.debugMessage('load profile info' + authResponse.accessToken);
-        var info = $q.defer();
-
-        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, ["public_profile"],
-            function (profileInfo) {
-                $scope.debugMessage('profile info success' + angular.toJson(profileInfo));
-                // For the purpose of this example I will store user data on local storage
-                LocalDataService.saveFacebookResponse({
-                    authResponse: authResponse,
-                    userID: profileInfo.id,
-                    name: profileInfo.name,
-                    email: profileInfo.email,
-                    picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-                });
-                $scope.localFBUser = LocalDataService.getFacebookResponse();
-
-                $scope.checkFacebookUser(LocalDataService.getFacebookResponse());
-
-
-                info.resolve(profileInfo);
-            },
-            function (response) {
-                $scope.debugMessage('profile info failed' + angular.toJson(response));
-                $log.error(response);
-                info.reject(response);
-            }
-        );
-        return info.promise;
-    };
-
-
-    //This method is executed when the user press the "Login with facebook" button
-    $scope.facebookSignIn = function() {
-        $log.info('facebook login');
-
-        facebookConnectPlugin.getLoginStatus(function(success){
-            $scope.facebookLoginStatus = success.status;
-            $log.info('facebook login status: '  + success.status);
-            $scope.debugMessage("fb status " + success.status);
-
-            if(success.status === 'connected'){
-
-                $scope.facebookConnectedStateHandler(success);
-
-            } else {
-                $scope.debugMessage('open facebookConnenct login');
-                // If (success.status === 'not_authorized') the user is logged in to Facebook,
-                // but has not authenticated your app
-                // Else the person is not logged into Facebook,
-                // so we're not sure if they are logged into this app or not.
-
-                $log.info('getLoginStatus', success.status);
-
-                $ionicLoading.show({
-                    template: 'Logging in...'
-                });
-
-                // Ask the permissions you need. You can learn more about
-                // FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-                facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-            }
-        });
-    };
-
-    $scope.facebookConnectedStateHandler = function(connectedResponse) {
-
-        // Check if we have our user saved
-        $scope.localFBUser = LocalDataService.getFacebookResponse();
-        $log.info("load local fb user: " + $scope.localFBUser);
-
-
-        if(!$scope.localFBUser.userID){
-            $scope.debugMessage("No local fb user");
-
-            $scope.getFacebookProfileInfo(connectedResponse.authResponse.accessToken)
-                .then(function(profileInfo) {
-
-                    // For the purpose of this example I will store user data on local storage
-                    LocalDataService.saveFacebookResponse({
-                        authResponse: connectedResponse.authResponse,
-                        userID: profileInfo.id,
-                        name: profileInfo.name,
-                        email: profileInfo.email,
-                        picture : "http://graph.facebook.com/" + connectedResponse.authResponse.userID + "/picture?type=large"
-                    });
-                    $scope.localFBUser = LocalDataService.getFacebookResponse();
-
-                    $scope.checkFacebookUser(profileInfo);
-
-
-
-                }, function(fail){
-                    // Fail get profile info
-                    $log.error('profile info fail', fail);
-                });
-        }else{
-            $scope.debugMessage("Has local user "+ $scope.localFBUser.email);
-            $scope.checkFacebookUser($scope.localFBUser);
-
-        }
-
-
     }
 
-
-    $scope.checkFacebookUser = function(localFBUser){
-        $log.info('check facebook users in our DB');
-
-        UserService.searchByFacebookAccount(localFBUser.email).then(function(facebookUsers) {
-            $scope.debugMessage("found FB users: " +  facebookUsers.length);
-
-
-            if(facebookUsers.length == 0){
-                // try to find user with same email
-
-                UserService.searchByEmail(localFBUser.email).then(function(matchedUsers){
-                    if(matchedUsers.length == 0){
-                        $scope.debugMessage('create user in DB');
-                        $log.debug('create user based on facebook profile info: ' + localFBUser);
-
-                        var userData = {
-                            UserName : localFBUser.email,
-                            Emailaddress : localFBUser.email,
-                            FacebookAccount : localFBUser.email,
-                            Password : localFBUser.email,
-                            FacebookToken : localFBUser.authResponse.accessToken
-                        }
-
-                        UserService.createUser(userData).then(function(createdUser){
-                            $scope.finishFacebookLogin(createdUser);
-                        });
-                    }
-                    else {
-                        $scope.debugMessage('update user in DB');
-                        $log.debug('link facebook acoount to user with same email address');
-
-                        var remoteFBUser = matchedUsers[0];
-                        remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
-                        remoteFBUser.FacebookAccount = localFBUser.email;
-
-                        UserService.updateUser(remoteFBUser).then(function(updatedUser){
-                            $scope.finishFacebookLogin(updatedUser);
-                        });;
-                    }
-
-                });
-
-            }
-            else {
-                $scope.debugMessage('Found matched FB user in DB: ' + $scope.localFBUser.userID);
-                $log.debug('update facebook token to existing facebook account');
-                var remoteFBUser = facebookUsers[0];
-                if(!localFBUser.authResponse){
-                    alert('fail');
-                }
-                if(remoteFBUser.FacebookToken !== localFBUser.authResponse.accessToken) {
-                    $log.debug('remote and locat facebook tokens are not equals');
-                }
-                remoteFBUser.FacebookToken = localFBUser.authResponse.accessToken;
-                UserService.updateUser(remoteFBUser).then(function(updatedUser){
-                    $scope.finishFacebookLogin(updatedUser);
-                });
-            }
-
-        },
-        function(response){
-            $log.error('Failed to search users', response);
-        });
-
+    $scope.openNativeLogin = function () {
+        facebookConnectPlugin.login(['email', 'public_profile'], $scope.nativeLoginSuccess, $scope.nativeLoginError);
     }
 
-    $scope.finishFacebookLogin = function(user){
-        $scope.debugMessage('finish fb login');
-
-
-        var localFBUser = LocalDataService.getFacebookResponse();
+    $scope.updateLocalStorage = function(user, profileInfo, accessToken){
         LocalDataService.saveUser(user);
-         $log.info('logged in via facebook', user);
-         var username = localFBUser.email;
-         var password = "facebook " + localFBUser.authResponse.accessToken;
-         BasicAuthorizationService.generateToken(username, password);
+
+        profileInfo.accessToken = accessToken;
+        profileInfo.picture = "http://graph.facebook.com/" + profileInfo.userID + "/picture?type=large";
+        LocalDataService.saveFacebookResponse(profileInfo);
+
+        $log.info('logged in via facebook', user);
+        var username = user.Emailaddress;
+        var password = "facebook " + accessToken;
+        BasicAuthorizationService.generateToken(username, password);
 
         $state.go('app.intro');
-    }
 
-    $scope.facebookLogout = function(){
-        facebookConnectPlugin.logout();
-        LocalDataService.saveFacebookResponse({});
 
     }
 
-
-    $scope.clearLocalStorage = function(){
-       delete(window.localStorage.wrapper_facebook_user);
-    }
-
-    $scope.debugMessage = function(message, data){
-        if($scope.log == 'debug'){
-         alert(message);
-         $log.debug(data);
+    $ionicPlatform.ready(function () {
+        $log.debug('ionic platform ready');
+        var facebookUser = LocalDataService.getFacebookResponse();
+        if(facebookUser){
+            FacebookService.getLoginStatus().then(
+                function (success) {
+                    alert(success.status);
+                }, function(error){}
+            )
         }
-    }
+    });
+
+
+
 
 });

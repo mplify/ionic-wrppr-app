@@ -55,6 +55,7 @@
       <script src="js/services/DTMFService.js"></script>
       <script src="js/services/NetworkService.js"></script>
       <script src="js/services/ExternalLoadService.js"></script>
+      <script src="js/services/FacebookService.js"></script>
 
 
 
@@ -62,6 +63,7 @@
     <script src="js/controllers.js"></script>
     <script src="js/controllers/AuthorizationController.js"></script>
     <script src="js/controllers/RestorePasswordController.js"></script>
+    <script src="js/controllers/DashboardController.js"></script>
     <script src="js/controllers/OrganizationController.js"></script>
     <script src="js/controllers/OptionsController.js"></script>
     <script src="js/controllers/ActionController.js"></script>
@@ -86,7 +88,7 @@
   <script src="cordova.js"></script>
   <script>
       var handleOpenURL = function(url) {
-          window.localStorage.setItem("external_load", url);
+          window.localStorage.setItem("ls.external_load", url);
           console.log('received url: ' + url);
       };
   </script>

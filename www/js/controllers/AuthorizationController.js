@@ -7,6 +7,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
     $scope.registerData = {};
     $scope.loginData = {};
 
+    $scope.passwordComplexity = "";
+
     $scope.loginSubmitted = false;
 
     // Perform the login action when the user submits the login form
@@ -41,12 +43,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
 
-
-            $scope.loginData.UserName = "";
-            $scope.loginData.Password = "";
-
+            $scope.resetLoginForm();
             $state.go('app.search');
-
 
         },
         function(result){
@@ -57,6 +55,15 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
     };
 
+    $scope.resetLoginForm = function(){
+        $scope.loginData.UserName = "";
+        $scope.loginData.Password = "";
+
+
+        $scope.loginForm.$setPristine();
+        $scope.loginForm.$setUntouched();
+    }
+
 
     $scope.doRegister = function(){
         $ionicLoading.show({
@@ -65,7 +72,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
         $log.info('start registration');
 
-        LoginService.createUser($scope.registerData).then(function(response) {
+        UserService.createUser($scope.registerData).then(function(response) {
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
             var user = response;
@@ -75,8 +82,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
            $ionicLoading.hide();
            $scope.$broadcast('scroll.refreshComplete');
-
-          $state.go('app.intro');
+           $scope.resetRegisterForm();
+           $state.go('app.intro');
 
        }, function(error){
             $ionicLoading.hide();
@@ -101,6 +108,16 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         });
     }
 
+    $scope.resetRegisterForm = function(){
+        $scope.registerData = {};
+
+
+        $scope.registerForm.$setPristine();
+        $scope.registerForm.$setUntouched();
+    }
+
+
+
     $scope.resetValidators = function(fieldName){
         $scope.registerForm[fieldName].$setValidity('unique', true);
         $scope.registerForm[fieldName].$setValidity('minLength', true);
@@ -111,7 +128,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
     $scope.$watch('registerData.Password', function(password) {
         var complexity = PasswordComplexity.check(password);
-        $scope.registerData.passwordComplexity = complexity;
+        $scope.passwordComplexity = complexity;
 
     });
 

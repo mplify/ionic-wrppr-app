@@ -45,14 +45,14 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
             // sync with local user
             FacebookService.saveUser(profileSuccess, accessToken).then(
-            function (saveSuccess) {
-                $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
-                $ionicLoading.hide();
-            },
-            function (saveError) {
-                $log.error('failed to save user');
-                $ionicLoading.hide();
-            });
+                function (saveSuccess) {
+                    $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
+                    $ionicLoading.hide();
+                },
+                function (saveError) {
+                    $log.error('failed to save user');
+                    $ionicLoading.hide();
+                });
 
         }, function (error) {
             $log.error('failed to get profile info');
@@ -68,7 +68,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         facebookConnectPlugin.login(['email', 'public_profile'], $scope.nativeLoginSuccess, $scope.nativeLoginError);
     }
 
-    $scope.updateLocalStorage = function(user, profileInfo, accessToken){
+    $scope.updateLocalStorage = function (user, profileInfo, accessToken) {
         LocalDataService.saveUser(user);
 
         profileInfo.accessToken = accessToken;
@@ -84,20 +84,6 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
 
     }
-
-    $ionicPlatform.ready(function () {
-        $log.debug('ionic platform ready');
-        var facebookUser = LocalDataService.getFacebookResponse();
-        if(facebookUser){
-            FacebookService.getLoginStatus().then(
-                function (success) {
-                    alert(success.status);
-                }, function(error){}
-            )
-        }
-    });
-
-
 
 
 });

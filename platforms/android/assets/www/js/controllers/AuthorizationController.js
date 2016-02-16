@@ -3,6 +3,7 @@ var controllers = angular.module('App.controllers');
 controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, LoginService, BasicAuthorizationService , UserService, PasswordComplexity, LocalDataService) {
     $log.info('init auth controller');
 
+
     $scope.registerData = {};
     $scope.loginData = {};
 
@@ -113,6 +114,8 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         $scope.registerData.passwordComplexity = complexity;
 
     });
+
+
 });
 
 

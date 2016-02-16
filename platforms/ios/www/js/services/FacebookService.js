@@ -109,7 +109,7 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
     return {
         getLoginStatus: getLoginStatus,
         getProfileInfo: getProfileInfo,
-        saveUser : saveUser
+        saveUser: saveUser
     }
 
 });

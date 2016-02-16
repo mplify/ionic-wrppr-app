@@ -7,7 +7,11 @@
         </ion-refresher>
         <ion-list ng-init="load();">
             <ion-item ng-repeat="message in messages track by message.id" class="item-icon-left">
-                    <i class="icon ion-ios-telephone"></i>
+                   <div ng-switch="message.ChannelTypeID">
+                        <i ng-switch-when="1" class="icon ion-ios-telephone"></i>
+                        <i ng-switch-when="2" class="icon ion-email"></i>
+                        <i ng-switch-when="3" class="icon ion-social-twitter"></i>
+                    </div>
                     {{message.Question}}
                     <span class="item-note">
                      {{message.createdAt | date:'MM.dd.yyyy HH:mm'}}

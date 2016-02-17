@@ -20,8 +20,8 @@
                     <span class="input-label">Password</span>
                     <input type="password" name="Password" ng-model="registerData.Password" ng-change="resetValidators('Password');" ng-minlength="6" ng-maxlength="50" required>
                 </label>
-                <label class="item password-complexity row" ng-show="registerData.passwordComplexity">
-                    <div class="col" ng-class="registerData.passwordComplexity"></div>
+                <label class="item password-complexity row" ng-show="passwordComplexity">
+                    <div class="col" ng-class="passwordComplexity"></div>
                 </label>
                 <label class="item item-input" ng-show="!registerForm.Password.$pristine && registerForm.Password.$invalid">
                     <p ng-show="registerForm.Password.$error.minlength">* Password minimal length is 6</p>

@@ -19,14 +19,14 @@ services.service('LoginService', function ($http, $q, $log, api) {
             return defer.promise;
 
         },
-        'restorePassword' : function(email){
+        'restorePassword' : function(username){
             $log.info('send restore password email');
 
             var url = api.byName('base-url') + api.byName('restore-password-url');
 
             var defer = $q.defer();
 
-            $http.get(url,{ params :  { type: 'passwordRestore', emailaddress: email} })
+            $http.get(url,{ params :  { 'type' : 'passwordRestore', 'username': username} })
                 .success(function (resp) {
                     defer.resolve(resp);
                 })

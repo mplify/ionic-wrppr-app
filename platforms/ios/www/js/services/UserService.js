@@ -66,7 +66,6 @@ services.service('UserService', function ($http, $q, $log, api) {
 
             $http.post(url, userData)
                 .success(function (resp) {
-                    setUser(resp);
                     defer.resolve(resp);
                 })
                 .error(function (err) {

@@ -67,7 +67,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             'OrgID' : $rootScope.sessionData.organization.id,
             'UserID' :  LocalDataService.loadUser().id,
             'Question' :  action.message + ' "' + $scope.currentOrganization + '"',
-            'ChannelTypeID' : action.id
+            'ChannelTypeID' : action.type
         };
 
         if($rootScope.sessionData.options.length > 0){

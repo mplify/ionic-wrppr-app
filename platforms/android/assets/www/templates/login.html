@@ -1,11 +1,11 @@
-<ion-view ng-controller="AuthorizationCtrl">
+<ion-view>
   <ion-header-bar align-title="left">
     <h1 class="title">{{'LOGIN_TITLE' | translate}}</h1>
     <div class="buttons">
       <button class="button button-clear" ui-sref="root">{{'GENERIC_CLOSE' | translate}}</button>
     </div>
   </ion-header-bar>
-  <ion-content scroll="false">
+  <ion-content scroll="false" ng-controller="AuthorizationCtrl">
     <form name="loginForm" ng-submit="doLogin()" novalidate>
       <div class="list">
 

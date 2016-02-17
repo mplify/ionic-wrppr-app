@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $ionicLoading ,LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -31,7 +31,13 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     }
 
     $scope.call = function () {
+
         $log.info('make a call');
+
+        $ionicLoading.show({
+            template: 'Calling ...'
+        });
+
 
         var opts = {                                           //search options
             filter: 'Wrapper',                                 // 'Bob'
@@ -42,11 +48,12 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
 
         $cordovaContacts.find(opts).then(function (contactsFound) {
+                var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
+                var phoneNumber = new ContactField($rootScope.sessionData.organization.orgName, number, false);
                 if (contactsFound && contactsFound.length > 0) {
                     var wrapperContact = contactsFound[0];
 
 
-                    var phoneNumber = new ContactField($rootScope.sessionData.organization.orgName, number, false);
                     if (wrapperContact.phoneNumbers == null) {
                         wrapperContact.phoneNumbers = [];
                     }
@@ -54,25 +61,45 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
                     wrapperContact.save(function () {
                         $log.info('saved wrapper contact number');
+                        $scope.makeCall(number);
+
+                        $ionicLoading.hide();
                     }, function (err) {
                         $log.error('failed to save wrapper contact', err);
+                        $ionicLoading.hide();
                     });
                 }
                 else {
-                    $cordovaContacts.save({"displayName": "Wrapper"}).then(function (result) {
+                    var contact =
+                        {
+                            "displayName": "Wrapper",
+                            "phoneNumbers": [phoneNumber]
+                        };
+
+
+                    $cordovaContacts.save(contact).then(function (result) {
                         $log.info('added wrapper contact number');
+                        $scope.makeCall(number);
+                        $ionicLoading.hide();
                     }, function (error) {
                         $log.error('failed to save wrapper contact', err);
+
+                        $ionicLoading.hide();
                     });
                 }
             },
             function (err) {
                 $log.error('failed to find wrapper contact', err);
+
+                $ionicLoading.hide();
             });
 
 
-        var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
+        $scope.logAction($scope.actionMessages.CALL);
 
+    }
+
+    $scope.makeCall = function (number) {
         window.plugins.CallNumber.callNumber(
             function () {
                 $log.info('finish call');
@@ -82,9 +109,6 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             },
             number,
             false);
-
-        $scope.logAction($scope.actionMessages.CALL);
-
     }
 
     $scope.mail = function () {

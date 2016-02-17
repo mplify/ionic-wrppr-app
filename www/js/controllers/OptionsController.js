@@ -23,7 +23,8 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
 
 
         $ionicLoading.show({
-            template: 'Loading...'
+            template: 'Loading...',
+            delay : 3000
         });
 
         OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function(response) {

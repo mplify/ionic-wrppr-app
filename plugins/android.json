@@ -33,6 +33,12 @@
         },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "mx.ferreyra.callnumber": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {}

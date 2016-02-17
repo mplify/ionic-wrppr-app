@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, LocalDataService, MessageService, UserService, DTMFService) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
     $log.debug('init action controller');
 
     if(!$rootScope.sessionData.organization){
@@ -32,10 +32,37 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
     $scope.call = function(){
         $log.info('make a call');
-        $scope.logAction($scope.actionMessages.CALL);
+
+            var opts = {                                           //search options
+                filter : 'Wrapper',                                 // 'Bob'
+                multiple: true,                                      // Yes, return any contact that matches criteria
+                fields:  [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
+                desiredFields: [id]    //return fields.
+        };
+
+
+
+        $cordovaContacts.find(opts).then(function (contactsFound) {
+            console.log(contactsFound);
+        });
+
+        $cordovaContacts.save({"displayName": "Steve Jobs"}).then(function(result) {
+            console.log(JSON.stringify(result));
+        }, function(error) {
+            console.log(error);
+        });
+
+       // alert('call');
 
         var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
-        $window.location = 'tel:' + number;
+        number = "+37126077635";
+
+        //window.plugins.CallNumber.callNumber(function(){}, function(){}, number, false);
+        //$scope.logAction($scope.actionMessages.CALL);
+
+        window.open('tel:' + number, '_system');
+
+        //$window.location = 'tel:' + number;
     }
 
     $scope.mail = function(){

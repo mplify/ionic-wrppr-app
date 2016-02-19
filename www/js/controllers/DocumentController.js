@@ -1,27 +1,42 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera) {
+controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $cordovaFile, LocalDataService) {
     $log.debug('init document controller');
 
     // 1
-    $scope.images = [];
+    $scope.images = LocalDataService.getPhotos();
+
+    LocalDataService.addPhoto("aaa", "bbb");
+
+    $scope.load = function(){
+        $scope.images = LocalDataService.getPhotos();
+
+        for(var image in $scope.images){
+            window.plugins.Base64.encodeFile(image, function(base64){  // Encode URI to Base64 needed for contacts plugin
+                alert(base64);
+                image = base64;
+            });
+        }
+    };
 
     $scope.urlForImage = function(imageName) {
-        var name = imageName.substr(imageName.lastIndexOf('/') + 1);
-        var trueOrigin = cordova.file.dataDirectory + name;
+        var trueOrigin = cordova.file.dataDirectory + imageName;
         return trueOrigin;
     }
+
+
 
 
     $scope.addImage = function() {
         // 2
         var options = {
-            destinationType : Camera.DestinationType.FILE_URI,
-            sourceType : Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
-            allowEdit : false,
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA,
             encodingType: Camera.EncodingType.JPEG,
-            popoverOptions: CameraPopoverOptions
+            cameraDirection: 1,
+            saveToPhotoAlbum: true
         };
 
         // 3
@@ -31,7 +46,28 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera) {
             onImageSuccess(imageData);
 
             function onImageSuccess(fileURI) {
-                createFileEntry(fileURI);
+                //Grab the file name of the photo in the temporary directory
+                var currentName = fileURI.replace(/^.*[\\\/]/, '');
+
+                //Create a new name for the photo
+                var d = new Date(),
+                    n = d.getTime(),
+                    newFileName = n + ".jpg";
+
+                //Move the file to permanent storage
+                $cordovaFile.moveFile(cordova.file.tempDirectory, currentName, cordova.file.dataDirectory, newFileName).then(function(success){
+
+                    //success.nativeURL will contain the path to the photo in permanent storage, do whatever you wish with it, e.g:
+                    alert(success.nativeURL);
+                    $scope.images.push(newFileName, success.nativeURL);
+
+                    LocalDataService.addPhoto(newFileName, success.nativeURL);
+
+                }, function(error){
+                    //an error occured
+                });
+
+                //createFileEntry(fileURI);
             }
 
             function createFileEntry(fileURI) {

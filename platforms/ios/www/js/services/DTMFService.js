@@ -7,7 +7,7 @@ services.service('DTMFService', function ($log, $cordovaContacts) {
 
             var baseNumber = organization.TelephoneNumber;
 
-            if (organization.initialpause) {
+            if (organization.initialpause && organization.initialpause !== null) {
                 $log.info('add initial pause ' + organization.initialpause);
                 for (i = 0; i < organization.initialpause; i++) {
                     baseNumber = baseNumber + ",";

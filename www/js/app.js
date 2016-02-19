@@ -210,6 +210,5 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         $logProvider.debugEnabled(true);
 
 
-
     }
 );

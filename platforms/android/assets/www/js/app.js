@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate'])
 
-    .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService) {
+    .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService) {
 
 
         $log.debug('run app');
@@ -208,7 +208,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         //Disable logging for production, set false
         $logProvider.debugEnabled(true);
-
 
 
     }

@@ -1,25 +1,25 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $ionicLoading ,LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
     $log.debug('init action controller');
 
-    if(!$rootScope.sessionData.organization){
+    if (!$rootScope.sessionData.organization) {
         $log.info('organization not selected, redirects to organization search');
         $state.go('app.organizations');
     }
 
     $scope.actionMessages = {
-        'CALL' : {type : 1, message : "Called "},
-        'MAIL' : {type: 2, message : "Send email to"},
-        'TWEET' : {type : 3, message: "Send tweet to"},
-        'FACEBOOK' : {type: 4, message: "Send a facebook msg"}
+        'CALL': {type: 1, message: "Called "},
+        'MAIL': {type: 2, message: "Send email to"},
+        'TWEET': {type: 3, message: "Send tweet to"},
+        'FACEBOOK': {type: 4, message: "Send a facebook msg"}
     }
 
     $scope.contacts = {};
 
 
-    if($rootScope.sessionData.organization != undefined) {
+    if ($rootScope.sessionData.organization != undefined) {
 
         $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
 
@@ -30,76 +30,122 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
     }
 
-    $scope.call = function(){
+    $scope.call = function () {
+
         $log.info('make a call');
 
-            var opts = {                                           //search options
-                filter : 'Wrapper',                                 // 'Bob'
-                multiple: true,                                      // Yes, return any contact that matches criteria
-                fields:  [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
-                desiredFields: [id]    //return fields.
+        $ionicLoading.show({
+            template: 'Calling ...'
+        });
+
+
+        var opts = {                                           //search options
+            filter: 'Wrapper',                                 // 'Bob'
+            multiple: true,                                      // Yes, return any contact that matches criteria
+            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
+            desiredFields: ['id']    //return fields.
         };
 
 
-
         $cordovaContacts.find(opts).then(function (contactsFound) {
-            console.log(contactsFound);
-        });
+                var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
+                var phoneNumber = new ContactField($rootScope.sessionData.organization.orgName, number, false);
+                if (contactsFound && contactsFound.length > 0) {
+                    var wrapperContact = contactsFound[0];
 
-        $cordovaContacts.save({"displayName": "Steve Jobs"}).then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
-            console.log(error);
-        });
 
-       // alert('call');
+                    if (wrapperContact.phoneNumbers == null) {
+                        wrapperContact.phoneNumbers = [];
+                    }
+                    wrapperContact.phoneNumbers.push(phoneNumber);
 
-        var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
-        number = "+37126077635";
+                    wrapperContact.save(function () {
+                        $log.info('saved wrapper contact number');
+                        $scope.makeCall(number);
 
-        //window.plugins.CallNumber.callNumber(function(){}, function(){}, number, false);
-        //$scope.logAction($scope.actionMessages.CALL);
+                        $ionicLoading.hide();
+                    }, function (err) {
+                        $log.error('failed to save wrapper contact', err);
+                        $ionicLoading.hide();
+                    });
+                }
+                else {
+                    var contact =
+                        {
+                            "displayName": "Wrapper",
+                            "phoneNumbers": [phoneNumber]
+                        };
 
-        window.open('tel:' + number, '_system');
 
-        //$window.location = 'tel:' + number;
+                    $cordovaContacts.save(contact).then(function (result) {
+                        $log.info('added wrapper contact number');
+                        $scope.makeCall(number);
+                        $ionicLoading.hide();
+                    }, function (error) {
+                        $log.error('failed to save wrapper contact', err);
+
+                        $ionicLoading.hide();
+                    });
+                }
+            },
+            function (err) {
+                $log.error('failed to find wrapper contact', err);
+
+                $ionicLoading.hide();
+            });
+
+
+        $scope.logAction($scope.actionMessages.CALL);
+
     }
 
-    $scope.mail = function(){
+    $scope.makeCall = function (number) {
+        window.plugins.CallNumber.callNumber(
+            function () {
+                $log.info('finish call');
+            },
+            function () {
+                $log.info('failed call');
+            },
+            number,
+            false);
+    }
+
+    $scope.mail = function () {
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        $window.location = 'mailto:' +$scope.contacts.email+ '?subject=This is a sample subject';
+        $window.location = 'mailto:' + $scope.contacts.email + '?subject=This is a sample subject';
     }
 
     $scope.hasTwitterApp = false;
 
 
-    $scope.tweet = function(){
+    $scope.tweet = function () {
         $log.info('tweet');
         $scope.logAction($scope.actionMessages.TWEET);
         var hasTwitterApp = LocalDataService.hasTwitterApp();
 
-        if(hasTwitterApp) {
+        if (hasTwitterApp) {
             window.open('twitter://user?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
         else {
-            window.open('https://twitter.com/intent/tweet?screen_name='+ $scope.contacts.twitter, '_system', 'location=no');
+            window.open('https://twitter.com/intent/tweet?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
     }
 
 
-    $scope.logAction = function(action){
+    $scope.logAction = function (action) {
         var message = {
-            'OrgID' : $rootScope.sessionData.organization.id,
-            'UserID' :  LocalDataService.loadUser().id,
-            'Question' :  action.message + ' "' + $scope.currentOrganization + '"',
-            'ChannelTypeID' : action.type
+            'OrgID': $rootScope.sessionData.organization.id,
+            'UserID': LocalDataService.loadUser().id,
+            'Question': action.message + ' "' + $scope.currentOrganization + '"',
+            'ChannelTypeID': action.type
         };
 
-        if($rootScope.sessionData.options.length > 0){
-            var contactMenu = $rootScope.sessionData.options[$rootScope.sessionData.options.length -1];
-            $log.debug('try to ' +action+ ' for menu: ',contactMenu);
+        if ($rootScope.sessionData.options.length > 0) {
+            var contactMenu = $rootScope.sessionData.options[$rootScope.sessionData.options.length - 1];
+            $log.debug('try to ' + action + ' for menu: ', contactMenu);
 
             message.ChoiceMenuID = contactMenu.id;
         }
@@ -107,14 +153,13 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     }
 
 
-    $scope.mailFeedback = function(){
-        $window.location = 'mailto:feedback@mplify.nl'+ '?subject=Feedback about wrapper app';
+    $scope.mailFeedback = function () {
+        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
     }
 
-    $scope.mailSupport = function(){
-        $window.location = 'mailto:support@mplify.nl'+ '?subject=Feedback about wrapper app';
+    $scope.mailSupport = function () {
+        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
     }
-
 
 
 });

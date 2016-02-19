@@ -9,7 +9,8 @@ services.service('LocalDataService', function (localStorageService) {
         TWITTER_APP_AVAILABLE: "twitter_app",
         NETWORK_TYPE: "network_type",
         NETWORK_STATE: "network_state",
-        EXTERNAL_LOAD_URL: "external_load"
+        EXTERNAL_LOAD_URL: "external_load",
+        PHOTO_LIBRARY : "photo_library"
     }
 
     return {
@@ -57,7 +58,20 @@ services.service('LocalDataService', function (localStorageService) {
         },
         'clearExternalURL': function () {
             localStorageService.remove(data_keys.EXTERNAL_LOAD_URL);
+        },
+        'addPhoto' : function(name, url){
+            var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '[]');
+
+            photos.push(
+                {"name" : name, "url" : url}
+            );
+            localStorageService.set(data_keys.PHOTO_LIBRARY, JSON.stringify(photos));
+        },
+        'getPhotos' : function(){
+            var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '{}');
+            return photos;
         }
+
 
 
     }

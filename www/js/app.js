@@ -177,7 +177,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/root');
 
-        $httpProvider.interceptors.push('APIInterceptor');
+        //$httpProvider.interceptors.push('APIInterceptor');
 
         $httpProvider.defaults.withCredentials = true;
 

@@ -1,27 +1,24 @@
-<ion-view class="has-header padding" view-title="Capture Document" ng-controller="DocumentCtrl">
-    <ion-content>
-        <div class="bar bar-header">
-            <button class="button button-assertive wrppr-action-button"  ng-click="addImage()">
-                Add image
-            </button>
-            <button class="button button-assertive wrppr-action-button"  ng-click="load()">
-                Load
-            </button>
+<ion-view class="has-header padding" view-title="Capture Document" ng-controller="DocumentCtrl" ng-init="load()">
 
-        </div>
+    <ion-content>
+        <button class="button button-clear"  ng-click="addImage()">
+            Add image
+        </button>
+        <button class="button button-clear"  ng-click="load()">
+            Load
+        </button>
 
         <ion-list>
             <ion-item ng-repeat="image in images" class="item-body">
-                <img class="full-image" ng-src="urlForImage(image.url)" style="height: 300px;">
+                <img class="full-image" ng-src="{{urlForImage(image.url)}}" style="height: 300px;">
                 <p>{{image.url}}</p>
                 <p>{{image.name}}</p>
             </ion-item>
         </ion-list>
-        <img class="full-image" ng-src="urlForImage(image.url)" style="height: 300px;">
+
 
 
     </ion-content>
-
 
 
 </ion-view>

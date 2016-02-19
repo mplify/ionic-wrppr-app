@@ -66,9 +66,10 @@ services.service('LocalDataService', function (localStorageService) {
                 {"name" : name, "url" : url}
             );
             localStorageService.set(data_keys.PHOTO_LIBRARY, JSON.stringify(photos));
+            alert(JSON.stringify(photos));
         },
         'getPhotos' : function(){
-            var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '{}');
+            var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '[]');
             return photos;
         }
 

@@ -47,7 +47,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider, $logProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider, $logProvider, $compileProvider) {
         $stateProvider
 
             .state('root', {
@@ -209,6 +209,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         //Disable logging for production, set false
         $logProvider.debugEnabled(true);
 
-
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
     }
 );

@@ -7,21 +7,24 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
     // 1
     $scope.images = LocalDataService.getPhotos();
 
-    LocalDataService.addPhoto("aaa", "bbb");
+    //LocalDataService.addPhoto("aaa", "bbb");
 
     $scope.load = function(){
         $scope.images = LocalDataService.getPhotos();
 
-        for(var image in $scope.images){
+        /*for(var image in $scope.images){
             window.plugins.Base64.encodeFile(image, function(base64){  // Encode URI to Base64 needed for contacts plugin
                 alert(base64);
                 image = base64;
             });
-        }
+        }*/
+
+        alert(JSON.stringify($scope.images));
     };
 
     $scope.urlForImage = function(imageName) {
-        var trueOrigin = cordova.file.dataDirectory + imageName;
+        var name = imageName.substr(imageName.lastIndexOf('/') + 1);
+        var trueOrigin = cordova.file.dataDirectory + name;
         return trueOrigin;
     }
 
@@ -49,26 +52,38 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
                 //Grab the file name of the photo in the temporary directory
                 var currentName = fileURI.replace(/^.*[\\\/]/, '');
 
+
+
                 //Create a new name for the photo
                 var d = new Date(),
                     n = d.getTime(),
                     newFileName = n + ".jpg";
 
+                //alert(fileURI);
+                //alert(cordova.file.tempDirectory);
+                //alert(cordova.file.dataDirectory);
+
                 //Move the file to permanent storage
-                $cordovaFile.moveFile(cordova.file.tempDirectory, currentName, cordova.file.dataDirectory, newFileName).then(function(success){
+                $cordovaFile.moveFile("file:///storage/sdcard0/Pictures/", currentName, cordova.file.dataDirectory, newFileName).then(function(success){
 
                     //success.nativeURL will contain the path to the photo in permanent storage, do whatever you wish with it, e.g:
                     alert(success.nativeURL);
-                    $scope.images.push(newFileName, success.nativeURL);
+                    $scope.$apply(function () {
+                        $scope.images.push({"name" : newFileName, "url" : success.nativeURL});
+                    });
+
 
                     LocalDataService.addPhoto(newFileName, success.nativeURL);
 
                 }, function(error){
+                    alert(error);
                     //an error occured
                 });
 
                 //createFileEntry(fileURI);
             }
+
+
 
             function createFileEntry(fileURI) {
                 window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
@@ -113,6 +128,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
             }
 
         }, function(err) {
+            alert('error');
             $log.error(err);
         });
     }

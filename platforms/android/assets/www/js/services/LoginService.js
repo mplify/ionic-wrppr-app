@@ -51,7 +51,7 @@ services.service('LoginService', function ($http, $q, $log, api) {
                 });
             return defer.promise;
         }
-    }
+    };
 
 });
 

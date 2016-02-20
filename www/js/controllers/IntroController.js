@@ -13,13 +13,13 @@ controllers.controller('IntroCtrl', function ($scope, $state, LocalDataService) 
     $scope.$on('$ionicView.beforeLeave', function(){
         //mark as visited
         LocalDataService.setIntroScreenVisited(true);
-    })
+    });
 
     $scope.init = function(){
 
         var user = LocalDataService.loadUser();
         $scope.userName = user.UserName;
-    }
+    };
 
 
 

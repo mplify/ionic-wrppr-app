@@ -1,17 +1,17 @@
 var services = angular.module('App.services');
 
-services.service('OptionService', function($http, $q, $log, api) {
+services.service('OptionService', function ($http, $q, $log, api) {
     return {
-        'getOptions': function(organizationID, parentID) {
-            $log.info('load options:  organization'  + organizationID + ' parent node id' + parentID);
+        'getOptions': function (organizationID, parentID) {
+            $log.info('load options:  organization' + organizationID + ' parent node id' + parentID);
 
-            var url =  api.byName('base-url') + api.byName('routing-url');
+            var url = api.byName('base-url') + api.byName('routing-url');
             var defer = $q.defer();
 
 
             var params = {
-                OrgID : organizationID,
-                ParentNode : parentID
+                OrgID: organizationID,
+                ParentNode: parentID
             };
 
             $http.get(url,
@@ -26,4 +26,5 @@ services.service('OptionService', function($http, $q, $log, api) {
                 });
             return defer.promise;
         }
-    }});
+    };
+});

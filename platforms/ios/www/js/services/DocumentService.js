@@ -28,7 +28,7 @@ services.service('DocumentService', function ($cordovaCamera, $cordovaFile, Loca
                                 $log.error('failed to create folder exists', createErr);
                                 defer.reject(createErr);
                             }
-                        )
+                        );
                     }
                     else {
                         defer.reject(err);
@@ -85,5 +85,5 @@ services.service('DocumentService', function ($cordovaCamera, $cordovaFile, Loca
 
             return defer.promise;
         }
-    }
+    };
 });

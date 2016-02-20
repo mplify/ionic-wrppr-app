@@ -10,7 +10,7 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
 
     $scope.loadTwitterUser = function(){
         $scope.twitterProfileInfo = UserService.getUser();
-    }
+    };
 
     $scope.twitterLogin = function () {
 
@@ -28,7 +28,7 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
             $log.error('failed to login via twitter', error);
             $ionicLoading.hide();
         });
-    }
+    };
 
 
 

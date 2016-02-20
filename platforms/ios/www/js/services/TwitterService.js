@@ -23,6 +23,6 @@ services.service('TwitterService', function($ionicPlatform, $log, LocalDataServi
         }
 
 
-    }
+    };
 
 });

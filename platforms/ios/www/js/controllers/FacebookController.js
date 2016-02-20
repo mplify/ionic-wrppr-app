@@ -37,7 +37,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             function (error) {
 
             });
-    }
+    };
 
     $scope.nativeLoginSuccess = function (response) {
         var accessToken = response.authResponse.accessToken;
@@ -58,15 +58,15 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             $log.error('failed to get profile info');
             $ionicLoading.hide();
         });
-    }
+    };
 
     $scope.nativeLoginError = function (error) {
         $ionicLoading.hide();
-    }
+    };
 
     $scope.openNativeLogin = function () {
         facebookConnectPlugin.login(['email', 'public_profile'], $scope.nativeLoginSuccess, $scope.nativeLoginError);
-    }
+    };
 
     $scope.updateLocalStorage = function (user, profileInfo, accessToken) {
         LocalDataService.saveUser(user);
@@ -83,7 +83,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
         $state.go('app.intro');
 
 
-    }
+    };
 
 
 });

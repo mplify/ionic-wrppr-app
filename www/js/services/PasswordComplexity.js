@@ -5,12 +5,12 @@ var services = angular.module('App.services');
 services.factory('PasswordComplexity', function($log){
     return {
         check : function(password) {
-            if(password == undefined || password.length == 0){
+            if(password === undefined || password.length === 0){
                 return;
             }
 
             var complexity = "";
-            if(password == undefined){
+            if(password === undefined){
                 password = "";
             }
 
@@ -35,5 +35,5 @@ services.factory('PasswordComplexity', function($log){
             }
             return complexity;
         }
-    }
+    };
 });

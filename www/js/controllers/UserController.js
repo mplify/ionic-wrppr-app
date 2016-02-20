@@ -11,7 +11,7 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, UserServi
             $log.error('failed to load user details');
         });
 
-    }
+    };
 
 
 
@@ -28,10 +28,10 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, UserServi
         if($scope.localUser.id){
             $scope.loadUserDetails($scope.localUser.id);
         }
-    }
+    };
 
     $scope.load();
-    $scope.$on('$ionicView.enter', function(){$scope.load()});
+    $scope.$on('$ionicView.enter', function(){$scope.load();});
 
 });
 

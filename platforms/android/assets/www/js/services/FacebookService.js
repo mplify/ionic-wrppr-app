@@ -16,7 +16,7 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
                 defer.reject(error);
             });
         return defer.promise;
-    }
+    };
 
 
     var getProfileInfo = function (accessToken) {
@@ -32,7 +32,7 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
             }
         );
         return info.promise;
-    }
+    };
 
 
     var saveUser = function (profileInfo, accessToken) {
@@ -44,10 +44,10 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
             var email = profileInfo.email;
             UserService.searchByFacebookAccount(email).then(
                 function (users) {
-                    if (users.length == 0) {
+                    if (users.length === 0) {
                         UserService.searchByEmail(email).then(
                             function (emailMapedUsers) {
-                                if (emailMapedUsers == 0) {
+                                if (emailMapedUsers === 0) {
                                     // create new user
                                     var userData = {
                                         UserName: profileInfo.email,
@@ -55,7 +55,7 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
                                         FacebookAccount: profileInfo.email,
                                         Password: profileInfo.email,
                                         FacebookToken: accessToken
-                                    }
+                                    };
 
                                     UserService.createUser(userData).then(function (createdUser) {
                                             defer.resolve(createdUser);
@@ -103,13 +103,13 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
         }
 
         return defer.promise;
-    }
+    };
 
 
     return {
         getLoginStatus: getLoginStatus,
         getProfileInfo: getProfileInfo,
         saveUser: saveUser
-    }
+    };
 
 });

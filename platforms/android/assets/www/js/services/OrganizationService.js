@@ -11,7 +11,7 @@ services.service('OrganizationService', function($http, $q, $log, api) {
 
 
             var params = {};
-            if(searchText != undefined && searchText.length > 0){
+            if(searchText !== undefined && searchText.length > 0){
                params = {
                    where : '{"orgName":{"startsWith":"'+searchText+'"}}'
                };
@@ -60,4 +60,5 @@ services.service('OrganizationService', function($http, $q, $log, api) {
             return defer.promise;
 
         }
-    }});
+    };
+});

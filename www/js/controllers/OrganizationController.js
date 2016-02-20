@@ -25,7 +25,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
 
         $scope.isLoading = true;
         OrganizationService.getOrganizations(searchText, $scope.organizations.length).then(function(response) {
-            if(response.length == 0){
+            if(response.length === 0){
                $scope.noMoreItemsAvailable = true;
             }
 
@@ -43,14 +43,14 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     $scope.loadNext = function(){
         $log.debug('load organizations next page');
         $scope.load($scope.search.model);
-    }
+    };
 
     $scope.reload = function(searchText){
         $log.debug('reload organization list');
         $scope.organizations = [];
         $scope.noMoreItemsAvailable = false;
         $scope.load(searchText);
-    }
+    };
 
     $scope.selectOrganisation = function(organization){
         $rootScope.sessionData.organization = organization;
@@ -59,7 +59,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
 
 
         $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
-    }
+    };
 
     $scope.$watch('search.model', function(newVal, oldVal){
         // wait till prev load done

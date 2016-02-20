@@ -13,12 +13,12 @@ services.service('DTMFService', function ($log, $cordovaContacts) {
                     baseNumber = baseNumber + ",";
                 }
             }
-            for (routing in routings) {
+            for (var routing in routings) {
                 baseNumber = baseNumber + "," + routings[0].DTMFID;
             }
             return baseNumber;
         }
 
 
-    }
+    };
 });

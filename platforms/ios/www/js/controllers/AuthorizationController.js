@@ -25,7 +25,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
             $scope.$broadcast('scroll.refreshComplete');
 
 
-            if(loginResponse.wrppr_users == false){
+            if(loginResponse.wrppr_users === false){
                 $log.error('login failed: ' + loginResponse.message);
 
                 $ionicPopup.alert({
@@ -62,7 +62,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
         $scope.loginForm.$setPristine();
         $scope.loginForm.$setUntouched();
-    }
+    };
 
 
     $scope.doRegister = function(){
@@ -90,7 +90,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
             if(error.error === "E_VALIDATION"){
                 for(var attribute in error.invalidAttributes){
-                    var inputKey = attribute.replace(/"/g,"");;
+                    var inputKey = attribute.replace(/"/g,"");
 
                     var validators = error.invalidAttributes[attribute];
                     for(var validatorIndex in validators){
@@ -106,7 +106,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
                 template: error.message
             });
         });
-    }
+    };
 
     $scope.resetRegisterForm = function(){
         $scope.registerData = {};
@@ -114,14 +114,14 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
 
         $scope.registerForm.$setPristine();
         $scope.registerForm.$setUntouched();
-    }
+    };
 
 
 
     $scope.resetValidators = function(fieldName){
         $scope.registerForm[fieldName].$setValidity('unique', true);
         $scope.registerForm[fieldName].$setValidity('minLength', true);
-    }
+    };
 
 
 

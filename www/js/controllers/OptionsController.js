@@ -33,7 +33,7 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
             $scope.$broadcast('scroll.refreshComplete');
 
             // if no options redirect to actions
-            if($scope.options.length == 0){
+            if($scope.options.length === 0){
                 $scope.showOptions = false;
             }
             else {
@@ -52,6 +52,6 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
         $rootScope.sessionData.options.push(option);
 
         $state.go('app.options', { 'orgID' : $stateParams.orgID , 'parentID' : option.NodeID});
-    }
+    };
 
 });

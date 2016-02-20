@@ -14,12 +14,12 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         'MAIL': {type: 2, message: "Send email to"},
         'TWEET': {type: 3, message: "Send tweet to"},
         'FACEBOOK': {type: 4, message: "Send a facebook msg"}
-    }
+    };
 
     $scope.contacts = {};
 
 
-    if ($rootScope.sessionData.organization != undefined) {
+    if ($rootScope.sessionData.organization !== undefined) {
 
         $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
 
@@ -54,7 +54,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                     var wrapperContact = contactsFound[0];
 
 
-                    if (wrapperContact.phoneNumbers == null) {
+                    if (wrapperContact.phoneNumbers === null) {
                         wrapperContact.phoneNumbers = [];
                     }
                     wrapperContact.phoneNumbers.push(phoneNumber);
@@ -97,7 +97,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         $scope.logAction($scope.actionMessages.CALL);
 
-    }
+    };
 
     $scope.makeCall = function (number) {
         window.plugins.CallNumber.callNumber(
@@ -109,14 +109,14 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             },
             number,
             false);
-    }
+    };
 
     $scope.mail = function () {
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
         $window.location = 'mailto:' + $scope.contacts.email + '?subject=This is a sample subject';
-    }
+    };
 
     $scope.hasTwitterApp = false;
 
@@ -132,7 +132,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         else {
             window.open('https://twitter.com/intent/tweet?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
-    }
+    };
 
 
     $scope.logAction = function (action) {
@@ -150,16 +150,16 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             message.ChoiceMenuID = contactMenu.id;
         }
         MessageService.createMessage(message);
-    }
+    };
 
 
     $scope.mailFeedback = function () {
         $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
-    }
+    };
 
     $scope.mailSupport = function () {
         $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
-    }
+    };
 
 
 });

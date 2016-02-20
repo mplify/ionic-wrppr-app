@@ -26,7 +26,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
         var name = imageName.substr(imageName.lastIndexOf('/') + 1);
         var trueOrigin = cordova.file.dataDirectory + name;
         return imageName;
-    }
+    };
 
     $scope.addImage = function () {
         $ionicLoading.show({
@@ -48,5 +48,5 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
                 $ionicLoading.hide();
             }
         );
-    }
+    };
 });

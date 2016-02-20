@@ -12,7 +12,7 @@ services.service('LocalDataService', function (localStorageService) {
         EXTERNAL_LOAD_URL: "external_load",
         PHOTO_LIBRARY : "photo_library",
         INTRO_VISITED  : "intro_visited"
-    }
+    };
 
     return {
         'saveBaseToken': function (token) {
@@ -82,6 +82,6 @@ services.service('LocalDataService', function (localStorageService) {
 
 
 
-    }
+    };
 
 });

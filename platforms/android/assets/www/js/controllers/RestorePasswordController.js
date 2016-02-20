@@ -31,7 +31,7 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
                 template: 'Please try again'
             });
         });
-    }
+    };
 
 
 
@@ -42,7 +42,7 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
     });
 
     $scope.$watch('repeatPassword', function(repeatPassword) {
-       if(repeatPassword == undefined){
+       if(repeatPassword === undefined){
            return;
        }
        if(repeatPassword && $scope.newPassword === repeatPassword){
@@ -51,6 +51,8 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
        else {
            $scope.passwordMatch = false;
        }
+
+
        $log.info('password match ' + $scope.passwordMatch);
     });
 
@@ -58,5 +60,5 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
         $log.info('change password');
 
         alert($stateParams.key);
-    }
+    };
 });

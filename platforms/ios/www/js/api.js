@@ -35,6 +35,7 @@ App.constant('API', {
 
     //messages
     'message-url':              '/wrppr_messages',
+    'companies-messages-url':   '/wrppr_numMessPerOrg',
 
     //actions
     'create' :                  '/create',

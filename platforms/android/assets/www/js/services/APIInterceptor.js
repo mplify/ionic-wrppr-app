@@ -17,12 +17,12 @@ services.service('APIInterceptor', function ($rootScope, $q, LocalDataService) {
 
     service.response = function (config) {
         if (config.data && config.data.message) {
-            if (config.data.wrppr_users != undefined && config.data.wrppr_users == false) {
+            if (config.data.wrppr_users !== undefined && config.data.wrppr_users === false) {
                 $rootScope.$broadcast('unauthorized');
             }
         }
         return config;
-    }
+    };
 
 
     service.responseError = function (response) {
@@ -36,4 +36,4 @@ services.service('APIInterceptor', function ($rootScope, $q, LocalDataService) {
         }
         return $q.reject(response);
     };
-})
+});

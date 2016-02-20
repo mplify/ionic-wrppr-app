@@ -22,7 +22,7 @@ services.service('UserService', function ($http, $q, $log, api) {
                 })
                 .success(function (resp) {
                     if (resp.length > 1) {
-                        console.err('There is a problem, more then 1 user with ' + username + ' facebookAccount')
+                        $log.error('There is a problem, more then 1 user with ' + username + ' facebookAccount');
                     }
 
                     defer.resolve(resp);
@@ -84,7 +84,7 @@ services.service('UserService', function ($http, $q, $log, api) {
                 'FacebookToken': userData.FacebookToken,
                 'FacebookAccount': userData.FacebookAccount,
                 'Emailaddress': userData.Emailaddress
-            }
+            };
 
             $http.put(url, data)
                 .success(function (resp) {
@@ -115,5 +115,5 @@ services.service('UserService', function ($http, $q, $log, api) {
 
         }
 
-    }
+    };
 });

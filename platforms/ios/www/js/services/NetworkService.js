@@ -17,12 +17,12 @@ services.service('NetworkService', function($ionicPlatform, $rootScope, $log, $i
         $rootScope.$on('networkOnline', function(event, networkState){
             var onlineState = networkState;
             LocalDataService.setNetworkState(onlineState);
-        })
+        });
 
         // listen for Offline event
         $rootScope.$on('networkOffline', function(event, networkState){
             LocalDataService.setNetworkState(networkState);
-        })
+        });
 
 
     }, false);

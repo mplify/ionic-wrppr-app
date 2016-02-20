@@ -10,8 +10,9 @@ services.service('LocalDataService', function (localStorageService) {
         NETWORK_TYPE: "network_type",
         NETWORK_STATE: "network_state",
         EXTERNAL_LOAD_URL: "external_load",
-        PHOTO_LIBRARY : "photo_library"
-    }
+        PHOTO_LIBRARY : "photo_library",
+        INTRO_VISITED  : "intro_visited"
+    };
 
     return {
         'saveBaseToken': function (token) {
@@ -71,10 +72,16 @@ services.service('LocalDataService', function (localStorageService) {
         'getPhotos' : function(){
             var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '[]');
             return photos;
+        },
+        'setIntroScreenVisited' : function(visited){
+            localStorageService.set(data_keys.INTRO_VISITED, visited);
+        },
+        'getIntroScreenVisited' : function(){
+           return localStorageService.get(data_keys.INTRO_VISITED) ? localStorageService.get(data_keys.INTRO_VISITED) : false;
         }
 
 
 
-    }
+    };
 
 });

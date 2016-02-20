@@ -164,6 +164,15 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.favorites', {
+                url: '/favorites',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/favorites.html'
+                    }
+                }
+            })
+
 
             .state('app.documents', {
                 url: '/documents',

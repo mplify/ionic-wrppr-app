@@ -1,7 +1,12 @@
 <ion-view class="has-header padding" view-title="Capture Document" ng-controller="DocumentCtrl" ng-init="load()">
 
     <ion-content>
-
+        <button class="button button-clear"  ng-click="addImage()">
+            Add image
+        </button>
+        <button class="button button-clear"  ng-click="load()">
+            Load
+        </button>
 
         <ion-list>
             <ion-item ng-repeat="image in images" class="item-body">
@@ -14,16 +19,6 @@
 
 
     </ion-content>
-    <ion-footer-bar>
-        <div class="button-bar">
-        <button class="button button-clear"  ng-click="addImage()">
-            Add image
-        </button>
-        <button class="button button-clear"  ng-click="load()">
-            Load
-        </button>
-        </div>
-    </ion-footer-bar>
 
 
 </ion-view>

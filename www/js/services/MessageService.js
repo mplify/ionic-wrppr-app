@@ -44,5 +44,30 @@ services.service('MessageService', function($http, $q, $log, api) {
                     defer.reject(err);
                 });
             return defer.promise;
+        },
+        'getCompaniesWithMsgCount' : function(userID){
+            $log.info('load companies with messages count');
+
+            var url =  api.byName('base-url') + api.byName('companies-messages-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            if(userID != undefined){
+                params = {
+                    'UserID' : userID
+                };
+            }
+
+            $http.get(url, {
+                'params' :params
+            })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
         }
     }});

@@ -12,10 +12,7 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
         DocumentService.createFolder().then(
             function (success) {
                 $scope.images = LocalDataService.getPhotos();
-                $ionicPopup.alert({
-                    title: 'Picture loaded',
-                    template: $scope.images.length
-                });
+
             },
             function (err) {
 
@@ -32,14 +29,24 @@ controllers.controller('DocumentCtrl', function ($scope, $log, $cordovaCamera, $
     }
 
     $scope.addImage = function () {
+        $ionicLoading.show({
+            template: 'Capturing image...'
+        });
+
         DocumentService.capturePicture().then(
             function(success){
+                $scope.images = LocalDataService.getPhotos();
+                $ionicLoading.hide();
+
                 $ionicPopup.alert({
                     title: 'Picture saved',
                     template: success
                 });
+
             },
-            function(fail){}
+            function(fail){
+                $ionicLoading.hide();
+            }
         );
     }
 });

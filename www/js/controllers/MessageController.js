@@ -9,6 +9,8 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
 
     ];
 
+    $scope.companies = [];
+
     $scope.userID = LocalDataService.loadUser().id;
 
     $scope.load = function(){
@@ -18,6 +20,18 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
 
         MessageService.getMessagesByUser($scope.userID).then(function(response) {
             $scope.messages = response;
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+    $scope.loadCompanies =  function(){
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+
+        MessageService.getCompaniesWithMsgCount($scope.userID).then(function(response) {
+            $scope.companies = response;
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
         });

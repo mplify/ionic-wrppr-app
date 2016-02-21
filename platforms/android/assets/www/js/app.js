@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate'])
+angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates'])
 
     .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService) {
 
@@ -52,37 +52,37 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'templates/dashboard2.html'
+                templateUrl: 'dashboard2.html'
             })
 
 
             .state('login', {
                 url: '/login',
-                templateUrl: 'templates/login.html',
+                templateUrl: 'login.html',
                 controller : 'AppCtrl'
             })
 
             .state('register', {
                 url: '/register',
-                templateUrl: 'templates/register.html',
+                templateUrl: 'register.html',
                 controller : 'AuthorizationCtrl'
             })
 
             .state('restorepassword', {
                 url: '/restorepassword',
-                templateUrl: 'templates/restore-password.html',
+                templateUrl: 'restore-password.html',
                 controller : 'RestorePasswordCtrl'
             })
 
             .state('changepassword', {
                 url: '/changepassword/:key',
-                templateUrl: 'templates/change-password.html',
+                templateUrl: 'change-password.html',
                 controller : 'RestorePasswordCtrl'
             })
 
             .state('app', {
                 url : '/app',
-                templateUrl : 'templates/menu.html',
+                templateUrl : 'menu.html',
                 abstract : true,
                 controller : 'AppCtrl'
             })
@@ -91,7 +91,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/intro',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/intro.html'
+                        templateUrl: 'intro.html'
                     }
                 }
             })
@@ -100,7 +100,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/dashboard2',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/dashboard2.html'
+                        templateUrl: 'dashboard2.html'
                     }
                 }
             })
@@ -109,7 +109,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/search',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/organization-list.html',
+                        templateUrl: 'organization-list.html',
                         controller : 'OrganizationsCtrl'
                     }
                 }
@@ -119,7 +119,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/search',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/organization-list.html'
+                        templateUrl: 'organization-list.html'
                     }
                 },
                 controller : 'OrganizationsCtrl'
@@ -129,7 +129,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/options/:orgID/:parentID',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/option-list.html'
+                        templateUrl: 'option-list.html'
                     }
                 },
                 controller : 'OptionsCtrl'
@@ -140,7 +140,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/actions/:orgName',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/actions.html'
+                        templateUrl: 'actions.html'
                     }
                 },
                 controller : 'OptionsCtrl'
@@ -150,7 +150,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/user',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/user.html'
+                        templateUrl: 'user.html'
                     }
                 }
             })
@@ -159,7 +159,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/messages',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/message-list.html'
+                        templateUrl: 'message-list.html'
                     }
                 }
             })
@@ -168,7 +168,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/favorites',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/favorites.html'
+                        templateUrl: 'favorites.html'
                     }
                 }
             })
@@ -178,7 +178,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/documents',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/capture-document.html'
+                        templateUrl: 'capture-document.html'
                     }
                 }
             });

@@ -1,0 +1,17 @@
+{
+  "name": "wrapper",
+  "app_id": "f44adf11",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://wrppr-core.herokuapp.com"
+    }
+  ],
+  "gulpStartupTasks": [
+      "sass",
+      "templatecache",
+      "ng_annotate",
+      "useref",
+      "watch"
+    ]
+}

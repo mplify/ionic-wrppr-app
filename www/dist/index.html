@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="lib/elegant_font/HTML%20CSS/style.css">
+    <link href="lib/ionicons/css/ionicons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="dist_css/styles.css">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="lib/angular-translate/angular-translate.js"></script>
+    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
+
+      <script src="lib/jsSHA/src/sha.js"></script>
+      <script src="lib/jsSHA/src/sha1.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client...-->
+      <script src="lib/ng-cordova/dist/ng-cordova.min.js"></script>
+      <script src="dist/dist_js/app/templates.js"></script>
+
+
+      <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
+
+
+    <!-- your app's js -->
+      <script src="dist_js/app.js"></script>
+
+
+  </head>
+
+  <body ng-app="starter"  ng-strict-di>
+
+  <!-- fb-root is needed by the FB API. -->
+  <div id="fb-root"></div>
+    <ion-nav-view>
+    </ion-nav-view>
+  <script src="cordova.js"></script>
+  <script>
+      var handleOpenURL = function(url) {
+          window.localStorage.setItem("ls.external_load", url);
+          console.log('received url: ' + url);
+      };
+  </script>
+
+  </body>
+</html>

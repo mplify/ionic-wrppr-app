@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0685416D1DCA40409655EC90 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8F3234B21844BFAF64CD72 /* Bolts.framework */; };
 		0A1A061A0E6D4D4EB6607E68 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F7DE45E2064524A6F459DA /* AddressBookUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -42,6 +41,8 @@
 		DCDA7A641C5AD8B10017AAFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCDA7A631C5AD8B10017AAFA /* Images.xcassets */; };
 		DE7ED96B8CB149C29D7B3223 /* CDVContact.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DECED44053406F83AE37B6 /* CDVContact.m */; };
 		FE5A38469C3C47D49170E9CC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B124B2CAC62647CF95D538E3 /* FBSDKShareKit.framework */; };
+		835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C243FB12EC54915953D6D09 /* NativePageTransitions.m */; };
+		3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,10 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = wrapper/config.xml; sourceTree = "<group>"; };
 		F9EAF87A9A55492F848A9D89 /* CDVExif.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVExif.h; path = "cordova-plugin-camera/CDVExif.h"; sourceTree = "<group>"; };
 		FD04E57C87724E27B43D03CA /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVJpegHeaderWriter.h; path = "cordova-plugin-camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; };
+		9C243FB12EC54915953D6D09 /* NativePageTransitions.m */ = {isa = PBXFileReference; name = "NativePageTransitions.m"; path = "com.telerik.plugins.nativepagetransitions/NativePageTransitions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.m"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		A8B5F210AE8D4684BFEA5CAA /* NativePageTransitions.h */ = {isa = PBXFileReference; name = "NativePageTransitions.h"; path = "com.telerik.plugins.nativepagetransitions/NativePageTransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.h"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +289,10 @@
 				D0DECED44053406F83AE37B6 /* CDVContact.m */,
 				A0B727D2784D4ED0B615CA56 /* CDVContacts.h */,
 				550905141C904084A8855685 /* CDVContact.h */,
+				9C243FB12EC54915953D6D09 /* NativePageTransitions.m */,
+				B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */,
+				A8B5F210AE8D4684BFEA5CAA /* NativePageTransitions.h */,
+				67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */,
 			);
 			name = Plugins;
 			path = wrapper/Plugins;
@@ -419,6 +428,8 @@
 				5BD588021DF3464092BC7ABF /* CFCallNumber.m in Sources */,
 				AB21C4DE3B224D559C75FB5E /* CDVContacts.m in Sources */,
 				DE7ED96B8CB149C29D7B3223 /* CDVContact.m in Sources */,
+				835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */,
+				3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

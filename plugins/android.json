@@ -39,6 +39,9 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "com.telerik.plugins.nativepagetransitions": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {}

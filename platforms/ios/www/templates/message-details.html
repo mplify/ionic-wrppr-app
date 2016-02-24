@@ -8,12 +8,10 @@
                     <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
 
                 </div>
+                <h2 style="text-align: center;">{{currentMessage.Question}}</h2>
+                <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
             </ion-item>
-            <ion-item>
-                {{currentMessage.Question}}
-            </ion-item>
-            <ion-item>Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</ion-item>
-            <ion-item>Updated At: {{currentMessage.updatedAt | date:'MM.dd.yyyy HH:mm'}}</ion-item>
+
         </ion-list>
 
     </ion-content>

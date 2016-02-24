@@ -864,8 +864,7 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                 var defer = $q.defer();
 
 
-                $http.get(url,
-                    {})
+                $http.get(url)
                     .success(function (resp) {
                         defer.resolve(resp);
                     })
@@ -1440,7 +1439,9 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
            $ionicLoading.hide();
            $scope.$broadcast('scroll.refreshComplete');
            $scope.resetRegisterForm();
-           $state.go('app.intro');
+
+
+           $state.go('app.search');
 
        }, function(error){
             $ionicLoading.hide();
@@ -1570,7 +1571,15 @@ controllers.controller('DashboardCtrl', ['$scope', '$log', 'LocalDataService', f
 }]);
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$state', '$log', 'OrganizationService', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService) {
+controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$state', '$log', 'OrganizationService', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService, LocalDataService) {
+    $scope.introVisible = LocalDataService.getIntroScreenVisited();
+
+
+    $scope.hideIntro = function(){
+        LocalDataService.setIntroScreenVisited(true);
+        $scope.introVisible = true;
+    };
+
 
     $scope.organizations = [
 
@@ -1991,7 +2000,7 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
         var password = "facebook " + accessToken;
         BasicAuthorizationService.generateToken(username, password);
 
-        $state.go('app.intro');
+        $state.go('app.search');
 
 
     };
@@ -2024,7 +2033,7 @@ controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$state
             $ionicLoading.hide();
 
 
-            $state.go('app.intro');
+            $state.go('app.search');
         }, function (error) {
             $log.error('failed to login via twitter', error);
             $ionicLoading.hide();
@@ -2127,16 +2136,21 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$log',
     $scope.currentMessage = {};
 
     $scope.loadMessage = function(){
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+
 
         var messageID = $stateParams.messageID;
         MessageService.loadMessage(messageID).then(
             function(success){
-               alert('success');
-               $log.debug('message', success);
+               $ionicLoading.hide();
+               $log.info('loaded message', success);
                $scope.currentMessage = success;
             },
             function(err){
-                alert('error');
+               $ionicLoading.hide();
+               $log.error('failed to load message ', err);
             });
     };
 

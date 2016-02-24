@@ -1,6 +1,6 @@
 <ion-view view-title="Search companies" ng-controller="OrganizationsCtrl" >
 
-    <ion-content>
+    <ion-content ng-show="introVisible">
         <div class="bar bar-header item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
@@ -27,5 +27,8 @@
                 on-infinite="loadNext()"
                 distance="10%">
         </ion-infinite-scroll>
+    </ion-content>
+    <ion-content ng-hide="introVisible">
+        <div ng-include src="'templates/intro.html'"></div>
     </ion-content>
 </ion-view>

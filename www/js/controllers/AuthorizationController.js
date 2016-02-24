@@ -89,7 +89,9 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
            $ionicLoading.hide();
            $scope.$broadcast('scroll.refreshComplete');
            $scope.resetRegisterForm();
-           $state.go('app.intro');
+
+
+           $state.go('app.search');
 
        }, function(error){
             $ionicLoading.hide();

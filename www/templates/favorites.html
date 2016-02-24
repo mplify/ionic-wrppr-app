@@ -6,8 +6,8 @@
                 on-refresh="loadCompanies();">
         </ion-refresher>
         <ion-list ng-init="loadCompanies();">
-            <ion-item ng-repeat="company in companies track by company.OrgID" class="item-icon-left" ng-click="selectOrganisation(company);">
-                {{company.OrgID}}
+            <ion-item ng-repeat="company in companies track by company.OrgID"  ng-click="selectOrganisation(company);">
+                {{company.orgName}}
                 <span class="badge badge-balanced">{{company.count}}</span>
             </ion-item>
         </ion-list>

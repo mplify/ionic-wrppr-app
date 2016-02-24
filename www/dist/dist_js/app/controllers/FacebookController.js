@@ -80,7 +80,7 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
         var password = "facebook " + accessToken;
         BasicAuthorizationService.generateToken(username, password);
 
-        $state.go('app.intro');
+        $state.go('app.search');
 
 
     };

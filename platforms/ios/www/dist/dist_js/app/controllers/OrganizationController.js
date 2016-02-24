@@ -1,6 +1,14 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$state', '$log', 'OrganizationService', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService) {
+controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$state', '$log', 'OrganizationService', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService, LocalDataService) {
+    $scope.introVisible = LocalDataService.getIntroScreenVisited();
+
+
+    $scope.hideIntro = function(){
+        LocalDataService.setIntroScreenVisited(true);
+        $scope.introVisible = true;
+    };
+
 
     $scope.organizations = [
 

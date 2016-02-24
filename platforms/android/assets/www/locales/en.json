@@ -9,5 +9,10 @@
     "PASSWORD" : "Password",
     "PASSWORD_REQUIRED_VALIDATOR" : "* Password is required",
     "LOGIN_BUTTON" : "Login",
-    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?"
+    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?",
+
+    "MAIL" : {
+        "SUBJECT" : "Question about ",
+        "BODY" : "Dear"
+    }
 }

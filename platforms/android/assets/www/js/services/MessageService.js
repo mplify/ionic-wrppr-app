@@ -20,7 +20,23 @@ services.service('MessageService', function ($http, $q, $log, api) {
                 return defer.promise;
 
             },
-            'getMessagesByUser': function (userID) {
+            'loadMessage' : function(messageID){
+                $log.info('load message details ' + messageID);
+
+                var url = api.byName('base-url') + api.byName('message-url') + '/' + messageID;
+                var defer = $q.defer();
+
+
+                $http.get(url)
+                    .success(function (resp) {
+                        defer.resolve(resp);
+                    })
+                    .error(function (err) {
+                        defer.reject(err);
+                    });
+                return defer.promise;
+            },
+            'getMessagesByUser': function (userID, orgID) {
                 $log.info('load messages for user: ' + userID);
 
                 var url = api.byName('base-url') + api.byName('message-url');
@@ -32,6 +48,10 @@ services.service('MessageService', function ($http, $q, $log, api) {
                     params = {
                         'UserID': userID
                     };
+                }
+
+                if(orgID){
+                    params.OrgID = orgID;
                 }
 
                 $http.get(url, {
@@ -55,7 +75,7 @@ services.service('MessageService', function ($http, $q, $log, api) {
                 var params = {};
                 if (userID !== undefined) {
                     params = {
-                        'UserID': userID
+                        'userID': userID
                     };
                 }
 

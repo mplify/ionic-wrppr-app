@@ -164,6 +164,16 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.messagedetails', {
+                url: '/messagedetails/:messageID',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'message-details.html'
+                    }
+                }
+            })
+
+
             .state('app.favorites', {
                 url: '/favorites',
                 views: {
@@ -173,6 +183,14 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.favorite', {
+            url: '/favorite/:orgID',
+                views: {
+                'menuContent': {
+                    templateUrl: 'message-list.html'
+                }
+            }
+             })
 
             .state('app.documents', {
                 url: '/documents',

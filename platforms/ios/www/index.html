@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="lib/elegant_font/HTML%20CSS/style.css">
     <link href="lib/ionicons/css/ionicons.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="dist_css/styles.css">
+    <!-- build:css dist_css/styles.css -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- endbuild -->
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -39,13 +41,52 @@
 
 
     <!-- your app's js -->
-      <script src="dist_js/app.js"></script>
+      <!-- build:js dist_js/app.js -->
+      <script src="dist/dist_js/app/app.js"></script>
+
+
+
+      <script src="dist/dist_js/app/services.js"></script>
+      <script src="dist/dist_js/app/services/Base64.js"></script>
+      <script src="dist/dist_js/app/services/APIInterceptor.js"></script>
+      <script src="dist/dist_js/app/services/BasicAuthorizationService.js"></script>
+      <script src="dist/dist_js/app/services/PasswordComplexity.js"></script>
+      <script src="dist/dist_js/app/services/LocalDataService.js"></script>
+      <script src="dist/dist_js/app/services/TwitterService.js"></script>
+      <script src="dist/dist_js/app/services/UserService.js"></script>
+      <script src="dist/dist_js/app/services/LoginService.js"></script>
+      <script src="dist/dist_js/app/services/OrganizationService.js"></script>
+      <script src="dist/dist_js/app/services/OptionService.js"></script>
+      <script src="dist/dist_js/app/services/MessageService.js"></script>
+      <script src="dist/dist_js/app/services/DTMFService.js"></script>
+      <script src="dist/dist_js/app/services/NetworkService.js"></script>
+      <script src="dist/dist_js/app/services/ExternalLoadService.js"></script>
+      <script src="dist/dist_js/app/services/FacebookService.js"></script>
+      <script src="dist/dist_js/app/services/DocumentService.js"></script>
+
+
+
+    <script src="dist/dist_js/app/api.js"></script>
+    <script src="dist/dist_js/app/controllers.js"></script>
+    <script src="dist/dist_js/app/controllers/AuthorizationController.js"></script>
+    <script src="dist/dist_js/app/controllers/RestorePasswordController.js"></script>
+    <script src="dist/dist_js/app/controllers/DashboardController.js"></script>
+    <script src="dist/dist_js/app/controllers/OrganizationController.js"></script>
+    <script src="dist/dist_js/app/controllers/OptionsController.js"></script>
+    <script src="dist/dist_js/app/controllers/ActionController.js"></script>
+    <script src="dist/dist_js/app/controllers/UserController.js"></script>
+    <script src="dist/dist_js/app/controllers/FacebookController.js"></script>
+    <script src="dist/dist_js/app/controllers/TwitterController.js"></script>
+    <script src="dist/dist_js/app/controllers/IntroController.js"></script>
+    <script src="dist/dist_js/app/controllers/MessageController.js"></script>
+    <script src="dist/dist_js/app/controllers/DocumentController.js"></script>
+      <!-- endbuild -->
       <script src="js/templates.js"></script>
 
 
   </head>
 
-  <body ng-app="starter"  ng-strict-di>
+  <body ng-app="starter"  ng-strict-di class="platform-ios platform-cordova platform-webview">
 
   <!-- fb-root is needed by the FB API. -->
   <div id="fb-root"></div>

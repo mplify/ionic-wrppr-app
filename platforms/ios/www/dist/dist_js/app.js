@@ -164,6 +164,16 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.messagedetails', {
+                url: '/messagedetails/:messageID',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'message-details.html'
+                    }
+                }
+            })
+
+
             .state('app.favorites', {
                 url: '/favorites',
                 views: {
@@ -173,6 +183,14 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
+            .state('app.favorite', {
+            url: '/favorite/:orgID',
+                views: {
+                'menuContent': {
+                    templateUrl: 'message-list.html'
+                }
+            }
+             })
 
             .state('app.documents', {
                 url: '/documents',
@@ -839,7 +857,24 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                 return defer.promise;
 
             },
-            'getMessagesByUser': function (userID) {
+            'loadMessage' : function(messageID){
+                $log.info('load message details ' + messageID);
+
+                var url = api.byName('base-url') + api.byName('message-url') + '/' + messageID;
+                var defer = $q.defer();
+
+
+                $http.get(url,
+                    {})
+                    .success(function (resp) {
+                        defer.resolve(resp);
+                    })
+                    .error(function (err) {
+                        defer.reject(err);
+                    });
+                return defer.promise;
+            },
+            'getMessagesByUser': function (userID, orgID) {
                 $log.info('load messages for user: ' + userID);
 
                 var url = api.byName('base-url') + api.byName('message-url');
@@ -851,6 +886,10 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                     params = {
                         'UserID': userID
                     };
+                }
+
+                if(orgID){
+                    params.OrgID = orgID;
                 }
 
                 $http.get(url, {
@@ -874,7 +913,7 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                 var params = {};
                 if (userID !== undefined) {
                     params = {
-                        'UserID': userID
+                        'userID': userID
                     };
                 }
 
@@ -1606,11 +1645,68 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
 
 }]);
 
+var controllers = angular.module('App.controllers');
+
+controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$log', '$ionicLoading', '$ionicHistory', 'OptionService', function ($scope, $rootScope, $state, $stateParams, $log, $ionicLoading, $ionicHistory, OptionService) {
+    $log.debug('init options controller', $rootScope.sessionData.options);
+
+    $scope.showOptions = true;
+
+
+    $rootScope.$ionicGoBack = function() {
+
+        // before go back remove  from options
+        if($state.is('app.options')){
+            $rootScope.sessionData.options.pop();
+        }
+        $ionicHistory.goBack();
+    };
+
+    $scope.options = [
+
+    ];
+
+    $scope.load = function(){
+
+
+        $ionicLoading.show({
+            template: 'Loading...',
+            delay : 500
+        });
+
+        OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function(response) {
+            $scope.options = response;
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
+
+            // if no options redirect to actions
+            if($scope.options.length === 0){
+                $scope.showOptions = false;
+            }
+            else {
+                $scope.showOptions = true;
+            }
+
+        });
+    };
+
+
+    $scope.currentOrganization = $stateParams.orgName;
+
+    $scope.selectOption = function(option){
+        $log.info('selected option ' + option);
+
+        $rootScope.sessionData.options.push(option);
+
+        $state.go('app.options', { 'orgID' : $stateParams.orgID , 'parentID' : option.NodeID});
+    };
+
+}]);
 
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $ionicLoading ,LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading ,LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -1724,7 +1820,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        $window.location = 'mailto:' + $scope.contacts.email + '?subject=This is a sample subject';
+        var body = $translate.instant("MAIL.BODY", { "company" : $rootScope.sessionData.organization.orgName});
+        $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
     };
 
     $scope.hasTwitterApp = false;
@@ -1972,7 +2069,14 @@ var controllers = angular.module('App.controllers');
 controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', 'MessageService', 'LocalDataService', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService) {
     $log.info('init messages controller');
 
-    $scope.$on('$ionicView.enter', $scope.load);
+    $scope.$on('$ionicView.enter', function(){
+        if($stateParams.messageID){
+            $scope.loadMessage();
+        }
+        else {
+            $scope.load();
+        }
+    });
 
     $scope.messages = [
 
@@ -1987,7 +2091,9 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$log',
             template: 'Loading...'
         });
 
-        MessageService.getMessagesByUser($scope.userID).then(function(response) {
+        var orgID = $stateParams.orgID;
+
+        MessageService.getMessagesByUser($scope.userID, orgID).then(function(response) {
             $scope.messages = response;
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
@@ -2003,7 +2109,35 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$log',
             $scope.companies = response;
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
+        },
+        function(err){
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
         });
+    };
+
+    $scope.selectOrganisation = function(organisation){
+        $state.go('app.favorite', { 'orgID' : organisation.OrgID});
+    };
+
+    $scope.selectMessage = function(message){
+        $state.go('app.messagedetails', { 'messageID' : message.id});
+    };
+
+    $scope.currentMessage = {};
+
+    $scope.loadMessage = function(){
+
+        var messageID = $stateParams.messageID;
+        MessageService.loadMessage(messageID).then(
+            function(success){
+               alert('success');
+               $log.debug('message', success);
+               $scope.currentMessage = success;
+            },
+            function(err){
+                alert('error');
+            });
     };
 
 

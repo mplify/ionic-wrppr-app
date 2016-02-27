@@ -10,7 +10,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
         $log.debug('run app');
-
         $ionicPlatform.ready(function () {
             $log.debug('ionic platform ready');
 
@@ -30,6 +29,12 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             TwitterService.checkTwitterApp();
             ExternalLoad.checkExternalLoad();
+
+            navigator.globalization.getPreferredLanguage(function(lang){
+                $log.debug('globalization plugin : ', lang);
+            }, function(err){
+                $log.error('globalization plugin error', err);
+            });
 
 
         });
@@ -230,6 +235,14 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         //$ionicConfigProvider.scrolling.jsScrolling(false);
 
 
+        var userLanguage = navigator.language || navigator.userLanguage;
+
+
+        var preferredLanguage = "nl";
+        if(userLanguage.startsWith('en')){
+            preferredLanguage = "en";
+
+        }
 
         $translateProvider
             .useStaticFilesLoader({
@@ -240,7 +253,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 'en' : 'en', 'en_GB': 'en', 'en_US': 'en',
                 'de' : 'nl', 'de_DE': 'nl', 'de_CH': 'nl'
             })
-            .preferredLanguage('en')
+            .preferredLanguage(preferredLanguage)
             .fallbackLanguage('nl')
             //.determinePreferredLanguage()
             .useSanitizeValueStrategy('escapeParameters');

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0685416D1DCA40409655EC90 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8F3234B21844BFAF64CD72 /* Bolts.framework */; };
 		0A1A061A0E6D4D4EB6607E68 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F7DE45E2064524A6F459DA /* AddressBookUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -44,6 +43,7 @@
 		DCDA7A641C5AD8B10017AAFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCDA7A631C5AD8B10017AAFA /* Images.xcassets */; };
 		DE7ED96B8CB149C29D7B3223 /* CDVContact.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DECED44053406F83AE37B6 /* CDVContact.m */; };
 		FE5A38469C3C47D49170E9CC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B124B2CAC62647CF95D538E3 /* FBSDKShareKit.framework */; };
+		95C767ADFDD5407FA6872F95 /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8323B3E231408E87C4629C /* CDVGlobalization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +131,8 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = wrapper/config.xml; sourceTree = "<group>"; };
 		F9EAF87A9A55492F848A9D89 /* CDVExif.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVExif.h; path = "cordova-plugin-camera/CDVExif.h"; sourceTree = "<group>"; };
 		FD04E57C87724E27B43D03CA /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVJpegHeaderWriter.h; path = "cordova-plugin-camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; };
+		7F8323B3E231408E87C4629C /* CDVGlobalization.m */ = {isa = PBXFileReference; name = "CDVGlobalization.m"; path = "cordova-plugin-globalization/CDVGlobalization.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9C82C521F0AD4CE58773E4F3 /* CDVGlobalization.h */ = {isa = PBXFileReference; name = "CDVGlobalization.h"; path = "cordova-plugin-globalization/CDVGlobalization.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,8 @@
 				B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */,
 				A8B5F210AE8D4684BFEA5CAA /* NativePageTransitions.h */,
 				67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */,
+				7F8323B3E231408E87C4629C /* CDVGlobalization.m */,
+				9C82C521F0AD4CE58773E4F3 /* CDVGlobalization.h */,
 			);
 			name = Plugins;
 			path = wrapper/Plugins;
@@ -431,6 +435,7 @@
 				DE7ED96B8CB149C29D7B3223 /* CDVContact.m in Sources */,
 				835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */,
 				3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */,
+				95C767ADFDD5407FA6872F95 /* CDVGlobalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

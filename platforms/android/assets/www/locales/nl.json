@@ -1,1 +1,48 @@
-//FIXME translate all labels form en.json
+{
+
+    "APP_TITLE" : "wrppr NL",
+    "GENERIC_CLOSE" : "Close",
+    "GENERIC"  : {
+        "REFRESH" : "Pull to refresh"
+    },
+
+
+    "MENU" : {
+        "BUSINESS_CONTACT_SEARCH" : "Search",
+        "USER_PROFILE" : "User Profile",
+        "FAVORITES" : "Favorites",
+        "HISTORY" : "Contact History",
+        "ATTACHMENTS" : "Attachments",
+        "LOGOUT" : "Logout"
+    },
+
+    "DASHBOARD" : {
+        "TITLE" : "Uw zakelijke contacten",
+        "DESCRIPTION" : "Zoek elk bedrijf, kies uw vraag en contactgegevens",
+        "FACEBOOK_LOGIN" : "Sign in with Facebook",
+        "TWITTER_LOGIN" : "Sign in with Twitter",
+        "LOGIN" : "Sign In",
+        "REGISTER" : "Register"
+    },
+
+
+
+    "LOGIN_TITLE" : "Login",
+    "USERNAME" : "Username",
+    "USERNAME_REQUIRED_VALIDATOR" : "* Username is required",
+    "PASSWORD" : "Password",
+    "PASSWORD_REQUIRED_VALIDATOR" : "* Password is required",
+    "LOGIN_BUTTON" : "Login",
+    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?",
+
+    "MAIL" : {
+        "SUBJECT" : "Question about ",
+        "BODY" : "Dear"
+    },
+
+    "BUSINESS_CONTACT" : {
+        "SEARCH" : "Search business contacts",
+        "SEARCH_FILTER_PLACEHOLDER" : "Search"
+
+    }
+}

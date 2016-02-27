@@ -42,6 +42,9 @@
         },
         "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {}

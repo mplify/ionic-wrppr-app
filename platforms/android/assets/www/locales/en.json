@@ -1,5 +1,29 @@
 {
+
+    "APP_TITLE" : "wrppr",
     "GENERIC_CLOSE" : "Close",
+    "GENERIC"  : {
+        "REFRESH" : "Pull to refresh"
+    },
+
+
+    "MENU" : {
+        "BUSINESS_CONTACT_SEARCH" : "Search",
+        "USER_PROFILE" : "User Profile",
+        "FAVORITES" : "Favorites",
+        "HISTORY" : "Contact History",
+        "ATTACHMENTS" : "Attachments",
+        "LOGOUT" : "Logout"
+    },
+
+    "DASHBOARD" : {
+        "TITLE" : "Your business contacts",
+        "DESCRIPTION" : "Search any business, choose your question and contact",
+        "FACEBOOK_LOGIN" : "Sign in with Facebook",
+        "TWITTER_LOGIN" : "Sign in with Twitter",
+        "LOGIN" : "Sign In",
+        "REGISTER" : "Register"
+    },
 
 
 
@@ -14,5 +38,11 @@
     "MAIL" : {
         "SUBJECT" : "Question about ",
         "BODY" : "Dear"
+    },
+
+    "BUSINESS_CONTACT" : {
+        "SEARCH" : "Search business contacts",
+        "SEARCH_FILTER_PLACEHOLDER" : "Search"
+
     }
 }

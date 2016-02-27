@@ -34,7 +34,7 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translat
     $scope.$on('$ionicView.enter', function(){$scope.load();});
 
     $scope.switchLanguage = function(){
-        $translate.use("nl");
+        $translate.use("en");
 
         $ionicLoading.show({
             template: 'Switching language ...'

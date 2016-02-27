@@ -1,6 +1,12 @@
 {
 
-    "APP_TITLE" : "wrpprNL",
+    "APP_TITLE" : "wrppr NL",
+    "GENERIC_CLOSE" : "Close",
+    "GENERIC"  : {
+        "REFRESH" : "Pull to refresh"
+    },
+
+
     "MENU" : {
         "BUSINESS_CONTACT_SEARCH" : "Search",
         "USER_PROFILE" : "User Profile",
@@ -10,7 +16,14 @@
         "LOGOUT" : "Logout"
     },
 
-    "GENERIC_CLOSE" : "Close",
+    "DASHBOARD" : {
+        "TITLE" : "Uw zakelijke contacten",
+        "DESCRIPTION" : "Zoek elk bedrijf, kies uw vraag en contactgegevens",
+        "FACEBOOK_LOGIN" : "Sign in with Facebook",
+        "TWITTER_LOGIN" : "Sign in with Twitter",
+        "LOGIN" : "Sign In",
+        "REGISTER" : "Register"
+    },
 
 
 
@@ -25,5 +38,11 @@
     "MAIL" : {
         "SUBJECT" : "Question about ",
         "BODY" : "Dear"
+    },
+
+    "BUSINESS_CONTACT" : {
+        "SEARCH" : "Search business contacts",
+        "SEARCH_FILTER_PLACEHOLDER" : "Search"
+
     }
 }

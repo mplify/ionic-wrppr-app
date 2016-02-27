@@ -1,6 +1,12 @@
 {
 
     "APP_TITLE" : "wrppr",
+    "GENERIC_CLOSE" : "Close",
+    "GENERIC"  : {
+        "REFRESH" : "Pull to refresh"
+    },
+
+
     "MENU" : {
         "BUSINESS_CONTACT_SEARCH" : "Search",
         "USER_PROFILE" : "User Profile",
@@ -10,9 +16,13 @@
         "LOGOUT" : "Logout"
     },
 
-    "GENERIC_CLOSE" : "Close",
-    "GENERIC"  : {
-        "REFRESH" : "Pull to refresh"
+    "DASHBOARD" : {
+        "TITLE" : "Your business contacts",
+        "DESCRIPTION" : "Search any business, choose your question and contact",
+        "FACEBOOK_LOGIN" : "Sign in with Facebook",
+        "TWITTER_LOGIN" : "Sign in with Twitter",
+        "LOGIN" : "Sign In",
+        "REGISTER" : "Register"
     },
 
 

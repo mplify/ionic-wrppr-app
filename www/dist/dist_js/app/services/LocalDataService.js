@@ -11,7 +11,8 @@ services.service('LocalDataService', ['localStorageService', function (localStor
         NETWORK_STATE: "network_state",
         EXTERNAL_LOAD_URL: "external_load",
         PHOTO_LIBRARY : "photo_library",
-        INTRO_VISITED  : "intro_visited"
+        INTRO_VISITED  : "intro_visited",
+        EMAIL_APP_AVAILABLE : "email_app"
     };
 
     return {
@@ -78,6 +79,12 @@ services.service('LocalDataService', ['localStorageService', function (localStor
         },
         'getIntroScreenVisited' : function(){
            return localStorageService.get(data_keys.INTRO_VISITED) ? localStorageService.get(data_keys.INTRO_VISITED) : false;
+        },
+        'setEmailApp': function (available) {
+            localStorageService.set(data_keys.EMAIL_APP_AVAILABLE, available);
+        },
+        'hasEmailApp': function () {
+            return localStorageService.get(data_keys.EMAIL_APP_AVAILABLE);
         }
 
 

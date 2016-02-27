@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -126,11 +126,13 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     };
 
     $scope.mail = function () {
+        EmailService.sendEmail();
+
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
-        $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
+        //var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
+        //$window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
     };
 
     $scope.hasTwitterApp = false;

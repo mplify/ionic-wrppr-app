@@ -75,6 +75,10 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.appplant.cordova.emailcomposer.EmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -109,7 +113,12 @@
                             "count": 1
                         }
                     ],
-                    "/manifest": [],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        }
+                    ],
                     "/manifest/application": [],
                     "/manifest/application/activity": [
                         {
@@ -189,6 +198,9 @@
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "de.appplant.cordova.plugin.email-composer": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
@@ -506,6 +518,14 @@
             "id": "cordova-plugin-globalization.globalization",
             "clobbers": [
                 "navigator.globalization"
+            ]
+        },
+        {
+            "file": "plugins/de.appplant.cordova.plugin.email-composer/www/email_composer.js",
+            "id": "de.appplant.cordova.plugin.email-composer.EmailComposer",
+            "clobbers": [
+                "cordova.plugins.email",
+                "plugin.email"
             ]
         }
     ]

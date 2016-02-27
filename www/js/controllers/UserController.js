@@ -23,6 +23,7 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translat
         $scope.sessionKey = LocalDataService.getBaseToken();
         $scope.networkStatus = LocalDataService.getNetworkState();
         $scope.networkType = LocalDataService.getNetworkType();
+        $scope.emailApp = LocalDataService.hasEmailApp();
 
 
         if($scope.localUser.id){

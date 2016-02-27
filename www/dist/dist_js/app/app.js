@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService) {
+    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService) {
 
 
         $log.debug('run app');
@@ -28,6 +28,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
+            EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
 
             navigator.globalization.getPreferredLanguage(function(lang){
@@ -239,7 +240,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
         var preferredLanguage = "nl";
-        if(userLanguage.startsWith('en')){
+        if(userLanguage && userLanguage.indexOf('en') > -1){
             preferredLanguage = "en";
 
         }

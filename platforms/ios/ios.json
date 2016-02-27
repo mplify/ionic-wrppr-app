@@ -75,6 +75,10 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -112,6 +116,10 @@
                     "LSApplicationQueriesSchemes": [
                         {
                             "xml": "<array><string>fbapi</string><string>fb-messenger-api</string><string>fbauth2</string><string>fbshareextension</string></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><string>mailto</string></array>",
                             "count": 1
                         }
                     ],
@@ -164,6 +172,9 @@
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "de.appplant.cordova.plugin.email-composer": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
@@ -536,6 +547,15 @@
             "pluginId": "cordova-plugin-globalization",
             "clobbers": [
                 "navigator.globalization"
+            ]
+        },
+        {
+            "file": "plugins/de.appplant.cordova.plugin.email-composer/www/email_composer.js",
+            "id": "de.appplant.cordova.plugin.email-composer.EmailComposer",
+            "pluginId": "de.appplant.cordova.plugin.email-composer",
+            "clobbers": [
+                "cordova.plugins.email",
+                "plugin.email"
             ]
         }
     ]

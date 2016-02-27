@@ -7,5 +7,6 @@
     "AVFoundation.framework": 1,
     "SystemConfiguration.framework": 1,
     "CoreTelephony.framework": 1,
-    "AddressBookUI.framework": 1
+    "AddressBookUI.framework": 1,
+    "MessageUI.framework": 1
 }

@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'EmailService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -126,11 +126,13 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.mail = function () {
+        EmailService.sendEmail();
+
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
-        $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
+        //var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
+        //$window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
     };
 
     $scope.hasTwitterApp = false;

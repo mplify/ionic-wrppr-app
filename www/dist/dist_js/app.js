@@ -1973,6 +1973,7 @@ controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate'
     $scope.$on('$ionicView.enter', function(){$scope.load();});
 
     $scope.switchLanguage = function(){
+        $log.info('switch to english');
         $translate.use("en");
 
         $ionicLoading.show({

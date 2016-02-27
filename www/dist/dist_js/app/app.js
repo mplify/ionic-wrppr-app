@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates'])
+angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
     .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService) {
 
@@ -199,6 +199,18 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                         templateUrl: 'capture-document.html'
                     }
                 }
+            })
+
+            .state('app.documentdetails', {
+                url: '/documentdetails/:name',
+                params: {
+                    document : null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: 'document-details.html'
+                    }
+                }
             });
 
         // if none of the above states are matched, use this as the fallback
@@ -216,6 +228,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         //FIXME
         //$ionicConfigProvider.scrolling.jsScrolling(false);
+
 
 
         $translateProvider

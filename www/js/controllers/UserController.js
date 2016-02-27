@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('UserCtrl', function ($scope, $rootScope, $log, UserService, LocalDataService) {
+controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translate, $ionicLoading, UserService, LocalDataService) {
 
 
     $scope.loadUserDetails = function(userId){
@@ -32,6 +32,21 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, UserServi
 
     $scope.load();
     $scope.$on('$ionicView.enter', function(){$scope.load();});
+
+    $scope.switchLanguage = function(){
+        $translate.use("nl");
+
+        $ionicLoading.show({
+            template: 'Switching language ...'
+        });
+        $translate.refresh();
+
+    };
+
+    $rootScope.$on('$translateRefreshEnd', function () {
+
+        $ionicLoading.hide();
+    });
 
 });
 

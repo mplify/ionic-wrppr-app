@@ -1,9 +1,9 @@
-<ion-view class="has-header padding" view-title="Capture Document" ng-controller="DocumentCtrl" ng-init="load()">
+<ion-view view-title="Capture Document" ng-controller="DocumentCtrl" ng-init="load()">
 
     <ion-content>
 
         <ion-list>
-            <ion-item ng-repeat="image in images" class="item-body">
+            <ion-item ng-repeat="image in images" class="item-body" ng-click="selectDocument(image);">
                 <img class="full-image" ng-src="{{urlForImage(image.url)}}" style="height: 300px;">
                 <p>{{image.url}}</p>
                 <p>{{image.name}}</p>

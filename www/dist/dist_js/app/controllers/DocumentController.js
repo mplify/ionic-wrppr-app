@@ -1,11 +1,18 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('DocumentCtrl', ['$scope', '$log', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $log, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
+controllers.controller('DocumentCtrl', ['$scope', '$stateParams', '$state', '$log', '$templateCache', '$ionicBackdrop', '$ionicModal', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
     $log.debug('init document controller');
 
 
     $scope.images = LocalDataService.getPhotos();
+
+    $scope.$on('$ionicView.enter', function(){
+        if($stateParams.document){
+            $scope.loadDocument();
+        }
+
+    });
 
     $scope.load = function () {
         $log.debug('load documents');
@@ -48,5 +55,24 @@ controllers.controller('DocumentCtrl', ['$scope', '$log', '$cordovaCamera', '$co
                 $ionicLoading.hide();
             }
         );
+    };
+
+
+    $scope.selectDocument = function(document){
+        $scope.document = document;
+        $scope.showModal('document-details.html');
+    };
+
+    $scope.showModal = function(templateUrl) {
+        $scope.modal = $ionicModal.fromTemplate($templateCache.get(templateUrl), {
+            scope: $scope
+        });
+        $scope.modal.show();
+
+    };
+
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove();
     };
 }]);

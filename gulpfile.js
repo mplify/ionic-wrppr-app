@@ -19,6 +19,7 @@ var paths = {
 
 
 gulp.task('templatecache', function (done) {
+
     gulp.src('./www/templates/*.html')
         .pipe(templateCache({standalone:true}))
         .pipe(gulp.dest('./www/js'))
@@ -32,7 +33,7 @@ gulp.task('ng_annotate', function (done) {
         .on('end', done);
 });
 
-gulp.task('useref', function (done) {
+gulp.task('useref', ['ng_annotate'], function (done) {
     gulp.src('./www/*.html')
         .pipe(useref())
         .pipe(gulp.dest('./www/dist'))
@@ -42,7 +43,7 @@ gulp.task('useref', function (done) {
 
 
 
-gulp.task('default', ['sass', 'templatecache', 'ng_annotate', 'useref']);
+gulp.task('default', ['sass', 'templatecache', 'useref']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')

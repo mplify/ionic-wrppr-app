@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading ,LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -34,65 +34,74 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
         $log.info('make a call');
 
-        $ionicLoading.show({
-            template: 'Calling ...'
-        });
 
 
         var opts = {                                           //search options
-            filter: 'Wrapper',                                 // 'Bob'
+            filter: 'wrapper',                                 // 'Bob'
             multiple: true,                                      // Yes, return any contact that matches criteria
             fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
             desiredFields: ['id']    //return fields.
         };
 
+        var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
+        if (window.cordova) {
+            $ionicLoading.show({
+                template: 'Calling ...'
+            });
 
-        $cordovaContacts.find(opts).then(function (contactsFound) {
-                var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
-                var phoneNumber = new ContactField($rootScope.sessionData.organization.orgName, number, false);
-                if (contactsFound && contactsFound.length > 0) {
-                    var wrapperContact = contactsFound[0];
+            $cordovaContacts.find(opts).then(function (contactsFound) {
+
+                    var phoneNumber = new ContactField($rootScope.sessionData.organization.orgName, number, false);
+                    if (contactsFound && contactsFound.length > 0) {
+                        var wrapperContact = contactsFound[0];
 
 
-                    if (wrapperContact.phoneNumbers === null) {
-                        wrapperContact.phoneNumbers = [];
+                        if (wrapperContact.phoneNumbers === null) {
+                            wrapperContact.phoneNumbers = [];
+                        }
+                        wrapperContact.phoneNumbers.push(phoneNumber);
+
+                        wrapperContact.save(function () {
+                            $log.info('saved wrapper contact number');
+                            $scope.makeCall(number);
+
+                            $ionicLoading.hide();
+                        }, function (err) {
+                            $log.error('failed to save wrapper contact', err);
+                            $ionicLoading.hide();
+                        });
                     }
-                    wrapperContact.phoneNumbers.push(phoneNumber);
-
-                    wrapperContact.save(function () {
-                        $log.info('saved wrapper contact number');
-                        $scope.makeCall(number);
-
-                        $ionicLoading.hide();
-                    }, function (err) {
-                        $log.error('failed to save wrapper contact', err);
-                        $ionicLoading.hide();
-                    });
-                }
-                else {
-                    var contact =
+                    else {
+                        var contact =
                         {
-                            "displayName": "Wrapper",
+                            "displayName": "wrapper",
                             "phoneNumbers": [phoneNumber]
                         };
 
 
-                    $cordovaContacts.save(contact).then(function (result) {
-                        $log.info('added wrapper contact number');
-                        $scope.makeCall(number);
-                        $ionicLoading.hide();
-                    }, function (error) {
-                        $log.error('failed to save wrapper contact', err);
+                        $cordovaContacts.save(contact).then(function (result) {
+                            $log.info('added wrapper contact number');
+                            $scope.makeCall(number);
+                            $ionicLoading.hide();
+                        }, function (error) {
+                            $log.error('failed to save wrapper contact', err);
 
-                        $ionicLoading.hide();
-                    });
-                }
-            },
-            function (err) {
-                $log.error('failed to find wrapper contact', err);
+                            $ionicLoading.hide();
+                            $scope.makeCallViaURL(number);
+                        });
+                    }
+                },
+                function (err) {
+                    $log.error('failed to find wrapper contact', err);
 
-                $ionicLoading.hide();
-            });
+                    $ionicLoading.hide();
+                    $scope.makeCallViaURL(number);
+                });
+        }
+        else {
+            // if contacts is not availble still make a call
+            $scope.makeCallViaURL(number);
+        }
 
 
         $scope.logAction($scope.actionMessages.CALL);
@@ -106,16 +115,21 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             },
             function () {
                 $log.info('failed call');
+                $scope.makeCallViaURL(number);
             },
             number,
             false);
+    };
+
+    $scope.makeCallViaURL = function(number){
+       $window.location = 'tel:' +number;
     };
 
     $scope.mail = function () {
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        var body = $translate.instant("MAIL.BODY", { "company" : $rootScope.sessionData.organization.orgName});
+        var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
         $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
     };
 

@@ -14,28 +14,28 @@
 
     <ion-side-menu side="left">
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Wrppr App</h1>
+            <h1 class="title">{{'APP_TITLE' | translate}}</h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>
 
                 <ion-item menu-close href="#/app/search">
-                    Search
+                    {{'MENU.BUSINESS_CONTACT_SEARCH' | translate}}
                 </ion-item>
                 <ion-item menu-close href="#/app/user">
-                    User Profile
+                    {{'MENU.USER_PROFILE' | translate}}
                 </ion-item>
                 <ion-item menu-close href="#/app/favorites">
-                    Favorites
+                    {{'MENU.FAVORITES' | translate}}
                 </ion-item>
                 <ion-item menu-close href="#/app/messages">
-                    History
+                    {{'MENU.HISTORY' | translate}}
                 </ion-item>
                 <ion-item menu-close href="#/app/documents">
-                    Documents
+                    {{'MENU.ATTACHMENTS' | translate}}
                 </ion-item>
                 <ion-item menu-close ng-click="logout()">
-                    Logout
+                    {{'MENU.LOGOUT' | translate}}
                 </ion-item>
 
             </ion-list>

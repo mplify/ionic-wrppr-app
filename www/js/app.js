@@ -199,6 +199,18 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                         templateUrl: 'capture-document.html'
                     }
                 }
+            })
+
+            .state('app.documentdetails', {
+                url: '/documentdetails/:name',
+                params: {
+                    document : null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: 'document-details.html'
+                    }
+                }
             });
 
         // if none of the above states are matched, use this as the fallback
@@ -216,6 +228,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         //FIXME
         //$ionicConfigProvider.scrolling.jsScrolling(false);
+
 
 
         $translateProvider

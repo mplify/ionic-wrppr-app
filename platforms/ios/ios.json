@@ -73,10 +73,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
                             "count": 1
                         }
@@ -169,9 +165,6 @@
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "com.telerik.plugins.nativepagetransitions": {
-            "PACKAGE_NAME": "com.wrppr.wrppr"
-        },
-        "cordova-plugin-globalization": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "de.appplant.cordova.plugin.email-composer": {
@@ -531,22 +524,6 @@
             "pluginId": "com.telerik.plugins.nativepagetransitions",
             "clobbers": [
                 "window.plugins.nativepagetransitions"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
-            "id": "cordova-plugin-globalization.GlobalizationError",
-            "pluginId": "cordova-plugin-globalization",
-            "clobbers": [
-                "window.GlobalizationError"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-globalization/www/globalization.js",
-            "id": "cordova-plugin-globalization.globalization",
-            "pluginId": "cordova-plugin-globalization",
-            "clobbers": [
-                "navigator.globalization"
             ]
         },
         {

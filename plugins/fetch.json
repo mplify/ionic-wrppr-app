@@ -94,14 +94,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-globalization": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-globalization@~1.0.2"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "de.appplant.cordova.plugin.email-composer": {
         "source": {
             "type": "git",

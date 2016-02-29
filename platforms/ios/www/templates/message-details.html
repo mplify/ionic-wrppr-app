@@ -1,0 +1,29 @@
+<ion-view view-title="Message details" ng-controller="MessageCtrl">
+    <ion-content>
+        <ion-list class="list card">
+            <ion-item ng-switch="currentMessage.ChannelTypeID">
+                <div class="row button-block " style="text-align: center; display: block;">
+                    <div ng-switch-when="1" class="ion-ios-telephone" style="font-size: 86px; color: lightgray;"></div>
+                    <div ng-switch-when="2" class="icon ion-email" style="font-size: 86px; color: lightgray;"></div>
+                    <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
+
+                </div>
+                <h2 style="text-align: center;">{{currentMessage.Question}}</h2>
+                <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+    <div class="bar bar-footer">
+        <div class="button-bar">
+            <button class="button button-clear">
+                Add Photo
+            </button>
+            <button class="button button-clear">
+                Report Incorrect
+            </button>
+        </div>
+    </div>
+
+</ion-view>

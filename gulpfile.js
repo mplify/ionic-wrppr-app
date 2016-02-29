@@ -43,7 +43,7 @@ gulp.task('useref', ['ng_annotate'], function (done) {
 
 
 
-gulp.task('default', ['sass', 'templatecache', 'useref']);
+gulp.task('default', ['sass', 'templatecache']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -61,8 +61,8 @@ gulp.task('sass', function(done) {
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.templatecache, ['templatecache']);
-  gulp.watch(paths.ng_annotate, ['ng_annotate']);
-  gulp.watch(paths.useref, ['useref']);
+
+
 });
 
 gulp.task('install', ['git-check'], function() {

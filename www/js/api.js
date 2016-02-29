@@ -32,6 +32,7 @@ App.constant('API', {
 
     //users
     'user-url' :                '/wrppr_users',
+    'change-password-url':      '/wrppr_pwRenew',
 
     //messages
     'message-url':              '/wrppr_messages',

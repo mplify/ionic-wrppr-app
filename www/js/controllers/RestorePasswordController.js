@@ -1,8 +1,8 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('RestorePasswordCtrl', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, LoginService, PasswordComplexity) {
+controllers.controller('RestorePasswordCtrl', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, LoginService, PasswordComplexity, UserService) {
     $log.info('init restore password controller');
-    $scope.username = "";
+    $scope.newPassword = "";
     $scope.passwordMatch = true;
 
 
@@ -57,8 +57,35 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
     });
 
     $scope.doChangePassword = function(){
+        $ionicLoading.show({
+            template: 'Saving ..'
+        });
+
         $log.info('change password');
 
-        alert($stateParams.key);
+        var key = $stateParams.key;
+
+        UserService.changePassword(key,  $scope.newPassword).then(
+            function(success){
+                $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: 'Password saved',
+                    template: 'Try to login with new password'
+                });
+
+                $state.go('root');
+            },
+            function(err){
+                $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: 'Failed to change password',
+                    template: 'Please try again'
+                });
+            }
+        );
+
+
     };
 });

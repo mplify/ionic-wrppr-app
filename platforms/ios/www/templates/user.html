@@ -1,0 +1,39 @@
+<ion-view view-title="{{localUser.UserName}}" ng-controller="UserCtrl">
+    <ion-content>
+        <ion-list >
+                <ion-item class="item-avatar">
+                    <img ng-src="{{localUser.picture}}" src="../img/photo.jpg">
+                    <h2>{{user.UserName}}</h2>
+                    <p>{{user.email}}</p>
+                    <p>{{user.createdAt | date:'medium' }}</p>
+                    <p>
+                        Basic Auth: {{sessionKey}}
+                    </p>
+                </ion-item>
+                <ion-item class="item-avatar">
+                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.jpg">
+                    <h2>{{localFBUser.name}}</h2>
+                    <h2>{{localFBUser.email}}</h2>
+                    <p>{{localFBUser.authResponse.expiresIn | date:'medium' }}</p>
+                    <p>
+                        {{localFBUser.authResponse.accessToken}}
+                    </p>
+                </ion-item>
+                <ion-item ng-show="networkType">
+                    Network Type: {{networkType}} is {{networkStatus}}
+                </ion-item>
+                <ion-item>
+                    {{emailApp}}
+                </ion-item>
+                <ion-item>
+                    <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="switchLanguage()">
+                        Switch to English Version
+                    </button>
+                </ion-item>
+
+
+        </ion-list>
+
+
+    </ion-content>
+</ion-view>

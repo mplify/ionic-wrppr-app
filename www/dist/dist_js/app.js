@@ -31,11 +31,11 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
 
-            navigator.globalization.getPreferredLanguage(function(lang){
+            /*navigator.globalization.getPreferredLanguage(function(lang){
                 $log.debug('globalization plugin : ', lang);
             }, function(err){
                 $log.error('globalization plugin error', err);
-            });
+            });*/
 
 
         });
@@ -728,6 +728,28 @@ services.service('UserService', ['$http', '$q', '$log', 'api', function ($http, 
                 });
             return defer.promise;
 
+        },
+        'changePassword' : function(key, newPassword){
+            $log.info('change password');
+
+            var url =  api.byName('base-url') + api.byName('change-password-url');
+            var defer = $q.defer();
+
+            var params = {
+                'key' : key,
+                'password' : newPassword
+            };
+
+            $http.post(url, params).then(
+                function(success){
+                   defer.resolve(success);
+                },
+                function(err){
+                   defer.resolve(err);
+                }
+            );
+
+            return defer.promise;
         }
 
     };
@@ -1268,7 +1290,7 @@ services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDat
 }]);
 var services = angular.module('App.services');
 
-services.service('EmailService', ['$ionicPlatform', '$log', 'LocalDataService', function($ionicPlatform, $log, LocalDataService) {
+services.service('EmailService', ['$ionicPlatform', '$log', '$cordovaFile', 'LocalDataService', function($ionicPlatform, $log, $cordovaFile, LocalDataService) {
     return {
         'checkEmailApp' : function(){
             $log.info('check email availability');
@@ -1284,22 +1306,42 @@ services.service('EmailService', ['$ionicPlatform', '$log', 'LocalDataService', 
         'sendEmail' : function(){
             $log.info('send an email');
 
+
+
+
             var photos = LocalDataService.getPhotos();
             var url = photos[0].url;
 
             var name = url.substr(url.lastIndexOf('/') + 1);
+            var folder = url.substr(0, url.lastIndexOf('/'));
             var trueOrigin = cordova.file.dataDirectory + name;
 
-            var path = trueOrigin.replace('file://', '');
+
+            var path = url.replace('file://', '');
 
             alert(url);
+            $log.info(folder);
+            $log.info(name);
 
-            cordova.plugins.email.open({
-                to:      'marykiselova@gmail.com',
-                attachments : path,
-                subject: 'Hi, it s me again',
-                body:    'How are you?'
-            });
+            $cordovaFile.checkFile(folder, name).then(
+                function(success){
+                    $log.debug('exist', success);
+
+                    cordova.plugins.email.open({
+                        to:      'marykiselova@gmail.com',
+                        attachments : [path],
+                        subject: 'Hi, it s me again',
+                        body:    'How are you?'
+                    });
+                },
+                function(error) {
+                    $log.debug('exist', error);
+
+                }
+            );
+
+
+
         }
 
 
@@ -1340,6 +1382,7 @@ App.constant('API', {
 
     //users
     'user-url' :                '/wrppr_users',
+    'change-password-url':      '/wrppr_pwRenew',
 
     //messages
     'message-url':              '/wrppr_messages',
@@ -1591,9 +1634,9 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams', '$log', '$ionicLoading', '$ionicPopup', 'LoginService', 'PasswordComplexity', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, LoginService, PasswordComplexity) {
+controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams', '$log', '$ionicLoading', '$ionicPopup', 'LoginService', 'PasswordComplexity', 'UserService', function ($scope, $state, $stateParams,  $log, $ionicLoading, $ionicPopup, LoginService, PasswordComplexity, UserService) {
     $log.info('init restore password controller');
-    $scope.username = "";
+    $scope.newPassword = "";
     $scope.passwordMatch = true;
 
 
@@ -1648,9 +1691,34 @@ controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams
     });
 
     $scope.doChangePassword = function(){
+        $ionicLoading.show({
+            template: 'Saving ..'
+        });
+
         $log.info('change password');
 
-        alert($stateParams.key);
+        UserService.changePassword(key,  $scope.newPassword).then(
+            function(success){
+                $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: 'Password saved',
+                    template: 'Try to login with new password'
+                });
+
+                $state.go('root');
+            },
+            function(err){
+                $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: 'Failed to change password',
+                    template: 'Please try again'
+                });
+            }
+        );
+
+
     };
 }]);
 
@@ -1932,13 +2000,13 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.mail = function () {
-        EmailService.sendEmail();
+        //EmailService.sendEmail();
 
         $log.info('send an email');
         $scope.logAction($scope.actionMessages.MAIL);
 
-        //var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
-        //$window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
+        var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
+        $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
     };
 
     $scope.hasTwitterApp = false;

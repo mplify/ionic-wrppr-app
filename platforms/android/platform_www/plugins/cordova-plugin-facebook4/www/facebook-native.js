@@ -48,4 +48,8 @@ exports.appInvite = function appLinks (options, s, f) {
   exec(s, f, 'FacebookConnectPlugin', 'appInvite', [options])
 }
 
+exports.activateApp = function (s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'activateApp', [])
+}
+
 });

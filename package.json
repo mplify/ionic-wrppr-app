@@ -31,8 +31,7 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-whitelist",
     {
-      "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
-      "id": "cordova-plugin-facebook4"
+      "locator": "https://github.com/apache/cordova-plugin-whitelist.git"
     }
   ],
   "cordovaPlatforms": [

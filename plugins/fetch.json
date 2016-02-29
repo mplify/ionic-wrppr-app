@@ -1,15 +1,4 @@
 {
-    "cordova-plugin-facebook4": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-facebook4"
-        },
-        "is_top_level": true,
-        "variables": {
-            "APP_ID": "758543534250966",
-            "APP_NAME": "test"
-        }
-    },
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
@@ -94,13 +83,16 @@
         "is_top_level": true,
         "variables": {}
     },
-    "de.appplant.cordova.plugin.email-composer": {
+
+    "cordova-plugin-facebook4": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/katzer/cordova-plugin-email-composer.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-facebook4"
         },
         "is_top_level": true,
-        "variables": {}
+        "variables": {
+            "APP_ID": "758543534250966",
+            "APP_NAME": "test"
+        }
     }
 }

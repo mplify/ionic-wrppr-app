@@ -7,11 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-facebook4": {
-            "APP_ID": "758543534250966",
-            "APP_NAME": "test",
-            "PACKAGE_NAME": "com.wrppr.wrppr"
-        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
@@ -43,7 +38,9 @@
         "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
-        "de.appplant.cordova.plugin.email-composer": {
+        "cordova-plugin-facebook4": {
+            "APP_ID": "758543534250966",
+            "APP_NAME": "test",
             "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },

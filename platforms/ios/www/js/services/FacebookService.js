@@ -18,7 +18,7 @@ services.service('FacebookService', function ($q, $log, $state, UserService, Loc
                         $state.go('app.search');
                     }
                 }, function(err){
-
+                      $log.error("facebook auto login failed", err);
                 });
            }
     };

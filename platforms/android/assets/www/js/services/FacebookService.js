@@ -1,6 +1,28 @@
 var services = angular.module('App.services');
 
-services.service('FacebookService', function ($q, $log, UserService, LocalDataService) {
+services.service('FacebookService', function ($q, $log, $state, UserService, LocalDataService, BasicAuthorizationService) {
+
+
+    var autoLogin = function(){
+           $log.info('try to auto login');
+           var localUser = LocalDataService.getFacebookResponse();
+           if(localUser){
+                getLoginStatus().then(function(success){
+                    if (success.status === 'connected') {
+                        $log.info('auto logged in via facebook', localUser);
+
+                        var username = localUser.email;
+                        var password = "facebook " + localUser.accessToken;
+                        BasicAuthorizationService.generateToken(username, password);
+
+                        $state.go('app.search');
+                    }
+                }, function(err){
+                      $log.error("facebook auto login failed", err);
+                });
+           }
+    };
+
 
     var getLoginStatus = function () {
         $log.info('facebook login status');
@@ -109,7 +131,8 @@ services.service('FacebookService', function ($q, $log, UserService, LocalDataSe
     return {
         getLoginStatus: getLoginStatus,
         getProfileInfo: getProfileInfo,
-        saveUser: saveUser
+        saveUser: saveUser,
+        autoLogin : autoLogin
     };
 
 });

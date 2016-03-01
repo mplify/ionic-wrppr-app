@@ -63,6 +63,8 @@ controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams
 
         $log.info('change password');
 
+        var key = $stateParams.key;
+
         UserService.changePassword(key,  $scope.newPassword).then(
             function(success){
                 $ionicLoading.hide();

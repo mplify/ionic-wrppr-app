@@ -16,7 +16,11 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                     FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
                         // sync with local user
                         FacebookService.saveUser(profileSuccess, accessToken).then(function (saveSuccess) {
-                            $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
+                            var user = {};
+                            if(saveSuccess && saveSuccess[0]){
+                                user = saveSuccess[0];
+                            }
+                            $scope.updateLocalStorage(user, profileSuccess, accessToken);
                             $ionicLoading.hide();
 
                         }, function (saveError) {

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService) {
+    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', 'FacebookService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService) {
 
 
         $log.debug('run app');
@@ -28,7 +28,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
-            EmailService.checkEmailApp();
+            //EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
 
             /*navigator.globalization.getPreferredLanguage(function(lang){
@@ -36,6 +36,8 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }, function(err){
                 $log.error('globalization plugin error', err);
             });*/
+
+            FacebookService.autoLogin();
 
 
         });
@@ -1086,7 +1088,29 @@ services.service('ExternalLoad', ['LocalDataService', '$state', '$log', function
 }]);
 var services = angular.module('App.services');
 
-services.service('FacebookService', ['$q', '$log', 'UserService', 'LocalDataService', function ($q, $log, UserService, LocalDataService) {
+services.service('FacebookService', ['$q', '$log', '$state', 'UserService', 'LocalDataService', 'BasicAuthorizationService', function ($q, $log, $state, UserService, LocalDataService, BasicAuthorizationService) {
+
+
+    var autoLogin = function(){
+           $log.info('try to auto login');
+           var localUser = LocalDataService.getFacebookResponse();
+           if(localUser){
+                getLoginStatus().then(function(success){
+                    if (success.status === 'connected') {
+                        $log.info('auto logged in via facebook', localUser);
+
+                        var username = localUser.email;
+                        var password = "facebook " + localUser.accessToken;
+                        BasicAuthorizationService.generateToken(username, password);
+
+                        $state.go('app.search');
+                    }
+                }, function(err){
+                      $log.error("facebook auto login failed", err);
+                });
+           }
+    };
+
 
     var getLoginStatus = function () {
         $log.info('facebook login status');
@@ -1195,7 +1219,8 @@ services.service('FacebookService', ['$q', '$log', 'UserService', 'LocalDataServ
     return {
         getLoginStatus: getLoginStatus,
         getProfileInfo: getProfileInfo,
-        saveUser: saveUser
+        saveUser: saveUser,
+        autoLogin : autoLogin
     };
 
 }]);
@@ -1566,7 +1591,7 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
         UserService.createUser($scope.registerData).then(function(response) {
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
-            var user = response;
+            var user = response[0];
             LocalDataService.saveUser(user);
 
             //LoginService.activateUser(user.id).then(function(response){});
@@ -1696,6 +1721,8 @@ controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams
         });
 
         $log.info('change password');
+
+        var key = $stateParams.key;
 
         UserService.changePassword(key,  $scope.newPassword).then(
             function(success){
@@ -2129,7 +2156,11 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                     FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
                         // sync with local user
                         FacebookService.saveUser(profileSuccess, accessToken).then(function (saveSuccess) {
-                            $scope.updateLocalStorage(saveSuccess, profileSuccess, accessToken);
+                            var user = {};
+                            if(saveSuccess && saveSuccess[0]){
+                                user = saveSuccess[0];
+                            }
+                            $scope.updateLocalStorage(user, profileSuccess, accessToken);
                             $ionicLoading.hide();
 
                         }, function (saveError) {

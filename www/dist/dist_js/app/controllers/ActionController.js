@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'EmailService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$log', '$translate', '$ionicLoading', '$ionicModal', '$templateCache', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'EmailService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -17,6 +17,11 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.contacts = {};
+
+    $scope.userCorrect = {
+        comment : "",
+        message : {}
+    };
 
 
     if ($rootScope.sessionData.organization !== undefined) {
@@ -166,7 +171,12 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
             message.ChoiceMenuID = contactMenu.id;
         }
-        MessageService.createMessage(message);
+        MessageService.createMessage(message).then(function(message){
+            $scope.userCorrect.message = message;
+        }, function(err){
+
+        });
+
     };
 
 
@@ -177,6 +187,24 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     $scope.mailSupport = function () {
         $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
     };
+
+    $scope.userCorrect = function(){
+        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
+            scope: $scope
+        });
+        $scope.modal.show();
+    };
+
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove();
+    };
+
+    $scope.submitUserCorrect = function(){
+         alert($scope.userCorrect.message);
+    };
+
+
 
 
 }]);

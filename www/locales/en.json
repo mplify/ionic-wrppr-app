@@ -52,6 +52,10 @@
 
     },
     "USER_CORRECT" : {
-        "BUTTON" : "User correct"
+        "BUTTON" : "User correct",
+        "TITLE" : "User correct",
+        "DESCRIPTION" : "Here should be a description what 'User correct' feature means",
+        "SUBMIT" : "Send"
+
     }
 }

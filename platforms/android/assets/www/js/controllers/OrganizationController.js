@@ -51,6 +51,8 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             $ionicLoading.hide();
             $scope.isLoading = false;
 
+
+
         }
         );
     };

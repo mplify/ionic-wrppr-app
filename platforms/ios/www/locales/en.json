@@ -3,7 +3,9 @@
     "APP_TITLE" : "wrppr",
     "GENERIC_CLOSE" : "Close",
     "GENERIC"  : {
-        "REFRESH" : "Pull to refresh"
+        "REFRESH" : "Pull to refresh",
+        "FEEDBACK" : "Feedback",
+        "SUPPORT" : "Support"
     },
 
 
@@ -43,7 +45,17 @@
 
     },
     "ACTIONS" : {
-        "TITLE" : "Contact"
+        "TITLE" : "Contact",
+        "CALL" : "CALL",
+        "MAIL" : "MAIL",
+        "TWEET" :  "TWEET"
+
+    },
+    "USER_CORRECT" : {
+        "BUTTON" : "User correct",
+        "TITLE" : "User correct",
+        "DESCRIPTION" : "Here should be a description what 'User correct' feature means",
+        "SUBMIT" : "Send"
 
     }
 }

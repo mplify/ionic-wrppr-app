@@ -3,6 +3,9 @@ var services = angular.module('App.services');
 services.factory('BasicAuthorizationService', ['Base64', '$http', '$log', 'LocalDataService', function (Base64, $http, $log, LocalDataService) {
     return {
         generateToken : function (username, password) {
+            if(!username || !password){
+                $log.error('trying to generate token with empty credentials');
+            }
             $log.info('set credentials');
             var encoded = Base64.encode(username + ':' + password);
             var token = "Basic " + encoded;

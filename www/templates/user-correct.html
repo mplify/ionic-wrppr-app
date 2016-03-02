@@ -1,6 +1,6 @@
 <ion-modal-view>
     <ion-header-bar align-title="left">
-        <h1 class="title">User Correct</h1>
+        <h1 class="title">{{ 'USER_CORRECT.TITLE' | translate }}</h1>
         <div class="buttons">
             <button class="button button-clear" ui-sref="root">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
@@ -9,7 +9,7 @@
         <form name="userCorrectForm" ng-submit="submitUserCorrect()" novalidate>
             <div class="list">
                 <label class="item">
-                    Here should be a description what 'User correct' feature means
+                    {{ 'USER_CORRECT.DESCRIPTION' | translate }}
                 </label>
 
 
@@ -20,7 +20,7 @@
                 </label>
 
                 <label class="item">
-                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="userCorrectForm.$invalid" type="submit">Send</button>
+                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="userCorrectForm.$invalid" type="submit">{{ 'USER_CORRECT.SUBMIT' | translate }}</button>
                 </label>
 
 

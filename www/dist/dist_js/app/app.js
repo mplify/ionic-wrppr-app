@@ -28,14 +28,9 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
-            //EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
+            NetworkService.checkNetworkState();
 
-            /*navigator.globalization.getPreferredLanguage(function(lang){
-                $log.debug('globalization plugin : ', lang);
-            }, function(err){
-                $log.error('globalization plugin error', err);
-            });*/
 
             FacebookService.autoLogin();
 
@@ -44,6 +39,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         $ionicPlatform.on('resume', function(){
             ExternalLoad.checkExternalLoad();
+            NetworkService.checkNetworkState();
         });
 
         var token = BasicAuthorizationService.getToken();
@@ -87,6 +83,13 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 templateUrl: 'change-password.html',
                 controller : 'RestorePasswordCtrl'
             })
+
+            .state('offline', {
+                url: '/offline',
+                templateUrl: 'no-internet.html',
+                controller : 'AppCtrl'
+            })
+
 
             .state('app', {
                 url : '/app',
@@ -199,6 +202,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             }
              })
+
 
             .state('app.documents', {
                 url: '/documents',

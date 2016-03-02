@@ -3,7 +3,9 @@
     "APP_TITLE" : "wrppr",
     "GENERIC_CLOSE" : "Close",
     "GENERIC"  : {
-        "REFRESH" : "Pull to refresh"
+        "REFRESH" : "Pull to refresh",
+        "FEEDBACK" : "Feedback",
+        "SUPPORT" : "Support"
     },
 
 
@@ -24,9 +26,6 @@
         "LOGIN" : "Sign In",
         "REGISTER" : "Register"
     },
-
-
-
     "LOGIN_TITLE" : "Login",
     "USERNAME" : "Username",
     "USERNAME_REQUIRED_VALIDATOR" : "* Username is required",
@@ -44,5 +43,15 @@
         "SEARCH" : "Search business contacts",
         "SEARCH_FILTER_PLACEHOLDER" : "Search"
 
+    },
+    "ACTIONS" : {
+        "TITLE" : "Contact",
+        "CALL" : "CALL",
+        "MAIL" : "MAIL",
+        "TWEET" :  "TWEET"
+
+    },
+    "USER_CORRECT" : {
+        "BUTTON" : "User correct"
     }
 }

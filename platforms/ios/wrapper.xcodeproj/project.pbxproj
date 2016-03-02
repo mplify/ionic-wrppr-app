@@ -44,6 +44,8 @@
 		0C59CEB6DD254B868B854281 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C118207BED461795810731 /* FBSDKCoreKit.framework */; };
 		8397A2592C5144F6BBCCAC72 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8028A37DD59141D9814377A1 /* FBSDKLoginKit.framework */; };
 		FE5056D5E7F842B187593EB4 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137FB7B2959049D195502745 /* FBSDKShareKit.framework */; };
+		A3C4E2B6E4E343BE94FBFEF7 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB575B27E594F608157B97F /* CDVSplashScreen.m */; };
+		1C3F08B45ACD42A89E75D2E3 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 3814271583B74AA381304548 /* CDVViewController+SplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,10 @@
 		73C118207BED461795810731 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; name = "FBSDKCoreKit.framework"; path = "wrapper/Plugins/cordova-plugin-facebook4/FBSDKCoreKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		8028A37DD59141D9814377A1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; name = "FBSDKLoginKit.framework"; path = "wrapper/Plugins/cordova-plugin-facebook4/FBSDKLoginKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		137FB7B2959049D195502745 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; name = "FBSDKShareKit.framework"; path = "wrapper/Plugins/cordova-plugin-facebook4/FBSDKShareKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		CEB575B27E594F608157B97F /* CDVSplashScreen.m */ = {isa = PBXFileReference; name = "CDVSplashScreen.m"; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		3814271583B74AA381304548 /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		1F7E183AABE144A186E389A3 /* CDVSplashScreen.h */ = {isa = PBXFileReference; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E616AC93FF564CADA74A86AC /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +303,10 @@
 				67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */,
 				C686CF6AAED8453CA7372D7F /* FacebookConnectPlugin.m */,
 				A2E04A52055B460CBE2A531F /* FacebookConnectPlugin.h */,
+				CEB575B27E594F608157B97F /* CDVSplashScreen.m */,
+				3814271583B74AA381304548 /* CDVViewController+SplashScreen.m */,
+				1F7E183AABE144A186E389A3 /* CDVSplashScreen.h */,
+				E616AC93FF564CADA74A86AC /* CDVViewController+SplashScreen.h */,
 			);
 			name = Plugins;
 			path = wrapper/Plugins;
@@ -434,6 +444,8 @@
 				835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */,
 				3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */,
 				E5084F5256384AC48DC1BC47 /* FacebookConnectPlugin.m in Sources */,
+				A3C4E2B6E4E343BE94FBFEF7 /* CDVSplashScreen.m in Sources */,
+				1C3F08B45ACD42A89E75D2E3 /* CDVViewController+SplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

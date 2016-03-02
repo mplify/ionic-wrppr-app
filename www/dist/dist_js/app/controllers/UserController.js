@@ -1,7 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate', '$ionicLoading', '$translate', 'UserService', 'LocalDataService', function ($scope, $rootScope, $log, $translate, $ionicLoading, $translate, UserService, LocalDataService) {
-    $scope.currentLanguage = $translate.proposedLanguage();
+controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate', '$ionicLoading', 'UserService', 'LocalDataService', function ($scope, $rootScope, $log, $translate, $ionicLoading,  UserService, LocalDataService) {
 
     $scope.loadUserDetails = function(userId){
         UserService.loadUser(userId).then(function(userDetails){
@@ -35,7 +34,6 @@ controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate'
     $scope.$on('$ionicView.enter', function(){$scope.load();});
 
     $scope.switchLanguage = function(){
-        alert($scope.currentLanguage);
         $log.info('switch to english');
         $translate.use("en");
 

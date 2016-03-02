@@ -2,7 +2,7 @@ angular.module('App.controllers', [])
 
     .controller('AppCtrl', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService) {
 
-
+        $rootScope.debugMode = true;
 
 
         $rootScope.sessionData = {};

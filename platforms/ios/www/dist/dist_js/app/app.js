@@ -60,36 +60,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'dashboard2.html',
-                resolve : {
-                    ensureUserAndLanguage: ['$log', '$q', '$translate', function($log, $q, $translate){
-                        var deferred = $q.defer();
-
-                        var userLanguage = navigator.language || navigator.userLanguage;
-
-
-                        var preferredLanguage = "nl";
-                        if(userLanguage && userLanguage.indexOf('en') > -1){
-                            preferredLanguage = "en";
-
-                        }
-
-
-                        // HERE'S THE IMPORTANT PART!!
-                        $translate.use(preferredLanguage)
-                            .then(function(){
-                                $log.debug('$translate.use. Lang is: ' + $translate.use());
-
-                                deferred.resolve();
-                            },
-                            function(){
-                               deferred.reject();
-                            }
-                        );
-
-                        return deferred.promise;
-                    }]
-                }
+                templateUrl: 'dashboard2.html'
             })
 
 

@@ -1,23 +1,30 @@
 <ion-modal-view>
-    <ion-header-bar class="bar bar-header">
+    <ion-header-bar align-title="left">
         <h1 class="title">User Correct</h1>
-        <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
-    </ion-header-bar>
-    <ion-content class="padding">
-        <p>
-            Here will be short description what "User Correct" feature means
-        </p>
-        <label class="item item-input">
-            <span class="input-label">Comment</span>
-            <textarea rows="4" cols="50" ng-model="userCorrect.comment">
-            </textarea>
-        </label>
-
-        <div class="bar bar-footer">
-
-            <button class="button button-full button-positive" ng-click="submitUserCorrect();">Submit</button>
-
+        <div class="buttons">
+            <button class="button button-clear" ui-sref="root">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
-    </ion-content>
+    </ion-header-bar>
+    <ion-content scroll="false" ng-controller="AuthorizationCtrl">
+        <form name="userCorrectForm" ng-submit="submitUserCorrect()" novalidate>
+            <div class="list">
+                <label class="item">
+                    Here should be a description what 'User correct' feature means
+                </label>
 
+
+                <label class="item item-input">
+                    <span class="input-label">Comment</span>
+                    <input type="text" name="username" ng-model="userCorrect.comment">
+
+                </label>
+
+                <label class="item">
+                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="userCorrectForm.$invalid" type="submit">Send</button>
+                </label>
+
+
+            </div>
+        </form>
+    </ion-content>
 </ion-modal-view>

@@ -83,7 +83,6 @@
         "is_top_level": true,
         "variables": {}
     },
-
     "cordova-plugin-facebook4": {
         "source": {
             "type": "registry",
@@ -94,5 +93,13 @@
             "APP_ID": "758543534250966",
             "APP_NAME": "test"
         }
+    },
+    "cordova-plugin-splashscreen": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-splashscreen"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

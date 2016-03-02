@@ -1,7 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translate, $ionicLoading, UserService, LocalDataService) {
-
+controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translate, $ionicLoading,  UserService, LocalDataService) {
 
     $scope.loadUserDetails = function(userId){
         UserService.loadUser(userId).then(function(userDetails){

@@ -24,9 +24,6 @@
         "LOGIN" : "Sign In",
         "REGISTER" : "Register"
     },
-
-
-
     "LOGIN_TITLE" : "Login",
     "USERNAME" : "Username",
     "USERNAME_REQUIRED_VALIDATOR" : "* Username is required",
@@ -43,6 +40,10 @@
     "BUSINESS_CONTACT" : {
         "SEARCH" : "Search business contacts",
         "SEARCH_FILTER_PLACEHOLDER" : "Search"
+
+    },
+    "ACTIONS" : {
+        "TITLE" : "Contact"
 
     }
 }

@@ -42,6 +42,9 @@
             "APP_ID": "758543534250966",
             "APP_NAME": "test",
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {}

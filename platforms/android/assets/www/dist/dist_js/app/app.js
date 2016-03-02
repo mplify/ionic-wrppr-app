@@ -266,5 +266,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         $logProvider.debugEnabled(true);
 
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
+
+
     }]
 );

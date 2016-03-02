@@ -60,36 +60,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'dashboard2.html',
-                resolve : {
-                    ensureUserAndLanguage: ['$log', '$q', '$translate', function($log, $q, $translate){
-                        var deferred = $q.defer();
-
-                        var userLanguage = navigator.language || navigator.userLanguage;
-
-
-                        var preferredLanguage = "nl";
-                        if(userLanguage && userLanguage.indexOf('en') > -1){
-                            preferredLanguage = "en";
-
-                        }
-
-
-                        // HERE'S THE IMPORTANT PART!!
-                        $translate.use(preferredLanguage)
-                            .then(function(){
-                                $log.debug('$translate.use. Lang is: ' + $translate.use());
-
-                                deferred.resolve();
-                            },
-                            function(){
-                               deferred.reject();
-                            }
-                        );
-
-                        return deferred.promise;
-                    }]
-                }
+                templateUrl: 'dashboard2.html'
             })
 
 
@@ -316,7 +287,7 @@ $templateCache.put("register.html","<ion-view>\n    <ion-header-bar>\n        <h
 $templateCache.put("restore-password.html","<ion-view>\n  <ion-header-bar>\n    <h1 class=\"title\">Recover password</h1>\n    <div class=\"buttons\">\n      <button class=\"button button-clear\" ui-sref=\"root\">Close</button>\n    </div>\n  </ion-header-bar>\n  <ion-content scroll=\"false\">\n    <form name=\"restorePasswordForm\" ng-submit=\"doRestorePassword()\" novalidate  ng-controller=\"RestorePasswordCtrl\">\n      <div class=\"list\">\n\n        <label class=\"item item-input\">\n          <span class=\"input-label\">Username</span>\n          <input type=\"text\" name=\"username\" ng-model=\"username\" required>\n\n        </label>\n        <label class=\"item item-input\" ng-show=\"!restorePasswordForm.username.$pristine && restorePasswordForm.username.$invalid\">\n            <p ng-show=\"restorePasswordForm.username.$error.required\">* Username is required</p>\n        </label>\n\n\n        <label class=\"item\">\n          <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"restorePasswordForm.$invalid\" type=\"submit\">Restore</button>\n        </label>\n        <label class=\"\">\n                <button class=\"button button-block button-clear\">Support</button>\n        </label>\n\n      </div>\n    </form>\n\n\n\n  </ion-content>\n\n\n</ion-view>\n");
 $templateCache.put("tabs.html","<ion-view>\n    <ion-tabs class=\"tabs-icon-top tabs-color-active-assertive\">\n\n        <ion-tab title=\"tab1\" icon=\"ion-man\" ui-sref=\"intro.login\">\n            <ion-nav-view name=\"tab-tab1\"></ion-nav-view>\n        </ion-tab>\n\n        <ion-tab title=\"tab2\" icon=\"ion-person-stalker\" ui-sref=\"intro.register\">\n            <ion-nav-view name=\"menuContent\"></ion-nav-view>\n        </ion-tab>\n    </ion-tabs>\n</ion-view>");
 $templateCache.put("user-correct.html","<ion-modal-view>\n    <ion-header-bar class=\"bar bar-header\">\n        <h1 class=\"title\">User Correct</h1>\n        <button class=\"button button-clear button-primary\" ng-click=\"closeModal()\">Cancel</button>\n    </ion-header-bar>\n    <ion-content class=\"padding\">\n        <p>\n            Here will be short description what \"User Correct\" feature means\n        </p>\n        <label class=\"item item-input\">\n            <span class=\"input-label\">Comment</span>\n            <textarea rows=\"4\" cols=\"50\" ng-model=\"userCorrect.comment\">\n            </textarea>\n        </label>\n\n        <div class=\"bar bar-footer\">\n\n            <button class=\"button button-full button-positive\" ng-click=\"submitUserCorrect();\">Submit</button>\n\n        </div>\n    </ion-content>\n\n</ion-modal-view>");
-$templateCache.put("user.html","<ion-view view-title=\"{{localUser.UserName}}\" ng-controller=\"UserCtrl\">\n    <ion-content>\n        <ion-list >\n                <ion-item class=\"item-avatar\">\n                    <img ng-src=\"{{localUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{user.UserName}}</h2>\n                    <p>{{user.email}}</p>\n                    <p>{{user.createdAt | date:\'medium\' }}</p>\n                    <p>\n                        Basic Auth: {{sessionKey}}\n                    </p>\n                </ion-item>\n                <ion-item class=\"item-avatar\">\n                    <img ng-src=\"{{localFBUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{localFBUser.name}}</h2>\n                    <h2>{{localFBUser.email}}</h2>\n                    <p>{{localFBUser.authResponse.expiresIn | date:\'medium\' }}</p>\n                    <p>\n                        {{localFBUser.authResponse.accessToken}}\n                    </p>\n                </ion-item>\n                <ion-item ng-show=\"networkType\">\n                    Network Type: {{networkType}} is {{networkStatus}}\n                </ion-item>\n                <ion-item>\n                    {{emailApp}}\n                </ion-item>\n                <ion-item>\n                    <button class=\"button button-large button-assertive wrppr-action-button\" style=\"width: 100%;\" ng-click=\"switchLanguage()\">\n                        Switch to English Version\n                    </button>\n                </ion-item>\n\n\n        </ion-list>\n\n\n    </ion-content>\n</ion-view>");}]);
+$templateCache.put("user.html","<ion-view view-title=\"{{localUser.UserName}}\" ng-controller=\"UserCtrl\">\n    <ion-content>\n        <ion-list >\n                <ion-item class=\"item-avatar\">\n                    <img ng-src=\"{{localUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{user.UserName}}</h2>\n                    <p>{{user.email}}</p>\n                    <p>{{user.createdAt | date:\'medium\' }}</p>\n                    <p ng-show=\"debugMode\">\n                        Basic Auth: {{sessionKey}}\n                    </p>\n                </ion-item>\n                <ion-item class=\"item-avatar\" ng-show=\"debugMode\">\n                    <img ng-src=\"{{localFBUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{localFBUser.name}}</h2>\n                    <h2>{{localFBUser.email}}</h2>\n                    <p>{{localFBUser.authResponse.expiresIn | date:\'medium\' }}</p>\n                    <p>\n                        {{localFBUser.authResponse.accessToken}}\n                    </p>\n                </ion-item>\n                <ion-item ng-show=\"networkType\">\n                    Network Type: {{networkType}} is {{networkStatus}}\n                </ion-item>\n\n                <ion-item>\n                    <button class=\"button button-large button-assertive wrppr-action-button\" style=\"width: 100%;\" ng-click=\"switchLanguage()\">\n                        Switch to English Version\n                    </button>\n                </ion-item>\n            <ion-item class=\"item-toggle\">\n                Debug\n            <label class=\"toggle\">\n                <input type=\"checkbox\" ng-model=\"$root.debugMode\">\n                <div class=\"track\">\n                    <div class=\"handle\"></div>\n                </div>\n            </label>\n            </ion-item>\n\n\n        </ion-list>\n\n\n    </ion-content>\n</ion-view>");}]);
 angular.module('App.services', []);
 
 var services = angular.module('App.services');
@@ -1124,7 +1095,7 @@ services.service('FacebookService', ['$q', '$log', '$state', 'UserService', 'Loc
     var autoLogin = function(){
            $log.info('try to auto login');
            var localUser = LocalDataService.getFacebookResponse();
-           if(localUser){
+           if(localUser && localUser.accessToken){
                 getLoginStatus().then(function(success){
                     if (success.status === 'connected') {
                         $log.info('auto logged in via facebook', localUser);
@@ -1466,7 +1437,7 @@ angular.module('App.controllers', [])
 
     .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService) {
 
-
+        $rootScope.debugMode = true;
 
 
         $rootScope.sessionData = {};
@@ -2046,11 +2017,12 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
     $scope.makeCall = function (number) {
         window.plugins.CallNumber.callNumber(
-            function () {
-                $log.info('finish call');
+            function (success) {
+                $log.info('finish call', success);
             },
-            function () {
-                $log.info('failed call');
+
+            function (err) {
+                $log.error('failed call', err);
                 $scope.makeCallViaURL(number);
             },
             number,
@@ -2143,8 +2115,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate', '$ionicLoading', 'UserService', 'LocalDataService', function ($scope, $rootScope, $log, $translate, $ionicLoading, UserService, LocalDataService) {
-
+controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate', '$ionicLoading', 'UserService', 'LocalDataService', function ($scope, $rootScope, $log, $translate, $ionicLoading,  UserService, LocalDataService) {
 
     $scope.loadUserDetails = function(userId){
         UserService.loadUser(userId).then(function(userDetails){

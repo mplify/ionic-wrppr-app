@@ -45,7 +45,16 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
-        });
+        },
+        function(error){
+            $log.error('Failed to load organizations', error);
+            $ionicLoading.hide();
+            $scope.isLoading = false;
+
+
+
+        }
+        );
     };
 
     $scope.loadNext = function(){

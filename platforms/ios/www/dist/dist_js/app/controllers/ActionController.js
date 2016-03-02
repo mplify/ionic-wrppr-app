@@ -115,11 +115,12 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
     $scope.makeCall = function (number) {
         window.plugins.CallNumber.callNumber(
-            function () {
-                $log.info('finish call');
+            function (success) {
+                $log.info('finish call', success);
             },
-            function () {
-                $log.info('failed call');
+
+            function (err) {
+                $log.error('failed call', err);
                 $scope.makeCallViaURL(number);
             },
             number,

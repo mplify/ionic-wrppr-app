@@ -71,6 +71,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -182,6 +186,9 @@
         "cordova-plugin-facebook4": {
             "APP_ID": "758543534250966",
             "APP_NAME": "test",
+            "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
@@ -485,6 +492,13 @@
             "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
             "clobbers": [
                 "facebookConnectPlugin"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "clobbers": [
+                "navigator.splashscreen"
             ]
         }
     ]

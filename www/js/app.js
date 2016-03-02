@@ -224,7 +224,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/root');
 
-        //$httpProvider.interceptors.push('APIInterceptor');
+        $httpProvider.interceptors.push('APIInterceptor');
 
         $httpProvider.defaults.withCredentials = true;
 
@@ -266,5 +266,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
         $logProvider.debugEnabled(true);
 
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
+
+
     }
 );

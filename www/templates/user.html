@@ -6,11 +6,11 @@
                     <h2>{{user.UserName}}</h2>
                     <p>{{user.email}}</p>
                     <p>{{user.createdAt | date:'medium' }}</p>
-                    <p>
+                    <p ng-show="debugMode">
                         Basic Auth: {{sessionKey}}
                     </p>
                 </ion-item>
-                <ion-item class="item-avatar">
+                <ion-item class="item-avatar" ng-show="debugMode">
                     <img ng-src="{{localFBUser.picture}}" src="../img/photo.jpg">
                     <h2>{{localFBUser.name}}</h2>
                     <h2>{{localFBUser.email}}</h2>
@@ -22,14 +22,21 @@
                 <ion-item ng-show="networkType">
                     Network Type: {{networkType}} is {{networkStatus}}
                 </ion-item>
-                <ion-item>
-                    {{emailApp}}
-                </ion-item>
+
                 <ion-item>
                     <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="switchLanguage()">
                         Switch to English Version
                     </button>
                 </ion-item>
+            <ion-item class="item-toggle">
+                Debug
+            <label class="toggle">
+                <input type="checkbox" ng-model="$root.debugMode">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+            </ion-item>
 
 
         </ion-list>

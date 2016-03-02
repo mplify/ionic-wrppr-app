@@ -6,7 +6,7 @@ services.service('FacebookService', function ($q, $log, $state, UserService, Loc
     var autoLogin = function(){
            $log.info('try to auto login');
            var localUser = LocalDataService.getFacebookResponse();
-           if(localUser){
+           if(localUser && localUser.accessToken){
                 getLoginStatus().then(function(success){
                     if (success.status === 'connected') {
                         $log.info('auto logged in via facebook', localUser);

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService) {
+    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', 'FacebookService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService) {
 
 
         $log.debug('run app');
@@ -28,7 +28,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
-            EmailService.checkEmailApp();
+            //EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
 
             /*navigator.globalization.getPreferredLanguage(function(lang){
@@ -36,6 +36,8 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }, function(err){
                 $log.error('globalization plugin error', err);
             });*/
+
+            FacebookService.autoLogin();
 
 
         });
@@ -58,7 +60,36 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'dashboard2.html'
+                templateUrl: 'dashboard2.html',
+                resolve : {
+                    ensureUserAndLanguage: ['$log', '$q', '$translate', function($log, $q, $translate){
+                        var deferred = $q.defer();
+
+                        var userLanguage = navigator.language || navigator.userLanguage;
+
+
+                        var preferredLanguage = "nl";
+                        if(userLanguage && userLanguage.indexOf('en') > -1){
+                            preferredLanguage = "en";
+
+                        }
+
+
+                        // HERE'S THE IMPORTANT PART!!
+                        $translate.use(preferredLanguage)
+                            .then(function(){
+                                $log.debug('$translate.use. Lang is: ' + $translate.use());
+
+                                deferred.resolve();
+                            },
+                            function(){
+                               deferred.reject();
+                            }
+                        );
+
+                        return deferred.promise;
+                    }]
+                }
             })
 
 

@@ -60,16 +60,21 @@
             </div>
         </div>
 
-
     </ion-content>
-    <div class="bar bar-footer">
-        <div class="button-bar">
-            <button class="button button-clear" ng-click="mailFeedback();">
-                Feedback
-            </button>
-            <button class="button button-clear" ng-click="mailSupport();">
-                Support
-            </button>
-        </div>
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ng-click="mailFeedback();">
+            <i class="icon ion-speakerphone"></i>
+            Feedback
+        </a>
+        <a class="tab-item" ng-show="userCorrect.message">
+            <i class="icon ion-edit" ng-click="userCorrect();" ></i>
+            User Correct
+        </a>
+        <a class="tab-item" ng-click="mailSupport();">
+            <i class="icon ion-help-buoy"></i>
+            Support
+        </a>
     </div>
+
+
 </ion-view>

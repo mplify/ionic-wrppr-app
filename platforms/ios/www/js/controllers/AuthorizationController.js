@@ -81,7 +81,7 @@ controllers.controller('AuthorizationCtrl', function ($scope, $ionicLoading, $io
         UserService.createUser($scope.registerData).then(function(response) {
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
-            var user = response;
+            var user = response[0];
             LocalDataService.saveUser(user);
 
             //LoginService.activateUser(user.id).then(function(response){});

@@ -201,7 +201,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.submitUserCorrect = function(){
-         alert($scope.userCorrect.message);
+         $log.info($scope.userCorrect.comment);
+         $scope.closeModal();
     };
 
 

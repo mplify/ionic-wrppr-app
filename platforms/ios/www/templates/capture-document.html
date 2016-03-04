@@ -3,10 +3,11 @@
     <ion-content>
 
         <ion-list>
-            <ion-item ng-repeat="image in images" class="item-body" ng-click="selectDocument(image);">
+            <ion-item ng-repeat="image in images" class="item item-image" style="padding: 10px;" ng-click="selectDocument(image);">
+                <p>{{image.name | Filename}}</p>
                 <img class="full-image" ng-src="{{urlForImage(image.url)}}" style="height: 300px;">
-                <p>{{image.url}}</p>
-                <p>{{image.name}}</p>
+
+
             </ion-item>
         </ion-list>
 
@@ -15,7 +16,7 @@
     </ion-content>
     <div class="bar bar-footer" ng-show="cameraAvailable">
         <div class="button-bar">
-            <button class="button button-clear icon-left ion-home" ng-click="addImage();">
+            <button class="button button-clear" ng-click="addImage();">
                 Add
             </button>
             <button class="button button-clear" ng-click="load();">

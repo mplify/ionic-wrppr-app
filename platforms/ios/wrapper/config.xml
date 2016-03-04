@@ -64,9 +64,6 @@
     <feature name="NativePageTransitions">
         <param name="ios-package" value="NativePageTransitions" />
     </feature>
-    <feature name="EmailComposer">
-        <param name="ios-package" value="APPEmailComposer" />
-    </feature>
     <feature name="SplashScreen">
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
@@ -107,6 +104,8 @@
     <access launch-external="yes" origin="mailto:*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="file://*/*" />
+    <allow-navigation href="tel://*/*" />
+    <allow-navigation href="mailto://*/*" />
     <allow-intent href="tel:*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

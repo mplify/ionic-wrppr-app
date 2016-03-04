@@ -1,7 +1,31 @@
 var services = angular.module('App.services');
 
-services.service('LoginService', function ($http, $q, $log, api) {
+services.service('LoginService', function ($http, $q, $log, api, LocalDataService) {
     return {
+        'autoLogin' : function(){
+            $log.info('auto login using basic token');
+
+            var defer = $q.defer();
+            var token = LocalDataService.getBaseToken();
+
+            if(!token){
+                defer.reject();
+            }
+            var url = api.byName('base-url') + api.byName('login-url');
+
+
+
+            $http.post(url)
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+
+                    defer.reject(err);
+                });
+            return defer.promise;
+
+         },
         'login' : function (loginData){
             $log.info('login');
 

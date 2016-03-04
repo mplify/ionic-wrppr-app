@@ -73,10 +73,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
@@ -135,11 +131,6 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-facebook4": {
-            "APP_ID": "758543534250966",
-            "APP_NAME": "test",
-            "PACKAGE_NAME": "com.wrppr.wrppr"
-        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
@@ -171,23 +162,17 @@
         "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
-        "de.appplant.cordova.plugin.email-composer": {
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
-        "cordova-plugin-splashscreen": {
+        "cordova-plugin-facebook4": {
+            "APP_ID": "758543534250966",
+            "APP_NAME": "test",
             "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
-            "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
-            "pluginId": "cordova-plugin-facebook4",
-            "clobbers": [
-                "facebookConnectPlugin"
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
             "id": "cordova-plugin-inappbrowser.inappbrowser",
@@ -534,12 +519,11 @@
             ]
         },
         {
-            "file": "plugins/de.appplant.cordova.plugin.email-composer/www/email_composer.js",
-            "id": "de.appplant.cordova.plugin.email-composer.EmailComposer",
-            "pluginId": "de.appplant.cordova.plugin.email-composer",
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "pluginId": "cordova-plugin-splashscreen",
             "clobbers": [
-                "cordova.plugins.email",
-                "plugin.email"
+                "navigator.splashscreen"
             ]
         },
         {
@@ -548,14 +532,6 @@
             "pluginId": "cordova-plugin-facebook4",
             "clobbers": [
                 "facebookConnectPlugin"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
             ]
         }
     ]

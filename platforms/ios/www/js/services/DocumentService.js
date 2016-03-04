@@ -2,6 +2,9 @@ var services = angular.module('App.services');
 
 services.service('DocumentService', function ($cordovaCamera, $cordovaFile, LocalDataService, $log, $q) {
     var dirName = "documents";
+
+
+
     return {
         'createFolder': function () {
             var defer = $q.defer();
@@ -51,29 +54,10 @@ services.service('DocumentService', function ($cordovaCamera, $cordovaFile, Loca
 
             $cordovaCamera.getPicture(options).then(
                 function (fileURI) {
-                    //Grab the file name of the photo in the temporary directory
-                    var currentName = fileURI.replace(/^.*[\\\/]/, '');
 
-                    //Create a new name for the photo
-                    var d = new Date(),
-                        n = d.getTime(),
-                        newFileName = n + ".jpg";
-
-                    var targetDir = cordova.file.dataDirectory + dirName;
-                    var sourceDir = fileURI.substring(0, fileURI.lastIndexOf("/"));
+                   defer.resolve(fileURI);
 
 
-                    $cordovaFile.moveFile(sourceDir, currentName, targetDir , newFileName).then(function (success) {
-                        var url = success.nativeURL;
-                        LocalDataService.addPhoto(newFileName, success.nativeURL);
-
-                        $log.debug('moved file from temp location to ', url);
-                        defer.resolve(url);
-
-                    }, function (error) {
-                        $log.error('failed to move file from temp location', JSON.stringify(error));
-                        defer.reject(error);
-                    });
 
 
                 },
@@ -82,6 +66,33 @@ services.service('DocumentService', function ($cordovaCamera, $cordovaFile, Loca
                     defer.reject(err);
                 }
             );
+
+            return defer.promise;
+        },
+        'moveFile' : function(fileURI, filename){
+            var defer = $q.defer();
+            //Grab the file name of the photo in the temporary directory
+            var currentName = fileURI.replace(/^.*[\\\/]/, '');
+
+
+
+            var newFileName = filename + ".jpg";
+
+            var targetDir = cordova.file.dataDirectory + dirName;
+            var sourceDir = fileURI.substring(0, fileURI.lastIndexOf("/"));
+
+
+            $cordovaFile.moveFile(sourceDir, currentName, targetDir , newFileName).then(function (success) {
+                var url = success.nativeURL;
+                LocalDataService.addPhoto(newFileName, success.nativeURL);
+
+                $log.debug('moved file from temp location to ', url);
+                defer.resolve(url);
+
+            }, function (error) {
+                $log.error('failed to move file from temp location', JSON.stringify(error));
+                defer.reject(error);
+            });
 
             return defer.promise;
         }

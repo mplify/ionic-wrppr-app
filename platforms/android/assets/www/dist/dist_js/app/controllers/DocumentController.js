@@ -1,12 +1,14 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('DocumentCtrl', ['$scope', '$stateParams', '$state', '$log', '$templateCache', '$ionicBackdrop', '$ionicModal', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
+controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', '$state', '$log', '$templateCache', '$ionicBackdrop', '$ionicModal', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
 
     $log.debug('init document controller');
     $scope.cameraAvailable = window.cordova;
 
+
     $scope.images = LocalDataService.getPhotos();
+    $scope.attachment = {};
 
     $scope.$on('$ionicView.enter', function(){
         if($stateParams.document){
@@ -46,15 +48,11 @@ controllers.controller('DocumentCtrl', ['$scope', '$stateParams', '$state', '$lo
         });
 
         DocumentService.capturePicture().then(
-            function(success){
-                $scope.images = LocalDataService.getPhotos();
+            function(fileURI){
+                $scope.fileURI = fileURI;
+
+                $scope.showAttachmentModal();
                 $ionicLoading.hide();
-
-                $ionicPopup.alert({
-                    title: 'Picture saved',
-                    template: success
-                });
-
             },
             function(fail){
                 $ionicLoading.hide();
@@ -77,7 +75,53 @@ controllers.controller('DocumentCtrl', ['$scope', '$stateParams', '$state', '$lo
     };
 
     $scope.closeModal = function() {
+        $log.debug('close modal');
+
         $scope.modal.hide();
         $scope.modal.remove();
+    };
+
+    $scope.showAttachmentModal = function(){
+        $scope.modal = $ionicModal.fromTemplate($templateCache.get('new-document.html'), {
+            scope: $scope
+        });
+        $scope.modal.show();
+    };
+
+
+    $scope.closeAttachmentModal = function(){
+        var filename = $scope.attachment.filename;
+
+
+        for(var i in $scope.images)
+        {
+            var image = $scope.images[i].name;
+            var imageName = image.substring(0, image.length - 4);
+            if(filename === imageName){
+                $ionicPopup.alert({
+                    title: 'Picture name is not unique'
+                });
+                return;
+            }
+        }
+
+        DocumentService.moveFile($scope.fileURI, $scope.attachment.filename).then(
+            function(success){
+
+                $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: 'Picture saved'
+                });
+
+                $scope.closeModal();
+                $log.info('display images', LocalDataService.getPhotos());
+                $scope.load();
+            },
+            function(fail){
+                $ionicLoading.hide();
+            }
+        );
+
     };
 }]);

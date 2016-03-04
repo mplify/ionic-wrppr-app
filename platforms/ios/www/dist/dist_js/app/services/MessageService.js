@@ -89,6 +89,29 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                         defer.reject(err);
                     });
                 return defer.promise;
+            },
+            'getMessageDetails' : function(messageID){
+                $log.info('load message details for: ' + messageID);
+
+                var url = api.byName('base-url') + api.byName('message-tree-url');
+                var defer = $q.defer();
+
+
+                var params = {
+                    'messageID': messageID
+                };
+
+                $http.get(url, {
+                    'params': params
+                })
+                    .success(function (resp) {
+                        defer.resolve(resp);
+                    })
+                    .error(function (err) {
+                        defer.reject(err);
+                    });
+                return defer.promise;
+
             }
         };
     }]

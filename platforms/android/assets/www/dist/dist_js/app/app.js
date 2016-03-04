@@ -6,8 +6,16 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', 'FacebookService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService) {
+    .run(['$ionicPlatform', 'BasicAuthorizationService', '$http', '$log', 'TwitterService', 'ExternalLoad', 'NetworkService', 'DTMFService', 'EmailService', 'FacebookService', 'LoginService', function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService, LoginService) {
 
+        LoginService.autoLogin().then(
+            function(success){
+
+            },
+            function(err){
+                FacebookService.autoLogin();
+            }
+        );
 
         $log.debug('run app');
         $ionicPlatform.ready(function () {
@@ -31,8 +39,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             ExternalLoad.checkExternalLoad();
             NetworkService.checkNetworkState();
 
-
-            FacebookService.autoLogin();
 
 
         });

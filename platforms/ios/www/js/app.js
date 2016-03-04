@@ -6,8 +6,16 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
 
-    .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService) {
+    .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService, LoginService) {
 
+        LoginService.autoLogin().then(
+            function(success){
+
+            },
+            function(err){
+
+            }
+        );
 
         $log.debug('run app');
         $ionicPlatform.ready(function () {
@@ -28,15 +36,8 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             }
 
             TwitterService.checkTwitterApp();
-            //EmailService.checkEmailApp();
             ExternalLoad.checkExternalLoad();
-
-            /*navigator.globalization.getPreferredLanguage(function(lang){
-                $log.debug('globalization plugin : ', lang);
-            }, function(err){
-                $log.error('globalization plugin error', err);
-            });*/
-
+            NetworkService.checkNetworkState();
             FacebookService.autoLogin();
 
 
@@ -44,6 +45,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
         $ionicPlatform.on('resume', function(){
             ExternalLoad.checkExternalLoad();
+            NetworkService.checkNetworkState();
         });
 
         var token = BasicAuthorizationService.getToken();
@@ -87,6 +89,13 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 templateUrl: 'change-password.html',
                 controller : 'RestorePasswordCtrl'
             })
+
+            .state('offline', {
+                url: '/offline',
+                templateUrl: 'no-internet.html',
+                controller : 'AppCtrl'
+            })
+
 
             .state('app', {
                 url : '/app',
@@ -199,6 +208,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             }
              })
+
 
             .state('app.documents', {
                 url: '/documents',

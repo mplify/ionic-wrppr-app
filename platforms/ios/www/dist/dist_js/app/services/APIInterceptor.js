@@ -6,10 +6,10 @@ services.service('APIInterceptor', ['$rootScope', '$q', 'LocalDataService', func
     service.request = function (config) {
 
         $rootScope.$broadcast('check-authorization');
-        if (!config.headers.authorization) {
+        if (!config.headers.Authorization) {
             var access_token = LocalDataService.getBaseToken();
             if (access_token) {
-                config.headers.authorization = access_token;
+                config.headers.Authorization = access_token;
             }
         }
         return config;

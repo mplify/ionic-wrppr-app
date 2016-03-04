@@ -83,17 +83,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-facebook4": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-facebook4"
-        },
-        "is_top_level": true,
-        "variables": {
-            "APP_ID": "758543534250966",
-            "APP_NAME": "test"
-        }
-    },
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
@@ -101,5 +90,16 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-facebook4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-facebook4@~1.6.3"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "758543534250966",
+            "APP_NAME": "test"
+        }
     }
 }

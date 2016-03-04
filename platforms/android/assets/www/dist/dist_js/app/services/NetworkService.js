@@ -1,12 +1,10 @@
 var services = angular.module('App.services');
 
-services.service('NetworkService', ['$ionicPlatform', '$rootScope', '$log', '$ionicPopup', '$cordovaNetwork', '$state', 'LocalDataService', function( $ionicPlatform, $rootScope, $log, $ionicPopup, $cordovaNetwork, $state, LocalDataService)
+services.service('NetworkService', ['$ionicPlatform', '$rootScope', '$log', '$ionicPopup', '$cordovaNetwork', '$templateCache', '$ionicModal', 'LocalDataService', function( $ionicPlatform, $rootScope, $log, $ionicPopup, $cordovaNetwork, $templateCache,  $ionicModal,LocalDataService)
 {
     var modal ;
     var showOfflineView = function(){
-        modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
+        modal = $ionicModal.fromTemplate($templateCache.get('no-internet.html'));
         modal.show();
     };
 

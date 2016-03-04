@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
+controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
     $log.debug('init action controller');
 
     if (!$rootScope.sessionData.organization) {
@@ -74,6 +74,9 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                         }, function (err) {
                             $log.error('failed to save wrapper contact', err);
                             $ionicLoading.hide();
+
+                            alert('failed to save wrapper contact');
+                            $scope.makeCallViaURL(number);
                         });
                     }
                     else {
@@ -97,6 +100,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                     }
                 },
                 function (err) {
+
                     $log.error('failed to find wrapper contact', err);
 
                     $ionicLoading.hide();
@@ -114,6 +118,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     };
 
     $scope.makeCall = function (number) {
+
         window.plugins.CallNumber.callNumber(
             function (success) {
                 $log.info('finish call', success);
@@ -121,6 +126,10 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
             function (err) {
                 $log.error('failed call', err);
+                $ionicPopup.alert({
+                    title: 'Call failed',
+                    template : err
+                });
                 $scope.makeCallViaURL(number);
             },
             number,
@@ -128,6 +137,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     };
 
     $scope.makeCallViaURL = function(number){
+       $log.debug('call via url');
        $window.location = 'tel:' +number;
     };
 

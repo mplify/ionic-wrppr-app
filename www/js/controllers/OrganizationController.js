@@ -85,10 +85,6 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             return;
         }
 
-        if((newVal.length === 0 && oldVal.length === 0) || newVal === oldVal ){
-            return;
-        }
-
         $log.info('search organization model changed: ' + newVal + oldVal);
         $scope.reload(newVal);
     });

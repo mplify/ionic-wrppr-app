@@ -1,4 +1,4 @@
-<ion-view view-title="Offline" ng-controller="AppCtrl">
+<ion-view view-title="{{'OFFLINE.TITLE' | translate}}" ng-controller="AppCtrl">
 
 
     <ion-content style="margin-left: 20px; margin-right: 20px;">
@@ -7,13 +7,13 @@
             <div class="ion-android-wifi" style="font-size: 86px; color: lightgray;"></div>
 
         </div>
-        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">No internet connection</h4></div>
-        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">Currently app doesn't support offline mode</h4></div>
+        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">{{'OFFLINE.TEXT' | translate}}</h4></div>
+        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">{{'OFFLINE.DESCRIPTION' | translate}}</h4></div>
         <div class="row" style="height: 30%"></div>
         <div class="row">
 
             <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="refreshNetworkState()">
-                Refresh
+                {{'OFFLINE.REFRESH' | translate}}
             </button>
 
         </div>

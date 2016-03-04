@@ -1,6 +1,6 @@
 <ion-modal-view ng-controller="DocumentCtrl">
     <ion-header-bar align-title="left">
-        <h1 class="title">New Attachment</h1>
+        <h1 class="title">{{'ATTACHMENT.NEW_TITLE' | translate}}</h1>
         <div class="buttons">
             <button class="button button-clear" ng-click="closeModal()">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
@@ -10,13 +10,13 @@
             <div class="list">
 
                 <label class="item item-input">
-                    <span class="input-label">Name</span>
+                    <span class="input-label">{{'ATTACHMENT.FILENAME' | translate}}</span>
                     <input type="text" name="username" ng-model="attachment.filename">
 
                 </label>
 
                 <label class="item">
-                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="newDocument.$invalid" type="submit">Save</button>
+                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="newDocument.$invalid" type="submit">{{'ATTACHMENT.SAVE' | translate}}</button>
                 </label>
             </div>
         </form>

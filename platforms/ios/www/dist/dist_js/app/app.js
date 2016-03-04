@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             },
             function(err){
-                FacebookService.autoLogin();
+
             }
         );
 
@@ -38,7 +38,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             TwitterService.checkTwitterApp();
             ExternalLoad.checkExternalLoad();
             NetworkService.checkNetworkState();
-
+            FacebookService.autoLogin();
 
 
         });
@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('root', {
                 url: '/root',
-                templateUrl: 'dashboard2.html'
+                templateUrl: 'dashboard.html'
             })
 
 
@@ -113,14 +113,6 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 }
             })
 
-            .state('app.dashboard2', {
-                url: '/dashboard2',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'dashboard2.html'
-                    }
-                }
-            })
 
             .state('app.search', {
                 url: '/search',

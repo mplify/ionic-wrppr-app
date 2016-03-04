@@ -1,4 +1,4 @@
-<ion-view view-title="Welcome" ng-controller="IntroCtrl" ng-init="init();">
+<ion-view view-title="{{'INTRO.TITLE' | translate}}" ng-controller="IntroCtrl" ng-init="init();">
 
 
     <ion-content style="margin-left: 20px; margin-right: 20px;">
@@ -7,13 +7,13 @@
             <div class="ion-coffee" style="font-size: 86px; color: lightgray;"></div>
 
         </div>
-        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">Welcome, {{userName}}</h4></div>
-        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">Now you can search any business, choose your question and contact</h4></div>
+        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">{{'INTRO.TEXT' | translate}}{{userName}}</h4></div>
+        <div class="row"><h4 class="title" style="width: 100%; text-align: center;">{{'INTRO.DESCRIPTION' | translate}}</h4></div>
         <div class="row" style="height: 30%"></div>
         <div class="row">
 
             <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="hideIntro()">
-                Search companies
+                {{'INTRO.SEARCH_BUTTON' | translate}}
             </button>
 
         </div>

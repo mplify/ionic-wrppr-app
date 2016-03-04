@@ -85,7 +85,7 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
             return;
         }
 
-        if((newVal.length === 0 && oldVal.length === 0) || newVal === oldVal ){
+        if(newVal === oldVal ){
             return;
         }
 

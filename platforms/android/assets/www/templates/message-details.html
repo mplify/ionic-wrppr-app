@@ -1,22 +1,39 @@
-<ion-view view-title="Message details" ng-controller="MessageCtrl">
+<ion-view view-title="{{'MESSAGES.DETAILS_TITLE' | translate}}" ng-controller="MessageCtrl">
+
     <ion-content>
-        <ion-list class="list card">
-            <ion-item ng-switch="currentMessage.ChannelTypeID">
-                <div class="row button-block " style="text-align: center; display: block;">
-                    <div ng-switch-when="1" class="ion-ios-telephone" style="font-size: 86px; color: lightgray;"></div>
-                    <div ng-switch-when="2" class="icon ion-email" style="font-size: 86px; color: lightgray;"></div>
-                    <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
+        <div style="height: 5px;"></div>
+        <div ng-switch="currentMessage.ChannelTypeID">
+            <div class="row button-block " style="text-align: center; display: block;">
+                <div ng-switch-when="1" class="ion-ios-telephone" style="font-size: 86px; color: lightgray;"></div>
+                <div ng-switch-when="2" class="icon ion-email" style="font-size: 86px; color: lightgray;"></div>
+                <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
 
-                </div>
-                <h2 style="text-align: center;">{{currentMessage.Question}}</h2>
-                <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
-            </ion-item>
+            </div>
+        </div>
+        <div class="row" style="height: 10%; padding-left: 20px; padding-right: 20px;">
+            <h3 style="text-align: center; width: 100%;">{{currentMessage.Question}}</h3>
+        </div>
 
-        </ion-list>
+        <div class="row" ng-repeat="option in messageOptions">
+            <p style="text-align: center; width: 100%;">{{option.NodeName}}</p>
+        </div>
+
+        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
 
     </ion-content>
-    <div class="bar bar-footer">
-
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ng-click="mailFeedback();">
+            <i class="icon ion-speakerphone"></i>
+            {{ 'GENERIC.FEEDBACK' | translate }}
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-edit" ng-click="userCorrect();"></i>
+            {{ 'USER_CORRECT.BUTTON' | translate }}
+        </a>
+        <a class="tab-item" ng-click="mailSupport();">
+            <i class="icon ion-help-buoy"></i>
+            {{ 'GENERIC.SUPPORT' | translate }}
+        </a>
     </div>
 
 </ion-view>

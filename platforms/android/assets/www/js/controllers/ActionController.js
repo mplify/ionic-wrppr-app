@@ -137,7 +137,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
     };
 
     $scope.makeCallViaURL = function(number){
-        alert(number);
+       $log.debug('call via url');
        $window.location = 'tel:' +number;
     };
 

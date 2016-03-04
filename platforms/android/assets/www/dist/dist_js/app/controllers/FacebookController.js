@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicPlatform', '$q', '$log', '$ionicLoading', '$http', '$cordovaOauth', 'UserService', 'BasicAuthorizationService', 'LocalDataService', 'FacebookService', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
+controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicPlatform', '$q', '$log', '$ionicLoading', '$ionicPopup', '$http', '$cordovaOauth', 'UserService', 'BasicAuthorizationService', 'LocalDataService', 'FacebookService', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $ionicPopup, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
     $scope.facebookLoginEnabled = window.cordova;
 
     $scope.facebookManualLogin = function () {
@@ -14,23 +14,29 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                     var accessToken = success.authResponse.accessToken;
 
                     FacebookService.getProfileInfo(accessToken).then(function (profileSuccess) {
+
                         // sync with local user
                         FacebookService.saveUser(profileSuccess, accessToken).then(function (saveSuccess) {
-                            var user = {};
-                            if(saveSuccess && saveSuccess[0]){
-                                user = saveSuccess[0];
-                            }
+                            var user = saveSuccess;
                             $scope.updateLocalStorage(user, profileSuccess, accessToken);
                             $ionicLoading.hide();
 
                         }, function (saveError) {
                             $log.error('failed to save profile info');
                             $ionicLoading.hide();
+
+                            $ionicPopup.alert({
+                                title: 'Facebook Login Failed'
+                            });
                         });
 
                     }, function (error) {
                         $log.error('failed to get profile info');
                         $ionicLoading.hide();
+
+                        $ionicPopup.alert({
+                            title: 'Facebook Login Failed'
+                        });
                     });
                 }
                 else {
@@ -56,11 +62,19 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                 function (saveError) {
                     $log.error('failed to save user');
                     $ionicLoading.hide();
+
+                    $ionicPopup.alert({
+                        title: 'Facebook Login Failed'
+                    });
                 });
 
         }, function (error) {
             $log.error('failed to get profile info');
             $ionicLoading.hide();
+
+            $ionicPopup.alert({
+                title: 'Facebook Login Failed'
+            });
         });
     };
 

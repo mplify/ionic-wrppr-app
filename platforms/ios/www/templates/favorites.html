@@ -1,8 +1,8 @@
 
-<ion-view view-title="Favorites" ng-controller="MessageCtrl">
+<ion-view view-title="{{'FAVORITES.TITLE' | translate}}" ng-controller="MessageCtrl">
     <ion-content>
         <ion-refresher
-                pulling-text="Pull to refresh..."
+                pulling-text="{{'GENERIC.REFRESH' | translate}}"
                 on-refresh="loadCompanies();">
         </ion-refresher>
         <ion-list ng-init="loadCompanies();">

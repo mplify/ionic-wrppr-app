@@ -1,14 +1,14 @@
 
-<ion-view view-title="Favorites" ng-controller="MessageCtrl">
+<ion-view view-title="{{'FAVORITES.TITLE' | translate}}" ng-controller="MessageCtrl">
     <ion-content>
         <ion-refresher
-                pulling-text="Pull to refresh..."
+                pulling-text="{{'GENERIC.REFRESH' | translate}}"
                 on-refresh="loadCompanies();">
         </ion-refresher>
         <ion-list ng-init="loadCompanies();">
             <ion-item ng-repeat="company in companies track by company.OrgID"  ng-click="selectOrganisation(company);">
                 {{company.orgName}}
-                <span class="badge badge-balanced">{{company.count}}</span>
+                <span class="badge wrppr-action-button" style="color: white;">{{company.count}}</span>
             </ion-item>
         </ion-list>
     </ion-content>

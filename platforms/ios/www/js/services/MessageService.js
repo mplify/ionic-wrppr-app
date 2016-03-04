@@ -98,7 +98,7 @@ services.service('MessageService', function ($http, $q, $log, api) {
 
 
                 var params = {
-                    'messageID': messageID
+                    'MessageID': messageID
                 };
 
                 $http.get(url, {

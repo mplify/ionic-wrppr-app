@@ -1,8 +1,8 @@
 
-<ion-view view-title="Messages History" ng-controller="MessageCtrl">
+<ion-view view-title="{{'MESSAGES.HISTORY_TITLE' | translate}}" ng-controller="MessageCtrl">
     <ion-content>
         <ion-refresher
-                pulling-text="Pull to refresh..."
+                pulling-text="{{'GENERIC.REFRESH' | translate}}"
                 on-refresh="load();">
         </ion-refresher>
         <ion-list ng-init="load();">

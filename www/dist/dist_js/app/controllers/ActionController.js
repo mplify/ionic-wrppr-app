@@ -1,8 +1,9 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$ionicPopup', '$log', '$translate', '$ionicLoading', '$ionicModal', '$templateCache', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'EmailService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$ionicPopup', '$log', '$translate', '$ionicLoading', '$ionicModal', '$templateCache', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'OrganizationService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, OrganizationService) {
     $log.debug('init action controller');
+
 
     if (!$rootScope.sessionData.organization) {
         $log.info('organization not selected, redirects to organization search');
@@ -34,6 +35,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
         $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
     }
+
+
 
     $scope.call = function () {
 

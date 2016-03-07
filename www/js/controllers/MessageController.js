@@ -1,22 +1,15 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService) {
+controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService) {
     $log.info('init messages controller');
 
-    $scope.$on('$ionicView.enter', function () {
-        if ($stateParams.messageID) {
-            $scope.loadMessage();
-        }
-        else {
-            $scope.load();
-        }
-    });
+
 
     $scope.messages = [
 
     ];
 
-    $scope.companies = [];
+    $scope.organizations = [];
 
     $scope.userID = LocalDataService.loadUser().id;
 
@@ -34,13 +27,13 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
         });
     };
 
-    $scope.loadCompanies = function () {
+    $scope.loadOrgs = function () {
         $ionicLoading.show({
             template: 'Loading...'
         });
 
         MessageService.getCompaniesWithMsgCount($scope.userID).then(function (response) {
-                $scope.companies = response;
+                $scope.organizations = response;
                 $ionicLoading.hide();
                 $scope.$broadcast('scroll.refreshComplete');
             },
@@ -50,8 +43,20 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
             });
     };
 
-    $scope.selectOrganisation = function (organisation) {
-        $state.go('app.favorite', { 'orgID': organisation.OrgID});
+    $scope.selectOrganisation = function (organization) {
+        $rootScope.sessionData.organization = organization;
+        $rootScope.sessionData.options = [];
+
+        OrganizationService.getOrganization(organization.OrgID).then(function(success){
+            $log.info('load organization details');
+            $rootScope.sessionData.organization = success;
+
+            $state.go('app.options', { 'orgID' : organization.OrgID , 'parentID' : 0});
+        }, function(err){
+            $log.error('failed to load org details selected in favorites', err);
+        });
+
+
     };
 
     $scope.selectMessage = function (message) {

@@ -3,12 +3,12 @@
     <ion-content>
         <ion-refresher
                 pulling-text="{{'GENERIC.REFRESH' | translate}}"
-                on-refresh="loadCompanies();">
+                on-refresh="loadOrgs();">
         </ion-refresher>
-        <ion-list ng-init="loadCompanies();">
-            <ion-item ng-repeat="company in companies track by company.OrgID"  ng-click="selectOrganisation(company);">
-                {{company.orgName}}
-                <span class="badge wrppr-action-button" style="color: white;">{{company.count}}</span>
+        <ion-list ng-init="loadOrgs();">
+            <ion-item ng-repeat="org in organizations track by org.OrgID"  ng-click="selectOrganisation(org);">
+                {{org.orgName}}
+                <span class="badge wrppr-action-button" style="color: white;">{{org.count}}</span>
             </ion-item>
         </ion-list>
     </ion-content>

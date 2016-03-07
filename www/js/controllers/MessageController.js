@@ -3,8 +3,6 @@ var controllers = angular.module('App.controllers');
 controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService) {
     $log.info('init messages controller');
 
-
-
     $scope.messages = [
 
     ];

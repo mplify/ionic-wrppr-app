@@ -1,7 +1,7 @@
 <ion-view view-title="{{'MESSAGES.DETAILS_TITLE' | translate}}" ng-controller="MessageCtrl">
     <form name="messageForm"  novalidate>
 
-    <ion-content >
+    <ion-content ng-init="loadMessage();">
 
         <div style="height: 5px;"></div>
         <div ng-switch="currentMessage.ChannelTypeID">
@@ -20,7 +20,7 @@
             <p style="text-align: center; width: 100%;">{{option.NodeName}}</p>
         </div>
 
-        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
+        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'dd.MM.yyyy HH:mm'}}</p>
 
 
         <div class="row" style="height: 20%;">

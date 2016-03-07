@@ -66,7 +66,7 @@ services.service('UserService', function ($http, $q, $log, api) {
 
             $http.post(url, userData)
                 .success(function (resp) {
-                    defer.resolve(resp);
+                    defer.resolve(resp[0]);
                 })
                 .error(function (err) {
                     defer.reject(err);
@@ -88,7 +88,7 @@ services.service('UserService', function ($http, $q, $log, api) {
 
             $http.put(url, data)
                 .success(function (resp) {
-                    defer.resolve(resp);
+                    defer.resolve(resp[0]);
                 })
                 .error(function (err) {
                     defer.reject(err);

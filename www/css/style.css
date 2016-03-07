@@ -118,3 +118,13 @@
     background-position: center, center;
 }
 
+.message-note {
+    width: 100%;
+    height: 100%;
+    border: 1px;
+    border-style: solid;
+    border-color: #b2b2b2;
+    border-radius: 8px;
+    padding: 10px;
+}
+

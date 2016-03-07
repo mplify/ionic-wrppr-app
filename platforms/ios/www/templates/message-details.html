@@ -1,22 +1,52 @@
 <ion-view view-title="{{'MESSAGES.DETAILS_TITLE' | translate}}" ng-controller="MessageCtrl">
-    <ion-content>
-        <ion-list class="list card">
-            <ion-item ng-switch="currentMessage.ChannelTypeID">
-                <div class="row button-block " style="text-align: center; display: block;">
-                    <div ng-switch-when="1" class="ion-ios-telephone" style="font-size: 86px; color: lightgray;"></div>
-                    <div ng-switch-when="2" class="icon ion-email" style="font-size: 86px; color: lightgray;"></div>
-                    <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
+    <form name="messageForm"  novalidate>
 
-                </div>
-                <h2 style="text-align: center;">{{currentMessage.Question}}</h2>
-                <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
-            </ion-item>
+    <ion-content >
 
-        </ion-list>
+        <div style="height: 5px;"></div>
+        <div ng-switch="currentMessage.ChannelTypeID">
+            <div class="row button-block " style="text-align: center; display: block;">
+                <div ng-switch-when="1" class="ion-ios-telephone" style="font-size: 86px; color: lightgray;"></div>
+                <div ng-switch-when="2" class="icon ion-email" style="font-size: 86px; color: lightgray;"></div>
+                <div ng-switch-when="3" class="ion-social-twitter" style="font-size: 86px; color: lightgray;"></div>
+
+            </div>
+        </div>
+        <div class="row" style="height: 10%; padding-left: 20px; padding-right: 20px;">
+            <h3 style="text-align: center; width: 100%;">{{currentMessage.Question}}</h3>
+        </div>
+
+        <div class="row" ng-repeat="option in messageOptions">
+            <p style="text-align: center; width: 100%;">{{option.NodeName}}</p>
+        </div>
+
+        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
+
+
+        <div class="row" style="height: 20%;">
+            <textarea class= "message-note" name="note" placeholder="please add some comment" rows="10" ng-focus="true" ng-model="currentMessage.Notes">
+            </textarea>
+        </div>
+
+        <div class="row" ng-hide="messageForm.note.$pristine">
+            <button class="button button-block button-assertive wrppr-action-button" ng-click="saveMessageNote();">Save note</button>
+        </div>
 
     </ion-content>
-    <div class="bar bar-footer">
-
+    </form>
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ng-click="mailFeedback();">
+            <i class="icon ion-speakerphone"></i>
+            {{ 'GENERIC.FEEDBACK' | translate }}
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-edit" ng-click="userCorrect();"></i>
+            {{ 'USER_CORRECT.BUTTON' | translate }}
+        </a>
+        <a class="tab-item" ng-click="mailSupport();">
+            <i class="icon ion-help-buoy"></i>
+            {{ 'GENERIC.SUPPORT' | translate }}
+        </a>
     </div>
 
 </ion-view>

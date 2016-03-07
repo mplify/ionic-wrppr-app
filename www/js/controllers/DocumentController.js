@@ -23,11 +23,12 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
 
         DocumentService.createFolder().then(
             function (success) {
+
                 $scope.images = LocalDataService.getPhotos();
 
             },
             function (err) {
-
+               $log.debug('failed to create folder', err);
             }
         );
 
@@ -115,8 +116,10 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
                 });
 
                 $scope.closeModal();
-                $log.info('display images', LocalDataService.getPhotos());
-                $scope.load();
+
+
+                $scope.images = LocalDataService.getPhotos();
+                $log.info('display images', $scope.images);
             },
             function(fail){
                 $ionicLoading.hide();

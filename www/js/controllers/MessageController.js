@@ -126,5 +126,28 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $log
         $scope.closeModal();
     };
 
+    $scope.saveMessageNote = function(){
+        $log.info("add message to note");
+
+        $ionicLoading.show({
+            template: 'Saving message...'
+        });
+
+        MessageService.updateMessageNote($scope.currentMessage).then(function(success){
+            $ionicLoading.hide();
+            $scope.messageForm.$setPristine();
+            $scope.messageForm.$setUntouched();
+
+        }, function(err){
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+                title: 'Failed to save note',
+                template : err
+            });
+        });
+
+
+    };
+
 
 });

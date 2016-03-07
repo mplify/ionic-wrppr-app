@@ -3,7 +3,7 @@
     <ion-content>
 
         <ion-list>
-            <ion-item ng-repeat="image in images" class="item item-image" style="padding: 10px;" ng-click="selectDocument(image);">
+            <ion-item ng-repeat="image in images track by image.name" class="item item-image" style="padding: 10px;" ng-click="selectDocument(image);">
                 <p>{{image.name | Filename}}</p>
                 <img class="full-image" ng-src="{{urlForImage(image.url)}}" style="height: 300px;">
 
@@ -16,7 +16,7 @@
             <button class="button button-clear" ng-click="addImage();">
                 {{'ATTACHMENT.ADD' | translate}}
             </button>
-            <button class="button button-clear" ng-click="load();">
+            <button id="attachmentsReload" class="button button-clear" ng-click="load();">
                 {{'ATTACHMENT.RELOAD' | translate}}
             </button>
         </div>

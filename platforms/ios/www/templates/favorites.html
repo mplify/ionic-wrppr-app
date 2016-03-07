@@ -8,7 +8,7 @@
         <ion-list ng-init="loadCompanies();">
             <ion-item ng-repeat="company in companies track by company.OrgID"  ng-click="selectOrganisation(company);">
                 {{company.orgName}}
-                <span class="badge badge-balanced">{{company.count}}</span>
+                <span class="badge wrppr-action-button" style="color: white;">{{company.count}}</span>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -1,106 +1,106 @@
 {
 
-    "APP_TITLE" : "wrppr",
-    "GENERIC_CLOSE" : "Close",
+    "APP_TITLE" : "wrpprNL",
+    "GENERIC_CLOSE" : "CloseNL",
     "GENERIC"  : {
-        "REFRESH" : "Pull to refresh",
-        "FEEDBACK" : "Feedback",
-        "SUPPORT" : "Support"
+        "REFRESH" : "Pull to refreshNL",
+        "FEEDBACK" : "FeedbackNL",
+        "SUPPORT" : "SupportNL"
     },
 
 
     "MENU" : {
-        "BUSINESS_CONTACT_SEARCH" : "Search",
-        "USER_PROFILE" : "User Profile",
-        "FAVORITES" : "Favorites",
-        "HISTORY" : "Contact History",
-        "ATTACHMENTS" : "Attachments",
-        "LOGOUT" : "Logout"
+        "BUSINESS_CONTACT_SEARCH" : "SearchNL",
+        "USER_PROFILE" : "User ProfileNL",
+        "FAVORITES" : "FavoritesNL",
+        "HISTORY" : "Contact HistoryNL",
+        "ATTACHMENTS" : "AttachmentsNL",
+        "LOGOUT" : "LogoutNL"
     },
 
     "DASHBOARD" : {
-        "TITLE" : "Your business contacts",
-        "DESCRIPTION" : "Search any business, choose your question and contact",
-        "FACEBOOK_LOGIN" : "Sign in with Facebook",
-        "TWITTER_LOGIN" : "Sign in with Twitter",
-        "LOGIN" : "Sign In",
-        "REGISTER" : "Register"
+        "TITLE" : "Your business contactsNL",
+        "DESCRIPTION" : "Search any business, choose your question and contactNL",
+        "FACEBOOK_LOGIN" : "Sign in with FacebookNL",
+        "TWITTER_LOGIN" : "Sign in with TwitterNL",
+        "LOGIN" : "Sign InNL",
+        "REGISTER" : "RegisterNL"
     },
-    "LOGIN_TITLE" : "Login",
-    "USERNAME" : "Username",
-    "USERNAME_REQUIRED_VALIDATOR" : "* Username is required",
-    "USERNAME_NOT_UNIQUE_VALIDATOR" : "* Username is not unique",
-    "PASSWORD" : "Password",
-    "PASSWORD_REQUIRED_VALIDATOR" : "* Password is required",
-    "PASSWORD_MIN_LENGTH_VALIDATOR" : "* Password minimal length is 6",
-    "PASSWORD_MAX_LENGTH_VALIDATOR" : "* Password max length is 50",
-    "EMAIL_REQUIRED_VALIDATOR" : "* Email is required",
-    "LOGIN_BUTTON" : "Login",
-    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?",
+    "LOGIN_TITLE" : "LoginNL",
+    "USERNAME" : "UsernameNL",
+    "USERNAME_REQUIRED_VALIDATOR" : "* Username is requiredNL",
+    "USERNAME_NOT_UNIQUE_VALIDATOR" : "* Username is not uniqueNL",
+    "PASSWORD" : "PasswordNL",
+    "PASSWORD_REQUIRED_VALIDATOR" : "* Password is requiredNL",
+    "PASSWORD_MIN_LENGTH_VALIDATOR" : "* Password minimal length is 6NL",
+    "PASSWORD_MAX_LENGTH_VALIDATOR" : "* Password max length is 50NL",
+    "EMAIL_REQUIRED_VALIDATOR" : "* Email is requiredNL",
+    "LOGIN_BUTTON" : "LoginNL",
+    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?NL",
 
     "MAIL" : {
-        "SUBJECT" : "Question about ",
-        "BODY" : "Dear"
+        "SUBJECT" : "Question aboutNL ",
+        "BODY" : "DearNL"
     },
 
     "BUSINESS_CONTACT" : {
-        "SEARCH" : "Search business contacts",
-        "SEARCH_FILTER_PLACEHOLDER" : "Search"
+        "SEARCH" : "Search business contactsNL",
+        "SEARCH_FILTER_PLACEHOLDER" : "SearchNL"
 
     },
     "ACTIONS" : {
-        "TITLE" : "Contact",
-        "CALL" : "CALL",
-        "MAIL" : "MAIL",
-        "TWEET" :  "TWEET"
+        "TITLE" : "ContactNL",
+        "CALL" : "CALLNL",
+        "MAIL" : "MAILNL",
+        "TWEET" :  "TWEETNL"
 
     },
     "USER_CORRECT" : {
-        "BUTTON" : "User correct",
-        "TITLE" : "User correct",
-        "DESCRIPTION" : "Here should be a description what 'User correct' feature means",
-        "SUBMIT" : "Send"
+        "BUTTON" : "User correctNL",
+        "TITLE" : "User correctNL",
+        "DESCRIPTION" : "Here should be a description what 'User correct' feature meansNL",
+        "SUBMIT" : "SendNL"
 
     },
     "ATTACHMENT" : {
-        "TITLE" : "Capture Attachment",
-        "ADD" : "Add",
-        "RELOAD" : "Reload",
-        "NEW_TITLE" : "New Attachment",
-        "FILENAME" : "Filename",
-        "SAVE" : "Save"
+        "TITLE" : "Capture AttachmentNL",
+        "ADD" : "AddNL",
+        "RELOAD" : "ReloadNL",
+        "NEW_TITLE" : "New AttachmentNL",
+        "FILENAME" : "FilenameNL",
+        "SAVE" : "SaveNL"
     },
     "CHANGE_PASSWORD" : {
-        "TITLE" : "Change Password",
-        "REPEAT_PASSWORD" : "Repeat Password",
-        "PASSWORD_MATCH" : "* Passwords don't match",
-        "SUBMIT" : "Change Password",
-        "RECOVER_PASSWORD" : "Recover Password",
-        "RESTORE_SUBMIT" : "Restore"
+        "TITLE" : "Change PasswordNL",
+        "REPEAT_PASSWORD" : "Repeat PasswordNL",
+        "PASSWORD_MATCH" : "* Passwords don't matchNL",
+        "SUBMIT" : "Change PasswordNL",
+        "RECOVER_PASSWORD" : "Recover PasswordNL",
+        "RESTORE_SUBMIT" : "RestoreNL"
     },
     "FAVORITES" : {
-        "TITLE" : "Favorites"
+        "TITLE" : "FavoritesNL"
     },
     "MESSAGES" : {
-        "HISTORY_TITLE" : "Messages History",
-        "DETAILS_TITLE" : "Message Details"
+        "HISTORY_TITLE" : "Messages HistoryNL",
+        "DETAILS_TITLE" : "Message DetailsNL"
     },
     "REGISTER" : {
-        "TITLE" : "Register",
-        "MOBILE" : "Mobile",
-        "EMAIL" : "Email",
-        "SUBMIT_BUTTON" : "Register"
+        "TITLE" : "RegisterNL",
+        "MOBILE" : "MobileNL",
+        "EMAIL" : "EmailNL",
+        "SUBMIT_BUTTON" : "RegisterNL"
     },
     "INTRO" : {
-        "TITLE" : "Welcome",
-        "TEXT" : "Welcome, ",
-        "DESCRIPTION" : "Now you can search any business, choose your question and contact",
-        "SEARCH_BUTTON" : "Search companies"
+        "TITLE" : "WelcomeNL",
+        "TEXT" : "WelcomeNL, ",
+        "DESCRIPTION" : "Now you can search any business, choose your question and contactNL",
+        "SEARCH_BUTTON" : "Search companiesNL"
     },
     "OFFLINE" : {
-        "TITLE" : "Offline",
-        "TEXT" : "No internet connection",
-        "DESCRIPTION" : "Currently app doesn't support offline mode",
-        "REFRESH" : "Refresh"
+        "TITLE" : "OfflineNL",
+        "TEXT" : "No internet connectionNL",
+        "DESCRIPTION" : "Currently app doesn't support offline modeNL",
+        "REFRESH" : "RefreshNL"
     }
 }

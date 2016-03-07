@@ -172,6 +172,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
 
     $scope.logAction = function (action) {
+
         var message = {
             'OrgID': $rootScope.sessionData.organization.id,
             'UserID': LocalDataService.loadUser().id,
@@ -187,6 +188,10 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         }
         MessageService.createMessage(message).then(function(message){
             $scope.userCorrect.message = message;
+
+            $rootScope.reloadFavorites = true;
+            $rootScope.reloadMessages = true;
+
         }, function(err){
 
         });

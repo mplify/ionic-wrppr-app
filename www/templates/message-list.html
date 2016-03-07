@@ -1,11 +1,11 @@
 
-<ion-view view-title="{{'MESSAGES.HISTORY_TITLE' | translate}}" ng-controller="MessageCtrl">
+<ion-view view-title="{{'MESSAGES.HISTORY_TITLE' | translate}}" ng-controller="MessageHistoryCtrl">
     <ion-content>
         <ion-refresher
                 pulling-text="{{'GENERIC.REFRESH' | translate}}"
                 on-refresh="load();">
         </ion-refresher>
-        <ion-list ng-init="load();">
+        <ion-list>
             <ion-item ng-repeat="message in messages track by message.id" class="item-icon-left" ng-click="selectMessage(message)">
                    <div ng-switch="message.ChannelTypeID">
                         <i ng-switch-when="1" class="icon ion-ios-telephone"></i>

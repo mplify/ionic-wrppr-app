@@ -1,11 +1,11 @@
 
-<ion-view view-title="{{'FAVORITES.TITLE' | translate}}" ng-controller="MessageCtrl">
+<ion-view view-title="{{'FAVORITES.TITLE' | translate}}" ng-controller="FavoritesCtrl">
     <ion-content>
         <ion-refresher
                 pulling-text="{{'GENERIC.REFRESH' | translate}}"
                 on-refresh="loadOrgs();">
         </ion-refresher>
-        <ion-list ng-init="loadOrgs();">
+        <ion-list>
             <ion-item ng-repeat="org in organizations track by org.OrgID"  ng-click="selectOrganisation(org);">
                 {{org.orgName}}
                 <span class="badge wrppr-action-button" style="color: white;">{{org.count}}</span>

@@ -1,6 +1,7 @@
 {
 
     "APP_TITLE" : "wrppr",
+    "CONTACT_NAME" : "wrapper",
     "GENERIC_CLOSE" : "Close",
     "GENERIC"  : {
         "REFRESH" : "Pull to refresh",

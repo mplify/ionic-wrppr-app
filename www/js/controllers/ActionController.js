@@ -45,9 +45,9 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
 
         var opts = {                                           //search options
-            filter: 'wrapper',                                 // 'Bob'
+            filter: $translate.instant("CONTACT_NAME"),
             multiple: true,                                      // Yes, return any contact that matches criteria
-            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
+            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'wrppr'.
             desiredFields: ['id']    //return fields.
         };
 
@@ -85,7 +85,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                     else {
                         var contact =
                         {
-                            "displayName": "wrapper",
+                            "displayName": $translate.instant("CONTACT_NAME"),
                             "phoneNumbers": [phoneNumber]
                         };
 

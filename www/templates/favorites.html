@@ -1,10 +1,6 @@
 
 <ion-view view-title="{{'FAVORITES.TITLE' | translate}}" ng-controller="FavoritesCtrl">
     <ion-content>
-        <ion-refresher
-                pulling-text="{{'GENERIC.REFRESH' | translate}}"
-                on-refresh="loadOrgs();">
-        </ion-refresher>
         <ion-list>
             <ion-item ng-repeat="org in organizations track by org.OrgID"  ng-click="selectOrganisation(org);">
                 {{org.orgName}}

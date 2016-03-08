@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('FavoritesCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService) {
-    $log.info('init favorits controller');
+    $log.info('init favorites controller');
 
     $scope.organizations = [];
 

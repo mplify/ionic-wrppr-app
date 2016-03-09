@@ -3,8 +3,6 @@ var services = angular.module('App.services');
 services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDataService', '$log', '$q', function ($cordovaCamera, $cordovaFile, LocalDataService, $log, $q) {
     var dirName = "documents";
 
-
-
     return {
         'createFolder': function () {
             var defer = $q.defer();
@@ -69,7 +67,7 @@ services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDat
 
             return defer.promise;
         },
-        'moveFile' : function(fileURI, filename){
+        'moveFile' : function(fileURI, filename, messageID){
             var defer = $q.defer();
             //Grab the file name of the photo in the temporary directory
             var currentName = fileURI.replace(/^.*[\\\/]/, '');
@@ -84,7 +82,7 @@ services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDat
 
             $cordovaFile.moveFile(sourceDir, currentName, targetDir , newFileName).then(function (success) {
                 var url = success.nativeURL;
-                LocalDataService.addPhoto(newFileName, success.nativeURL);
+                LocalDataService.addPhoto(newFileName, success.nativeURL, messageID);
 
                 $log.debug('moved file from temp location to ', url);
                 defer.resolve(url);

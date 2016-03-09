@@ -61,11 +61,11 @@ services.service('LocalDataService', function (localStorageService) {
         'clearExternalURL': function () {
             localStorageService.remove(data_keys.EXTERNAL_LOAD_URL);
         },
-        'addPhoto' : function(name, url){
+        'addPhoto' : function(name, url, message){
             var photos = JSON.parse(localStorageService.get(data_keys.PHOTO_LIBRARY) || '[]');
 
             photos.push(
-                {"name" : name, "url" : url}
+                {"name" : name, "url" : url, "message" : message}
             );
             localStorageService.set(data_keys.PHOTO_LIBRARY, JSON.stringify(photos));
 

@@ -1,0 +1,24 @@
+<ion-modal-view>
+    <ion-header-bar align-title="left">
+        <h1 class="title">Message Note</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal();">{{'GENERIC_CLOSE' | translate}}</button>
+        </div>
+    </ion-header-bar>
+    <ion-content scroll="false" ng-controller="AuthorizationCtrl">
+        <form name="messageNoteForm" ng-submit="saveMessageNote()" novalidate>
+            <div class="list">
+
+                <label class="item item-input">
+                    <span class="input-label">Note</span>
+                    <input type="text" name="username" ng-model="currentMessage.Notes">
+
+                </label>
+
+                <label class="item">
+                    <button class="button button-block button-assertive wrppr-action-button"  type="submit">Save</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

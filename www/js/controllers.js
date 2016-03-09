@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
 
         $rootScope.debugMode = true;
 
@@ -72,6 +72,64 @@ angular.module('App.controllers', [])
 
         $scope.refreshNetworkState = function(){
             NetworkService.checkNetworkState();
+        };
+
+
+        $scope.openSupport = function(){
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    { text : "User correct"},
+                    { text : "Support"},
+                    { text : "Feedback"}
+
+                ],
+                titleText: 'Feedback',
+                cancelText: 'Cancel',
+                buttonClicked: function (index) {
+                    if(index === 0){
+                        $scope.userCorrect();
+                    }
+                    else if(index === 1){
+                        $scope.mailSupport();
+                    }
+                    else if(index === 2){
+                        $scope.mailFeedback();
+                    }
+
+
+
+                    return true;
+                }
+            });
+        };
+
+
+        $scope.mailFeedback = function () {
+            $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+        };
+
+        $scope.mailSupport = function () {
+            $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+        };
+
+        $scope.userCorrect = function () {
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+            $scope.modal.remove();
+        };
+
+
+
+        $scope.submitUserCorrect = function (comment) {
+            $log.info(comment);
+            $scope.closeModal();
         };
 
 

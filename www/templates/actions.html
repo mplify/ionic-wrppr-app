@@ -58,7 +58,14 @@
                 </div>
 
             </div>
-            <div class="col">
+            <div class="col" ng-hide="contacts.email == null">
+                <div class="features-box-icon" ng-style="{'background-color': brandingColor2}" ng-click="webpage();">
+                    <span aria-hidden="true" class="ion-android-globe"></span>
+                    <button class="button button-clear">
+
+                    </button>
+                </div>
+
             </div>
         </div>
 

@@ -1,6 +1,8 @@
 <ion-view view-title="{{'MESSAGES.DETAILS_TITLE' | translate}}" ng-controller="MessageCtrl">
+    <form name="messageForm"  novalidate>
 
     <ion-content>
+
         <div style="height: 5px;"></div>
         <div ng-switch="currentMessage.ChannelTypeID">
             <div class="row button-block " style="text-align: center; display: block;">
@@ -18,9 +20,20 @@
             <p style="text-align: center; width: 100%;">{{option.NodeName}}</p>
         </div>
 
-        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'MM.dd.yyyy HH:mm'}}</p>
+        <p style="text-align: center;">Created At: {{currentMessage.createdAt | date:'dd.MM.yyyy HH:mm'}}</p>
+
+
+        <div class="row" style="height: 20%;">
+            <textarea class= "message-note" name="note" placeholder="please add some comment" rows="10" ng-focus="true" ng-model="currentMessage.Notes">
+            </textarea>
+        </div>
+
+        <div class="row" ng-hide="messageForm.note.$pristine">
+            <button class="button button-block button-assertive wrppr-action-button" ng-click="saveMessageNote();">Save note</button>
+        </div>
 
     </ion-content>
+    </form>
     <div class="tabs tabs-icon-top">
         <a class="tab-item" ng-click="mailFeedback();">
             <i class="icon ion-speakerphone"></i>

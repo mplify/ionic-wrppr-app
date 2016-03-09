@@ -4,43 +4,47 @@ var controllers = angular.module('App.controllers');
 controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, $ionicActionSheet, $timeout, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, OrganizationService) {
     $log.debug('init action controller');
 
-    $scope.currentOrganization = {};
-    $scope.hasWebpage = false;
+
+    $scope.init = function(){
+        $scope.currentOrganization = {};
+        $scope.hasWebpage = false;
 
 
-    if (!$rootScope.sessionData.organization) {
-        $log.info('organization not selected, redirects to organization search');
-        $state.go('app.organizations');
-    }
-    else {
-        $scope.currentOrganization = $rootScope.sessionData.organization;
-    }
+        if (!$rootScope.sessionData.organization) {
+            $log.info('organization not selected, redirects to organization search');
+            $state.go('app.organizations');
+        }
+        else {
+            $scope.currentOrganization = $rootScope.sessionData.organization;
+        }
 
-    $scope.actionMessages = {
-        'CALL': {type: 1, message: "Called "},
-        'MAIL': {type: 2, message: "Send email to"},
-        'TWEET': {type: 3, message: "Send tweet to"},
-        'FACEBOOK': {type: 4, message: "Send a facebook msg"}
+        $scope.actionMessages = {
+            'CALL': {type: 1, message: "Called "},
+            'MAIL': {type: 2, message: "Send email to"},
+            'TWEET': {type: 3, message: "Send tweet to"},
+            'FACEBOOK': {type: 4, message: "Send a facebook msg"}
+        };
+
+        $scope.contacts = {};
+
+        $scope.userCorrect = {
+            comment : "",
+            message : {}
+        };
+
+
+        if ($rootScope.sessionData.organization !== undefined) {
+
+            $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
+
+            $scope.currentOptions = $rootScope.sessionData.options;
+
+            $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
+            $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
+            $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
+        }
+
     };
-
-    $scope.contacts = {};
-
-    $scope.userCorrect = {
-        comment : "",
-        message : {}
-    };
-
-
-    if ($rootScope.sessionData.organization !== undefined) {
-
-        $scope.currentOrganization = $rootScope.sessionData.organization.orgName;
-
-        $scope.currentOptions = $rootScope.sessionData.options;
-
-        $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
-        $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
-        $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
-    }
 
 
 
@@ -263,7 +267,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                 buttonClicked: function (index) {
 
 
-                    $window.location = buttons[index].url;
+                    window.open(buttons[index].url);
 
                     return true;
                 }
@@ -272,7 +276,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         }
 
 
-    }
+    };
 
 
 });

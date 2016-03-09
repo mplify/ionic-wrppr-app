@@ -22,6 +22,8 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
     $scope.load = function(){
 
 
+
+
         $ionicLoading.show({
             template: 'Loading...',
             delay : 500

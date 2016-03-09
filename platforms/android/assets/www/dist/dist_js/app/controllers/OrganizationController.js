@@ -85,10 +85,6 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
             return;
         }
 
-        if(newVal === oldVal ){
-            return;
-        }
-
         $log.info('search organization model changed: ' + newVal + oldVal);
         $scope.reload(newVal);
     });

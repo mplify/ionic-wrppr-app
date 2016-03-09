@@ -1,6 +1,7 @@
 {
 
     "APP_TITLE" : "wrppr",
+    "CONTACT_NAME" : "wrapper",
     "GENERIC_CLOSE" : "Close",
     "GENERIC"  : {
         "REFRESH" : "Pull to refresh",
@@ -13,7 +14,7 @@
         "BUSINESS_CONTACT_SEARCH" : "Search",
         "USER_PROFILE" : "User Profile",
         "FAVORITES" : "Favorites",
-        "HISTORY" : "Contact History",
+        "HISTORY" : "Contact Overview",
         "ATTACHMENTS" : "Attachments",
         "LOGOUT" : "Logout"
     },

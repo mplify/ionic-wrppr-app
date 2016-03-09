@@ -112,6 +112,26 @@ services.service('MessageService', function ($http, $q, $log, api) {
                     });
                 return defer.promise;
 
+            },
+            'updateMessageNote' : function(message){
+                $log.info('update message note' + message.Notes);
+
+                var url = api.byName('base-url') + api.byName('message-url') + api.byName('update') + '/' + message.id;
+
+                var defer = $q.defer();
+
+                var data = {
+                    'Notes': message.Notes
+                };
+
+                $http.put(url, data)
+                    .success(function (resp) {
+                        defer.resolve(resp[0]);
+                    })
+                    .error(function (err) {
+                        defer.reject(err);
+                    });
+                return defer.promise;
             }
         };
     }

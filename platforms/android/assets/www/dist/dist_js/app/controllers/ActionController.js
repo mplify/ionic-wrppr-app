@@ -1,12 +1,19 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$ionicPopup', '$log', '$translate', '$ionicLoading', '$ionicModal', '$templateCache', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'EmailService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, EmailService) {
+controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$window', '$ionicPlatform', '$ionicPopup', '$log', '$translate', '$ionicLoading', '$ionicModal', '$templateCache', '$ionicActionSheet', '$timeout', 'LocalDataService', 'MessageService', 'UserService', 'DTMFService', '$cordovaContacts', 'OrganizationService', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, $ionicActionSheet, $timeout, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, OrganizationService) {
     $log.debug('init action controller');
+
+    $scope.currentOrganization = {};
+    $scope.hasWebpage = false;
+
 
     if (!$rootScope.sessionData.organization) {
         $log.info('organization not selected, redirects to organization search');
         $state.go('app.organizations');
+    }
+    else {
+        $scope.currentOrganization = $rootScope.sessionData.organization;
     }
 
     $scope.actionMessages = {
@@ -35,6 +42,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
     }
 
+
+
     $scope.call = function () {
 
         $log.info('make a call');
@@ -42,9 +51,9 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
 
         var opts = {                                           //search options
-            filter: 'wrapper',                                 // 'Bob'
+            filter: $translate.instant("CONTACT_NAME"),
             multiple: true,                                      // Yes, return any contact that matches criteria
-            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
+            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'wrppr'.
             desiredFields: ['id']    //return fields.
         };
 
@@ -82,7 +91,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
                     else {
                         var contact =
                         {
-                            "displayName": "wrapper",
+                            "displayName": $translate.instant("CONTACT_NAME"),
                             "phoneNumbers": [phoneNumber]
                         };
 
@@ -169,6 +178,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
 
     $scope.logAction = function (action) {
+
         var message = {
             'OrgID': $rootScope.sessionData.organization.id,
             'UserID': LocalDataService.loadUser().id,
@@ -184,6 +194,10 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         }
         MessageService.createMessage(message).then(function(message){
             $scope.userCorrect.message = message;
+
+            $rootScope.reloadFavorites = true;
+            $rootScope.reloadMessages = true;
+
         }, function(err){
 
         });
@@ -217,6 +231,48 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
 
+    $scope.webpage = function () {
+        var generalWebpage = "https://www.mplify.nl";
+        var selfServiceWebpage = "https://mplify.atlassian.net";
+        var communityWebpage = "https://www.facebook.com/mPlify/";
+
+        var buttons = [];
+        if (generalWebpage) {
+            buttons.push({ text: 'General', url: generalWebpage });
+        }
+
+        if (selfServiceWebpage) {
+            buttons.push({ text: 'Self-service', url: selfServiceWebpage});
+        }
+
+        if (communityWebpage) {
+            buttons.push({ text: 'Community', url: communityWebpage });
+        }
+
+        // redirect without actions shett
+        if (buttons.length === 1) {
+            $window.location = buttons[0].url;
+        }
+        else {
+
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                buttons: buttons,
+                titleText: 'Open company webpage',
+                cancelText: 'Cancel',
+                buttonClicked: function (index) {
+
+
+                    $window.location = buttons[index].url;
+
+                    return true;
+                }
+            });
+
+        }
+
+
+    }
 
 
 }]);

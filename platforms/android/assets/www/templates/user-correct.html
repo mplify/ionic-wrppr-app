@@ -2,7 +2,7 @@
     <ion-header-bar align-title="left">
         <h1 class="title">{{ 'USER_CORRECT.TITLE' | translate }}</h1>
         <div class="buttons">
-            <button class="button button-clear" ui-sref="root">{{'GENERIC_CLOSE' | translate}}</button>
+            <button class="button button-clear" ng-click="closeModal();">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
     </ion-header-bar>
     <ion-content scroll="false" ng-controller="AuthorizationCtrl">

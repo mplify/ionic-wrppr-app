@@ -4,6 +4,7 @@ controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate'
 
     $scope.loadUserDetails = function(userId){
         UserService.loadUser(userId).then(function(userDetails){
+
             $scope.user = userDetails;
 
         }, function(error){

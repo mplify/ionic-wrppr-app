@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
 
         $rootScope.debugMode = false;
 
@@ -57,8 +57,8 @@ angular.module('App.controllers', [])
 
         $scope.$on('serverdown', function(){
             $ionicPopup.alert({
-                title: 'Service is temporarily not available',
-                template: 'BUT we are working hard to fix it'
+                title: $translate.instant("GENERIC.SERVER_ERROR_TITLE"),
+                template: $translate.instant("GENERIC.SERVER_ERROR_TEXT")
             });
         });
 

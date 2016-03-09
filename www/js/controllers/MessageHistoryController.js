@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageHistoryCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService) {
+controllers.controller('MessageHistoryCtrl', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicPopup, $translate, MessageService, LocalDataService, OrganizationService) {
     $log.info('init messages controller');
 
     $scope.$on('$ionicView.enter', function () {
@@ -19,7 +19,7 @@ controllers.controller('MessageHistoryCtrl', function ($scope, $rootScope, $stat
 
     $scope.load = function () {
         $ionicLoading.show({
-            template: 'Loading...'
+            template: $translate.instant("MESSAGES.LOADING_LIST")
         });
 
         var orgID = $stateParams.orgID;
@@ -33,6 +33,11 @@ controllers.controller('MessageHistoryCtrl', function ($scope, $rootScope, $stat
             },
             function (err) {
                 $log.error('failed to load messages history', err);
+
+                $ionicPopup.alert({
+                    title: $translate.instant("MESSAGES.LOAD_FAILED"),
+                    template: err
+                });
             });
     };
     $scope.load();

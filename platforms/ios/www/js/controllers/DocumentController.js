@@ -17,21 +17,12 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
 
     });
 
+
+
     $scope.load = function () {
         $log.debug('load documents');
         if($scope.cameraAvailable){
-
-        DocumentService.createFolder().then(
-            function (success) {
-
-                $scope.images = LocalDataService.getPhotos();
-
-            },
-            function (err) {
-               $log.debug('failed to create folder', err);
-            }
-        );
-
+            $scope.images = LocalDataService.getPhotos();
         }
 
 

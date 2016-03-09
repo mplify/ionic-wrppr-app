@@ -1,6 +1,7 @@
 {
 
     "APP_TITLE" : "wrpprNL",
+    "CONTACT_NAME" : "wrppr",
     "GENERIC_CLOSE" : "CloseNL",
     "GENERIC"  : {
         "REFRESH" : "Pull to refreshNL",

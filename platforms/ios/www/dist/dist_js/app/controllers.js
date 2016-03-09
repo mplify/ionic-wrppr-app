@@ -75,6 +75,36 @@ angular.module('App.controllers', [])
         };
 
 
+        $scope.openSupport = function(){
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    { text : "User correct"},
+                    { text : "Support"},
+                    { text : "Feedback"}
+
+                ],
+                titleText: 'Feedback',
+                cancelText: 'Cancel',
+                buttonClicked: function (index) {
+                    if(index === 0){
+
+                    }
+                    else if(index === 1){
+                        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+                    }
+                    else if(index === 2){
+                        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+                    }
+
+
+
+                    return true;
+                }
+            });
+        }
+
+
 
 
 

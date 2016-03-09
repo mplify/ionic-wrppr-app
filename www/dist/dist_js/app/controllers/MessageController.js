@@ -60,31 +60,6 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     };
 
-    $scope.mailFeedback = function () {
-        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
-
-    $scope.mailSupport = function () {
-        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
-
-    $scope.userCorrect = function () {
-        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
-        $scope.modal.show();
-    };
-
-    $scope.closeModal = function () {
-        $scope.modal.hide();
-        $scope.modal.remove();
-    };
-
-    $scope.submitUserCorrect = function () {
-        $log.info($scope.userCorrect.comment);
-        $scope.closeModal();
-    };
-
 
     $scope.addNote = function(){
         if(!window.cordova){
@@ -207,7 +182,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
 
                 $scope.currentAttachments.push({
-                    "name" : filename,
+                    "name" : filename + ".jpg",
                     "url" : success
                 });
                 $log.info('document saved: '+ filename);

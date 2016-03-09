@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', '$ionicActionSheet', '$templateCache', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
 
         $rootScope.debugMode = true;
 
@@ -88,13 +88,13 @@ angular.module('App.controllers', [])
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
                     if(index === 0){
-
+                        $scope.userCorrect();
                     }
                     else if(index === 1){
-                        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+                        $scope.mailSupport();
                     }
                     else if(index === 2){
-                        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+                        $scope.mailFeedback();
                     }
 
 
@@ -102,7 +102,35 @@ angular.module('App.controllers', [])
                     return true;
                 }
             });
-        }
+        };
+
+
+        $scope.mailFeedback = function () {
+            $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+        };
+
+        $scope.mailSupport = function () {
+            $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+        };
+
+        $scope.userCorrect = function () {
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+            $scope.modal.remove();
+        };
+
+
+
+        $scope.submitUserCorrect = function (comment) {
+            $log.info(comment);
+            $scope.closeModal();
+        };
 
 
 

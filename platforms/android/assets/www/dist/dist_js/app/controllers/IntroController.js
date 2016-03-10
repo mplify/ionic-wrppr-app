@@ -18,6 +18,7 @@ controllers.controller('IntroCtrl', ['$scope', '$state', 'LocalDataService', fun
     $scope.init = function(){
 
         var user = LocalDataService.loadUser();
+
         $scope.userName = user.UserName;
     };
 

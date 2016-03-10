@@ -135,6 +135,7 @@ angular.module('App.controllers', [])
 
         $scope.submitUserCorrect = function (action, comment) {
             $log.info(comment);
+            $log.debug('support message details', $rootScope.supportMessage);
 
             $ionicLoading.show({
                 template: "Submitting"

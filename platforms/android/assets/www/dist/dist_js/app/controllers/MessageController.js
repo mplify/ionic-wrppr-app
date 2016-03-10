@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filter', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', '$ionicActionSheet', '$ionicModal', '$templateCache', '$ionicPopup', 'MessageService', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $state, $filter, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicActionSheet, $ionicModal, $templateCache, $ionicPopup, MessageService, LocalDataService, DocumentService) {
+controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filter', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', '$ionicActionSheet', '$ionicModal', '$templateCache', '$ionicPopup', '$translate', 'MessageService', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $state, $filter, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicActionSheet, $ionicModal, $templateCache, $ionicPopup, $translate, MessageService, LocalDataService, DocumentService) {
     $log.info('init messages controller');
 
     $scope.$on('$ionicView.enter', function () {
@@ -10,30 +10,22 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     });
 
+    $scope.$on('$ionicView.beforeLeave', function () {
+        $rootScope.supportMessage = {};
+
+    });
+
     $scope.userID = LocalDataService.loadUser().id;
     $scope.currentMessage = {};
     $scope.currentAttachments = [];
 
     $scope.loadMessage = function () {
         $ionicLoading.show({
-            template: 'Loading...'
+            template: $translate.instant("MESSAGES.LOADING")
         });
 
 
         var messageID = $stateParams.messageID;
-        MessageService.loadMessage(messageID).then(
-            function (success) {
-                $ionicLoading.hide();
-                $log.info('loaded message', success);
-                $scope.currentMessage = success;
-
-                $scope.images = LocalDataService.getPhotos();
-                $scope.currentAttachments = $filter('filter')($scope.images, { message : messageID });
-            },
-            function (err) {
-                $ionicLoading.hide();
-                $log.error('failed to load message ', err);
-            });
 
         MessageService.getMessageDetails(messageID).then(function (success) {
             $ionicLoading.hide();
@@ -43,15 +35,25 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
             $scope.messageOptions = [];
             $scope.getSelectedRoutingPath($scope.currentMessage.PreviousRoutingID);
 
+            $scope.images = LocalDataService.getPhotos();
+            $scope.currentAttachments = $filter('filter')($scope.images, { message: messageID });
+
+            $rootScope.supportMessage = $scope.currentMessage;
+
         }, function (err) {
             $ionicLoading.hide();
             $log.error('failed to load message ', err);
+
+            $ionicPopup.alert({
+                title: $translate.instant("MESSAGES.LOAD_FAILED"),
+                template: err
+            });
         });
     };
 
     $scope.getSelectedRoutingPath = function (source) {
         var routing = source[0];
-        if(routing){
+        if (routing) {
             $scope.messageOptions.push(routing);
             if (routing.children.length > 0) {
                 $scope.getSelectedRoutingPath(routing.children);
@@ -60,34 +62,9 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     };
 
-    $scope.mailFeedback = function () {
-        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
 
-    $scope.mailSupport = function () {
-        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
-
-    $scope.userCorrect = function () {
-        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
-        $scope.modal.show();
-    };
-
-    $scope.closeModal = function () {
-        $scope.modal.hide();
-        $scope.modal.remove();
-    };
-
-    $scope.submitUserCorrect = function () {
-        $log.info($scope.userCorrect.comment);
-        $scope.closeModal();
-    };
-
-
-    $scope.addNote = function(){
-        if(!window.cordova){
+    $scope.addNote = function () {
+        if (!window.cordova) {
             $scope.openNoteModal();
         }
         else {
@@ -95,17 +72,17 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text : "Text note"},
-                    { text : "Capture Photo"}
+                    { text: $translate.instant("MESSAGES.NOTE_BUTTON")},
+                    { text: $translate.instant("MESSAGES.PHOTO_BUTTON")}
 
                 ],
-                titleText: 'Note',
-                cancelText: 'Cancel',
+                titleText: $translate.instant("MESSAGES.NOTE_TITLE"),
+                cancelText: $translate.instant("GENERIC.CANCEL"),
                 buttonClicked: function (index) {
-                    if(index === 0){
+                    if (index === 0) {
                         $scope.openNoteModal();
                     }
-                    else if(index === 1){
+                    else if (index === 1) {
                         $scope.addImage();
                     }
 
@@ -116,7 +93,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         }
     };
 
-    $scope.openNoteModal = function(){
+    $scope.openNoteModal = function () {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get('message-note.html'), {
             scope: $scope
         });
@@ -127,7 +104,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         $log.info("add message to note");
 
         $ionicLoading.show({
-            template: 'Saving message...'
+            template: $translate.instant("MESSAGES.SAVING")
         });
 
         MessageService.updateMessageNote($scope.currentMessage).then(function (success) {
@@ -140,7 +117,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         }, function (err) {
             $ionicLoading.hide();
             $ionicPopup.alert({
-                title: 'Failed to save note',
+                title: $translate.instant("MESSAGES.SAVING_FAILED"),
                 template: err
             });
         });
@@ -150,30 +127,35 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     $scope.addImage = function () {
         $ionicLoading.show({
-            template: 'Capturing image...'
+            template: $translate.instant("ATTACHMENT.LOADING")
         });
 
         DocumentService.capturePicture().then(
-            function(fileURI){
+            function (fileURI) {
                 $scope.fileURI = fileURI;
 
                 $scope.showAttachmentModal();
                 $ionicLoading.hide();
             },
-            function(fail){
+            function (fail) {
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVING_FAILED"),
+                    template: err
+                });
             }
         );
     };
 
-    $scope.closeModal = function() {
+    $scope.closeModal = function () {
         $log.debug('close modal');
 
         $scope.modal.hide();
         $scope.modal.remove();
     };
 
-    $scope.showAttachmentModal = function(){
+    $scope.showAttachmentModal = function () {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get('new-document.html'), {
             scope: $scope
         });
@@ -181,14 +163,13 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
     };
 
 
-    $scope.closeAttachmentModal = function(filename){
-        for(var i in $scope.images)
-        {
+    $scope.closeAttachmentModal = function (filename) {
+        for (var i in $scope.images) {
             var image = $scope.images[i].name;
             var imageName = image.substring(0, image.length - 4);
-            if(filename === imageName){
+            if (filename === imageName) {
                 $ionicPopup.alert({
-                    title: 'Picture name is not unique'
+                    title: $translate.instant("ATTACHMENT.FILENAME_NOT_UNIQUE")
                 });
                 return;
             }
@@ -197,51 +178,52 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         var messageID = $scope.currentMessage.id;
 
         DocumentService.moveFile($scope.fileURI, filename, messageID).then(
-            function(success){
+            function (success) {
 
                 $ionicLoading.hide();
 
                 $ionicPopup.alert({
-                    title: 'Picture saved'
+                    title: $translate.instant("ATTACHMENT.SAVE_SUCCESS")
                 });
 
 
                 $scope.currentAttachments.push({
-                    "name" : filename,
-                    "url" : success
+                    "name": filename + ".jpg",
+                    "url": success
                 });
-                $log.info('document saved: '+ filename);
+                $log.info('document saved: ' + filename);
 
                 $scope.closeModal();
 
 
             },
-            function(fail){
+            function (fail) {
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVE_FAILED"),
+                    template: fail
+                });
             }
         );
 
     };
 
 
-    $scope.selectDocument = function(document){
-        $ionicLoading.show({
-            template: 'Saving message...'
-        });
+    $scope.selectDocument = function (document) {
 
         $scope.document = document;
         $scope.showModal('document-details.html');
-        $ionicLoading.hide();
+
     };
 
-    $scope.showModal = function(templateUrl) {
+    $scope.showModal = function (templateUrl) {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get(templateUrl), {
             scope: $scope
         });
         $scope.modal.show();
 
     };
-
 
 
 }]);

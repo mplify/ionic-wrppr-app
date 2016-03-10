@@ -29,6 +29,7 @@ App.constant('API', {
 
     // routing
     'routing-url' :            '/wrppr_routing',
+    'routing-tree-url' :       '/wrppr_routing_tree',
 
     //users
     'user-url' :                '/wrppr_users',
@@ -38,6 +39,9 @@ App.constant('API', {
     'message-url':              '/wrppr_messages',
     'message-tree-url':         '/wrppr_message_tree',
     'companies-messages-url':   '/wrppr_numMessPerOrg',
+
+    //support
+    'support-url':              '/wrppr_support',
 
     //actions
     'create' :                  '/create',

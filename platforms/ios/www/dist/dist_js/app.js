@@ -1024,7 +1024,8 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                 var params = {};
                 if (userID !== undefined) {
                     params = {
-                        'UserID': userID
+                        'UserID': userID,
+                        'sort' : 'createdAt DESC'
                     };
                 }
 
@@ -1718,6 +1719,7 @@ angular.module('App.controllers', [])
 
         $scope.submitUserCorrect = function (action, comment) {
             $log.info(comment);
+            $log.debug('support message details', $rootScope.supportMessage);
 
             $ionicLoading.show({
                 template: "Submitting"

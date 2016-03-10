@@ -46,7 +46,8 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                 var params = {};
                 if (userID !== undefined) {
                     params = {
-                        'UserID': userID
+                        'UserID': userID,
+                        'sort' : 'createdAt DESC'
                     };
                 }
 

@@ -1,7 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
+controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $translate, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
 
     $log.debug('init document controller');
     $scope.cameraAvailable = window.cordova;
@@ -36,7 +36,7 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
 
     $scope.addImage = function () {
         $ionicLoading.show({
-            template: 'Capturing image...'
+            template: $translate.instant("ATTACHMENT.LOADING")
         });
 
         DocumentService.capturePicture().then(
@@ -91,7 +91,7 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
             var imageName = image.substring(0, image.length - 4);
             if(filename === imageName){
                 $ionicPopup.alert({
-                    title: 'Picture name is not unique'
+                    title: $translate.instant("ATTACHMENT.FILENAME_NOT_UNIQUE")
                 });
                 return;
             }
@@ -103,7 +103,7 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
                 $ionicLoading.hide();
 
                 $ionicPopup.alert({
-                    title: 'Picture saved'
+                    title: $translate.instant("ATTACHMENT.SAVE_SUCCESS")
                 });
 
                 $scope.closeModal();
@@ -114,6 +114,11 @@ controllers.controller('DocumentCtrl', function ($scope, $rootScope, $stateParam
             },
             function(fail){
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVE_FAILED"),
+                    template: err
+                });
             }
         );
 

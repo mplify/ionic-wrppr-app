@@ -6,7 +6,7 @@
         </div>
     </ion-header-bar>
     <ion-content scroll="false" ng-controller="AuthorizationCtrl">
-        <form name="userCorrectForm" ng-submit="submitUserCorrect()" novalidate>
+        <form name="userCorrectForm" ng-submit="submitUserCorrect('Usercorrect', userCorrect.comment)" novalidate>
             <div class="list">
                 <label class="item">
                     {{ 'USER_CORRECT.DESCRIPTION' | translate }}

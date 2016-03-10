@@ -23,11 +23,6 @@
                     Network Type: {{networkType}} is {{networkStatus}}
                 </ion-item>
 
-                <ion-item>
-                    <button class="button button-large button-assertive wrppr-action-button" style="width: 100%;" ng-click="switchLanguage()">
-                        Switch to English Version
-                    </button>
-                </ion-item>
             <ion-item class="item-toggle">
                 Debug
             <label class="toggle">
@@ -40,7 +35,16 @@
 
 
         </ion-list>
-
+        <div class="tabs tabs-icon-top">
+            <a class="tab-item">
+                <i class="icon ion-at" ng-click="switchLanguage();"></i>
+                English version
+            </a>
+            <a class="tab-item" ng-click="logout();">
+                <i class="icon ion-android-walk"></i>
+                {{ 'MENU.LOGOUT' | translate }}
+            </a>
+        </div>
 
     </ion-content>
 </ion-view>

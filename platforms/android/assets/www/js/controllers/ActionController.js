@@ -4,10 +4,16 @@ var controllers = angular.module('App.controllers');
 controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, $ionicActionSheet, $timeout, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, OrganizationService) {
     $log.debug('init action controller');
 
+    $scope.$on('$ionicView.beforeLeave', function () {
+        $rootScope.supportMessage = {};
+
+    });
+
 
     $scope.init = function(){
         $scope.currentOrganization = {};
         $scope.hasWebpage = false;
+        $rootScope.showUserCorrect = false;
 
 
         if (!$rootScope.sessionData.organization) {
@@ -26,12 +32,6 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         };
 
         $scope.contacts = {};
-
-        $scope.userCorrect = {
-            comment : "",
-            message : {}
-        };
-
 
         if ($rootScope.sessionData.organization !== undefined) {
 
@@ -197,7 +197,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             message.ChoiceMenuID = contactMenu.id;
         }
         MessageService.createMessage(message).then(function(message){
-            $scope.userCorrect.message = message;
+            $rootScope.showUserCorrect = true;
+            $rootScope.supportMessage = message;
 
             $rootScope.reloadFavorites = true;
             $rootScope.reloadMessages = true;
@@ -207,33 +208,6 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         });
 
     };
-
-
-    $scope.mailFeedback = function () {
-        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
-
-    $scope.mailSupport = function () {
-        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
-    };
-
-    $scope.userCorrect = function(){
-        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
-        $scope.modal.show();
-    };
-
-    $scope.closeModal = function() {
-        $scope.modal.hide();
-        $scope.modal.remove();
-    };
-
-    $scope.submitUserCorrect = function(){
-         $log.info($scope.userCorrect.comment);
-         $scope.closeModal();
-    };
-
 
     $scope.webpage = function () {
         var generalWebpage = "https://www.mplify.nl";

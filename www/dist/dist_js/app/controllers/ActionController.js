@@ -217,22 +217,13 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
     };
 
-    $scope.userCorrect = function(){
-        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
-        $scope.modal.show();
-    };
+
 
     $scope.closeModal = function() {
         $scope.modal.hide();
         $scope.modal.remove();
     };
 
-    $scope.submitUserCorrect = function(){
-         $log.info($scope.userCorrect.comment);
-         $scope.closeModal();
-    };
 
 
     $scope.webpage = function () {

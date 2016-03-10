@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
 
         $rootScope.debugMode = false;
 
@@ -88,7 +88,7 @@ angular.module('App.controllers', [])
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
                     if(index === 0){
-                        $scope.userCorrect();
+                        $scope.showUserCorrect();
                     }
                     else if(index === 1){
                         $scope.mailSupport();
@@ -106,14 +106,20 @@ angular.module('App.controllers', [])
 
 
         $scope.mailFeedback = function () {
-            $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-feedback.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
         };
 
         $scope.mailSupport = function () {
-            $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-support.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
         };
 
-        $scope.userCorrect = function () {
+        $scope.showUserCorrect = function () {
             $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
                 scope: $scope
             });
@@ -127,9 +133,32 @@ angular.module('App.controllers', [])
 
 
 
-        $scope.submitUserCorrect = function (comment) {
+        $scope.submitUserCorrect = function (action, comment) {
             $log.info(comment);
-            $scope.closeModal();
+
+            $ionicLoading.show({
+                template: "Submitting"
+            });
+
+            var user = LocalDataService.loadUser();
+
+            SupportService.submitSupport(action, user.UserName, comment).then(
+                function(success){
+                    $ionicLoading.hide();
+
+                    $scope.closeModal();
+                },
+                function(err){
+                    $ionicLoading.hide();
+
+                    $log.error("failed to submit user correct", err);
+                    $ionicPopup.alert({
+                        title: "Failed",
+                        template: err
+                    });
+                }
+            );
+
         };
 
 

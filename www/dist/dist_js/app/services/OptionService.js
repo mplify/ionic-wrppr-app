@@ -25,6 +25,29 @@ services.service('OptionService', ['$http', '$q', '$log', 'api', function ($http
                     defer.reject(err);
                 });
             return defer.promise;
+        },
+        'getOptionsTree' : function(organizationID){
+            $log.info('load options:  organization' + organizationID );
+
+            var url = api.byName('base-url') + api.byName('routing-tree-url');
+            var defer = $q.defer();
+
+
+            var params = {
+                OrgID: organizationID
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
         }
     };
 }]);

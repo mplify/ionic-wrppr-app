@@ -298,7 +298,8 @@ $templateCache.put("organization-list.html","<ion-view view-title=\"{{ \'BUSINES
 $templateCache.put("register.html","<ion-view>\n    <ion-header-bar>\n        <h1 class=\"title\">{{\'REGISTER.TITLE\' | translate}}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form name=\"registerForm\" ng-submit=\"doRegister()\">\n            <div class=\"list\">\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Username</span>\n                    <input type=\"text\" name=\"UserName\" ng-model=\"registerData.UserName\" ng-change=\"resetValidators(\'UserName\');\" required>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.UserName.$pristine && registerForm.UserName.$invalid\">\n                    <p ng-show=\"registerForm.UserName.$error.required\">{{\'USERNAME_REQUIRED_VALIDATOR\' | translate}}</p>\n                    <p ng-show=\"registerForm.UserName.$error.unique\">{{\'USERNAME_NOT_UNIQUE_VALIDATOR\' | translate}}</p>\n                </label>\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'PASSWORD\' | translate}}</span>\n                    <input type=\"password\" name=\"Password\" ng-model=\"registerData.Password\" ng-change=\"resetValidators(\'Password\');\" ng-minlength=\"6\" ng-maxlength=\"50\" required>\n                </label>\n                <label class=\"item password-complexity row\" ng-show=\"passwordComplexity\">\n                    <div class=\"col\" ng-class=\"passwordComplexity\"></div>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.Password.$pristine && registerForm.Password.$invalid\">\n                    <p ng-show=\"registerForm.Password.$error.minlength\">{{\'PASSWORD_MIN_LENGTH_VALIDATOR\' | translate}}</p>\n                    <p ng-show=\"registerForm.Password.$error.maxlength\">{{\'PASSWORD_MAX_LENGTH_VALIDATOR\' | translate}}</p>\n                </label>\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'REGISTER.MOBILE\' | translate}}</span>\n                    <input type=\"tel\" pattern=\"+[0-9]*\" ng-model=\"registerData.mobile\">\n                </label>\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'REGISTER.EMAIL\' | translate}}</span>\n                    <input type=\"email\" name=\"Email\" ng-model=\"registerData.email\" required>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.Email.$pristine && registerForm.Email.$invalid\">\n                    <p ng-show=\"registerForm.Email.$error.required\">{{\'EMAIL_REQUIRED_VALIDATOR\' | translate}}</p>\n                </label>\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"registerForm.$invalid\" type=\"submit\">{{\'REGISTER.SUBMIT_BUTTON\' | translate}}</button>\n                </label>\n            </div>\n        </form>\n        <div>\n\n        </div>\n    </ion-content>\n</ion-view>\n");
 $templateCache.put("restore-password.html","<ion-view>\n  <ion-header-bar>\n    <h1 class=\"title\">{{\'CHANGE_PASSWORD.RECOVER_PASSWORD\' | translate }}</h1>\n    <div class=\"buttons\">\n      <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC.CLOSE\' | translate }}</button>\n    </div>\n  </ion-header-bar>\n  <ion-content scroll=\"false\">\n    <form name=\"restorePasswordForm\" ng-submit=\"doRestorePassword()\" novalidate  ng-controller=\"RestorePasswordCtrl\">\n      <div class=\"list\">\n\n        <label class=\"item item-input\">\n          <span class=\"input-label\">{{\'USERNAME\' | translate}}</span>\n          <input type=\"text\" name=\"username\" ng-model=\"username\" required>\n\n        </label>\n        <label class=\"item item-input\" ng-show=\"!restorePasswordForm.username.$pristine && restorePasswordForm.username.$invalid\">\n            <p ng-show=\"restorePasswordForm.username.$error.required\">{{\'USERNAME_REQUIRED_VALIDATOR | translate\'}}</p>\n        </label>\n\n\n        <label class=\"item\">\n          <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"restorePasswordForm.$invalid\" type=\"submit\">{{ \'CHANGE_PASSWORD.RESTORE_SUBMIT\' | translate }}</button>\n        </label>\n        <label class=\"\">\n                <button class=\"button button-block button-clear\">{{\'GENERIC.SUPPORT\' | translate }}</button>\n        </label>\n\n      </div>\n    </form>\n\n\n\n  </ion-content>\n\n\n</ion-view>\n");
 $templateCache.put("tabs.html","<ion-view>\n    <ion-tabs class=\"tabs-icon-top tabs-color-active-assertive\">\n\n        <ion-tab title=\"tab1\" icon=\"ion-man\" ui-sref=\"intro.login\">\n            <ion-nav-view name=\"tab-tab1\"></ion-nav-view>\n        </ion-tab>\n\n        <ion-tab title=\"tab2\" icon=\"ion-person-stalker\" ui-sref=\"intro.register\">\n            <ion-nav-view name=\"menuContent\"></ion-nav-view>\n        </ion-tab>\n    </ion-tabs>\n</ion-view>");
-$templateCache.put("user-correct.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">{{ \'USER_CORRECT.TITLE\' | translate }}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal();\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form name=\"userCorrectForm\" ng-submit=\"submitUserCorrect()\" novalidate>\n            <div class=\"list\">\n                <label class=\"item\">\n                    {{ \'USER_CORRECT.DESCRIPTION\' | translate }}\n                </label>\n\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Comment</span>\n                    <input type=\"text\" name=\"username\" ng-model=\"userCorrect.comment\">\n\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"userCorrectForm.$invalid\" type=\"submit\">{{ \'USER_CORRECT.SUBMIT\' | translate }}</button>\n                </label>\n\n\n            </div>\n        </form>\n    </ion-content>\n</ion-modal-view>");
+$templateCache.put("user-correct.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">{{ \'USER_CORRECT.TITLE\' | translate }}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal();\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form name=\"userCorrectForm\" ng-submit=\"submitUserCorrect(\'Usercorrect\', userCorrect.comment)\" novalidate>\n            <div class=\"list\">\n                <label class=\"item\">\n                    {{ \'USER_CORRECT.DESCRIPTION\' | translate }}\n                </label>\n\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Comment</span>\n                    <input type=\"text\" name=\"username\" ng-model=\"userCorrect.comment\">\n\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"userCorrectForm.$invalid\" type=\"submit\">{{ \'USER_CORRECT.SUBMIT\' | translate }}</button>\n                </label>\n\n\n            </div>\n        </form>\n    </ion-content>\n</ion-modal-view>");
+$templateCache.put("user-feedback.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">Feedback</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal();\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form  ng-submit=\"submitUserCorrect(\'feedback\', comment )\" novalidate>\n            <div class=\"list\">\n                <label class=\"item\">\n                    Feedback procedure description\n                </label>\n\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Comment</span>\n                    <input type=\"text\" name=\"username\" ng-model=\"comment\">\n\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\"  type=\"submit\">Save</button>\n                </label>\n\n\n            </div>\n        </form>\n    </ion-content>\n</ion-modal-view>");
 $templateCache.put("user.html","<ion-view view-title=\"{{localUser.UserName}}\" ng-controller=\"UserCtrl\">\n    <ion-content>\n        <ion-list >\n                <ion-item class=\"item-avatar\">\n                    <img ng-src=\"{{localUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{user.UserName}}</h2>\n                    <p>{{user.email}}</p>\n                    <p>{{user.createdAt | date:\'medium\' }}</p>\n                    <p ng-show=\"debugMode\">\n                        Basic Auth: {{sessionKey}}\n                    </p>\n                </ion-item>\n                <ion-item class=\"item-avatar\" ng-show=\"debugMode\">\n                    <img ng-src=\"{{localFBUser.picture}}\" src=\"../img/photo.jpg\">\n                    <h2>{{localFBUser.name}}</h2>\n                    <h2>{{localFBUser.email}}</h2>\n                    <p>{{localFBUser.authResponse.expiresIn | date:\'medium\' }}</p>\n                    <p>\n                        {{localFBUser.authResponse.accessToken}}\n                    </p>\n                </ion-item>\n                <ion-item ng-show=\"networkType\">\n                    Network Type: {{networkType}} is {{networkStatus}}\n                </ion-item>\n\n            <ion-item class=\"item-toggle\">\n                Debug\n            <label class=\"toggle\">\n                <input type=\"checkbox\" ng-model=\"$root.debugMode\">\n                <div class=\"track\">\n                    <div class=\"handle\"></div>\n                </div>\n            </label>\n            </ion-item>\n\n\n        </ion-list>\n        <div class=\"tabs tabs-icon-top\">\n            <a class=\"tab-item\">\n                <i class=\"icon ion-at\" ng-click=\"switchLanguage();\"></i>\n                English version\n            </a>\n            <a class=\"tab-item\" ng-click=\"logout();\">\n                <i class=\"icon ion-android-walk\"></i>\n                {{ \'MENU.LOGOUT\' | translate }}\n            </a>\n        </div>\n\n    </ion-content>\n</ion-view>");}]);
 angular.module('App.services', []);
 
@@ -947,6 +948,29 @@ services.service('OptionService', ['$http', '$q', '$log', 'api', function ($http
                     defer.reject(err);
                 });
             return defer.promise;
+        },
+        'getOptionsTree' : function(organizationID){
+            $log.info('load options:  organization' + organizationID );
+
+            var url = api.byName('base-url') + api.byName('routing-tree-url');
+            var defer = $q.defer();
+
+
+            var params = {
+                OrgID: organizationID
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
         }
     };
 }]);
@@ -1523,6 +1547,7 @@ App.constant('API', {
 
     // routing
     'routing-url' :            '/wrppr_routing',
+    'routing-tree-url' :       '/wrppr_routing_tree',
 
     //users
     'user-url' :                '/wrppr_users',
@@ -1532,6 +1557,9 @@ App.constant('API', {
     'message-url':              '/wrppr_messages',
     'message-tree-url':         '/wrppr_message_tree',
     'companies-messages-url':   '/wrppr_numMessPerOrg',
+
+    //support
+    'support-url':              '/wrppr_support',
 
     //actions
     'create' :                  '/create',
@@ -1554,7 +1582,7 @@ App.factory('api', ['API', function(api) {
 
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', '$ionicActionSheet', '$templateCache', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', '$ionicActionSheet', '$templateCache', '$translate', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', 'SupportService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
 
         $rootScope.debugMode = false;
 
@@ -1611,8 +1639,8 @@ angular.module('App.controllers', [])
 
         $scope.$on('serverdown', function(){
             $ionicPopup.alert({
-                title: 'Service is temporarily not available',
-                template: 'BUT we are working hard to fix it'
+                title: $translate.instant("GENERIC.SERVER_ERROR_TITLE"),
+                template: $translate.instant("GENERIC.SERVER_ERROR_TEXT")
             });
         });
 
@@ -1660,11 +1688,17 @@ angular.module('App.controllers', [])
 
 
         $scope.mailFeedback = function () {
-            $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-feedback.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
         };
 
         $scope.mailSupport = function () {
-            $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-support.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
         };
 
         $scope.userCorrect = function () {
@@ -1681,9 +1715,32 @@ angular.module('App.controllers', [])
 
 
 
-        $scope.submitUserCorrect = function (comment) {
+        $scope.submitUserCorrect = function (action, comment) {
             $log.info(comment);
-            $scope.closeModal();
+
+            $ionicLoading.show({
+                template: "Submitting"
+            });
+
+            var user = LocalDataService.loadUser();
+
+            SupportService.submitSupport(action, user.UserName, comment).then(
+                function(success){
+                    $ionicLoading.hide();
+
+                    $scope.closeModal();
+                },
+                function(err){
+                    $ionicLoading.hide();
+
+                    $log.error("failed to submit user correct", err);
+                    $ionicPopup.alert({
+                        title: "Failed",
+                        template: err
+                    });
+                }
+            );
+
         };
 
 
@@ -1696,7 +1753,7 @@ angular.module('App.controllers', [])
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicModal', '$ionicPopup', '$state', '$log', '$stateParams', 'LoginService', 'BasicAuthorizationService', 'UserService', 'PasswordComplexity', 'LocalDataService', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, LoginService, BasicAuthorizationService , UserService, PasswordComplexity, LocalDataService) {
+controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicModal', '$ionicPopup', '$state', '$log', '$stateParams', '$translate', 'LoginService', 'BasicAuthorizationService', 'UserService', 'PasswordComplexity', 'LocalDataService', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, $translate, LoginService, BasicAuthorizationService, UserService, PasswordComplexity, LocalDataService) {
     $log.info('init auth controller');
 
 
@@ -1709,55 +1766,55 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
-        $log.info('Doing login', $scope.loginData);
+        $log.info('doing login', $scope.loginData);
 
         $ionicLoading.show({
-            template: 'Loading...'
+            template: $translate.instant("LOGIN.LOADING")
         });
 
 
-        LoginService.login($scope.loginData).then(function(loginResponse) {
-            $ionicLoading.hide();
-            $scope.$broadcast('scroll.refreshComplete');
+        LoginService.login($scope.loginData).then(function (loginResponse) {
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
 
 
-            if(loginResponse.wrppr_users === false){
-                $log.error('login failed: ' + loginResponse.message);
+                if (loginResponse.wrppr_users === false) {
+                    $log.error('login failed: ' + loginResponse.message);
+
+                    $ionicPopup.alert({
+                        title: 'Login failed',
+                        template: loginResponse.message
+                    });
+
+                    return;
+                }
+
+                var user = loginResponse.wrppr_users;
+                LocalDataService.saveUser(user);
+                LocalDataService.saveFacebookResponse({});
+
+                BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
+
+
+                $scope.resetLoginForm();
+                $state.go('app.search');
+
+            },
+            function (err) {
+                $ionicLoading.hide();
+                $log.error('failed to login', err);
 
                 $ionicPopup.alert({
-                    title: 'Login failed',
-                    template: loginResponse.message
+                    title: $translate.instant("LOGIN.FAILED"),
+                    template: err
                 });
 
-                return;
-            }
-
-            var user = loginResponse.wrppr_users;
-            LocalDataService.saveUser(user);
-            LocalDataService.saveFacebookResponse({});
-
-            BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
-
-
-            $scope.resetLoginForm();
-            $state.go('app.search');
-
-        },
-        function(err){
-            $ionicLoading.hide();
-            $log.error('failed to login', err);
-
-            $ionicPopup.alert({
-                title: 'Login failed',
-                template: err
             });
-
-        });
 
 
     };
 
-    $scope.resetLoginForm = function(){
+    $scope.resetLoginForm = function () {
         $scope.loginData.UserName = "";
         $scope.loginData.Password = "";
 
@@ -1767,37 +1824,36 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
     };
 
 
-    $scope.doRegister = function(){
-        $ionicLoading.show({
-            template: 'Loading...'
-        });
-
+    $scope.doRegister = function () {
         $log.info('start registration');
 
-        UserService.createUser($scope.registerData).then(function(response) {
+        $ionicLoading.show({
+            template: $translate.instant("REGISTER.LOADING")
+        });
+
+        UserService.createUser($scope.registerData).then(function (response) {
             BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
             var user = response;
             LocalDataService.saveUser(user);
 
-            //LoginService.activateUser(user.id).then(function(response){});
 
-           $ionicLoading.hide();
-           $scope.$broadcast('scroll.refreshComplete');
-           $scope.resetRegisterForm();
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.resetRegisterForm();
 
 
-           $state.go('app.search');
+            $state.go('app.search');
 
-       }, function(error){
+        }, function (error) {
             $ionicLoading.hide();
 
-            if(error.error === "E_VALIDATION"){
-                for(var attribute in error.invalidAttributes){
-                    var inputKey = attribute.replace(/"/g,"");
+            if (error.error === "E_VALIDATION") {
+                for (var attribute in error.invalidAttributes) {
+                    var inputKey = attribute.replace(/"/g, "");
 
                     var validators = error.invalidAttributes[attribute];
-                    for(var validatorIndex in validators){
+                    for (var validatorIndex in validators) {
                         $scope.registerForm[inputKey].$setValidity(validators[validatorIndex].rule, false);
                     }
 
@@ -1806,13 +1862,13 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
             }
 
             $ionicPopup.alert({
-                title: 'Registration Failed',
+                title: $translate.instant("REGISTER.FAILED"),
                 template: error.message
             });
         });
     };
 
-    $scope.resetRegisterForm = function(){
+    $scope.resetRegisterForm = function () {
         $scope.registerData = {};
 
 
@@ -1821,16 +1877,13 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
     };
 
 
-
-    $scope.resetValidators = function(fieldName){
+    $scope.resetValidators = function (fieldName) {
         $scope.registerForm[fieldName].$setValidity('unique', true);
         $scope.registerForm[fieldName].$setValidity('minLength', true);
     };
 
 
-
-
-    $scope.$watch('registerData.Password', function(password) {
+    $scope.$watch('registerData.Password', function (password) {
         var complexity = PasswordComplexity.check(password);
         $scope.passwordComplexity = complexity;
 
@@ -2038,16 +2091,16 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$log', '$ionicLoading', '$ionicHistory', 'OptionService', function ($scope, $rootScope, $state, $stateParams, $log, $ionicLoading, $ionicHistory, OptionService) {
+controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$log', '$ionicLoading', '$ionicHistory', '$ionicPopup', '$translate', 'OptionService', function ($scope, $rootScope, $state, $stateParams, $log, $ionicLoading, $ionicHistory, $ionicPopup, $translate, OptionService) {
     $log.debug('init options controller', $rootScope.sessionData.options);
 
     $scope.showOptions = true;
 
 
-    $rootScope.$ionicGoBack = function() {
+    $rootScope.$ionicGoBack = function () {
 
         // before go back remove  from options
-        if($state.is('app.options')){
+        if ($state.is('app.options')) {
             $rootScope.sessionData.options.pop();
         }
         $ionicHistory.goBack();
@@ -2057,41 +2110,53 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
 
     ];
 
-    $scope.load = function(){
-
+    $scope.load = function () {
 
 
 
         $ionicLoading.show({
-            template: 'Loading...',
-            delay : 500
+            template: $translate.instant("ROUTING.LOADING"),
+            delay: 500
         });
 
-        OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function(response) {
-            $scope.options = response;
-            $ionicLoading.hide();
-            $scope.$broadcast('scroll.refreshComplete');
+        OptionService.getOptionsTree($stateParams.orgID).then(
+            function(success){
 
-            // if no options redirect to actions
-            if($scope.options.length === 0){
-                $scope.showOptions = false;
-            }
-            else {
-                $scope.showOptions = true;
-            }
+            },function(err){
 
-        });
+            });
+
+        OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function (response) {
+                $scope.options = response;
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
+
+                // if no options redirect to actions
+                if ($scope.options.length === 0) {
+                    $scope.showOptions = false;
+                }
+                else {
+                    $scope.showOptions = true;
+                }
+
+            },
+            function (err) {
+                $ionicPopup.alert({
+                    title: $translate.instant("ROUTING.FAILED"),
+                    template: err
+                });
+            });
     };
 
 
     $scope.currentOrganization = $stateParams.orgName;
 
-    $scope.selectOption = function(option){
+    $scope.selectOption = function (option) {
         $log.info('selected option ' + option);
 
         $rootScope.sessionData.options.push(option);
 
-        $state.go('app.options', { 'orgID' : $stateParams.orgID , 'parentID' : option.NodeID});
+        $state.go('app.options', { 'orgID': $stateParams.orgID, 'parentID': option.NodeID});
     };
 
 }]);
@@ -2315,22 +2380,13 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
     };
 
-    $scope.userCorrect = function(){
-        $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
-            scope: $scope
-        });
-        $scope.modal.show();
-    };
+
 
     $scope.closeModal = function() {
         $scope.modal.hide();
         $scope.modal.remove();
     };
 
-    $scope.submitUserCorrect = function(){
-         $log.info($scope.userCorrect.comment);
-         $scope.closeModal();
-    };
 
 
     $scope.webpage = function () {
@@ -2437,12 +2493,12 @@ controllers.controller('UserCtrl', ['$scope', '$rootScope', '$log', '$translate'
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicPlatform', '$q', '$log', '$ionicLoading', '$ionicPopup', '$http', '$cordovaOauth', 'UserService', 'BasicAuthorizationService', 'LocalDataService', 'FacebookService', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $ionicPopup, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
+controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicPlatform', '$q', '$log', '$ionicLoading', '$ionicPopup', '$http', '$cordovaOauth', '$translate', 'UserService', 'BasicAuthorizationService', 'LocalDataService', 'FacebookService', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $ionicPopup, $http, $cordovaOauth, $translate, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
     $scope.facebookLoginEnabled = window.cordova;
 
     $scope.facebookManualLogin = function () {
         $ionicLoading.show({
-            template: 'Logging in...'
+            template: $translate.instant("FACEBOOK.LOADING")
         });
 
         FacebookService.getLoginStatus().then(
@@ -2463,7 +2519,7 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                             $ionicLoading.hide();
 
                             $ionicPopup.alert({
-                                title: 'Facebook Login Failed'
+                                title: $translate.instant("FACEBOOK.FAILED")
                             });
                         });
 
@@ -2472,7 +2528,7 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                         $ionicLoading.hide();
 
                         $ionicPopup.alert({
-                            title: 'Facebook Login Failed'
+                            title: $translate.instant("FACEBOOK.FAILED")
                         });
                     });
                 }
@@ -2501,7 +2557,8 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
                     $ionicLoading.hide();
 
                     $ionicPopup.alert({
-                        title: 'Facebook Login Failed'
+                        title: $translate.instant("FACEBOOK.FAILED"),
+                        template: error
                     });
                 });
 
@@ -2510,7 +2567,8 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
             $ionicLoading.hide();
 
             $ionicPopup.alert({
-                title: 'Facebook Login Failed'
+                title: $translate.instant("FACEBOOK.FAILED"),
+                template: error
             });
         });
     };
@@ -2600,6 +2658,7 @@ controllers.controller('IntroCtrl', ['$scope', '$state', 'LocalDataService', fun
     $scope.init = function(){
 
         var user = LocalDataService.loadUser();
+
         $scope.userName = user.UserName;
     };
 
@@ -2610,7 +2669,7 @@ controllers.controller('IntroCtrl', ['$scope', '$state', 'LocalDataService', fun
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filter', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', '$ionicActionSheet', '$ionicModal', '$templateCache', '$ionicPopup', 'MessageService', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $state, $filter, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicActionSheet, $ionicModal, $templateCache, $ionicPopup, MessageService, LocalDataService, DocumentService) {
+controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filter', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', '$ionicActionSheet', '$ionicModal', '$templateCache', '$ionicPopup', '$translate', 'MessageService', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $state, $filter, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicActionSheet, $ionicModal, $templateCache, $ionicPopup, $translate, MessageService, LocalDataService, DocumentService) {
     $log.info('init messages controller');
 
     $scope.$on('$ionicView.enter', function () {
@@ -2626,24 +2685,11 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     $scope.loadMessage = function () {
         $ionicLoading.show({
-            template: 'Loading...'
+            template: $translate.instant("MESSAGES.LOADING")
         });
 
 
         var messageID = $stateParams.messageID;
-        MessageService.loadMessage(messageID).then(
-            function (success) {
-                $ionicLoading.hide();
-                $log.info('loaded message', success);
-                $scope.currentMessage = success;
-
-                $scope.images = LocalDataService.getPhotos();
-                $scope.currentAttachments = $filter('filter')($scope.images, { message : messageID });
-            },
-            function (err) {
-                $ionicLoading.hide();
-                $log.error('failed to load message ', err);
-            });
 
         MessageService.getMessageDetails(messageID).then(function (success) {
             $ionicLoading.hide();
@@ -2653,15 +2699,23 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
             $scope.messageOptions = [];
             $scope.getSelectedRoutingPath($scope.currentMessage.PreviousRoutingID);
 
+            $scope.images = LocalDataService.getPhotos();
+            $scope.currentAttachments = $filter('filter')($scope.images, { message: messageID });
+
         }, function (err) {
             $ionicLoading.hide();
             $log.error('failed to load message ', err);
+
+            $ionicPopup.alert({
+                title: $translate.instant("MESSAGES.LOAD_FAILED"),
+                template: err
+            });
         });
     };
 
     $scope.getSelectedRoutingPath = function (source) {
         var routing = source[0];
-        if(routing){
+        if (routing) {
             $scope.messageOptions.push(routing);
             if (routing.children.length > 0) {
                 $scope.getSelectedRoutingPath(routing.children);
@@ -2671,8 +2725,8 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
     };
 
 
-    $scope.addNote = function(){
-        if(!window.cordova){
+    $scope.addNote = function () {
+        if (!window.cordova) {
             $scope.openNoteModal();
         }
         else {
@@ -2680,17 +2734,17 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text : "Text note"},
-                    { text : "Capture Photo"}
+                    { text: $translate.instant("MESSAGES.NOTE_BUTTON")},
+                    { text: $translate.instant("MESSAGES.PHOTO_BUTTON")}
 
                 ],
-                titleText: 'Note',
-                cancelText: 'Cancel',
+                titleText: $translate.instant("MESSAGES.NOTE_TITLE"),
+                cancelText: $translate.instant("GENERIC.CANCEL"),
                 buttonClicked: function (index) {
-                    if(index === 0){
+                    if (index === 0) {
                         $scope.openNoteModal();
                     }
-                    else if(index === 1){
+                    else if (index === 1) {
                         $scope.addImage();
                     }
 
@@ -2701,7 +2755,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         }
     };
 
-    $scope.openNoteModal = function(){
+    $scope.openNoteModal = function () {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get('message-note.html'), {
             scope: $scope
         });
@@ -2712,7 +2766,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         $log.info("add message to note");
 
         $ionicLoading.show({
-            template: 'Saving message...'
+            template: $translate.instant("MESSAGES.SAVING")
         });
 
         MessageService.updateMessageNote($scope.currentMessage).then(function (success) {
@@ -2725,7 +2779,7 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         }, function (err) {
             $ionicLoading.hide();
             $ionicPopup.alert({
-                title: 'Failed to save note',
+                title: $translate.instant("MESSAGES.SAVING_FAILED"),
                 template: err
             });
         });
@@ -2735,30 +2789,35 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     $scope.addImage = function () {
         $ionicLoading.show({
-            template: 'Capturing image...'
+            template: $translate.instant("ATTACHMENT.LOADING")
         });
 
         DocumentService.capturePicture().then(
-            function(fileURI){
+            function (fileURI) {
                 $scope.fileURI = fileURI;
 
                 $scope.showAttachmentModal();
                 $ionicLoading.hide();
             },
-            function(fail){
+            function (fail) {
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVING_FAILED"),
+                    template: err
+                });
             }
         );
     };
 
-    $scope.closeModal = function() {
+    $scope.closeModal = function () {
         $log.debug('close modal');
 
         $scope.modal.hide();
         $scope.modal.remove();
     };
 
-    $scope.showAttachmentModal = function(){
+    $scope.showAttachmentModal = function () {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get('new-document.html'), {
             scope: $scope
         });
@@ -2766,14 +2825,13 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
     };
 
 
-    $scope.closeAttachmentModal = function(filename){
-        for(var i in $scope.images)
-        {
+    $scope.closeAttachmentModal = function (filename) {
+        for (var i in $scope.images) {
             var image = $scope.images[i].name;
             var imageName = image.substring(0, image.length - 4);
-            if(filename === imageName){
+            if (filename === imageName) {
                 $ionicPopup.alert({
-                    title: 'Picture name is not unique'
+                    title: $translate.instant("ATTACHMENT.FILENAME_NOT_UNIQUE")
                 });
                 return;
             }
@@ -2782,44 +2840,46 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         var messageID = $scope.currentMessage.id;
 
         DocumentService.moveFile($scope.fileURI, filename, messageID).then(
-            function(success){
+            function (success) {
 
                 $ionicLoading.hide();
 
                 $ionicPopup.alert({
-                    title: 'Picture saved'
+                    title: $translate.instant("ATTACHMENT.SAVE_SUCCESS")
                 });
 
 
                 $scope.currentAttachments.push({
-                    "name" : filename + ".jpg",
-                    "url" : success
+                    "name": filename + ".jpg",
+                    "url": success
                 });
-                $log.info('document saved: '+ filename);
+                $log.info('document saved: ' + filename);
 
                 $scope.closeModal();
 
 
             },
-            function(fail){
+            function (fail) {
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVE_FAILED"),
+                    template: fail
+                });
             }
         );
 
     };
 
 
-    $scope.selectDocument = function(document){
-        $ionicLoading.show({
-            template: 'Saving message...'
-        });
+    $scope.selectDocument = function (document) {
 
         $scope.document = document;
         $scope.showModal('document-details.html');
-        $ionicLoading.hide();
+
     };
 
-    $scope.showModal = function(templateUrl) {
+    $scope.showModal = function (templateUrl) {
         $scope.modal = $ionicModal.fromTemplate($templateCache.get(templateUrl), {
             scope: $scope
         });
@@ -2828,13 +2888,12 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
     };
 
 
-
 }]);
 
 var controllers = angular.module('App.controllers');
 
 
-controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', '$state', '$log', '$templateCache', '$ionicBackdrop', '$ionicModal', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
+controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', '$state', '$log', '$templateCache', '$ionicBackdrop', '$ionicModal', '$translate', '$cordovaCamera', '$cordovaFile', '$ionicLoading', '$ionicPopup', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $stateParams, $state, $log, $templateCache, $ionicBackdrop, $ionicModal, $translate, $cordovaCamera, $cordovaFile, $ionicLoading, $ionicPopup, LocalDataService, DocumentService) {
 
     $log.debug('init document controller');
     $scope.cameraAvailable = window.cordova;
@@ -2869,7 +2928,7 @@ controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', 
 
     $scope.addImage = function () {
         $ionicLoading.show({
-            template: 'Capturing image...'
+            template: $translate.instant("ATTACHMENT.LOADING")
         });
 
         DocumentService.capturePicture().then(
@@ -2924,7 +2983,7 @@ controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', 
             var imageName = image.substring(0, image.length - 4);
             if(filename === imageName){
                 $ionicPopup.alert({
-                    title: 'Picture name is not unique'
+                    title: $translate.instant("ATTACHMENT.FILENAME_NOT_UNIQUE")
                 });
                 return;
             }
@@ -2936,7 +2995,7 @@ controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', 
                 $ionicLoading.hide();
 
                 $ionicPopup.alert({
-                    title: 'Picture saved'
+                    title: $translate.instant("ATTACHMENT.SAVE_SUCCESS")
                 });
 
                 $scope.closeModal();
@@ -2947,6 +3006,11 @@ controllers.controller('DocumentCtrl', ['$scope', '$rootScope', '$stateParams', 
             },
             function(fail){
                 $ionicLoading.hide();
+
+                $ionicPopup.alert({
+                    title: $translate.instant("ATTACHMENT.SAVE_FAILED"),
+                    template: err
+                });
             }
         );
 

@@ -22,10 +22,18 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
     $scope.load = function () {
 
 
+
         $ionicLoading.show({
             template: $translate.instant("ROUTING.LOADING"),
             delay: 500
         });
+
+        OptionService.getOptionsTree($stateParams.orgID).then(
+            function(success){
+
+            },function(err){
+
+            });
 
         OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function (response) {
                 $scope.options = response;

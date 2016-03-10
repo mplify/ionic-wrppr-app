@@ -10,6 +10,11 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
     });
 
+    $scope.$on('$ionicView.beforeLeave', function () {
+        $rootScope.supportMessage = {};
+
+    });
+
     $scope.userID = LocalDataService.loadUser().id;
     $scope.currentMessage = {};
     $scope.currentAttachments = [];
@@ -32,6 +37,8 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
             $scope.images = LocalDataService.getPhotos();
             $scope.currentAttachments = $filter('filter')($scope.images, { message: messageID });
+
+            $rootScope.supportMessage = $scope.currentMessage;
 
         }, function (err) {
             $ionicLoading.hide();

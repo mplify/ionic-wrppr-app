@@ -1,8 +1,8 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', function ($scope, $rootScope, $state, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService) {
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', '$ionicActionSheet', '$templateCache', '$translate', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', 'SupportService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
 
-        $rootScope.debugMode = true;
+        $rootScope.debugMode = false;
 
 
         $rootScope.sessionData = {};
@@ -57,8 +57,8 @@ angular.module('App.controllers', [])
 
         $scope.$on('serverdown', function(){
             $ionicPopup.alert({
-                title: 'Service is temporarily not available',
-                template: 'BUT we are working hard to fix it'
+                title: $translate.instant("GENERIC.SERVER_ERROR_TITLE"),
+                template: $translate.instant("GENERIC.SERVER_ERROR_TEXT")
             });
         });
 
@@ -88,13 +88,13 @@ angular.module('App.controllers', [])
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
                     if(index === 0){
-
+                        $scope.showUserCorrect();
                     }
                     else if(index === 1){
-                        $window.location = 'mailto:support@mplify.nl' + '?subject=Feedback about wrapper app';
+                        $scope.mailSupport();
                     }
                     else if(index === 2){
-                        $window.location = 'mailto:feedback@mplify.nl' + '?subject=Feedback about wrapper app';
+                        $scope.mailFeedback();
                     }
 
 
@@ -102,7 +102,64 @@ angular.module('App.controllers', [])
                     return true;
                 }
             });
-        }
+        };
+
+
+        $scope.mailFeedback = function () {
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-feedback.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.mailSupport = function () {
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-support.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.showUserCorrect = function () {
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+            $scope.modal.remove();
+        };
+
+
+
+        $scope.submitUserCorrect = function (action, comment) {
+            $log.info(comment);
+
+            $ionicLoading.show({
+                template: "Submitting"
+            });
+
+            var user = LocalDataService.loadUser();
+
+            SupportService.submitSupport(action, user.UserName, comment).then(
+                function(success){
+                    $ionicLoading.hide();
+
+                    $scope.closeModal();
+                },
+                function(err){
+                    $ionicLoading.hide();
+
+                    $log.error("failed to submit user correct", err);
+                    $ionicPopup.alert({
+                        title: "Failed",
+                        template: err
+                    });
+                }
+            );
+
+        };
 
 
 

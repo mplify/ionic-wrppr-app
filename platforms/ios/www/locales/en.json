@@ -6,7 +6,11 @@
     "GENERIC"  : {
         "REFRESH" : "Pull to refresh",
         "FEEDBACK" : "Feedback",
-        "SUPPORT" : "Support"
+        "SUPPORT" : "Support",
+        "CLOSE" : "Close",
+        "CANCEL" : "Cancel",
+        "SERVER_ERROR_TITLE" : "Service is temporarily not available",
+        "SERVER_ERROR_TEXT" : "BUT we are working hard to fix it"
     },
 
 
@@ -27,6 +31,15 @@
         "LOGIN" : "Sign In",
         "REGISTER" : "Register"
     },
+    "LOGIN" : {
+        "LOADING" : "Login In...",
+        "FAILED" : "Login failed"
+     },
+    "FACEBOOK" : {
+        "LOADING" : "Login In via Facebook",
+        "FAILED" : "Login failed"
+
+     },
     "LOGIN_TITLE" : "Login",
     "USERNAME" : "Username",
     "USERNAME_REQUIRED_VALIDATOR" : "* Username is required",
@@ -65,11 +78,16 @@
     },
     "ATTACHMENT" : {
         "TITLE" : "Capture Attachment",
+        "LOADING" : "Capturing Image",
+
         "ADD" : "Add",
         "RELOAD" : "Reload",
         "NEW_TITLE" : "New Attachment",
         "FILENAME" : "Filename",
-        "SAVE" : "Save"
+        "FILENAME_NOT_UNIQUE" : "Picture name is not unique",
+        "SAVE" : "Save",
+        "SAVE_SUCCESS" : "Image saved",
+        "SAVE_FAILED" : "Image save failed"
     },
     "CHANGE_PASSWORD" : {
         "TITLE" : "Change Password",
@@ -83,14 +101,25 @@
         "TITLE" : "Favorites"
     },
     "MESSAGES" : {
-        "HISTORY_TITLE" : "Messages History",
-        "DETAILS_TITLE" : "Message Details"
+        "HISTORY_TITLE" : "Messages Overview",
+        "DETAILS_TITLE" : "Message Details",
+        "LOADING" : "Loading details ..",
+        "LOADING_LIST" : "Loading messages",
+        "LOAD_FAILED" : "Load failed",
+        "NOTE_BUTTON" : "Text Note",
+        "PHOTO_BUTTON" : "Capture Photo",
+        "NOTE_TITLE" : "Notes",
+        "SAVING" : "Saving note",
+        "SAVING_FAILED" : "Saving failed"
+
     },
     "REGISTER" : {
+        "LOADING" : "Loading...",
         "TITLE" : "Register",
         "MOBILE" : "Mobile",
         "EMAIL" : "Email",
-        "SUBMIT_BUTTON" : "Register"
+        "SUBMIT_BUTTON" : "Register",
+        "FAILED" : "Registration failed"
     },
     "INTRO" : {
         "TITLE" : "Welcome",
@@ -103,5 +132,9 @@
         "TEXT" : "No internet connection",
         "DESCRIPTION" : "Currently app doesn't support offline mode",
         "REFRESH" : "Refresh"
+    },
+    "ROUTING" : {
+        "LOADING" : "Loading ..",
+        "FAILED" : "Failed"
     }
 }

@@ -4,6 +4,11 @@ var controllers = angular.module('App.controllers');
 controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPlatform, $ionicPopup, $log, $translate, $ionicLoading, $ionicModal, $templateCache, $ionicActionSheet, $timeout, LocalDataService, MessageService, UserService, DTMFService, $cordovaContacts, OrganizationService) {
     $log.debug('init action controller');
 
+    $scope.$on('$ionicView.beforeLeave', function () {
+        $rootScope.supportMessage = {};
+
+    });
+
 
     $scope.init = function(){
         $scope.currentOrganization = {};
@@ -193,6 +198,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         }
         MessageService.createMessage(message).then(function(message){
             $rootScope.showUserCorrect = true;
+            $rootScope.supportMessage = message;
 
             $rootScope.reloadFavorites = true;
             $rootScope.reloadMessages = true;

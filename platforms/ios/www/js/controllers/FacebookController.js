@@ -1,11 +1,11 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $ionicPopup, $http, $cordovaOauth, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
+controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicPlatform, $q, $log, $ionicLoading, $ionicPopup, $http, $cordovaOauth, $translate, UserService, BasicAuthorizationService, LocalDataService, FacebookService) {
     $scope.facebookLoginEnabled = window.cordova;
 
     $scope.facebookManualLogin = function () {
         $ionicLoading.show({
-            template: 'Logging in...'
+            template: $translate.instant("FACEBOOK.LOADING")
         });
 
         FacebookService.getLoginStatus().then(
@@ -26,7 +26,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                             $ionicLoading.hide();
 
                             $ionicPopup.alert({
-                                title: 'Facebook Login Failed'
+                                title: $translate.instant("FACEBOOK.FAILED")
                             });
                         });
 
@@ -35,7 +35,7 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                         $ionicLoading.hide();
 
                         $ionicPopup.alert({
-                            title: 'Facebook Login Failed'
+                            title: $translate.instant("FACEBOOK.FAILED")
                         });
                     });
                 }
@@ -64,7 +64,8 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
                     $ionicLoading.hide();
 
                     $ionicPopup.alert({
-                        title: 'Facebook Login Failed'
+                        title: $translate.instant("FACEBOOK.FAILED"),
+                        template: error
                     });
                 });
 
@@ -73,7 +74,8 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
             $ionicLoading.hide();
 
             $ionicPopup.alert({
-                title: 'Facebook Login Failed'
+                title: $translate.instant("FACEBOOK.FAILED"),
+                template: error
             });
         });
     };

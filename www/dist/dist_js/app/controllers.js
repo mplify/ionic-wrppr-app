@@ -88,7 +88,7 @@ angular.module('App.controllers', [])
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
                     if(index === 0){
-                        $scope.userCorrect();
+                        $scope.showUserCorrect();
                     }
                     else if(index === 1){
                         $scope.mailSupport();
@@ -119,7 +119,7 @@ angular.module('App.controllers', [])
             $scope.modal.show();
         };
 
-        $scope.userCorrect = function () {
+        $scope.showUserCorrect = function () {
             $scope.modal = $ionicModal.fromTemplate($templateCache.get('user-correct.html'), {
                 scope: $scope
             });
@@ -135,6 +135,7 @@ angular.module('App.controllers', [])
 
         $scope.submitUserCorrect = function (action, comment) {
             $log.info(comment);
+            $log.debug('support message details', $rootScope.supportMessage);
 
             $ionicLoading.show({
                 template: "Submitting"

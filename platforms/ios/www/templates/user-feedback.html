@@ -1,26 +1,26 @@
 <ion-modal-view>
     <ion-header-bar align-title="left">
-        <h1 class="title">{{ 'USER_CORRECT.TITLE' | translate }}</h1>
+        <h1 class="title">Feedback</h1>
         <div class="buttons">
             <button class="button button-clear" ng-click="closeModal();">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
     </ion-header-bar>
     <ion-content scroll="false" ng-controller="AuthorizationCtrl">
-        <form name="userCorrectForm" ng-submit="submitUserCorrect('Usercorrect', userCorrect.comment)" novalidate>
+        <form  ng-submit="submitUserCorrect('feedback', comment )" novalidate>
             <div class="list">
                 <label class="item">
-                    {{ 'USER_CORRECT.DESCRIPTION' | translate }}
+                    Feedback procedure description
                 </label>
 
 
                 <label class="item item-input">
                     <span class="input-label">Comment</span>
-                    <input type="text" name="username" ng-model="userCorrect.comment">
+                    <input type="text" name="username" ng-model="comment">
 
                 </label>
 
                 <label class="item">
-                    <button class="button button-block button-assertive wrppr-action-button" ng-disabled="userCorrectForm.$invalid" type="submit">{{ 'USER_CORRECT.SUBMIT' | translate }}</button>
+                    <button class="button button-block button-assertive wrppr-action-button"  type="submit">Save</button>
                 </label>
 
 

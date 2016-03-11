@@ -102,6 +102,7 @@
     <access origin="*" />
     <access launch-external="yes" origin="tel:*" />
     <access launch-external="yes" origin="mailto:*" />
+    <allow-navigation href="https://*/*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="file://*/*" />
     <allow-navigation href="tel://*/*" />

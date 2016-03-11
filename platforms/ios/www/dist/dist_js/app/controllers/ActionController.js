@@ -241,7 +241,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
                 buttonClicked: function (index) {
 
 
-                    window.open(buttons[index].url);
+                    window.open(buttons[index].url, '_system', 'location=yes');
 
                     return true;
                 }

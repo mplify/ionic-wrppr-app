@@ -13,6 +13,10 @@ services.service('DTMFService', ['$log', '$cordovaContacts', function ($log, $co
                     baseNumber = baseNumber + ",";
                 }
             }
+
+            var lastRouting = routings[routings.length - 1];
+            alert(lastRouting.AltInitialPause);
+
             for (var routing in routings) {
                 baseNumber = baseNumber + "," + routings[0].DTMFID;
             }

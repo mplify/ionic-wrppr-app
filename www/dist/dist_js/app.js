@@ -279,7 +279,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
     }]
 );
 
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("actions.html","<ion-view view-title=\"{{\'ACTIONS.TITLE\' | translate}} {{currentOrganization}}\" ng-controller=\"ActionCtrl\">\n\n    <ion-content ng-init=\"init();\">\n        <div style=\"height: 5px;\" ng-style=\"{\'background-color\': brandingColor}\"></div>\n        <div class=\"row\" style=\"height: 10%; padding-left: 20px; padding-right: 20px;\">\n            <h3 style=\"text-align: center; width: 100%;\">{{currentOrganization}}</h3>\n        </div>\n\n        <div class=\"row\" ng-repeat=\"option in currentOptions\">\n            <p style=\"text-align: center; width: 100%;\">{{option.NodeName}}</p>\n        </div>\n\n        <div class=\"row button-block\" style=\"text-align: center; display: block;\"\n             ng-show=\"contacts.call == null && contacts.twitter == null && contacts.email == null\">\n\n            <div class=\"ion-sad-outline\" style=\"font-size: 86px; color: lightgray;\"></div>\n            <h4 class=\"title\" style=\"width: 100%; text-align: center;\">We don\'t have any contacts for\n                {{currentOrganization}}, please try later or contact our support</h4>\n\n\n        </div>\n\n        <div class=\"row\" style=\"height: 40%; padding-left: 20px; padding-right: 20px;\">\n            <div class=\"col\" ng-hide=\"contacts.call == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"call();\">\n                    <span aria-hidden=\"true\" class=\"icon_phone\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n\n            <div class=\"col\" ng-hide=\"contacts.twitter == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"tweet();\">\n                    <span aria-hidden=\"true\" class=\"social_twitter\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n\n        </div>\n        <div class=\"row\" style=\"height: 40%; padding-left: 20px; padding-right: 20px;\">\n\n            <div class=\"col\" ng-hide=\"contacts.email == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"mail();\">\n                    <span aria-hidden=\"true\" class=\"icon_mail\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n            <div class=\"col\" ng-hide=\"contacts.email == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"webpage();\">\n                    <span aria-hidden=\"true\" class=\"ion-android-globe\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n        </div>\n\n    </ion-content>\n    <div class=\"tabs tabs-icon-top\">\n        <a class=\"tab-item\" ng-click=\"mailFeedback();\">\n            <i class=\"icon ion-speakerphone\"></i>\n            {{ \'GENERIC.FEEDBACK\' | translate }}\n        </a>\n        <a class=\"tab-item\" ng-show=\"supportMessage\">\n            <i class=\"icon ion-edit\" ng-click=\"showUserCorrect();\"></i>\n            {{ \'USER_CORRECT.BUTTON\' | translate }}\n        </a>\n        <a class=\"tab-item\" ng-click=\"mailSupport();\">\n            <i class=\"icon ion-help-buoy\"></i>\n            {{ \'GENERIC.SUPPORT\' | translate }}\n        </a>\n    </div>\n\n\n</ion-view>");
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("actions.html","<ion-view view-title=\"{{\'ACTIONS.TITLE\' | translate}} {{currentOrganization}}\" ng-controller=\"ActionCtrl\">\n\n    <ion-content ng-init=\"init();\">\n        <div style=\"height: 5px;\" ng-style=\"{\'background-color\': brandingColor}\"></div>\n        <div class=\"row\" style=\"height: 10%; padding-left: 20px; padding-right: 20px;\">\n            <h3 style=\"text-align: center; width: 100%;\">{{currentOrganization}}</h3>\n        </div>\n\n        <div class=\"row\" ng-repeat=\"option in currentOptions\">\n            <p style=\"text-align: center; width: 100%;\">{{option.NodeName}}</p>\n        </div>\n\n        <div class=\"row button-block\" style=\"text-align: center; display: block;\"\n             ng-show=\"contacts.call == null && contacts.twitter == null && contacts.email == null\">\n\n            <div class=\"ion-sad-outline\" style=\"font-size: 86px; color: lightgray;\"></div>\n            <h4 class=\"title\" style=\"width: 100%; text-align: center;\">We don\'t have any contacts for\n                {{currentOrganization}}, please try later or contact our support</h4>\n\n\n        </div>\n\n        <div class=\"row\" style=\"height: 40%; padding-left: 20px; padding-right: 20px;\">\n            <div class=\"col\" ng-hide=\"contacts.call == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"call();\">\n                    <span aria-hidden=\"true\" class=\"icon_phone\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n\n            <div class=\"col\" ng-hide=\"contacts.twitter == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"tweet();\">\n                    <span aria-hidden=\"true\" class=\"social_twitter\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n\n        </div>\n        <div class=\"row\" style=\"height: 40%; padding-left: 20px; padding-right: 20px;\">\n\n            <div class=\"col\" ng-hide=\"contacts.email == null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"mail();\">\n                    <span aria-hidden=\"true\" class=\"icon_mail\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n            <div class=\"col\" ng-show=\"generalWebpage !== null || selfServiceWebpage !== null || communityWebpage !== null\">\n                <div class=\"features-box-icon\" ng-style=\"{\'background-color\': brandingColor2}\" ng-click=\"webpage();\">\n                    <span aria-hidden=\"true\" class=\"ion-android-globe\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n        </div>\n\n    </ion-content>\n    <div class=\"tabs tabs-icon-top\">\n        <a class=\"tab-item\" ng-click=\"mailFeedback();\">\n            <i class=\"icon ion-speakerphone\"></i>\n            {{ \'GENERIC.FEEDBACK\' | translate }}\n        </a>\n        <a class=\"tab-item\" ng-show=\"supportMessage\">\n            <i class=\"icon ion-edit\" ng-click=\"showUserCorrect();\"></i>\n            {{ \'USER_CORRECT.BUTTON\' | translate }}\n        </a>\n        <a class=\"tab-item\" ng-click=\"mailSupport();\">\n            <i class=\"icon ion-help-buoy\"></i>\n            {{ \'GENERIC.SUPPORT\' | translate }}\n        </a>\n    </div>\n\n\n</ion-view>");
 $templateCache.put("capture-document.html","<ion-view view-title=\"{{\'ATTACHMENT.TITLE\' | translate}}\" ng-controller=\"DocumentCtrl\" ng-init=\"load()\">\n\n    <ion-content>\n\n        <ion-list>\n            <ion-item ng-repeat=\"image in images track by image.name\" class=\"item item-image\" style=\"padding: 10px;\" ng-click=\"selectDocument(image);\">\n                <p>{{image.name | Filename}}</p>\n                <img class=\"full-image\" ng-src=\"{{urlForImage(image.url)}}\" style=\"height: 300px;\">\n\n\n            </ion-item>\n        </ion-list>\n    </ion-content>\n    <div class=\"bar bar-footer\" ng-show=\"cameraAvailable\">\n        <div class=\"button-bar\">\n            <button class=\"button button-clear\" ng-click=\"addImage();\">\n                {{\'ATTACHMENT.ADD\' | translate}}\n            </button>\n            <button id=\"attachmentsReload\" class=\"button button-clear\" ng-click=\"load();\">\n                {{\'ATTACHMENT.RELOAD\' | translate}}\n            </button>\n        </div>\n    </div>\n\n\n</ion-view>");
 $templateCache.put("change-password.html","<ion-view>\n    <ion-header-bar>\n        <h1 class=\"title\">{{\'CHANGE_PASSWORD.TITLE\' | translate}}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\">\n        <form name=\"changePasswordForm\" ng-submit=\"doChangePassword()\" novalidate  ng-controller=\"RestorePasswordCtrl\">\n            <div class=\"list\">\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'PASSWORD\' | translate}}</span>\n                    <input type=\"password\" ng-model=\"newPassword\" required>\n\n                </label>\n                <label class=\"item password-complexity row\" ng-show=\"passwordComplexity\">\n                    <div class=\"col\" ng-class=\"passwordComplexity\"></div>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!changePasswordForm.newPassword.$pristine && changePasswordForm.newPassword.$invalid\">\n                    <p ng-show=\"changePasswordForm.newPassword.$error.required\">{{\'PASSWORD_REQUIRED_VALIDATOR\' | translate}}</p>\n                </label>\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'CHANGE_PASSWORD.REPEAT_PASSWORD\' | translate}}</span>\n                    <input type=\"password\" ng-model=\"repeatPassword\" required>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!changePasswordForm.repeatPassword.$pristine && !passwordMatch\">\n                    <p ng-show=\"!passwordMatch\">{{\'CHANGE_PASSWORD.PASSWORD_MATCH\' | translate}}</p>\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"changePasswordForm.$invalid || !passwordMatch\" type=\"submit\">{{\'CHANGE_PASSWORD.SUBMIT\' | translate}}</button>\n                </label>\n                <label class=\"\">\n                    <button class=\"button button-block button-clear\">{{\'GENERIC.SUPPORT\' | translate}}</button>\n                </label>\n\n            </div>\n        </form>\n\n\n\n    </ion-content>\n\n\n</ion-view>\n");
 $templateCache.put("dashboard.html","<ion-view class=\"fill\" ng-controller=\"DashboardCtrl\">\n    <ion-content style=\"margin-left: 20px; margin-right: 20px;\">\n        <div class=\"row\" style=\"height: 20%;\"> </div>\n        <div class=\"row\">\n            <h1 style=\"text-align: center; width: 100%;\">{{\'DASHBOARD.TITLE\' | translate}}</h1>\n\n        </div>\n        <div class=\"row\">\n            <h2 style=\"text-align: center; width: 100%;\">{{\'DASHBOARD.DESCRIPTION\' | translate}}</h2>\n        </div>\n        <div class=\"row\" ng-controller=\"FacebookCtrl\" ng-show=\"facebookLoginEnabled\" ng-init=\"facebookAutoLogin()\">\n            <button class=\"button button-block button-positive\" ng-click=\"facebookManualLogin()\">{{\'DASHBOARD.FACEBOOK_LOGIN\' | translate}}</button>\n        </div>\n        <div class=\"row\" ng-controller=\"TwitterCtrl\" ng-show=\"twitterLoginEnabled\">\n            <button class=\"button button-block button-calm\" ng-click=\"twitterLogin()\">{{\'DASHBOARD.TWITTER_LOGIN\' | translate}}</button>\n        </div>\n        <div class=\"row\">\n            <div class=\"col\">\n                <button class=\"button button-block button-clear\" style=\"color: black;\" ui-sref=\"login\">{{\'DASHBOARD.LOGIN\' | translate}}</button>\n            </div>\n            <div class=\"col\">\n                <button class=\"button button-block button-clear\" style=\"color: black;\" ui-sref=\"register\">{{\'DASHBOARD.REGISTER\' | translate}}</button>\n            </div>\n\n        </div>\n\n    </ion-content>\n\n</ion-view>");
@@ -1125,15 +1125,24 @@ services.service('DTMFService', ['$log', '$cordovaContacts', function ($log, $co
 
             var baseNumber = organization.TelephoneNumber;
 
-            if (organization.initialpause && organization.initialpause !== null) {
-                $log.info('add initial pause ' + organization.initialpause);
-                for (i = 0; i < organization.initialpause; i++) {
+            var pause = null;
+
+            var lastRouting = routings[routings.length - 1];
+            if (lastRouting.AltInitialPause !== null) {
+                pause = lastRouting.AltInitialPause;
+            }
+            else {
+                pause = organization.initialpause;
+            }
+
+
+            if (pause !== null) {
+                $log.info('add initial pause ' + pause);
+                for (i = 0; i < pause; i++) {
                     baseNumber = baseNumber + ",";
                 }
             }
 
-            var lastRouting = routings[routings.length - 1];
-            alert(lastRouting.AltInitialPause);
 
             for (var routing in routings) {
                 baseNumber = baseNumber + "," + routings[0].DTMFID;
@@ -2186,6 +2195,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $rootScope.showUserCorrect = false;
 
 
+
         if (!$rootScope.sessionData.organization) {
             $log.info('organization not selected, redirects to organization search');
             $state.go('app.organizations');
@@ -2212,6 +2222,20 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
             $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
             $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
+
+            $scope.generalWebpage = $scope.currentOrganization.GeneralWebsite;
+
+            $scope.selfServiceWebpage = null;
+            $scope.communityWebpage = null;
+
+            if($scope.currentOptions.length > 0){
+
+                var lastRouting = $scope.currentOptions[$scope.currentOptions.length - 1];
+                $scope.generalWebpage = lastRouting.GeneralInformation;
+                $scope.selfServiceWebpage = lastRouting.SelfService;
+                $scope.communityWebpage = lastRouting.Community;
+
+            }
         }
 
     };
@@ -2380,26 +2404,29 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.webpage = function () {
-        var generalWebpage = "https://www.mplify.nl";
-        var selfServiceWebpage = "https://mplify.atlassian.net";
-        var communityWebpage = "https://www.facebook.com/mPlify/";
 
         var buttons = [];
-        if (generalWebpage) {
-            buttons.push({ text: 'General', url: generalWebpage });
+        if ($scope.generalWebpage) {
+            buttons.push({ text: 'General', url: $scope.generalWebpage });
         }
 
-        if (selfServiceWebpage) {
-            buttons.push({ text: 'Self-service', url: selfServiceWebpage});
+        if ($scope.selfServiceWebpage) {
+            buttons.push({ text: 'Self-service', url: $scope.selfServiceWebpage});
         }
 
-        if (communityWebpage) {
-            buttons.push({ text: 'Community', url: communityWebpage });
+        if ($scope.communityWebpage) {
+            buttons.push({ text: 'Community', url: $scope.communityWebpage });
         }
 
-        // redirect without actions shett
-        if (buttons.length === 1) {
-            $window.location = buttons[0].url;
+        if(buttons.length === 0){
+
+        }
+        // redirect without actions sheet
+        else if (buttons.length === 1) {
+            var url = buttons[0].url;
+
+            $log.debug('try to open url ', url);
+            window.open(url, '_system', 'location=yes');
         }
         else {
 
@@ -2409,9 +2436,10 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
                 titleText: 'Open company webpage',
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
+                    var url = buttons[index].url;
+                    $log.debug('try to open url ', url);
 
-
-                    window.open(buttons[index].url, '_system', 'location=yes');
+                    window.open(url, '_system', 'location=yes');
 
                     return true;
                 }
@@ -2615,6 +2643,7 @@ controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$state
             $log.info('logged in via twitter', result);
             $ionicLoading.hide();
 
+            $log.debug('twitter login success', result);
 
             $state.go('app.search');
         }, function (error) {

@@ -22,6 +22,7 @@ controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$state
             $log.info('logged in via twitter', result);
             $ionicLoading.hide();
 
+            $log.debug('twitter login success', result);
 
             $state.go('app.search');
         }, function (error) {

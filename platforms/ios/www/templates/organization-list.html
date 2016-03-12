@@ -1,7 +1,6 @@
 <ion-view view-title="{{ 'BUSINESS_CONTACT.SEARCH' | translate }}" >
 
     <ion-content >
-        <div ng-show="introVisible">
         <div class="bar bar-header item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
@@ -18,18 +17,20 @@
                 pulling-text="{{ 'GENERIC.REFRESH' | translate }}"
                 on-refresh="reload();">
         </ion-refresher>
+
         <ion-list>
             <ion-item ng-repeat="organisation in organizations track by organisation.id" ng-click="selectOrganisation(organisation);">
                 {{organisation.orgName}}
             </ion-item>
         </ion-list>
+
         <ion-infinite-scroll
                 ng-if="!noMoreItemsAvailable"
                 on-infinite="loadNext()"
                 distance="10%">
         </ion-infinite-scroll>
-        </div>
-        <div ng-hide="introVisible" ng-include src="'intro.html'"></div>
+
+
     </ion-content>
 
 </ion-view>

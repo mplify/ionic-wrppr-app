@@ -1,6 +1,7 @@
 var controllers = angular.module('App.controllers');
 
 controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$state', '$log', 'OrganizationService', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $state, $log, OrganizationService, LocalDataService) {
+    $log.info('init organizations controller');
     $scope.introVisible = LocalDataService.getIntroScreenVisited();
 
 
@@ -22,12 +23,8 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
         model : ""
     };
 
-    $scope.$on('$ionicView.beforeEnter', function () {
-        if($scope.organizations.length === 0 ){
-
-        }
-
-
+    $scope.$on('$stateChangeSuccess', function() {
+        $scope.reload();
     });
 
     $scope.load = function(searchText){
@@ -40,14 +37,17 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
 
 
         $scope.isLoading = true;
+
         OrganizationService.getOrganizations(searchText, $scope.organizations.length).then(function(response) {
 
             if(response.length === 0){
                $scope.noMoreItemsAvailable = true;
             }
 
-            //$scope.organizations = $scope.organizations.concat(response);
-            $scope.organizations = angular.merge(response, $scope.organization);
+
+            $scope.organizations = $scope.organizations.concat(response);
+
+
 
             $ionicLoading.hide();
             $scope.isLoading = false;
@@ -93,6 +93,10 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
         // wait till prev load done
         if($scope.isLoading){
             $log.debug('skipped loading organization, prev is not done');
+            return;
+        }
+
+        if(newVal === oldVal){
             return;
         }
 

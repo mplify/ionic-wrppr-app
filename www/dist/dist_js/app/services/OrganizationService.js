@@ -23,7 +23,7 @@ services.service('OrganizationService', ['$http', '$q', '$log', 'api', function(
 
             }
 
-            params.limit = 30;
+            params.limit = 10;
 
             $http.get(url,
             {

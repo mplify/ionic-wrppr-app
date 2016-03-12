@@ -22,6 +22,14 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
         model : ""
     };
 
+    $scope.$on('$ionicView.beforeEnter', function () {
+        if($scope.organizations.length === 0 ){
+
+        }
+
+
+    });
+
     $scope.load = function(searchText){
         $log.info('load organizations '+ searchText);
 
@@ -37,7 +45,8 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
                $scope.noMoreItemsAvailable = true;
             }
 
-            $scope.organizations = $scope.organizations.concat(response);
+            //$scope.organizations = $scope.organizations.concat(response);
+            $scope.organizations = angular.merge(response, $scope.organization);
 
             $ionicLoading.hide();
             $scope.isLoading = false;

@@ -7,12 +7,25 @@ services.service('DTMFService', function ($log, $cordovaContacts) {
 
             var baseNumber = organization.TelephoneNumber;
 
-            if (organization.initialpause && organization.initialpause !== null) {
-                $log.info('add initial pause ' + organization.initialpause);
-                for (i = 0; i < organization.initialpause; i++) {
+            var pause = null;
+
+            var lastRouting = routings[routings.length - 1];
+            if (lastRouting.AltInitialPause !== null) {
+                pause = lastRouting.AltInitialPause;
+            }
+            else {
+                pause = organization.initialpause;
+            }
+
+
+            if (pause !== null) {
+                $log.info('add initial pause ' + pause);
+                for (i = 0; i < pause; i++) {
                     baseNumber = baseNumber + ",";
                 }
             }
+
+
             for (var routing in routings) {
                 baseNumber = baseNumber + "," + routings[0].DTMFID;
             }

@@ -69,7 +69,7 @@ services.service('FacebookService', function ($q, $log, $state, UserService, Loc
                     if (users.length === 0) {
                         UserService.searchByEmail(email).then(
                             function (emailMapedUsers) {
-                                if (emailMapedUsers === 0) {
+                                if (emailMapedUsers.length === 0) {
                                     // create new user
                                     var userData = {
                                         UserName: profileInfo.email,

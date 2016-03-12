@@ -16,6 +16,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         $rootScope.showUserCorrect = false;
 
 
+
         if (!$rootScope.sessionData.organization) {
             $log.info('organization not selected, redirects to organization search');
             $state.go('app.organizations');
@@ -42,6 +43,20 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             $scope.contacts.email = $rootScope.sessionData.organization.EmailAddress;
             $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
             $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
+
+            $scope.generalWebpage = $scope.currentOrganization.GeneralWebsite;
+
+            $scope.selfServiceWebpage = null;
+            $scope.communityWebpage = null;
+
+            if($scope.currentOptions.length > 0){
+
+                var lastRouting = $scope.currentOptions[$scope.currentOptions.length - 1];
+                $scope.generalWebpage = lastRouting.GeneralInformation;
+                $scope.selfServiceWebpage = lastRouting.SelfService;
+                $scope.communityWebpage = lastRouting.Community;
+
+            }
         }
 
     };
@@ -210,26 +225,29 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
     };
 
     $scope.webpage = function () {
-        var generalWebpage = "https://www.mplify.nl";
-        var selfServiceWebpage = "https://mplify.atlassian.net";
-        var communityWebpage = "https://www.facebook.com/mPlify/";
 
         var buttons = [];
-        if (generalWebpage) {
-            buttons.push({ text: 'General', url: generalWebpage });
+        if ($scope.generalWebpage) {
+            buttons.push({ text: 'General', url: $scope.generalWebpage });
         }
 
-        if (selfServiceWebpage) {
-            buttons.push({ text: 'Self-service', url: selfServiceWebpage});
+        if ($scope.selfServiceWebpage) {
+            buttons.push({ text: 'Self-service', url: $scope.selfServiceWebpage});
         }
 
-        if (communityWebpage) {
-            buttons.push({ text: 'Community', url: communityWebpage });
+        if ($scope.communityWebpage) {
+            buttons.push({ text: 'Community', url: $scope.communityWebpage });
         }
 
-        // redirect without actions shett
-        if (buttons.length === 1) {
-            $window.location = buttons[0].url;
+        if(buttons.length === 0){
+
+        }
+        // redirect without actions sheet
+        else if (buttons.length === 1) {
+            var url = buttons[0].url;
+
+            $log.debug('try to open url ', url);
+            window.open(url, '_system', 'location=yes');
         }
         else {
 
@@ -239,9 +257,10 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
                 titleText: 'Open company webpage',
                 cancelText: 'Cancel',
                 buttonClicked: function (index) {
+                    var url = buttons[index].url;
+                    $log.debug('try to open url ', url);
 
-
-                    window.open(buttons[index].url);
+                    window.open(url, '_system', 'location=yes');
 
                     return true;
                 }

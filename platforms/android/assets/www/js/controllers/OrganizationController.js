@@ -49,9 +49,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
         model : ""
     };
 
-    $scope.$on('$stateChangeSuccess', function() {
-        $scope.reload();
-    });
+
 
     $scope.load = function(searchText){
         $log.info('load organizations '+ searchText);
@@ -121,8 +119,6 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             $log.debug('skipped loading organization, prev is not done');
             return;
         }
-
-
 
         $log.info('search organization model changed: ' + newVal + oldVal);
         $scope.reload(newVal);

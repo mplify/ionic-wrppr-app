@@ -10,7 +10,7 @@ services.service('DTMFService', function ($log, $cordovaContacts) {
             var pause = null;
 
             var lastRouting = routings[routings.length - 1];
-            if (lastRouting.AltInitialPause !== null) {
+            if (routings.length > 0 && lastRouting.AltInitialPause !== null) {
                 pause = lastRouting.AltInitialPause;
             }
             else {

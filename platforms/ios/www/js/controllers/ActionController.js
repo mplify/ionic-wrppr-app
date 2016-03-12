@@ -44,7 +44,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             $scope.contacts.twitter = $rootScope.sessionData.organization.TwitterAccount;
             $scope.contacts.call = $rootScope.sessionData.organization.TelephoneNumber;
 
-            $scope.generalWebpage = $scope.currentOrganization.GeneralWebsite;
+            $scope.hasWebpage = false;
+            $scope.generalWebpage = $rootScope.sessionData.organization.GeneralWebsite;
 
             $scope.selfServiceWebpage = null;
             $scope.communityWebpage = null;
@@ -57,6 +58,12 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
                 $scope.communityWebpage = lastRouting.Community;
 
             }
+
+
+            if($scope.generalWebpage || $scope.selfServiceWebpage || $scope.communityWebpage){
+                $scope.hasWebpage = true;
+            }
+
         }
 
     };
@@ -166,7 +173,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
     $scope.makeCallViaURL = function(number){
        $log.debug('call via url');
-       $window.location = 'tel:' +number;
+
+       window.open('tel:' +number ,'_system');
     };
 
     $scope.mail = function () {
@@ -176,7 +184,10 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         $scope.logAction($scope.actionMessages.MAIL);
 
         var body = $translate.instant("MAIL.BODY", { "company": $rootScope.sessionData.organization.orgName});
-        $window.location = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
+
+        var url = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
+        window.open(url,'_system');
+
     };
 
     $scope.hasTwitterApp = false;

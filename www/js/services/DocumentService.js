@@ -47,7 +47,7 @@ services.service('DocumentService', function ($cordovaCamera, $cordovaFile, Loca
                 sourceType: Camera.PictureSourceType.CAMERA,
                 encodingType: Camera.EncodingType.JPEG,
                 cameraDirection: 1,
-                saveToPhotoAlbum: false
+                saveToPhotoAlbum: true
             };
 
             $cordovaCamera.getPicture(options).then(

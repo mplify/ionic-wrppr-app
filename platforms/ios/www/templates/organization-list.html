@@ -1,6 +1,7 @@
-<ion-view view-title="{{ 'BUSINESS_CONTACT.SEARCH' | translate }}" ng-controller="OrganizationsCtrl" ng-init="reload()">
+<ion-view view-title="{{ 'BUSINESS_CONTACT.SEARCH' | translate }}" >
 
-    <ion-content ng-show="introVisible">
+    <ion-content >
+        <div ng-show="introVisible">
         <div class="bar bar-header item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
@@ -27,8 +28,8 @@
                 on-infinite="loadNext()"
                 distance="10%">
         </ion-infinite-scroll>
+        </div>
+        <div ng-hide="introVisible" ng-include src="'intro.html'"></div>
     </ion-content>
-    <ion-content ng-hide="introVisible">
-        <div ng-include src="'intro.html'"></div>
-    </ion-content>
+
 </ion-view>

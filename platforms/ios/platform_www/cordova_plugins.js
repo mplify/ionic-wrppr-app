@@ -1,15 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "pluginId": "cordova-plugin-inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-appavailability/www/AppAvailability.js",
         "id": "cordova-plugin-appavailability.AppAvailability",
         "pluginId": "cordova-plugin-appavailability",
@@ -359,6 +350,15 @@ module.exports = [
         "pluginId": "cordova-plugin-facebook4",
         "clobbers": [
             "facebookConnectPlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
         ]
     }
 ];

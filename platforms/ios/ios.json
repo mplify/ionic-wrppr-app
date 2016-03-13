@@ -37,10 +37,6 @@
                             "count": 2
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"AppAvailability\"><param name=\"ios-package\" value=\"AppAvailability\" /></feature>",
                             "count": 1
                         },
@@ -74,6 +70,10 @@
                         },
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -131,9 +131,6 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.wrppr.wrppr"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
@@ -169,19 +166,13 @@
             "APP_ID": "758543534250966",
             "APP_NAME": "test",
             "PACKAGE_NAME": "com.wrppr.wrppr"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.wrppr.wrppr"
         }
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
-            "pluginId": "cordova-plugin-inappbrowser",
-            "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-appavailability/www/AppAvailability.js",
             "id": "cordova-plugin-appavailability.AppAvailability",
@@ -532,6 +523,15 @@
             "pluginId": "cordova-plugin-facebook4",
             "clobbers": [
                 "facebookConnectPlugin"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "pluginId": "cordova-plugin-inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
             ]
         }
     ]

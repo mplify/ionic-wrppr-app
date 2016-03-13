@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService, LocalDataService) {
+controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService, BasicAuthorizationService) {
     $scope.twitterLoginEnabled = window.cordova;
 
     $scope.consumerKey = 'JVj33eTXGPxlVZxoT8htdqwNK';
@@ -24,11 +24,76 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
 
             $log.debug('twitter login success', result);
 
-            $state.go('app.search');
+            var twitterName = result.screen_name;
+            var twitterToken = result.oauth_token;
+
+            UserService.searchByTwitterAccount(twitterName).then(function(users){
+                if(users.length > 0){
+                    $log.info('found user with same twitter account', users);
+
+                    $scope.updateToken(users[0], twitterToken);
+                    //fixme update token
+
+                }
+                else {
+                    UserService.searchByUsername(twitterName).then(
+                        function(usersWithUsername){
+                            if(usersWithUsername.length > 0){
+                                $scope.updateToken(usersWithUsername[0], twitterToken);
+                            }
+                            else {
+                                //fixme create user
+                                var user = {
+                                    'UserName' :  twitterName,
+                                    'TwitterAccount' :  twitterName,
+                                    'TwitterOauthToken' :  twitterToken
+                                };
+
+                                UserService.createUser(user).then(
+                                    function(createdUser){
+                                         $scope.updateCredentials(createdUser, twitterToken);
+                                    },
+                                    function(createError){
+
+                                    }
+                                );
+                            }
+                        },
+                        function(err){
+
+                        }
+                    );
+                }
+            }, function(error){
+                alert(error);
+            });
+
+            //$state.go('app.search');
         }, function (error) {
             $log.error('failed to login via twitter', error);
             $ionicLoading.hide();
         });
+    };
+
+    $scope.updateToken = function(user, token){
+       user.TwitterOauthToken = token;
+       UserService.updateUser(user).then(
+           function(updateSuccess){
+               $scope.updateCredentials(user, token);
+           },
+           function(error){
+
+           }
+       );
+    };
+
+    $scope.updateCredentials = function(user, token){
+        $log.info('logged in via twitter', user);
+        var username = user.UserName;
+        var password = "twitter " + token;
+        BasicAuthorizationService.generateToken(username, password);
+
+        $state.go('app.search');
     };
 
 

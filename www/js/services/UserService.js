@@ -32,6 +32,35 @@ services.service('UserService', function ($http, $q, $log, api) {
                 });
             return defer.promise;
         },
+        'searchByTwitterAccount': function (username) {
+            $log.info('search user by twitter account: ' + username);
+
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            params = {
+                where: '{"FacebookAccount": "' + username + '"}'
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    if (resp.length > 1) {
+                        $log.error('There is a problem, more then 1 user with ' + username + ' facebookAccount');
+                    }
+
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
         'searchByEmail': function (email) {
             $log.info('search user by email: ' + email);
 
@@ -43,6 +72,31 @@ services.service('UserService', function ($http, $q, $log, api) {
             var params = {};
             params = {
                 where: '{"Emailaddress": "' + email + '"}'
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
+        'searchByUsername': function (username) {
+            $log.info('search user by username: ' + username);
+
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            params = {
+                where: '{"UserName": "' + username + '"}'
             };
 
             $http.get(url,

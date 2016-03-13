@@ -1,12 +1,4 @@
 {
-    "cordova-plugin-inappbrowser": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-inappbrowser@~1.2.0"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "git",
@@ -101,5 +93,13 @@
             "APP_ID": "758543534250966",
             "APP_NAME": "test"
         }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser@~1.2.0"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

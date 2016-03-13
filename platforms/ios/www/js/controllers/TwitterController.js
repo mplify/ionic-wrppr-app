@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService, LocalDataService) {
+controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService) {
     $scope.twitterLoginEnabled = window.cordova;
 
     $scope.consumerKey = 'JVj33eTXGPxlVZxoT8htdqwNK';
@@ -23,6 +23,8 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
             $ionicLoading.hide();
 
             $log.debug('twitter login success', result);
+
+            UserService.searchByTwitterAccount(result.username).then(function(){}, function(){});
 
             $state.go('app.search');
         }, function (error) {

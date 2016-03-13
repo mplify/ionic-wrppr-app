@@ -667,6 +667,35 @@ services.service('UserService', ['$http', '$q', '$log', 'api', function ($http, 
                 });
             return defer.promise;
         },
+        'searchByTwitterAccount': function (username) {
+            $log.info('search user by twitter account: ' + username);
+
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            params = {
+                where: '{"FacebookAccount": "' + username + '"}'
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    if (resp.length > 1) {
+                        $log.error('There is a problem, more then 1 user with ' + username + ' facebookAccount');
+                    }
+
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
         'searchByEmail': function (email) {
             $log.info('search user by email: ' + email);
 
@@ -678,6 +707,31 @@ services.service('UserService', ['$http', '$q', '$log', 'api', function ($http, 
             var params = {};
             params = {
                 where: '{"Emailaddress": "' + email + '"}'
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
+        'searchByUsername': function (username) {
+            $log.info('search user by username: ' + username);
+
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            params = {
+                where: '{"UserName": "' + username + '"}'
             };
 
             $http.get(url,
@@ -1422,7 +1476,7 @@ services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDat
                 sourceType: Camera.PictureSourceType.CAMERA,
                 encodingType: Camera.EncodingType.JPEG,
                 cameraDirection: 1,
-                saveToPhotoAlbum: false
+                saveToPhotoAlbum: true
             };
 
             $cordovaCamera.getPicture(options).then(
@@ -1744,7 +1798,12 @@ angular.module('App.controllers', [])
                 function(success){
                     $ionicLoading.hide();
 
+                    $ionicPopup.alert({
+                        title: "Support",
+                        template : "Thanks, you message send. We will contact you soon."
+                    });
                     $scope.closeModal();
+
                 },
                 function(err){
                     $ionicLoading.hide();
@@ -2668,7 +2727,7 @@ controllers.controller('FacebookCtrl', ['$scope', '$rootScope', '$state', '$stat
 
 var controllers = angular.module('App.controllers');
 
-controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicLoading', '$ionicPlatform', '$log', '$cordovaOauth', 'localStorageService', 'UserService', 'LocalDataService', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService, LocalDataService) {
+controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$ionicLoading', '$ionicPlatform', '$log', '$cordovaOauth', 'localStorageService', 'UserService', 'BasicAuthorizationService', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, $ionicPlatform, $log, $cordovaOauth, localStorageService, UserService, BasicAuthorizationService) {
     $scope.twitterLoginEnabled = window.cordova;
 
     $scope.consumerKey = 'JVj33eTXGPxlVZxoT8htdqwNK';
@@ -2692,11 +2751,76 @@ controllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$state', '$state
 
             $log.debug('twitter login success', result);
 
-            $state.go('app.search');
+            var twitterName = result.screen_name;
+            var twitterToken = result.oauth_token;
+
+            UserService.searchByTwitterAccount(twitterName).then(function(users){
+                if(users.length > 0){
+                    $log.info('found user with same twitter account', users);
+
+                    $scope.updateToken(users[0], twitterToken);
+                    //fixme update token
+
+                }
+                else {
+                    UserService.searchByUsername(twitterName).then(
+                        function(usersWithUsername){
+                            if(usersWithUsername.length > 0){
+                                $scope.updateToken(usersWithUsername[0], twitterToken);
+                            }
+                            else {
+                                //fixme create user
+                                var user = {
+                                    'UserName' :  twitterName,
+                                    'TwitterAccount' :  twitterName,
+                                    'TwitterOauthToken' :  twitterToken
+                                };
+
+                                UserService.createUser(user).then(
+                                    function(createdUser){
+                                         $scope.updateCredentials(createdUser, twitterToken);
+                                    },
+                                    function(createError){
+
+                                    }
+                                );
+                            }
+                        },
+                        function(err){
+                           $log.error('failed to search user', err);
+                        }
+                    );
+                }
+            }, function(error){
+                $log.error('failed to search user', error);
+            });
+
+            //$state.go('app.search');
         }, function (error) {
             $log.error('failed to login via twitter', error);
             $ionicLoading.hide();
         });
+    };
+
+    $scope.updateToken = function(user, token){
+       user.TwitterOauthToken = token;
+       UserService.updateUser(user).then(
+           function(updateSuccess){
+               $scope.updateCredentials(user, token);
+           },
+           function(error){
+               $log.error('failed update user', error);
+           }
+       );
+    };
+
+    $scope.updateCredentials = function(user, token){
+        $log.info('logged in via twitter', user);
+        var username = user.UserName;
+        var password = "twitter " + token;
+        BasicAuthorizationService.generateToken(username, password);
+
+        $state.go('app.search');
     };
 
 

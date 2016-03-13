@@ -60,12 +60,12 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
                             }
                         },
                         function(err){
-
+                           $log.error('failed to search user', err);
                         }
                     );
                 }
             }, function(error){
-                alert(error);
+                $log.error('failed to search user', error);
             });
 
             //$state.go('app.search');
@@ -82,7 +82,7 @@ controllers.controller('TwitterCtrl', function ($scope, $rootScope, $state, $sta
                $scope.updateCredentials(user, token);
            },
            function(error){
-
+               $log.error('failed update user', error);
            }
        );
     };

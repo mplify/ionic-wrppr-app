@@ -147,7 +147,12 @@ angular.module('App.controllers', [])
                 function(success){
                     $ionicLoading.hide();
 
+                    $ionicPopup.alert({
+                        title: "Support",
+                        template : "Thanks, you message send. We will contact you soon."
+                    });
                     $scope.closeModal();
+
                 },
                 function(err){
                     $ionicLoading.hide();

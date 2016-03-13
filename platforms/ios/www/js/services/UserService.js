@@ -86,6 +86,31 @@ services.service('UserService', function ($http, $q, $log, api) {
                 });
             return defer.promise;
         },
+        'searchByUsername': function (username) {
+            $log.info('search user by username: ' + username);
+
+
+            var url = api.byName('base-url') + api.byName('user-url');
+            var defer = $q.defer();
+
+
+            var params = {};
+            params = {
+                where: '{"UserName": "' + username + '"}'
+            };
+
+            $http.get(url,
+                {
+                    params: params
+                })
+                .success(function (resp) {
+                    defer.resolve(resp);
+                })
+                .error(function (err) {
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
         'createUser': function (userData) {
             $log.info('create user' + userData);
 

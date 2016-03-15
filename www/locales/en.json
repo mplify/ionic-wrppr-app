@@ -66,7 +66,14 @@
         "TITLE" : "Contact",
         "CALL" : "CALL",
         "MAIL" : "MAIL",
-        "TWEET" :  "TWEET"
+        "TWEET" :  "TWEET",
+        "WEBPAGE" : "Open company webpage",
+        "WEBPAGE_GENERAL" : "General",
+        "WEBPAGE_SELF_SERVICE" : "Self Service",
+        "WEBPAGE_SOCIAL" : "Community",
+        "CALL_PROCESS" : "Calling ...",
+        "CALL_FAILED"  : "Call failed",
+        "MESSAGE_SAVE_FAIL" : "Failed to save a message"
 
     },
     "USER_CORRECT" : {
@@ -101,8 +108,8 @@
         "TITLE" : "Favorites"
     },
     "MESSAGES" : {
-        "HISTORY_TITLE" : "Messages Overview",
-        "DETAILS_TITLE" : "Message Details",
+        "HISTORY_TITLE" : "Contacts Overview",
+        "DETAILS_TITLE" : "Contact Moment",
         "LOADING" : "Loading details ..",
         "LOADING_LIST" : "Loading messages",
         "LOAD_FAILED" : "Load failed",

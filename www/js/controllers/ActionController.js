@@ -76,17 +76,17 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
 
 
-        var opts = {                                           //search options
+        var opts = {
             filter: $translate.instant("CONTACT_NAME"),
-            multiple: true,                                      // Yes, return any contact that matches criteria
-            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'wrppr'.
-            desiredFields: ['id']    //return fields.
+            multiple: true,
+            fields: [ 'displayName', 'name' ],
+            desiredFields: ['id']
         };
 
         var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
         if (window.cordova) {
             $ionicLoading.show({
-                template: 'Calling ...'
+                template: $translate.instant("ACTIONS.CALL_PROCESS")
             });
 
             $cordovaContacts.find(opts).then(function (contactsFound) {
@@ -162,7 +162,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             function (err) {
                 $log.error('failed call', err);
                 $ionicPopup.alert({
-                    title: 'Call failed',
+                    title: $translate.instant("ACTIONS.CALL_FAILED"),
                     template : err
                 });
                 $scope.makeCallViaURL(number);
@@ -230,7 +230,11 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             $rootScope.reloadMessages = true;
 
         }, function(err){
-
+            $log.error('failed to save a message', err);
+            $ionicPopup.alert({
+                title: $translate.instant("ACTIONS.MESSAGE_SAVE_FAIL"),
+                template : err
+            });
         });
 
     };
@@ -239,15 +243,15 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         var buttons = [];
         if ($scope.generalWebpage) {
-            buttons.push({ text: 'General', url: $scope.generalWebpage });
+            buttons.push({ text: $translate.instant("ACTIONS.WEBPAGE_GENERAL"), url: $scope.generalWebpage });
         }
 
         if ($scope.selfServiceWebpage) {
-            buttons.push({ text: 'Self-service', url: $scope.selfServiceWebpage});
+            buttons.push({ text: $translate.instant("ACTIONS.WEBPAGE_SELF_SERVICE"), url: $scope.selfServiceWebpage});
         }
 
         if ($scope.communityWebpage) {
-            buttons.push({ text: 'Community', url: $scope.communityWebpage });
+            buttons.push({ text: "ACTIONS.WEBPAGE_COMMUNITY", url: $scope.communityWebpage });
         }
 
         if(buttons.length === 0){
@@ -265,8 +269,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: buttons,
-                titleText: 'Open company webpage',
-                cancelText: 'Cancel',
+                titleText: $translate.instant("ACTIONS.WEBPAGE"),
+                cancelText: $translate.instant("GENERIC.CANCEL"),
                 buttonClicked: function (index) {
                     var url = buttons[index].url;
                     $log.debug('try to open url ', url);

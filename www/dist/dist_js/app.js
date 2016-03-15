@@ -289,7 +289,7 @@ $templateCache.put("intro.html","<ion-modal-view>\n    <ion-header-bar align-tit
 $templateCache.put("login.html","<ion-view>\n  <ion-header-bar align-title=\"left\">\n    <h1 class=\"title\">{{\'LOGIN_TITLE\' | translate}}</h1>\n    <div class=\"buttons\">\n      <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC_CLOSE\' | translate}}</button>\n    </div>\n  </ion-header-bar>\n  <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n    <form name=\"loginForm\" ng-submit=\"doLogin()\" novalidate>\n      <div class=\"list\">\n\n        <label class=\"item item-input\">\n          <span class=\"input-label\">{{\'USERNAME\' | translate}}</span>\n          <input type=\"text\" name=\"username\" ng-model=\"loginData.UserName\" required>\n\n        </label>\n        <label class=\"item item-input\" ng-show=\"!loginForm.username.$pristine && loginForm.username.$invalid\">\n            <p ng-show=\"loginForm.username.$error.required\">{{\'USERNAME_REQUIRED_VALIDATOR\' | translate}}</p>\n        </label>\n\n        <label class=\"item item-input\">\n          <span class=\"input-label\">{{\'PASSWORD\' | translate}}</span>\n          <input type=\"password\" name=\"password\" ng-model=\"loginData.Password\" required complex-password>\n        </label>\n        <label class=\"item item-input\" ng-show=\"!loginForm.password.$pristine && loginForm.password.$invalid\">\n              <p ng-show=\"loginForm.password.$error.required\">{{\'PASSWORD_REQUIRED_VALIDATOR\' | translate}}</p>\n        </label>\n        <label class=\"item\">\n          <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"loginForm.$invalid\" type=\"submit\">{{\'LOGIN_BUTTON\' | translate}}</button>\n        </label>\n        <label class=\"\">\n                <button class=\"button button-block button-clear\" ui-sref=\"restorepassword\">{{\'FORGOT_PASSWORD_BUTTON\' | translate}}</button>\n        </label>\n\n      </div>\n    </form>\n\n\n\n  </ion-content>\n\n\n</ion-view>\n");
 $templateCache.put("menu.html","<ion-side-menus enable-menu-with-back-views=\"false\">\n    <ion-side-menu-content>\n        <ion-nav-bar class=\"bar-stable\">\n            <ion-nav-buttons >\n                <button class=\"button button-icon button-clear ion-navicon\" menu-toggle=\"left\">\n                </button>\n            </ion-nav-buttons>\n            <ion-nav-back-button>\n            </ion-nav-back-button>\n        </ion-nav-bar>\n\n        <ion-nav-view name=\"menuContent\"></ion-nav-view>\n    </ion-side-menu-content>\n\n    <ion-side-menu side=\"left\">\n        <ion-header-bar class=\"bar-stable\">\n            <h1 class=\"title\">{{\'APP_TITLE\' | translate}}</h1>\n        </ion-header-bar>\n        <ion-content>\n            <ion-list>\n\n                <ion-item menu-close href=\"#/app/search\">\n                    {{\'MENU.BUSINESS_CONTACT_SEARCH\' | translate}}\n                </ion-item>\n                <ion-item menu-close href=\"#/app/user\">\n                    {{\'MENU.USER_PROFILE\' | translate}}\n                </ion-item>\n                <ion-item menu-close href=\"#/app/favorites\">\n                    {{\'MENU.FAVORITES\' | translate}}\n                </ion-item>\n                <ion-item menu-close href=\"#/app/messages\">\n                    {{\'MENU.HISTORY\' | translate}}\n                </ion-item>\n                <ion-item menu-close href=\"#/app/documents\">\n                    {{\'MENU.ATTACHMENTS\' | translate}}\n                </ion-item>\n                <ion-item menu-close ng-click=\"logout()\">\n                    {{\'MENU.LOGOUT\' | translate}}\n                </ion-item>\n\n            </ion-list>\n        </ion-content>\n    </ion-side-menu>\n</ion-side-menus>\n");
 $templateCache.put("message-details.html","<ion-view view-title=\"{{\'MESSAGES.DETAILS_TITLE\' | translate}}\" ng-controller=\"MessageCtrl\">\n\n\n    <form name=\"messageForm\"  novalidate>\n\n    <ion-content>\n        <ion-list>\n            <ion-item>\n                <div ng-switch=\"currentMessage.ChannelTypeID\">\n                    <div class=\"row button-block \" style=\"text-align: center; display: block;\">\n                        <div ng-switch-when=\"1\" class=\"ion-ios-telephone\" style=\"font-size: 86px; color: lightgray;\"></div>\n                        <div ng-switch-when=\"2\" class=\"icon ion-email\" style=\"font-size: 86px; color: lightgray;\"></div>\n                        <div ng-switch-when=\"3\" class=\"ion-social-twitter\" style=\"font-size: 86px; color: lightgray;\"></div>\n\n                    </div>\n                </div>\n            </ion-item>\n\n            <ion-item>\n                <h3 style=\"text-align: center; width: 100%;\">{{currentMessage.Question}}</h3>\n            </ion-item>\n            <ion-item ng-show=\"messageOptions.length > 0\">\n                <p ng-repeat=\"option in messageOptions\" style=\"text-align: center; width: 100%;\">{{option.NodeName}}</p>\n            </ion-item>\n\n\n\n            <ion-item class=\"item-divider item-icon-right\">\n                Created\n\n            </ion-item>\n            <ion-item>\n                <p style=\"text-align: center;\">{{currentMessage.createdAt | date:\'dd.MM.yyyy HH:mm\'}}</p>\n            </ion-item>\n            <ion-item class=\"item-divider item-icon-right\" ng-show=\"currentMessage.Notes\">\n                Note\n\n            </ion-item>\n            <ion-item ng-show=\"currentMessage.Notes\">\n                <p style=\"text-align: center;\">{{currentMessage.Notes}}</p>\n            </ion-item>\n            <ion-item class=\"item-divider item-icon-right\" ng-show=\"currentAttachments.length > 0\">\n                Attachments\n\n            </ion-item>\n            <ion-item ng-repeat=\"attachment in currentAttachments\" ng-show=\"currentAttachments.length > 0\">\n                <a style=\"text-align: center;\" ng-click=\"selectDocument(attachment)\">{{attachment.name | Filename}}</a>\n\n            </ion-item>\n\n        </ion-list>\n\n\n    </ion-content>\n    </form>\n    <div class=\"tabs tabs-icon-top\">\n        <a class=\"tab-item\">\n            <i class=\"icon ion-android-attach\" ng-click=\"addNote();\"></i>\n            Add Attachment\n        </a>\n        <a class=\"tab-item\" ng-click=\"openSupport();\">\n            <i class=\"icon ion-help-buoy\"></i>\n            {{ \'GENERIC.SUPPORT\' | translate }}\n        </a>\n    </div>\n\n</ion-view>");
-$templateCache.put("message-list.html","\n<ion-view view-title=\"{{\'MESSAGES.HISTORY_TITLE\' | translate}}\" ng-controller=\"MessageHistoryCtrl\">\n    <ion-content>\n        <ion-list>\n            <ion-item ng-repeat=\"message in messages track by message.id\" class=\"item-icon-left\" ng-click=\"selectMessage(message)\">\n                   <div ng-switch=\"message.ChannelTypeID\">\n                        <i ng-switch-when=\"1\" class=\"icon ion-ios-telephone\"></i>\n                        <i ng-switch-when=\"2\" class=\"icon ion-email\"></i>\n                        <i ng-switch-when=\"3\" class=\"icon ion-social-twitter\"></i>\n                    </div>\n                    {{message.Question}}\n                    <span class=\"item-note\">\n                     {{message.createdAt | date:\'dd.MM.yyyy\'}}\n                    </span>\n            </ion-item>\n        </ion-list>\n    </ion-content>\n\n</ion-view>");
+$templateCache.put("message-list.html","\n<ion-view view-title=\"{{\'MESSAGES.HISTORY_TITLE\' | translate}}\" ng-controller=\"MessageHistoryCtrl\">\n    <ion-content>\n        <ion-list>\n            <ion-item ng-repeat=\"message in messages track by message.id\" class=\"item-icon-left\" ng-click=\"selectMessage(message)\">\n                   <div ng-switch=\"message.ChannelTypeID\">\n                        <i ng-switch-when=\"1\" class=\"icon ion-ios-telephone\"></i>\n                        <i ng-switch-when=\"2\" class=\"icon ion-email\"></i>\n                        <i ng-switch-when=\"3\" class=\"icon ion-social-twitter\"></i>\n                    </div>\n                    {{message.OrgID.orgName}}\n                    <span class=\"item-note\">\n                     {{message.createdAt | date:\'dd.MM.yyyy\'}}\n                    </span>\n            </ion-item>\n        </ion-list>\n    </ion-content>\n\n</ion-view>");
 $templateCache.put("message-note.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">Message Note</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal();\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form name=\"messageNoteForm\" ng-submit=\"saveMessageNote()\" novalidate>\n            <div class=\"list\">\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Note</span>\n                    <input type=\"text\" name=\"username\" ng-model=\"currentMessage.Notes\">\n\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\"  type=\"submit\">Save</button>\n                </label>\n            </div>\n        </form>\n    </ion-content>\n</ion-modal-view>");
 $templateCache.put("new-document.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">{{\'ATTACHMENT.NEW_TITLE\' | translate}}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal()\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\">\n        <form name=\"newDocumentForm\" ng-submit=\"closeAttachmentModal(attachment.filename)\" novalidate>\n            <div class=\"list\">\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'ATTACHMENT.FILENAME\' | translate}}</span>\n                    <input type=\"text\" name=\"username\" ng-model=\"attachment.filename\">\n\n                </label>\n\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"newDocument.$invalid\" type=\"submit\">{{\'ATTACHMENT.SAVE\' | translate}}</button>\n                </label>\n            </div>\n        </form>\n    </ion-content>\n</ion-modal-view>");
 $templateCache.put("no-internet.html","<ion-view view-title=\"{{\'OFFLINE.TITLE\' | translate}}\" ng-controller=\"AppCtrl\">\n\n\n    <ion-content style=\"margin-left: 20px; margin-right: 20px;\">\n\n        <div class=\"row button-block \" style=\"text-align: center; display: block;\">\n            <div class=\"ion-android-wifi\" style=\"font-size: 86px; color: lightgray;\"></div>\n\n        </div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'OFFLINE.TEXT\' | translate}}</h4></div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'OFFLINE.DESCRIPTION\' | translate}}</h4></div>\n        <div class=\"row\" style=\"height: 30%\"></div>\n        <div class=\"row\">\n\n            <button class=\"button button-large button-assertive wrppr-action-button\" style=\"width: 100%;\" ng-click=\"refreshNetworkState()\">\n                {{\'OFFLINE.REFRESH\' | translate}}\n            </button>\n\n        </div>\n\n\n\n    </ion-content>\n\n\n</ion-view>");
@@ -2350,17 +2350,17 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
 
 
-        var opts = {                                           //search options
+        var opts = {
             filter: $translate.instant("CONTACT_NAME"),
-            multiple: true,                                      // Yes, return any contact that matches criteria
-            fields: [ 'displayName', 'name' ],                   // These are the fields to search for 'wrppr'.
-            desiredFields: ['id']    //return fields.
+            multiple: true,
+            fields: [ 'displayName', 'name' ],
+            desiredFields: ['id']
         };
 
         var number = DTMFService.createNumber($rootScope.sessionData.organization, $scope.currentOptions);
         if (window.cordova) {
             $ionicLoading.show({
-                template: 'Calling ...'
+                template: $translate.instant("ACTIONS.CALL_PROCESS")
             });
 
             $cordovaContacts.find(opts).then(function (contactsFound) {
@@ -2436,7 +2436,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             function (err) {
                 $log.error('failed call', err);
                 $ionicPopup.alert({
-                    title: 'Call failed',
+                    title: $translate.instant("ACTIONS.CALL_FAILED"),
                     template : err
                 });
                 $scope.makeCallViaURL(number);
@@ -2504,7 +2504,11 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             $rootScope.reloadMessages = true;
 
         }, function(err){
-
+            $log.error('failed to save a message', err);
+            $ionicPopup.alert({
+                title: $translate.instant("ACTIONS.MESSAGE_SAVE_FAIL"),
+                template : err
+            });
         });
 
     };
@@ -2513,15 +2517,15 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
         var buttons = [];
         if ($scope.generalWebpage) {
-            buttons.push({ text: 'General', url: $scope.generalWebpage });
+            buttons.push({ text: $translate.instant("ACTIONS.WEBPAGE_GENERAL"), url: $scope.generalWebpage });
         }
 
         if ($scope.selfServiceWebpage) {
-            buttons.push({ text: 'Self-service', url: $scope.selfServiceWebpage});
+            buttons.push({ text: $translate.instant("ACTIONS.WEBPAGE_SELF_SERVICE"), url: $scope.selfServiceWebpage});
         }
 
         if ($scope.communityWebpage) {
-            buttons.push({ text: 'Community', url: $scope.communityWebpage });
+            buttons.push({ text: "ACTIONS.WEBPAGE_COMMUNITY", url: $scope.communityWebpage });
         }
 
         if(buttons.length === 0){
@@ -2539,8 +2543,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: buttons,
-                titleText: 'Open company webpage',
-                cancelText: 'Cancel',
+                titleText: $translate.instant("ACTIONS.WEBPAGE"),
+                cancelText: $translate.instant("GENERIC.CANCEL"),
                 buttonClicked: function (index) {
                     var url = buttons[index].url;
                     $log.debug('try to open url ', url);

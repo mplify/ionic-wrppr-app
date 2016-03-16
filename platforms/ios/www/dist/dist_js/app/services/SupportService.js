@@ -2,7 +2,7 @@ var services = angular.module('App.services');
 
 services.service('SupportService', ['$http', '$q', '$log', 'api', function ($http, $q, $log, api) {
         return {
-            'submitSupport': function (action, username, description) {
+            'submitSupport': function (action, username, description, messageID) {
                 $log.info('create support: ' +  action + ' from '+ username);
 
 
@@ -13,7 +13,8 @@ services.service('SupportService', ['$http', '$q', '$log', 'api', function ($htt
                 var data = {
                     "action" : action,
                     "userName" : username,
-                    "description" : description
+                    "description" : description,
+                    "messageID" : messageID
                 };
 
                 $http.post(url, data)

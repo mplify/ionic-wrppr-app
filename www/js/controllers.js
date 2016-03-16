@@ -143,11 +143,11 @@ angular.module('App.controllers', [])
 
             var user = LocalDataService.loadUser();
             if($rootScope.supportMessage){
-                var messageID = $rootScope.supportMessage.id.toString();
+                $scope.messageID = $rootScope.supportMessage.id.toString();
 
             }
 
-            SupportService.submitSupport(action, user.UserName, comment, messageID).then(
+            SupportService.submitSupport(action, user.UserName, comment, $scope.messageID).then(
                 function(success){
                     $ionicLoading.hide();
 

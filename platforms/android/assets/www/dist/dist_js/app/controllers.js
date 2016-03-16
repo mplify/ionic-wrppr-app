@@ -142,8 +142,12 @@ angular.module('App.controllers', [])
             });
 
             var user = LocalDataService.loadUser();
+            if($rootScope.supportMessage){
+                var messageID = $rootScope.supportMessage.id;
 
-            SupportService.submitSupport(action, user.UserName, comment).then(
+            }
+
+            SupportService.submitSupport(action, user.UserName, comment, messageID).then(
                 function(success){
                     $ionicLoading.hide();
 
@@ -186,12 +190,12 @@ angular.module('App.controllers', [])
         $scope.ratePositive = function(){
             $log.info('rate positive');
             $scope.closeModal();
-        }
+        };
 
         $scope.rateNegative = function(){
             $log.info('rate negative');
             $scope.closeModal();
-        }
+        };
 
 
 

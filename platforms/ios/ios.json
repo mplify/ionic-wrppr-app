@@ -65,10 +65,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"NativePageTransitions\"><param name=\"ios-package\" value=\"NativePageTransitions\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -154,9 +150,6 @@
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.wrppr.wrppr"
-        },
-        "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "com.wrppr.wrppr"
         },
         "cordova-plugin-splashscreen": {
@@ -499,14 +492,6 @@
             "pluginId": "cordova-plugin-contacts",
             "merges": [
                 "Contact"
-            ]
-        },
-        {
-            "file": "plugins/com.telerik.plugins.nativepagetransitions/www/NativePageTransitions.js",
-            "id": "com.telerik.plugins.nativepagetransitions.NativePageTransitions",
-            "pluginId": "com.telerik.plugins.nativepagetransitions",
-            "clobbers": [
-                "window.plugins.nativepagetransitions"
             ]
         },
         {

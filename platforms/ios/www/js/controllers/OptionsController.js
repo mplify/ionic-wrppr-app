@@ -37,24 +37,10 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
     $scope.load = function () {
 
 
-        $ionicLoading.show({
-            template: $translate.instant("ROUTING.LOADING"),
-            delay: 500
-        });
 
-        if ($stateParams.parentID === 0) {
-            OptionService.getOptionsTree($stateParams.orgID).then(
-                function (success) {
-                   $log.info('loaded org details');
-                   $rootScope.organizationDetails = success;
 
-                    $scope.options = $rootScope.organizationDetails.routes;
-                    $ionicLoading.hide();
-
-                }, function (err) {
-
-                });
-
+        if ($stateParams.parentID === "0") {
+            $scope.options = $rootScope.organizationDetails.routes;
         }
         else {
            $scope.recursiveFilter($rootScope.organizationDetails.routes, $stateParams.parentID);
@@ -62,14 +48,16 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
 
             $scope.options = $scope.filtered[0].children;
 
-            // if no options redirect to actions
-            if ($scope.options.length === 0) {
-                $scope.showOptions = false;
-            }
-            else {
-                $scope.showOptions = true;
-            }
-            $ionicLoading.hide();
+
+
+        }
+
+        // if no options redirect to actions
+        if ($scope.options.length === 0) {
+            $scope.showOptions = false;
+        }
+        else {
+            $scope.showOptions = true;
         }
 
 

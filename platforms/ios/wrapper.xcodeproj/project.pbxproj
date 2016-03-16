@@ -16,7 +16,6 @@
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		361245E47E4145AABE546663 /* AppAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 80ACD2029B0D45FCAC7DECB5 /* AppAvailability.m */; };
 		3BB51F20FD0143D5874AC349 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA2F04D99C94AC3A402DC3A /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */; };
 		5021B2FBA57B4164AF045516 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 164B45A265BD4C93A186EB53 /* CDVLocalFilesystem.m */; };
 		5190C3B51D474AEEB395BDFC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E8B50116554886B838FBC9 /* CoreTelephony.framework */; };
 		59A7DC937A7549AC86D3DF28 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C293C76BE11D46BE9B889D8B /* CDVCamera.m */; };
@@ -27,7 +26,6 @@
 		74DF01F3133043469C19D7BD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81CAF54450B4D5CA959BA35 /* FBSDKShareKit.framework */; };
 		796F93FD99FB496397145549 /* CDVConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6DBF56A3464E6BB068F46D /* CDVConnection.m */; };
 		83202CCA359D4CCE992D9270 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 219ABC5A777C47EF8F7101DD /* CDVFile.m */; };
-		835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C243FB12EC54915953D6D09 /* NativePageTransitions.m */; };
 		99AD5AE0FF2548329EA24ED3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 56729045BF554DDEA30EFB79 /* libsqlite3.tbd */; };
 		9BC4E5DD712F4B138E9FD644 /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = E32F7B70D62041369DBF846F /* UIImage+CropScaleOrientation.m */; };
 		A19AC053DEF8455489B0173D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1065887BBBAF48FBACF3E14B /* FBSDKLoginKit.framework */; };
@@ -98,7 +96,6 @@
 		59E8B50116554886B838FBC9 /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5A31E889E00B452389679E37 /* AVFoundation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5BA95D2640E74382B77ACE5D /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = FacebookConnectPlugin.h; path = "cordova-plugin-facebook4/FacebookConnectPlugin.h"; sourceTree = "<group>"; };
-		67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+nativepagetransitions.h"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.h"; sourceTree = "<group>"; };
 		78B330FCCDFD4353B9ED6EC2 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "wrapper/Plugins/cordova-plugin-facebook4/Bolts.framework"; sourceTree = "<group>"; };
 		7C6DBF56A3464E6BB068F46D /* CDVConnection.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVConnection.m; path = "cordova-plugin-network-information/CDVConnection.m"; sourceTree = "<group>"; };
 		80ACD2029B0D45FCAC7DECB5 /* AppAvailability.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = AppAvailability.m; path = "cordova-plugin-appavailability/AppAvailability.m"; sourceTree = "<group>"; };
@@ -107,12 +104,9 @@
 		8CDA9A90820F4F6C93C56336 /* CDVContacts.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVContacts.m; path = "cordova-plugin-contacts/CDVContacts.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* wrapper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "wrapper-Info.plist"; path = "wrapper/wrapper-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
 		8DA2F04D99C94AC3A402DC3A /* ImageIO.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		9C243FB12EC54915953D6D09 /* NativePageTransitions.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = NativePageTransitions.m; path = com.telerik.plugins.nativepagetransitions/NativePageTransitions.m; sourceTree = "<group>"; };
 		A0B727D2784D4ED0B615CA56 /* CDVContacts.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVContacts.h; path = "cordova-plugin-contacts/CDVContacts.h"; sourceTree = "<group>"; };
 		A13F27790A5147E7BA2ED67E /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVAssetLibraryFilesystem.h; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; };
-		A8B5F210AE8D4684BFEA5CAA /* NativePageTransitions.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = NativePageTransitions.h; path = com.telerik.plugins.nativepagetransitions/NativePageTransitions.h; sourceTree = "<group>"; };
 		A8F7DE45E2064524A6F459DA /* AddressBookUI.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+nativepagetransitions.m"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.m"; sourceTree = "<group>"; };
 		B921BEC0BADC4E2CA8CC8ADC /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C293C76BE11D46BE9B889D8B /* CDVCamera.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = "cordova-plugin-camera/CDVCamera.m"; sourceTree = "<group>"; };
 		CEB575B27E594F608157B97F /* CDVSplashScreen.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVSplashScreen.m; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; };
@@ -295,10 +289,6 @@
 				D0DECED44053406F83AE37B6 /* CDVContact.m */,
 				A0B727D2784D4ED0B615CA56 /* CDVContacts.h */,
 				550905141C904084A8855685 /* CDVContact.h */,
-				9C243FB12EC54915953D6D09 /* NativePageTransitions.m */,
-				B13EEA95CE9549D4853E873D /* AppDelegate+nativepagetransitions.m */,
-				A8B5F210AE8D4684BFEA5CAA /* NativePageTransitions.h */,
-				67CADDF2D3B54DA9BD23D2D8 /* AppDelegate+nativepagetransitions.h */,
 				CEB575B27E594F608157B97F /* CDVSplashScreen.m */,
 				3814271583B74AA381304548 /* CDVViewController+SplashScreen.m */,
 				1F7E183AABE144A186E389A3 /* CDVSplashScreen.h */,
@@ -440,8 +430,6 @@
 				5BD588021DF3464092BC7ABF /* CFCallNumber.m in Sources */,
 				AB21C4DE3B224D559C75FB5E /* CDVContacts.m in Sources */,
 				DE7ED96B8CB149C29D7B3223 /* CDVContact.m in Sources */,
-				835185142A554689A8B33D06 /* NativePageTransitions.m in Sources */,
-				3E4950C137384AE28C8F257C /* AppDelegate+nativepagetransitions.m in Sources */,
 				A3C4E2B6E4E343BE94FBFEF7 /* CDVSplashScreen.m in Sources */,
 				1C3F08B45ACD42A89E75D2E3 /* CDVViewController+SplashScreen.m in Sources */,
 				E3C9EAC1CE334C258BD634DC /* FacebookConnectPlugin.m in Sources */,

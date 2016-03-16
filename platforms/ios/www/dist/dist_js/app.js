@@ -1795,11 +1795,11 @@ angular.module('App.controllers', [])
 
             var user = LocalDataService.loadUser();
             if($rootScope.supportMessage){
-                var messageID = $rootScope.supportMessage.id;
+                $scope.messageID = $rootScope.supportMessage.id.toString();
 
             }
 
-            SupportService.submitSupport(action, user.UserName, comment, messageID).then(
+            SupportService.submitSupport(action, user.UserName, comment, $scope.messageID).then(
                 function(success){
                     $ionicLoading.hide();
 
@@ -2100,7 +2100,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$log', 'LocalDataService', f
 }]);
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$templateCache', '$state', '$log', 'OrganizationService', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService) {
+controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$templateCache', '$state', '$log', 'OrganizationService', 'LocalDataService', 'OptionService', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService, OptionService) {
     $log.info('init organizations controller');
     $scope.introVisited = LocalDataService.getIntroScreenVisited();
 
@@ -2209,8 +2209,21 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
         $rootScope.sessionData.options = [];
         $log.info('organisation selected ' + organization.orgName);
 
+        OptionService.getOptionsTree(organization.id).then(
+            function (success) {
+                $log.info('loaded org details');
+                $rootScope.organizationDetails = success;
 
-        $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $ionicLoading.hide();
+
+            }, function (err) {
+
+            });
+
+
+
+
     };
 
     $scope.$watch('search.model', function(newVal, oldVal){
@@ -2234,6 +2247,7 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
     $log.debug('init options controller', $rootScope.sessionData.options);
 
     $scope.showOptions = true;
+    $scope.organizationDetails = {};
 
 
     $rootScope.$ionicGoBack = function () {
@@ -2249,23 +2263,50 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
 
     ];
 
+
+
+    $scope.filtered = [];
+    $scope.recursiveFilter = function(items,id){
+        angular.forEach(items,function(item){
+            if(item.NodeID === id){
+               $scope.filtered.push(item);
+            }
+            if(angular.isArray(item.items) && item.items.length > 0){
+                $scope.recursiveFilter(item.items,id);
+            }
+        });
+    };
+
     $scope.load = function () {
 
 
 
-        $ionicLoading.show({
-            template: $translate.instant("ROUTING.LOADING"),
-            delay: 500
-        });
 
-        OptionService.getOptionsTree($stateParams.orgID).then(
-            function(success){
+        if ($stateParams.parentID === "0") {
+            $scope.options = $rootScope.organizationDetails.routes;
+        }
+        else {
+           $scope.recursiveFilter($rootScope.organizationDetails.routes, $stateParams.parentID);
+           $log.info('found parent node' , $scope.filtered);
 
-            },function(err){
+            $scope.options = $scope.filtered[0].children;
 
-            });
 
-        OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function (response) {
+
+        }
+
+        // if no options redirect to actions
+        if ($scope.options.length === 0) {
+            $scope.showOptions = false;
+        }
+        else {
+            $scope.showOptions = true;
+        }
+
+
+
+
+        /*OptionService.getOptions($stateParams.orgID, $stateParams.parentID).then(function (response) {
                 $scope.options = response;
                 $ionicLoading.hide();
                 $scope.$broadcast('scroll.refreshComplete');
@@ -2284,7 +2325,7 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
                     title: $translate.instant("ROUTING.FAILED"),
                     template: err
                 });
-            });
+            }); */
     };
 
 

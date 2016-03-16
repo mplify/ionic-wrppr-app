@@ -2100,7 +2100,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$log', 'LocalDataService', f
 }]);
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$templateCache', '$state', '$log', 'OrganizationService', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService) {
+controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$templateCache', '$state', '$log', 'OrganizationService', 'LocalDataService', 'OptionService', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService, OptionService) {
     $log.info('init organizations controller');
     $scope.introVisited = LocalDataService.getIntroScreenVisited();
 
@@ -2209,8 +2209,21 @@ controllers.controller('OrganizationsCtrl', ['$scope', '$rootScope', '$ionicLoad
         $rootScope.sessionData.options = [];
         $log.info('organisation selected ' + organization.orgName);
 
+        OptionService.getOptionsTree(organization.id).then(
+            function (success) {
+                $log.info('loaded org details');
+                $rootScope.organizationDetails = success;
 
-        $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $ionicLoading.hide();
+
+            }, function (err) {
+
+            });
+
+
+
+
     };
 
     $scope.$watch('search.model', function(newVal, oldVal){
@@ -2267,24 +2280,10 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
     $scope.load = function () {
 
 
-        $ionicLoading.show({
-            template: $translate.instant("ROUTING.LOADING"),
-            delay: 500
-        });
+
 
         if ($stateParams.parentID === "0") {
-            OptionService.getOptionsTree($stateParams.orgID).then(
-                function (success) {
-                   $log.info('loaded org details');
-                   $rootScope.organizationDetails = success;
-
-                    $scope.options = $rootScope.organizationDetails.routes;
-                    $ionicLoading.hide();
-
-                }, function (err) {
-
-                });
-
+            $scope.options = $rootScope.organizationDetails.routes;
         }
         else {
            $scope.recursiveFilter($rootScope.organizationDetails.routes, $stateParams.parentID);
@@ -2292,14 +2291,16 @@ controllers.controller('OptionsCtrl', ['$scope', '$rootScope', '$state', '$state
 
             $scope.options = $scope.filtered[0].children;
 
-            // if no options redirect to actions
-            if ($scope.options.length === 0) {
-                $scope.showOptions = false;
-            }
-            else {
-                $scope.showOptions = true;
-            }
-            $ionicLoading.hide();
+
+
+        }
+
+        // if no options redirect to actions
+        if ($scope.options.length === 0) {
+            $scope.showOptions = false;
+        }
+        else {
+            $scope.showOptions = true;
         }
 
 

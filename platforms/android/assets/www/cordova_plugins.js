@@ -279,13 +279,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.telerik.plugins.nativepagetransitions/www/NativePageTransitions.js",
-        "id": "com.telerik.plugins.nativepagetransitions.NativePageTransitions",
-        "clobbers": [
-            "window.plugins.nativepagetransitions"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "clobbers": [

@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService, OptionService) {
     $log.info('init organizations controller');
     $scope.introVisited = LocalDataService.getIntroScreenVisited();
 
@@ -109,8 +109,21 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
         $rootScope.sessionData.options = [];
         $log.info('organisation selected ' + organization.orgName);
 
+        OptionService.getOptionsTree(organization.id).then(
+            function (success) {
+                $log.info('loaded org details');
+                $rootScope.organizationDetails = success;
 
-        $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $state.go('app.options', { 'orgID' : organization.id , 'parentID' : 0});
+                $ionicLoading.hide();
+
+            }, function (err) {
+
+            });
+
+
+
+
     };
 
     $scope.$watch('search.model', function(newVal, oldVal){

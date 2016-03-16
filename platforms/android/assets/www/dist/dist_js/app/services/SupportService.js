@@ -17,6 +17,8 @@ services.service('SupportService', ['$http', '$q', '$log', 'api', function ($htt
                     "messageID" : messageID
                 };
 
+
+
                 $http.post(url, data)
                     .success(function (resp) {
                         defer.resolve(resp);

@@ -5,3 +5,4 @@ services.filter('Filename', function () {
         return path.substring(0, path.length - 4);
     };
 });
+

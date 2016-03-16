@@ -53,7 +53,14 @@
         "TITLE" : "ContactNL",
         "CALL" : "CALLNL",
         "MAIL" : "MAILNL",
-        "TWEET" :  "TWEETNL"
+        "TWEET" :  "TWEETNL",
+        "WEBPAGE" : "Open company webpage",
+        "WEBPAGE_GENERAL" : "General",
+        "WEBPAGE_SELF_SERVICE" : "Self Service",
+        "WEBPAGE_SOCIAL" : "Community",
+        "CALL_PROCESS" : "Calling ...",
+        "CALL_FAILED"  : "Call failed",
+        "MESSAGE_SAVE_FAIL" : "Failed to save a message"
 
     },
     "USER_CORRECT" : {

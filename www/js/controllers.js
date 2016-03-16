@@ -142,8 +142,12 @@ angular.module('App.controllers', [])
             });
 
             var user = LocalDataService.loadUser();
+            if($rootScope.supportMessage){
+                var messageID = $rootScope.supportMessage.id.toString();
 
-            SupportService.submitSupport(action, user.UserName, comment).then(
+            }
+
+            SupportService.submitSupport(action, user.UserName, comment, messageID).then(
                 function(success){
                     $ionicLoading.hide();
 
@@ -168,7 +172,30 @@ angular.module('App.controllers', [])
         };
 
 
+        //rating
 
+        $scope.requestRating = function(){
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('rating.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.$on('rating', function(){
+            $log.info('show rating screen');
+            $scope.requestRating();
+        });
+
+
+        $scope.ratePositive = function(){
+            $log.info('rate positive');
+            $scope.closeModal();
+        };
+
+        $scope.rateNegative = function(){
+            $log.info('rate negative');
+            $scope.closeModal();
+        };
 
 
 

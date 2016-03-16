@@ -150,6 +150,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         $scope.logAction($scope.actionMessages.CALL);
 
+
     };
 
     $scope.makeCall = function (number) {
@@ -157,6 +158,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         window.plugins.CallNumber.callNumber(
             function (success) {
                 $log.info('finish call', success);
+                $rootScope.$broadcast('rating');
             },
 
             function (err) {
@@ -175,6 +177,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
        $log.debug('call via url');
 
        window.open('tel:' +number ,'_system');
+       $rootScope.$broadcast('rating');
     };
 
     $scope.mail = function () {
@@ -187,6 +190,8 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
 
         var url = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
         window.open(url,'_system');
+
+        $rootScope.$broadcast('rating');
 
     };
 
@@ -204,6 +209,7 @@ controllers.controller('ActionCtrl', function ($scope, $rootScope, $state, $stat
         else {
             window.open('https://twitter.com/intent/tweet?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
+        $rootScope.$broadcast('rating');
     };
 
 

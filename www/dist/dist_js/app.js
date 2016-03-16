@@ -295,6 +295,7 @@ $templateCache.put("new-document.html","<ion-modal-view>\n    <ion-header-bar al
 $templateCache.put("no-internet.html","<ion-view view-title=\"{{\'OFFLINE.TITLE\' | translate}}\" ng-controller=\"AppCtrl\">\n\n\n    <ion-content style=\"margin-left: 20px; margin-right: 20px;\">\n\n        <div class=\"row button-block \" style=\"text-align: center; display: block;\">\n            <div class=\"ion-android-wifi\" style=\"font-size: 86px; color: lightgray;\"></div>\n\n        </div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'OFFLINE.TEXT\' | translate}}</h4></div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'OFFLINE.DESCRIPTION\' | translate}}</h4></div>\n        <div class=\"row\" style=\"height: 30%\"></div>\n        <div class=\"row\">\n\n            <button class=\"button button-large button-assertive wrppr-action-button\" style=\"width: 100%;\" ng-click=\"refreshNetworkState()\">\n                {{\'OFFLINE.REFRESH\' | translate}}\n            </button>\n\n        </div>\n\n\n\n    </ion-content>\n\n\n</ion-view>");
 $templateCache.put("option-list.html","\n<ion-view view-title=\"{{currentOrganization}}\" ng-controller=\"OptionsCtrl\">\n    <ion-content ng-show=\"showOptions\">\n        <div style=\"height: 5px; background-color: #ff5642;\" ng-style=\"{\'background-color\': brandingColor}\"></div>\n        <ion-refresher\n                pulling-text=\"Pull to refresh...\"\n                on-refresh=\"load();\">\n        </ion-refresher>\n        <ion-list ng-init=\"load();\">\n            <ion-item ng-repeat=\"option in options track by option.id\" ng-click=\"selectOption(option);\">\n                {{option.NodeName}}\n            </ion-item>\n        </ion-list>\n    </ion-content>\n\n    <ion-content ng-hide=\"showOptions\">\n        <div ng-include src=\"\'actions.html\'\"></div>\n    </ion-content>\n</ion-view>");
 $templateCache.put("organization-list.html","<ion-view view-title=\"{{ \'BUSINESS_CONTACT.SEARCH\' | translate }}\" >\n\n    <ion-content >\n        <div class=\"bar bar-header item-input-inset\">\n            <label class=\"item-input-wrapper\">\n                <i class=\"icon ion-ios-search placeholder-icon\"></i>\n                <input type=\"search\" placeholder=\"{{ \'BUSINESS_CONTACT.SEARCH_FILTER_PLACEHOLDER\' | translate }}\" ng-model=\"search.model\">\n                <a ng-if=\"search.model != \'\'\"\n                   on-touch=\"search.model=\'\'\">\n                    <i class=\"icon ion-ios-close placeholder-icon\"></i>\n                </a>\n            </label>\n\n\n        </div>\n        <ion-refresher\n                pulling-text=\"{{ \'GENERIC.REFRESH\' | translate }}\"\n                on-refresh=\"reload();\">\n        </ion-refresher>\n\n\n        <ion-list>\n            <ion-item ng-repeat=\"organisation in organizations track by organisation.id\" ng-click=\"selectOrganisation(organisation);\">\n                {{organisation.orgName}}\n            </ion-item>\n        </ion-list>\n\n        <ion-infinite-scroll\n                ng-if=\"!noMoreItemsAvailable\"\n                immediate-check=\"false\"\n                on-infinite=\"loadNext()\"\n                distance=\"10%\">\n        </ion-infinite-scroll>\n\n\n    </ion-content>\n\n</ion-view>");
+$templateCache.put("rating.html","<ion-modal-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">{{\'RATING.TITLE\' | translate}}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ng-click=\"closeModal();\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n\n\n\n    <ion-content style=\"margin-left: 20px; margin-right: 20px;\">\n\n        <div class=\"row button-block \" style=\"text-align: center; display: block;\">\n            <div class=\"ion-star\" style=\"font-size: 86px; color: lightgray;\"></div>\n\n        </div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'RATING.TEXT\' | translate}}{{userName}}</h4></div>\n        <div class=\"row\"><h4 class=\"title\" style=\"width: 100%; text-align: center;\">{{\'RATING.DESCRIPTION\' | translate}}</h4></div>\n        <div class=\"row\" style=\"height: 20px\"></div>\n        <div class=\"row\">\n            <div class=\"col\">\n                <div class=\"features-box-icon\" ng-click=\"ratePositive();\">\n                    <span aria-hidden=\"true\" class=\"ion-happy\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n\n            <div class=\"col\">\n                <div class=\"features-box-icon\" ng-click=\"rateNegative();\">\n                    <span aria-hidden=\"true\" class=\"ion-sad\"></span>\n                    <button class=\"button button-clear\">\n\n                    </button>\n                </div>\n\n            </div>\n        </div>\n\n\n\n    </ion-content>\n\n\n</ion-modal-view>");
 $templateCache.put("register.html","<ion-view>\n    <ion-header-bar align-title=\"left\">\n        <h1 class=\"title\">{{\'REGISTER.TITLE\' | translate}}</h1>\n        <div class=\"buttons\">\n            <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC_CLOSE\' | translate}}</button>\n        </div>\n    </ion-header-bar>\n    <ion-content scroll=\"false\" ng-controller=\"AuthorizationCtrl\">\n        <form name=\"registerForm\" ng-submit=\"doRegister()\">\n            <div class=\"list\">\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">Username</span>\n                    <input type=\"text\" name=\"UserName\" ng-model=\"registerData.UserName\" ng-change=\"resetValidators(\'UserName\');\" required>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.UserName.$pristine && registerForm.UserName.$invalid\">\n                    <p ng-show=\"registerForm.UserName.$error.required\">{{\'USERNAME_REQUIRED_VALIDATOR\' | translate}}</p>\n                    <p ng-show=\"registerForm.UserName.$error.unique\">{{\'USERNAME_NOT_UNIQUE_VALIDATOR\' | translate}}</p>\n                </label>\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'PASSWORD\' | translate}}</span>\n                    <input type=\"password\" name=\"Password\" ng-model=\"registerData.Password\" ng-change=\"resetValidators(\'Password\');\" ng-minlength=\"6\" ng-maxlength=\"50\" required>\n                </label>\n                <label class=\"item password-complexity row\" ng-show=\"passwordComplexity\">\n                    <div class=\"col\" ng-class=\"passwordComplexity\"></div>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.Password.$pristine && registerForm.Password.$invalid\">\n                    <p ng-show=\"registerForm.Password.$error.minlength\">{{\'PASSWORD_MIN_LENGTH_VALIDATOR\' | translate}}</p>\n                    <p ng-show=\"registerForm.Password.$error.maxlength\">{{\'PASSWORD_MAX_LENGTH_VALIDATOR\' | translate}}</p>\n                </label>\n\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'REGISTER.MOBILE\' | translate}}</span>\n                    <input type=\"tel\" pattern=\"+[0-9]*\" ng-model=\"registerData.mobile\">\n                </label>\n                <label class=\"item item-input\">\n                    <span class=\"input-label\">{{\'REGISTER.EMAIL\' | translate}}</span>\n                    <input type=\"email\" name=\"Email\" ng-model=\"registerData.Emailaddress\" required>\n                </label>\n                <label class=\"item item-input\" ng-show=\"!registerForm.Email.$pristine && registerForm.Email.$invalid\">\n                    <p ng-show=\"registerForm.Email.$error.required\">{{\'EMAIL_REQUIRED_VALIDATOR\' | translate}}</p>\n                </label>\n                <label class=\"item\">\n                    <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"registerForm.$invalid\" type=\"submit\">{{\'REGISTER.SUBMIT_BUTTON\' | translate}}</button>\n                </label>\n            </div>\n        </form>\n        <div>\n\n        </div>\n    </ion-content>\n</ion-view>\n");
 $templateCache.put("restore-password.html","<ion-view>\n  <ion-header-bar>\n    <h1 class=\"title\">{{\'CHANGE_PASSWORD.RECOVER_PASSWORD\' | translate }}</h1>\n    <div class=\"buttons\">\n      <button class=\"button button-clear\" ui-sref=\"root\">{{\'GENERIC.CLOSE\' | translate }}</button>\n    </div>\n  </ion-header-bar>\n  <ion-content scroll=\"false\">\n    <form name=\"restorePasswordForm\" ng-submit=\"doRestorePassword()\" novalidate  ng-controller=\"RestorePasswordCtrl\">\n      <div class=\"list\">\n\n        <label class=\"item item-input\">\n          <span class=\"input-label\">{{\'USERNAME\' | translate}}</span>\n          <input type=\"text\" name=\"username\" ng-model=\"username\" required>\n\n        </label>\n        <label class=\"item item-input\" ng-show=\"!restorePasswordForm.username.$pristine && restorePasswordForm.username.$invalid\">\n            <p ng-show=\"restorePasswordForm.username.$error.required\">{{\'USERNAME_REQUIRED_VALIDATOR | translate\'}}</p>\n        </label>\n\n\n        <label class=\"item\">\n          <button class=\"button button-block button-assertive wrppr-action-button\" ng-disabled=\"restorePasswordForm.$invalid\" type=\"submit\">{{ \'CHANGE_PASSWORD.RESTORE_SUBMIT\' | translate }}</button>\n        </label>\n        <label class=\"\">\n                <button class=\"button button-block button-clear\">{{\'GENERIC.SUPPORT\' | translate }}</button>\n        </label>\n\n      </div>\n    </form>\n\n\n\n  </ion-content>\n\n\n</ion-view>\n");
 $templateCache.put("tabs.html","<ion-view>\n    <ion-tabs class=\"tabs-icon-top tabs-color-active-assertive\">\n\n        <ion-tab title=\"tab1\" icon=\"ion-man\" ui-sref=\"intro.login\">\n            <ion-nav-view name=\"tab-tab1\"></ion-nav-view>\n        </ion-tab>\n\n        <ion-tab title=\"tab2\" icon=\"ion-person-stalker\" ui-sref=\"intro.register\">\n            <ion-nav-view name=\"menuContent\"></ion-nav-view>\n        </ion-tab>\n    </ion-tabs>\n</ion-view>");
@@ -1793,8 +1794,12 @@ angular.module('App.controllers', [])
             });
 
             var user = LocalDataService.loadUser();
+            if($rootScope.supportMessage){
+                var messageID = $rootScope.supportMessage.id;
 
-            SupportService.submitSupport(action, user.UserName, comment).then(
+            }
+
+            SupportService.submitSupport(action, user.UserName, comment, messageID).then(
                 function(success){
                     $ionicLoading.hide();
 
@@ -1819,7 +1824,30 @@ angular.module('App.controllers', [])
         };
 
 
+        //rating
 
+        $scope.requestRating = function(){
+            $scope.modal = $ionicModal.fromTemplate($templateCache.get('rating.html'), {
+                scope: $scope
+            });
+            $scope.modal.show();
+        };
+
+        $scope.$on('rating', function(){
+            $log.info('show rating screen');
+            $scope.requestRating();
+        });
+
+
+        $scope.ratePositive = function(){
+            $log.info('rate positive');
+            $scope.closeModal();
+        };
+
+        $scope.rateNegative = function(){
+            $log.info('rate negative');
+            $scope.closeModal();
+        };
 
 
 
@@ -2424,6 +2452,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
         $scope.logAction($scope.actionMessages.CALL);
 
+
     };
 
     $scope.makeCall = function (number) {
@@ -2431,6 +2460,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         window.plugins.CallNumber.callNumber(
             function (success) {
                 $log.info('finish call', success);
+                $rootScope.$broadcast('rating');
             },
 
             function (err) {
@@ -2449,6 +2479,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
        $log.debug('call via url');
 
        window.open('tel:' +number ,'_system');
+       $rootScope.$broadcast('rating');
     };
 
     $scope.mail = function () {
@@ -2461,6 +2492,8 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
         var url = 'mailto:' + $scope.contacts.email + '?subject=' + $translate.instant("MAIL.SUBJECT") + "&body=" + body;
         window.open(url,'_system');
+
+        $rootScope.$broadcast('rating');
 
     };
 
@@ -2478,6 +2511,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
         else {
             window.open('https://twitter.com/intent/tweet?screen_name=' + $scope.contacts.twitter, '_system', 'location=no');
         }
+        $rootScope.$broadcast('rating');
     };
 
 

@@ -143,5 +143,10 @@
     "ROUTING" : {
         "LOADING" : "Loading ..",
         "FAILED" : "Failed"
+    },
+    "RATING" : {
+        "TITLE" : "Rate",
+        "TEXT" : "Please rate wrapper",
+        "DESCRIPTION" : "Would you tip a friend to use wrapper?"
     }
 }

@@ -11,6 +11,7 @@ controllers.controller('ActionCtrl', ['$scope', '$rootScope', '$state', '$stateP
 
 
     $scope.init = function(){
+        $rootScope.supportMessage = {};
         $scope.currentOrganization = {};
         $scope.hasWebpage = false;
         $rootScope.showUserCorrect = false;

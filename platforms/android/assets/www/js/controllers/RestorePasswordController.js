@@ -23,12 +23,17 @@ controllers.controller('RestorePasswordCtrl', function ($scope, $state, $statePa
 
             $state.go('root');
 
-        }, function () {
+        }, function (error) {
             $ionicLoading.hide();
+
+            var message = error;
+            if(error.message){
+                message = error.message;
+            }
 
             $ionicPopup.alert({
                 title: 'Failed to restore',
-                template: 'Please try again'
+                template: message
             });
         });
     };

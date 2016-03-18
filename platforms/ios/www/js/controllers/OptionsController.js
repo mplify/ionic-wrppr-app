@@ -28,8 +28,8 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
             if(item.NodeID === id){
                $scope.filtered.push(item);
             }
-            if(angular.isArray(item.items) && item.items.length > 0){
-                $scope.recursiveFilter(item.items,id);
+            if(angular.isArray(item.children) && item.children.length > 0){
+                $scope.recursiveFilter(item.children,id);
             }
         });
     };
@@ -46,7 +46,10 @@ controllers.controller('OptionsCtrl', function ($scope, $rootScope, $state, $sta
            $scope.recursiveFilter($rootScope.organizationDetails.routes, $stateParams.parentID);
            $log.info('found parent node' , $scope.filtered);
 
+           $scope.options = [];
+           if($scope.filtered.length > 0){
             $scope.options = $scope.filtered[0].children;
+           }
 
 
 

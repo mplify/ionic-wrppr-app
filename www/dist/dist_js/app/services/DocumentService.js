@@ -46,7 +46,7 @@ services.service('DocumentService', ['$cordovaCamera', '$cordovaFile', 'LocalDat
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 encodingType: Camera.EncodingType.JPEG,
-                cameraDirection: 1,
+                cameraDirection: 0,
                 saveToPhotoAlbum: true
             };
 

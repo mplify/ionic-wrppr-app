@@ -157,6 +157,8 @@ angular.module('App.controllers', [])
                     });
                     $scope.closeModal();
 
+                    $rootScope.supportMessage = {};
+
                 },
                 function(err){
                     $ionicLoading.hide();
@@ -166,6 +168,8 @@ angular.module('App.controllers', [])
                         title: "Failed",
                         template: err
                     });
+
+                    $rootScope.supportMessage = {};
                 }
             );
 

@@ -1,7 +1,7 @@
 <ion-view view-title="{{'MESSAGES.DETAILS_TITLE' | translate}}" ng-controller="MessageCtrl">
 
 
-    <form name="messageForm"  novalidate>
+    <form name="messageForm"  novalidate ng-hide="isLoading">
 
     <ion-content>
         <ion-list>

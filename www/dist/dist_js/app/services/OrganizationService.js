@@ -10,10 +10,13 @@ services.service('OrganizationService', ['$http', '$q', '$log', 'api', function(
             var defer = $q.defer();
 
 
-            var params = {};
+            var params = {
+                'sort' : 'orgName ASC'
+            };
             if(searchText !== undefined && searchText.length > 0){
                params = {
                    where : '{"orgName":{"startsWith":"'+searchText+'"}}'
+
                };
             }
 

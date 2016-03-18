@@ -2,9 +2,11 @@ var controllers = angular.module('App.controllers');
 
 controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filter', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', '$ionicActionSheet', '$ionicModal', '$templateCache', '$ionicPopup', '$translate', 'MessageService', 'LocalDataService', 'DocumentService', function ($scope, $rootScope, $state, $filter, $log, $stateParams, $ionicLoading, $ionicHistory, $ionicActionSheet, $ionicModal, $templateCache, $ionicPopup, $translate, MessageService, LocalDataService, DocumentService) {
     $log.info('init messages controller');
+    $scope.isLoading = false;
 
-    $scope.$on('$ionicView.enter', function () {
+    $scope.$on('$ionicView.beforeEnter', function () {
         if ($stateParams.messageID) {
+
             $scope.loadMessage();
         }
 
@@ -23,12 +25,15 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
         $ionicLoading.show({
             template: $translate.instant("MESSAGES.LOADING")
         });
+        $scope.isLoading = true;
 
 
         var messageID = $stateParams.messageID;
 
         MessageService.getMessageDetails(messageID).then(function (success) {
             $ionicLoading.hide();
+            $scope.isLoading = false;
+
             $log.info('loaded message', success);
             $scope.currentMessage = success[0];
 
@@ -42,6 +47,8 @@ controllers.controller('MessageCtrl', ['$scope', '$rootScope', '$state', '$filte
 
         }, function (err) {
             $ionicLoading.hide();
+            $scope.isLoading = false;
+
             $log.error('failed to load message ', err);
 
             $ionicPopup.alert({

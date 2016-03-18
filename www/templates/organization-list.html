@@ -1,18 +1,18 @@
 <ion-view view-title="{{ 'BUSINESS_CONTACT.SEARCH' | translate }}" >
 
+    <ion-header-bar class="bar bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="{{ 'BUSINESS_CONTACT.SEARCH_FILTER_PLACEHOLDER' | translate }}" ng-model="search.model">
+            <a ng-if="search.model != ''"
+               on-touch="search.model=''">
+                <i class="icon ion-ios-close placeholder-icon"></i>
+            </a>
+        </label>
+    </ion-header-bar>
+
     <ion-content >
-        <div class="bar bar-header item-input-inset">
-            <label class="item-input-wrapper">
-                <i class="icon ion-ios-search placeholder-icon"></i>
-                <input type="search" placeholder="{{ 'BUSINESS_CONTACT.SEARCH_FILTER_PLACEHOLDER' | translate }}" ng-model="search.model">
-                <a ng-if="search.model != ''"
-                   on-touch="search.model=''">
-                    <i class="icon ion-ios-close placeholder-icon"></i>
-                </a>
-            </label>
 
-
-        </div>
 
 
         <ion-list>

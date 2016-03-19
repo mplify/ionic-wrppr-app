@@ -118,7 +118,7 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
                 $ionicLoading.hide();
 
             }, function (err) {
-
+                $log.error('failed to load organization details');
             });
 
 

@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('FavoritesCtrl', ['$scope', '$rootScope', '$state', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', 'MessageService', 'LocalDataService', 'OrganizationService', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService) {
+controllers.controller('FavoritesCtrl', ['$scope', '$rootScope', '$state', '$log', '$stateParams', '$ionicLoading', '$ionicHistory', 'MessageService', 'LocalDataService', 'OrganizationService', 'OptionService', function ($scope, $rootScope, $state, $log, $stateParams, $ionicLoading, $ionicHistory, MessageService, LocalDataService, OrganizationService, OptionService) {
     $log.info('init favorites controller');
 
     $scope.organizations = [];
@@ -37,17 +37,22 @@ controllers.controller('FavoritesCtrl', ['$scope', '$rootScope', '$state', '$log
     $scope.loadOrgs();
 
     $scope.selectOrganisation = function (organization) {
-        $rootScope.sessionData.organization = organization;
+
         $rootScope.sessionData.options = [];
 
-        OrganizationService.getOrganization(organization.OrgID).then(function (success) {
-            $log.info('load organization details');
-            $rootScope.sessionData.organization = success;
+        OptionService.getOptionsTree(organization.OrgID).then(
+            function (success) {
+                $log.info('loaded org details');
+                $rootScope.organizationDetails = success;
+                $rootScope.sessionData.organization = success;
 
-            $state.go('app.options', { 'orgID': organization.OrgID, 'parentID': 0});
-        }, function (err) {
-            $log.error('failed to load org details selected in favorites', err);
-        });
+                $state.go('app.options', { 'orgID' : organization.OrgID , 'parentID' : 0});
+                $ionicLoading.hide();
+
+            }, function (err) {
+                $log.error('failed to load org details selected in favorites', err);
+            });
+
 
 
     };

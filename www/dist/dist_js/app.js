@@ -925,11 +925,12 @@ services.service('OrganizationService', ['$http', '$q', '$log', 'api', function(
 
 
             var params = {
-                'sort' : 'orgName ASC'
+                'sort' : 'orgName ASC',
+                'where' : '{"activeInApp" : "X"}'
             };
             if(searchText !== undefined && searchText.length > 0){
                params = {
-                   where : '{"orgName":{"startsWith":"'+searchText+'"}}'
+                   where : '{"orgName":{"startsWith":"'+searchText+'"}, "activeInApp" : "X"}'
 
                };
             }
@@ -1852,7 +1853,7 @@ angular.module('App.controllers', [])
 
             $scope.isRated = true;
 
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
 
         };
 
@@ -1860,7 +1861,12 @@ angular.module('App.controllers', [])
             $log.info('rate negative');
 
             $scope.isRated = true;
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
+        };
+
+        $scope.closeRating = function(){
+            $scope.isRated = false;
+            $scope.closeModal();
         };
 
 

@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$timeout', '$q', '$ionicActionSheet', '$templateCache', '$translate', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', 'SupportService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $timeout, $q, $ionicActionSheet, $templateCache, $translate, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
+    .controller('AppCtrl', ['$scope', '$rootScope', '$state', '$window', '$log', '$ionicPlatform', '$ionicModal', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$q', '$ionicActionSheet', '$templateCache', '$translate', '$timeout', 'BasicAuthorizationService', 'UserService', '$cordovaOauth', 'api', '$http', 'LocalDataService', 'NetworkService', 'SupportService', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $q, $ionicActionSheet, $templateCache, $translate, $timeout, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
 
         $rootScope.debugMode = false;
 
@@ -177,6 +177,7 @@ angular.module('App.controllers', [])
 
 
         //rating
+        $scope.isRated = false;
 
         $scope.requestRating = function(){
             $scope.modal = $ionicModal.fromTemplate($templateCache.get('rating.html'), {
@@ -193,12 +194,18 @@ angular.module('App.controllers', [])
 
         $scope.ratePositive = function(){
             $log.info('rate positive');
-            $scope.closeModal();
+
+            $scope.isRated = true;
+
+            $timeout($scope.closeModal, 1000);
+
         };
 
         $scope.rateNegative = function(){
             $log.info('rate negative');
-            $scope.closeModal();
+
+            $scope.isRated = true;
+            $timeout($scope.closeModal, 1000);
         };
 
 

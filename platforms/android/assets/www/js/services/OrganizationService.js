@@ -11,11 +11,12 @@ services.service('OrganizationService', function($http, $q, $log, api) {
 
 
             var params = {
-                'sort' : 'orgName ASC'
+                'sort' : 'orgName ASC',
+                'where' : '{"activeInApp" : "X"}'
             };
             if(searchText !== undefined && searchText.length > 0){
                params = {
-                   where : '{"orgName":{"startsWith":"'+searchText+'"}}'
+                   where : '{"orgName":{"startsWith":"'+searchText+'"}, "activeInApp" : "X"}'
 
                };
             }

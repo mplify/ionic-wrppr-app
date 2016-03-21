@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
@@ -10,14 +10,11 @@
     <!-- build:css dist_css/styles.css -->
 
 
-
-
     <!-- endbuild -->
 
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
 
 
     <!-- ionic/angularjs js -->
@@ -27,43 +24,52 @@
     <script src="lib/angular-translate/angular-translate.js"></script>
     <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
     <script src="lib/ionic-native-transitions/dist/ionic-native-transitions.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+    <script src="lib/underscore/underscore-min.js"></script>
 
 
-      <script src="lib/jsSHA/src/sha.js"></script>
-      <script src="lib/jsSHA/src/sha1.js"></script>
+    <script src="lib/ngmap/build/scripts/ng-map.min.js"></script>
+
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
+    <script src="lib/angular-slugify/dist/angular-slugify.min.js"></script>
+    <script src="lib/collide/collide.js"></script>
+    <script src="lib/ionic-contrib-tinder-cards/ionic.tdcards.js"></script>
+
+
+    <script src="lib/jsSHA/src/sha.js"></script>
+    <script src="lib/jsSHA/src/sha1.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client...-->
-      <script src="lib/ng-cordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/ng-cordova/dist/ng-cordova.min.js"></script>
 
 
-
-      <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
-
+    <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
 
 
-      <script src="js/app.js"></script>
-      <script src="js/templates.js"></script>
-      <script src="js/services.js"></script>
-      <script src="js/services/Filename.js"></script>
-      <script src="js/services/Base64.js"></script>
-      <script src="js/services/APIInterceptor.js"></script>
-      <script src="js/services/BasicAuthorizationService.js"></script>
-      <script src="js/services/PasswordComplexity.js"></script>
-      <script src="js/services/LocalDataService.js"></script>
-      <script src="js/services/TwitterService.js"></script>
-      <script src="js/services/UserService.js"></script>
-      <script src="js/services/LoginService.js"></script>
-      <script src="js/services/OrganizationService.js"></script>
-      <script src="js/services/OptionService.js"></script>
-      <script src="js/services/MessageService.js"></script>
-      <script src="js/services/DTMFService.js"></script>
-      <script src="js/services/NetworkService.js"></script>
-      <script src="js/services/ExternalLoadService.js"></script>
-      <script src="js/services/FacebookService.js"></script>
-      <script src="js/services/DocumentService.js"></script>
-      <script src="js/services/EmailService.js"></script>
-      <script src="js/services/SupportService.js"></script>
-
+    <script src="js/app.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/services/Filename.js"></script>
+    <script src="js/services/Base64.js"></script>
+    <script src="js/services/APIInterceptor.js"></script>
+    <script src="js/services/BasicAuthorizationService.js"></script>
+    <script src="js/services/PasswordComplexity.js"></script>
+    <script src="js/services/LocalDataService.js"></script>
+    <script src="js/services/TwitterService.js"></script>
+    <script src="js/services/UserService.js"></script>
+    <script src="js/services/LoginService.js"></script>
+    <script src="js/services/OrganizationService.js"></script>
+    <script src="js/services/OptionService.js"></script>
+    <script src="js/services/MessageService.js"></script>
+    <script src="js/services/DTMFService.js"></script>
+    <script src="js/services/NetworkService.js"></script>
+    <script src="js/services/ExternalLoadService.js"></script>
+    <script src="js/services/FacebookService.js"></script>
+    <script src="js/services/DocumentService.js"></script>
+    <script src="js/services/EmailService.js"></script>
+    <script src="js/services/SupportService.js"></script>
 
 
     <script src="js/api.js"></script>
@@ -84,24 +90,21 @@
     <script src="js/controllers/FavoritesController.js"></script>
 
 
+</head>
 
+<body ng-app="starter">
 
+<!-- fb-root is needed by the FB API. -->
+<div id="fb-root"></div>
+<ion-nav-view>
+</ion-nav-view>
+<script src="cordova.js"></script>
+<script>
+    var handleOpenURL = function (url) {
+        window.localStorage.setItem("ls.external_load", url);
+        console.log('received url: ' + url);
+    };
+</script>
 
-  </head>
-
-  <body ng-app="starter">
-
-  <!-- fb-root is needed by the FB API. -->
-  <div id="fb-root"></div>
-    <ion-nav-view>
-    </ion-nav-view>
-  <script src="cordova.js"></script>
-  <script>
-      var handleOpenURL = function(url) {
-          window.localStorage.setItem("ls.external_load", url);
-          console.log('received url: ' + url);
-      };
-  </script>
-
-  </body>
+</body>
 </html>

@@ -1,11 +1,8 @@
 
 <ion-view view-title="{{currentOrganization}}" ng-controller="OptionsCtrl">
     <ion-content ng-show="showOptions">
-        <div style="height: 5px; background-color: #ff5642;" ng-style="{'background-color': brandingColor}"></div>
-        <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="load();">
-        </ion-refresher>
+        <div style="height: 5px; background-color: white;" ng-style="{'background-color': brandingColor}"></div>
+
         <ion-list ng-init="load();">
             <ion-item ng-repeat="option in options track by option.id" ng-click="selectOption(option);">
                 {{option.NodeName}}

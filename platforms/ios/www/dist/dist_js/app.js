@@ -1853,7 +1853,7 @@ angular.module('App.controllers', [])
 
             $scope.isRated = true;
 
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
 
         };
 
@@ -1861,7 +1861,12 @@ angular.module('App.controllers', [])
             $log.info('rate negative');
 
             $scope.isRated = true;
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
+        };
+
+        $scope.closeRating = function(){
+            $scope.isRated = false;
+            $scope.closeModal();
         };
 
 

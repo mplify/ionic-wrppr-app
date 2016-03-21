@@ -14,14 +14,14 @@ angular.module('App.controllers', [])
                     $rootScope.brandingColor = $rootScope.sessionData.organization.BrandingColor1;
                 }
                 else {
-                    $rootScope.brandingColor = '#ff5642';
+                    $rootScope.brandingColor = '#00CCFF';
                 }
 
                 if($rootScope.sessionData.organization.BrandingColor2 !== null){
                     $rootScope.brandingColor2 = $rootScope.sessionData.organization.BrandingColor2;
                 }
                 else {
-                    $rootScope.brandingColor2 = '#ff5642';
+                    $rootScope.brandingColor2 = '#00CCFF';
                 }
 
             }
@@ -51,7 +51,7 @@ angular.module('App.controllers', [])
 
                 });
 
-            $state.go('root');
+            $state.go('auth.walkthrough');
 
         };
 
@@ -65,7 +65,7 @@ angular.module('App.controllers', [])
         $scope.$on('unauthorized', function(){
             $log.info('unauthorized, redirect to root');
             if($state.current.name.indexOf('app') > -1){
-                $state.go('root');
+                $state.go('auth.walkthrough');
             }
         });
 

@@ -1,40 +1,29 @@
-<ion-view view-title="{{localUser.UserName}}" ng-controller="UserCtrl">
+
+<ion-view class="profile-view" ng-controller="UserCtrl">
+    <ion-nav-title>
+        <span>{{localUser.UserName}}</span>
+    </ion-nav-title>
     <ion-content>
-        <ion-list >
-                <ion-item class="item-avatar">
-                    <img ng-src="{{localUser.picture}}" src="../img/photo.jpg">
-                    <h2>{{user.UserName}}</h2>
-                    <p>{{user.email}}</p>
-                    <p>{{user.createdAt | date:'medium' }}</p>
-                    <p ng-show="debugMode">
-                        Basic Auth: {{sessionKey}}
-                    </p>
-                </ion-item>
-                <ion-item class="item-avatar" ng-show="debugMode">
-                    <img ng-src="{{localFBUser.picture}}" src="../img/photo.jpg">
-                    <h2>{{localFBUser.name}}</h2>
-                    <h2>{{localFBUser.email}}</h2>
-                    <p>{{localFBUser.authResponse.expiresIn | date:'medium' }}</p>
-                    <p>
-                        {{localFBUser.authResponse.accessToken}}
-                    </p>
-                </ion-item>
-                <ion-item ng-show="networkType">
-                    Network Type: {{networkType}} is {{networkStatus}}
-                </ion-item>
-
-            <ion-item class="item-toggle">
-                Debug
-            <label class="toggle">
-                <input type="checkbox" ng-model="$root.debugMode">
-                <div class="track">
-                    <div class="handle"></div>
+        <div class="top-content row">
+            <div class="profile-container">
+                <div class="user-image-container">
+                    <pre-img ratio="_1_1" helper-class="rounded-image">
+                        <img class="user-image" ng-src="https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"  spinner-on-load>
+                    </pre-img>
                 </div>
-            </label>
-            </ion-item>
-
-
-        </ion-list>
+                <div class="user-name">{{localUser.UserName}}</div>
+                <div class="user-twitter">{{user.email}}</div>
+                <div class="user-twitter">{{user.createdAt | date:'medium' }}</div>
+            </div>
+            <div class="user-background-image-outer">
+                <div multi-bg="['{{localFBUser.picture}}']"></div>
+            </div>
+        </div>
+        <div class="bottom-content">
+            <div class="user-bio">
+                <p></p>
+            </div>
+        </div>
         <div class="tabs tabs-icon-top">
             <a class="tab-item">
                 <i class="icon ion-at" ng-click="switchLanguage();"></i>
@@ -45,6 +34,5 @@
                 {{ 'MENU.LOGOUT' | translate }}
             </a>
         </div>
-
     </ion-content>
 </ion-view>

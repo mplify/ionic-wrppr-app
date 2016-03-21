@@ -1,10 +1,30 @@
 // Ionic Starter App
 
+
+angular.module('underscore', [])
+    .factory('_', function() {
+        return window._; // assumes underscore has already been loaded on the page
+    });
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 'App.controllers', 'App.services', 'ngCordova', 'ngCordova.plugins.appAvailability', 'ngCordovaOauth', 'pascalprecht.translate', 'templates', 'ionic-native-transitions'])
+angular.module('starter', [
+        'ionic',
+        'LocalStorageModule',
+        'ionic.service.core',
+        'App.controllers',
+        'App.services',
+        'App.directives',
+        'underscore',
+        'ngCordova',
+        'ngCordova.plugins.appAvailability',
+        'ngCordovaOauth',
+        'pascalprecht.translate',
+        'templates',
+        'ionic-native-transitions'
+    ])
 
     .run(function ($ionicPlatform, BasicAuthorizationService, $http, $log, LocalDataService, TwitterService, ExternalLoad, NetworkService, DTMFService, EmailService, FacebookService, LoginService, DocumentService) {
 
@@ -66,6 +86,46 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider, $translateProvider, $logProvider, $compileProvider) {
         $stateProvider
 
+            //INTRO
+            .state('auth', {
+                url: "/auth",
+                templateUrl: "views/auth/auth.html",
+                abstract: false
+            })
+
+
+            .state('auth.login', {
+                url: '/login',
+                templateUrl: 'views/auth/login.html',
+                controller : 'AppCtrl'
+            })
+
+
+            .state('auth.walkthrough', {
+                url: '/walkthrough',
+                templateUrl: "views/auth/walkthrough.html"
+            })
+
+            .state('auth.signup', {
+                url: '/signup',
+                templateUrl: "views/auth/signup.html"
+            })
+
+
+            .state('auth.restorepassword', {
+                url: '/restorepassword',
+                templateUrl: 'views/auth/restore-password.html',
+                controller : 'RestorePasswordCtrl'
+            })
+
+            .state('auth.changepassword', {
+                url: '/changepassword/:key',
+                templateUrl: 'views/auth/change-password.html',
+                controller : 'RestorePasswordCtrl'
+            })
+
+
+
             .state('root', {
                 url: '/root',
                 templateUrl: 'dashboard.html'
@@ -73,8 +133,8 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
 
             .state('login', {
-                url: '/login',
-                templateUrl: 'login.html',
+                url: 'login',
+                templateUrl: 'views/auth/login.html',
                 controller : 'AppCtrl'
             })
 
@@ -84,17 +144,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 controller : 'AuthorizationCtrl'
             })
 
-            .state('restorepassword', {
-                url: '/restorepassword',
-                templateUrl: 'restore-password.html',
-                controller : 'RestorePasswordCtrl'
-            })
 
-            .state('changepassword', {
-                url: '/changepassword/:key',
-                templateUrl: 'change-password.html',
-                controller : 'RestorePasswordCtrl'
-            })
 
             .state('offline', {
                 url: '/offline',
@@ -105,7 +155,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
 
             .state('app', {
                 url : '/app',
-                templateUrl : 'menu.html',
+                templateUrl : 'templates/menu.html',
                 abstract : true,
                 controller : 'AppCtrl'
             })
@@ -124,7 +174,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/search',
                 views: {
                     'menuContent': {
-                        templateUrl: 'organization-list.html',
+                        templateUrl: 'templates/organization-list.html',
                         controller : 'OrganizationsCtrl'
                     }
                 }
@@ -165,7 +215,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
                 url: '/user',
                 views: {
                     'menuContent': {
-                        templateUrl: 'user.html'
+                        templateUrl: 'templates/user.html'
                     }
                 }
             })
@@ -230,7 +280,7 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'ionic.service.core', 
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/root');
+        $urlRouterProvider.otherwise('/auth/walkthrough');
 
         $httpProvider.interceptors.push('APIInterceptor');
 

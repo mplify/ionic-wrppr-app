@@ -51,7 +51,7 @@ angular.module('App.controllers', [])
 
                 });
 
-            $state.go('root');
+            $state.go('auth.walkthrough');
 
         };
 
@@ -65,7 +65,7 @@ angular.module('App.controllers', [])
         $scope.$on('unauthorized', function(){
             $log.info('unauthorized, redirect to root');
             if($state.current.name.indexOf('app') > -1){
-                $state.go('root');
+                $state.go('auth.walkthrough');
             }
         });
 
@@ -197,7 +197,7 @@ angular.module('App.controllers', [])
 
             $scope.isRated = true;
 
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
 
         };
 
@@ -205,7 +205,12 @@ angular.module('App.controllers', [])
             $log.info('rate negative');
 
             $scope.isRated = true;
-            $timeout($scope.closeModal, 1000);
+            $timeout($scope.closeRating, 1000);
+        };
+
+        $scope.closeRating = function(){
+            $scope.isRated = false;
+            $scope.closeModal();
         };
 
 

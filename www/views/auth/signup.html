@@ -1,0 +1,50 @@
+<ion-view class="signup-view auth-view" cache-view="false">
+  <ion-content scroll="false">
+    <div class="row">
+      <div class="col col-center">
+        <div class="card sign-up-container" ng-controller="AuthorizationCtrl">
+          <form class=""  name="registerForm" ng-submit="doRegister()" novalidate>
+            <div class="item item-body">
+              <label class="item item-input">
+                  <input placeholder="{{'USERNAME' | translate}}" type="text" name="UserName" ng-model="registerData.UserName" ng-change="resetValidators('UserName');" required>
+              </label>
+              <label class="item item-input" ng-show="!registerForm.UserName.$pristine && registerForm.UserName.$invalid">
+                    <p ng-show="registerForm.UserName.$error.required">{{'USERNAME_REQUIRED_VALIDATOR' | translate}}</p>
+                    <p ng-show="registerForm.UserName.$error.unique">{{'USERNAME_NOT_UNIQUE_VALIDATOR' | translate}}</p>
+              </label>
+              <label class="item item-input" show-hide-container>
+                <input placeholder="{{'PASSWORD' | translate}}" type="password" name="Password" ng-model="registerData.Password" ng-change="resetValidators('Password');" ng-minlength="6" ng-maxlength="50" required show-hide-input>
+              </label>
+              <label class="item password-complexity row" ng-show="passwordComplexity">
+                    <div class="col" ng-class="passwordComplexity"></div>
+               </label>
+                <label class="item item-input" ng-show="!registerForm.Password.$pristine && registerForm.Password.$invalid">
+                    <p ng-show="registerForm.Password.$error.minlength">{{'PASSWORD_MIN_LENGTH_VALIDATOR' | translate}}</p>
+                    <p ng-show="registerForm.Password.$error.maxlength">{{'PASSWORD_MAX_LENGTH_VALIDATOR' | translate}}</p>
+                </label>
+                <label class="item item-input">
+                    <input placeholder="{{'REGISTER.MOBILE' | translate}}" type="tel" pattern="+[0-9]*" ng-model="registerData.mobile" required>
+                </label>
+                <label class="item item-input">
+                    <input placeholder="{{'REGISTER.EMAIL' | translate}}" type="email" name="Email" ng-model="registerData.Emailaddress" required>
+                </label>
+                <label class="item item-input" ng-show="!registerForm.Email.$pristine && registerForm.Email.$invalid">
+                    <p ng-show="registerForm.Email.$error.required">{{'EMAIL_REQUIRED_VALIDATOR' | translate}}</p>
+                </label>
+            </div>
+            <div class="item item-body bottom-content">
+              <button type="submit" class="button button-assertive button-block" ng-disabled="registerForm.$invalid" type="submit">
+                  {{'REGISTER.SUBMIT_BUTTON' | translate}}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="alternative-actions">
+          <a class="log-in button button-small button-clear button-light" ui-sref="auth.login">
+              {{'LOGIN_BUTTON' | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

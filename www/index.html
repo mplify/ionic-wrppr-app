@@ -8,13 +8,12 @@
 
 
     <!-- build:css dist_css/styles.css -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 
     <!-- endbuild -->
 
-    <!-- compiled css output -->
-    <link href="css/ionic.app.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 
 
     <!-- ionic/angularjs js -->
@@ -46,53 +45,56 @@
 
     <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
 
+    <!-- build:js dist_js/app.js -->
+    <script src="dist/dist_js/app/app.js"></script>
+    <script src="dist/dist_js/app/templates.js"></script>
+    <script src="dist/dist_js/app/directives.js"></script>
+    <script src="dist/dist_js/app/services.js"></script>
+    <script src="dist/dist_js/app/services/Filename.js"></script>
+    <script src="dist/dist_js/app/services/Base64.js"></script>
+    <script src="dist/dist_js/app/services/APIInterceptor.js"></script>
+    <script src="dist/dist_js/app/services/BasicAuthorizationService.js"></script>
+    <script src="dist/dist_js/app/services/PasswordComplexity.js"></script>
+    <script src="dist/dist_js/app/services/LocalDataService.js"></script>
+    <script src="dist/dist_js/app/services/TwitterService.js"></script>
+    <script src="dist/dist_js/app/services/UserService.js"></script>
+    <script src="dist/dist_js/app/services/LoginService.js"></script>
+    <script src="dist/dist_js/app/services/OrganizationService.js"></script>
+    <script src="dist/dist_js/app/services/OptionService.js"></script>
+    <script src="dist/dist_js/app/services/MessageService.js"></script>
+    <script src="dist/dist_js/app/services/DTMFService.js"></script>
+    <script src="dist/dist_js/app/services/NetworkService.js"></script>
+    <script src="dist/dist_js/app/services/ExternalLoadService.js"></script>
+    <script src="dist/dist_js/app/services/FacebookService.js"></script>
+    <script src="dist/dist_js/app/services/DocumentService.js"></script>
+    <script src="dist/dist_js/app/services/EmailService.js"></script>
+    <script src="dist/dist_js/app/services/SupportService.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/templates.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/services/Filename.js"></script>
-    <script src="js/services/Base64.js"></script>
-    <script src="js/services/APIInterceptor.js"></script>
-    <script src="js/services/BasicAuthorizationService.js"></script>
-    <script src="js/services/PasswordComplexity.js"></script>
-    <script src="js/services/LocalDataService.js"></script>
-    <script src="js/services/TwitterService.js"></script>
-    <script src="js/services/UserService.js"></script>
-    <script src="js/services/LoginService.js"></script>
-    <script src="js/services/OrganizationService.js"></script>
-    <script src="js/services/OptionService.js"></script>
-    <script src="js/services/MessageService.js"></script>
-    <script src="js/services/DTMFService.js"></script>
-    <script src="js/services/NetworkService.js"></script>
-    <script src="js/services/ExternalLoadService.js"></script>
-    <script src="js/services/FacebookService.js"></script>
-    <script src="js/services/DocumentService.js"></script>
-    <script src="js/services/EmailService.js"></script>
-    <script src="js/services/SupportService.js"></script>
 
+    <script src="dist/dist_js/app/api.js"></script>
+    <script src="dist/dist_js/app/controllers.js"></script>
+    <script src="dist/dist_js/app/controllers/OptionsController.js"></script>
+    <script src="dist/dist_js/app/controllers/AuthorizationController.js"></script>
+    <script src="dist/dist_js/app/controllers/RestorePasswordController.js"></script>
+    <script src="dist/dist_js/app/controllers/DashboardController.js"></script>
+    <script src="dist/dist_js/app/controllers/OrganizationController.js"></script>
 
-    <script src="js/api.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/controllers/AuthorizationController.js"></script>
-    <script src="js/controllers/RestorePasswordController.js"></script>
-    <script src="js/controllers/DashboardController.js"></script>
-    <script src="js/controllers/OrganizationController.js"></script>
-    <script src="js/controllers/OptionsController.js"></script>
-    <script src="js/controllers/ActionController.js"></script>
-    <script src="js/controllers/UserController.js"></script>
-    <script src="js/controllers/FacebookController.js"></script>
-    <script src="js/controllers/TwitterController.js"></script>
-    <script src="js/controllers/IntroController.js"></script>
-    <script src="js/controllers/MessageHistoryController.js"></script>
-    <script src="js/controllers/MessageController.js"></script>
-    <script src="js/controllers/DocumentController.js"></script>
-    <script src="js/controllers/FavoritesController.js"></script>
+    <script src="dist/dist_js/app/controllers/ActionController.js"></script>
+    <script src="dist/dist_js/app/controllers/UserController.js"></script>
+    <script src="dist/dist_js/app/controllers/FacebookController.js"></script>
+    <script src="dist/dist_js/app/controllers/TwitterController.js"></script>
+    <script src="dist/dist_js/app/controllers/IntroController.js"></script>
+    <script src="dist/dist_js/app/controllers/MessageHistoryController.js"></script>
+    <script src="dist/dist_js/app/controllers/MessageController.js"></script>
+    <script src="dist/dist_js/app/controllers/DocumentController.js"></script>
+    <script src="dist/dist_js/app/controllers/FavoritesController.js"></script>
+    <!-- endbuild -->
+
 
 
 </head>
 
-<body ng-app="starter">
+<body ng-app="starter"  ng-strict-di>
 
 <!-- fb-root is needed by the FB API. -->
 <div id="fb-root"></div>

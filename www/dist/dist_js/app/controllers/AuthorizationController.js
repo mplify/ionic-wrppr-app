@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicModal', '$ionicPopup', '$state', '$log', '$stateParams', '$translate', 'LoginService', 'BasicAuthorizationService', 'UserService', 'PasswordComplexity', 'LocalDataService', function ($scope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, $translate, LoginService, BasicAuthorizationService, UserService, PasswordComplexity, LocalDataService) {
+controllers.controller('AuthorizationCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$ionicPopup', '$state', '$log', '$stateParams', '$translate', 'LoginService', 'BasicAuthorizationService', 'UserService', 'PasswordComplexity', 'LocalDataService', function ($scope, $rootScope, $ionicLoading, $ionicModal, $ionicPopup, $state, $log, $stateParams, $translate, LoginService, BasicAuthorizationService, UserService, PasswordComplexity, LocalDataService) {
     $log.info('init auth controller');
 
 
@@ -41,6 +41,8 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$ionicLoading', '$ionicM
                 LocalDataService.saveFacebookResponse({});
 
                 BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
+
+                $rootScope.currentUsername = $scope.loginData.UserName;
 
 
                 $scope.resetLoginForm();

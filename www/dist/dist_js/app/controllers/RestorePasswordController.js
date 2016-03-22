@@ -21,7 +21,7 @@ controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams
                 template: 'Please checkout you  email for instructions'
             });
 
-            $state.go('root');
+            $state.go('auth.walkthrough');
 
         }, function (error) {
             $ionicLoading.hide();
@@ -79,7 +79,7 @@ controllers.controller('RestorePasswordCtrl', ['$scope', '$state', '$stateParams
                     template: 'Try to login with new password'
                 });
 
-                $state.go('root');
+                $state.go('auth.walkthrough');
             },
             function(err){
                 $ionicLoading.hide();

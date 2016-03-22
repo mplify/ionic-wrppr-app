@@ -133,7 +133,7 @@ angular.module('starter', [
 
             .state('app', {
                 url : '/app',
-                templateUrl : 'templates/menu.html',
+                templateUrl : 'menu.html',
                 abstract : true,
                 controller : 'AppCtrl'
             })
@@ -152,7 +152,7 @@ angular.module('starter', [
                 url: '/search',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/organization-list.html',
+                        templateUrl: 'organization-list.html',
                         controller : 'OrganizationsCtrl'
                     }
                 }
@@ -193,7 +193,7 @@ angular.module('starter', [
                 url: '/user',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/user.html'
+                        templateUrl: 'user.html'
                     }
                 }
             })
@@ -202,7 +202,7 @@ angular.module('starter', [
                 url: '/messages',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/message-list.html'
+                        templateUrl: 'message-list.html'
                     }
                 }
             })
@@ -211,7 +211,7 @@ angular.module('starter', [
                 url: '/messagedetails/:messageID',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/message-details.html'
+                        templateUrl: 'message-details.html'
                     }
                 }
             })
@@ -221,7 +221,7 @@ angular.module('starter', [
                 url: '/favorites',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/favorites.html'
+                        templateUrl: 'favorites.html'
                     }
                 }
             })
@@ -230,7 +230,7 @@ angular.module('starter', [
             url: '/favorite/:orgID',
                 views: {
                 'menuContent': {
-                    templateUrl: 'templates/message-list.html'
+                    templateUrl: 'message-list.html'
                 }
             }
              })

@@ -23,7 +23,7 @@ angular.module('App.directives', [])
 				tabs.push(tab);
 			};
 		},
-		templateUrl: 'views/common/my-tabs.html'
+		templateUrl: 'common/my-tabs.html'
 	};
 })
 
@@ -38,7 +38,7 @@ angular.module('App.directives', [])
 		link: function(scope, element, attrs, tabsCtrl) {
 			tabsCtrl.addTab(scope);
 		},
-		templateUrl: 'views/common/my-tab.html'
+		templateUrl: 'common/my-tab.html'
 	};
 })
 
@@ -87,7 +87,7 @@ angular.module('App.directives', [])
 				$scope.$broadcast("toggle-type", $scope.show);
 			};
 		},
-		templateUrl: 'views/common/show-hide-password.html',
+		templateUrl: 'common/show-hide-password.html',
 		restrict: 'A',
 		replace: false,
 		transclude: true
@@ -187,7 +187,7 @@ angular.module('App.directives', [])
 				}
 		  });
 		},
-		templateUrl: 'views/common/ionic-youtube-video.html',
+		templateUrl: 'common/ionic-youtube-video.html',
 		replace: false
 	};
 })
@@ -311,7 +311,7 @@ angular.module('App.directives', [])
 				}
 			}
 		},
-		templateUrl: 'views/common/multi-bg.html',
+		templateUrl: 'common/multi-bg.html',
 		restrict: 'A',
 		replace: true,
 		transclude: true
@@ -352,7 +352,7 @@ angular.module('App.directives', [])
 				});
 			};
 		},
-		templateUrl: 'views/common/pre-img.html'
+		templateUrl: 'common/pre-img.html'
 	};
 })
 

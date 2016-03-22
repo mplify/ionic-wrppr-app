@@ -89,62 +89,40 @@ angular.module('starter', [
             //INTRO
             .state('auth', {
                 url: "/auth",
-                templateUrl: "views/auth/auth.html",
+                templateUrl: "auth/auth.html",
                 abstract: false
             })
 
 
             .state('auth.login', {
                 url: '/login',
-                templateUrl: 'views/auth/login.html',
+                templateUrl: 'auth/login.html',
                 controller : 'AppCtrl'
             })
 
 
             .state('auth.walkthrough', {
                 url: '/walkthrough',
-                templateUrl: "views/auth/walkthrough.html"
+                templateUrl: "auth/walkthrough.html"
             })
 
             .state('auth.signup', {
                 url: '/signup',
-                templateUrl: "views/auth/signup.html"
+                templateUrl: "auth/signup.html"
             })
 
 
             .state('auth.restorepassword', {
                 url: '/restorepassword',
-                templateUrl: 'views/auth/restore-password.html',
+                templateUrl: 'auth/restore-password.html',
                 controller : 'RestorePasswordCtrl'
             })
 
             .state('auth.changepassword', {
                 url: '/changepassword/:key',
-                templateUrl: 'views/auth/change-password.html',
+                templateUrl: 'auth/change-password.html',
                 controller : 'RestorePasswordCtrl'
             })
-
-
-
-            .state('root', {
-                url: '/root',
-                templateUrl: 'dashboard.html'
-            })
-
-
-            .state('login', {
-                url: 'login',
-                templateUrl: 'views/auth/login.html',
-                controller : 'AppCtrl'
-            })
-
-            .state('register', {
-                url: '/register',
-                templateUrl: 'register.html',
-                controller : 'AuthorizationCtrl'
-            })
-
-
 
             .state('offline', {
                 url: '/offline',

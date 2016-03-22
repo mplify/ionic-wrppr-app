@@ -9,7 +9,7 @@ var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  templatecache: ['./www/views/**/*.html']
+  templatecache: ['./www/templates/**/*.html']
 };
 
 gulp.task('sass', function(done) {
@@ -25,7 +25,7 @@ gulp.task('sass', function(done) {
 
 gulp.task('templatecache', function (done) {
   gulp.src(paths.templatecache)
-    .pipe(templateCache({standalone:true, filename:'views.js', module:'your_app_name.views', root:'views/'}))
+    .pipe(templateCache({standalone:true, filename:'templates.js', module:'templates', root:''}))
     .pipe(gulp.dest('./www/js/'))
     .on('end', done);
 });

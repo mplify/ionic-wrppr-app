@@ -43,6 +43,7 @@ controllers.controller('MessageCtrl', function ($scope, $rootScope, $state, $fil
             $scope.images = LocalDataService.getPhotos();
             $scope.currentAttachments = $filter('filter')($scope.images, { message: messageID });
 
+
             $rootScope.supportMessage = $scope.currentMessage;
 
         }, function (err) {

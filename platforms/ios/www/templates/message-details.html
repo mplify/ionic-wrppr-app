@@ -27,15 +27,14 @@
 
                         </div>
                     </div>
-                    <div ng-show="messageOptions.length > 0">
+                    <div ng-show="messageOptions.length > 0" style="padding: 10px;">
                         <p ng-repeat="option in messageOptions" style="text-align: center; width: 100%;">{{option.NodeName}}</p>
                     </div>
-                    <p class="post-excerpt" dynamic-anchor-fix>{{currentMessage.Notes}}</p>
-                    <div class="post-actions row" ng-repeat="attachment in currentAttachments"  ng-show="currentAttachments.length > 0">
-                        <div class="actions col col-center col-66">
-                            <a class="button button-icon icon ion-file" ng-click="selectDocument(attachment)">{{attachment.name | Filename}}</a>
-                        </div>
+                    <p style="text-align: center; padding: 10px;">{{currentMessage.Notes}}</p>
+                    <div class="post-tags item item-text-wrap" ng-repeat="attachment in currentAttachments"  ng-show="currentAttachments.length > 0">
+                        <span class="post-tag button button-small button-outline button-stable" ng-click="selectDocument(attachment)" >{{attachment.name | Filename}}</span>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -224,7 +224,7 @@ angular.module('starter', [
                 url: '/messages',
                 views: {
                     'menuContent': {
-                        templateUrl: 'message-list.html'
+                        templateUrl: 'templates/message-list.html'
                     }
                 }
             })
@@ -233,7 +233,7 @@ angular.module('starter', [
                 url: '/messagedetails/:messageID',
                 views: {
                     'menuContent': {
-                        templateUrl: 'message-details.html'
+                        templateUrl: 'templates/message-details.html'
                     }
                 }
             })
@@ -243,7 +243,7 @@ angular.module('starter', [
                 url: '/favorites',
                 views: {
                     'menuContent': {
-                        templateUrl: 'favorites.html'
+                        templateUrl: 'templates/favorites.html'
                     }
                 }
             })
@@ -252,7 +252,7 @@ angular.module('starter', [
             url: '/favorite/:orgID',
                 views: {
                 'menuContent': {
-                    templateUrl: 'message-list.html'
+                    templateUrl: 'templates/message-list.html'
                 }
             }
              })

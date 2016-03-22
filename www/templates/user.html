@@ -8,7 +8,7 @@
             <div class="profile-container">
                 <div class="user-image-container">
                     <pre-img ratio="_1_1" helper-class="rounded-image">
-                        <img class="user-image" ng-src="https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"  spinner-on-load>
+                        <img class="user-image" ng-src="{{localFBUser.picture}}">
                     </pre-img>
                 </div>
                 <div class="user-name">{{localUser.UserName}}</div>
@@ -24,15 +24,19 @@
                 <p></p>
             </div>
         </div>
-        <div class="tabs tabs-icon-top">
-            <a class="tab-item">
-                <i class="icon ion-at" ng-click="switchLanguage();"></i>
-                English version
-            </a>
-            <a class="tab-item" ng-click="logout();">
-                <i class="icon ion-android-walk"></i>
-                {{ 'MENU.LOGOUT' | translate }}
-            </a>
-        </div>
+
+
     </ion-content>
+    <ion-footer-bar class="post-footer bar bar-footer bar-dark">
+        <div class="row">
+            <div class="col col-50 col-offset-10 col-center">
+                <a class="button button-icon icon icon-right ion-at"  ng-click="switchLanguage();"></a>
+            </div>
+            <div class="col col-50 col-offset-10 col-center">
+                <a class="button button-icon icon icon-right ion-android-walk"  ng-click="logout();"></a>
+            </div>
+
+
+        </div>
+    </ion-footer-bar>
 </ion-view>

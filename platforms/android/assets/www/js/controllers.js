@@ -14,14 +14,14 @@ angular.module('App.controllers', [])
                     $rootScope.brandingColor = $rootScope.sessionData.organization.BrandingColor1;
                 }
                 else {
-                    $rootScope.brandingColor = '#ff5642';
+                    $rootScope.brandingColor = '#00CCFF';
                 }
 
                 if($rootScope.sessionData.organization.BrandingColor2 !== null){
                     $rootScope.brandingColor2 = $rootScope.sessionData.organization.BrandingColor2;
                 }
                 else {
-                    $rootScope.brandingColor2 = '#ff5642';
+                    $rootScope.brandingColor2 = '#00CCFF';
                 }
 
             }

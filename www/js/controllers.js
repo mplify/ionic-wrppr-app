@@ -80,7 +80,6 @@ angular.module('App.controllers', [])
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
                     { text : "User correct"},
-                    { text : "Support"},
                     { text : "Feedback"}
 
                 ],
@@ -91,9 +90,6 @@ angular.module('App.controllers', [])
                         $scope.showUserCorrect();
                     }
                     else if(index === 1){
-                        $scope.mailSupport();
-                    }
-                    else if(index === 2){
                         $scope.mailFeedback();
                     }
 

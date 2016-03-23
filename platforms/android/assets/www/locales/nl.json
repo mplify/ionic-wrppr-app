@@ -1,114 +1,165 @@
 {
 
-    "APP_TITLE" : "wrpprNL",
-    "CONTACT_NAME" : "wrppr",
-    "GENERIC_CLOSE" : "CloseNL",
+    "APP_TITLE" : "wrppr",
+    "CONTACT_NAME" : "wrapper",
+    "GENERIC_CLOSE" : "Sluiten",
     "GENERIC"  : {
-        "REFRESH" : "Pull to refreshNL",
-        "FEEDBACK" : "FeedbackNL",
-        "SUPPORT" : "SupportNL"
+        "REFRESH" : "Pull to refresh",
+        "FEEDBACK" : "Feedback",
+        "FEEDBACK_MSG" : "Feedback omschrijving",
+        "SUPPORT" : "Support",
+        "SUPPORT_MSG" : "Support omschrijving",
+        "COMMENT" : "Opmerking",
+        "CLOSE" : "Close",
+        "CANCEL" : "Cancel",
+        "SERVER_ERROR_TITLE" : "Service is tijdelijk niet beschikbaar",
+        "SERVER_ERROR_TEXT" : "We werken aan een oplossing",
+        "HI" : "Hi,",
+        "WELCOME" : "Welkom terug",
+        "PRIVACY_WARNING" : "Door op 'Registeren' te klikken ga je akkoord met",
+        "TERMS_AND_CONDS" : "Gebruiksvoorwaarden",
+        "PRIVACY_POLICY" : "Privacy Policy"
     },
 
 
     "MENU" : {
-        "BUSINESS_CONTACT_SEARCH" : "SearchNL",
-        "USER_PROFILE" : "User ProfileNL",
-        "FAVORITES" : "FavoritesNL",
-        "HISTORY" : "Contact HistoryNL",
-        "ATTACHMENTS" : "AttachmentsNL",
-        "LOGOUT" : "LogoutNL"
+        "BUSINESS_CONTACT_SEARCH" : "Zoeken",
+        "USER_PROFILE" : "Gebruikersprofiel",
+        "FAVORITES" : "Favorieten",
+        "HISTORY" : "Contact Overview",
+        "ATTACHMENTS" : "Bijlagen",
+        "LOGOUT" : "Uitloggen"
     },
 
     "DASHBOARD" : {
-        "TITLE" : "Your business contactsNL",
-        "DESCRIPTION" : "Search any business, choose your question and contactNL",
-        "FACEBOOK_LOGIN" : "Sign in with FacebookNL",
-        "TWITTER_LOGIN" : "Sign in with TwitterNL",
-        "LOGIN" : "Sign InNL",
-        "REGISTER" : "RegisterNL"
+        "TITLE" : "Your business contacts",
+        "DESCRIPTION" : "Search any business, choose your question and contact",
+        "FACEBOOK_LOGIN" : "Inloggen via Facebook",
+        "TWITTER_LOGIN" : "Inloggen via Twitter",
+        "LOGIN" : "Inloggen",
+        "REGISTER" : "Registeren"
     },
-    "LOGIN_TITLE" : "LoginNL",
-    "USERNAME" : "UsernameNL",
-    "USERNAME_REQUIRED_VALIDATOR" : "* Username is requiredNL",
-    "USERNAME_NOT_UNIQUE_VALIDATOR" : "* Username is not uniqueNL",
-    "PASSWORD" : "PasswordNL",
-    "PASSWORD_REQUIRED_VALIDATOR" : "* Password is requiredNL",
-    "PASSWORD_MIN_LENGTH_VALIDATOR" : "* Password minimal length is 6NL",
-    "PASSWORD_MAX_LENGTH_VALIDATOR" : "* Password max length is 50NL",
-    "EMAIL_REQUIRED_VALIDATOR" : "* Email is requiredNL",
-    "LOGIN_BUTTON" : "LoginNL",
-    "FORGOT_PASSWORD_BUTTON" : "Forgot password/username?NL",
+    "LOGIN" : {
+        "LOADING" : "Login In...",
+        "FAILED" : "Login failed"
+     },
+    "FACEBOOK" : {
+        "LOADING" : "Login In via Facebook",
+        "FAILED" : "Inloggen mislukt"
+
+     },
+    "LOGIN_TITLE" : "Inloggen",
+    "USERNAME" : "Gebruikersnaam",
+    "USERNAME_REQUIRED_VALIDATOR" : "* Gebruikersnaam is verplicht",
+    "USERNAME_NOT_UNIQUE_VALIDATOR" : "* Gebruikersnaam is niet uniek",
+    "PASSWORD" : "Wachtwoord",
+    "PASSWORD_REQUIRED_VALIDATOR" : "* Wachtwoord is verplicht",
+    "PASSWORD_MIN_LENGTH_VALIDATOR" : "* Wachtwoord minimale lengte is 6",
+    "PASSWORD_MAX_LENGTH_VALIDATOR" : "* Wachtwoord maximale lengte is 50",
+    "EMAIL_REQUIRED_VALIDATOR" : "* Email is verplicht",
+    "LOGIN_BUTTON" : "Login",
+    "FORGOT_PASSWORD_BUTTON" : "Wachtwoord/gebruikersnaam vergeten?",
 
     "MAIL" : {
-        "SUBJECT" : "Question aboutNL ",
-        "BODY" : "DearNL"
+        "SUBJECT" : "Vraag over ",
+        "BODY" : "Beste"
     },
 
     "BUSINESS_CONTACT" : {
-        "SEARCH" : "Search business contactsNL",
-        "SEARCH_FILTER_PLACEHOLDER" : "SearchNL"
+        "SEARCH" : "Search business contacts",
+        "SEARCH_FILTER_PLACEHOLDER" : "Search"
 
     },
     "ACTIONS" : {
-        "TITLE" : "ContactNL",
-        "CALL" : "CALLNL",
-        "MAIL" : "MAILNL",
-        "TWEET" :  "TWEETNL",
-        "WEBPAGE" : "Open company webpage",
-        "WEBPAGE_GENERAL" : "General",
+        "TITLE" : "Contact",
+        "CALL" : "Bellen",
+        "MAIL" : "Mailen",
+        "TWEET" :  "Tweeten",
+        "WEBPAGE" : "Open website bedrijf",
+        "WEBPAGE_GENERAL" : "Algemeen",
         "WEBPAGE_SELF_SERVICE" : "Self Service",
         "WEBPAGE_SOCIAL" : "Community",
-        "CALL_PROCESS" : "Calling ...",
-        "CALL_FAILED"  : "Call failed",
-        "MESSAGE_SAVE_FAIL" : "Failed to save a message"
+        "CALL_PROCESS" : "Bellen ...",
+        "CALL_FAILED"  : "Bellen mislukt",
+        "MESSAGE_SAVE_FAIL" : "Bericht niet opgeslagen",
+        "NO_CONTACTS_TITLE" : "We hebben geen contactgegevens voor",
+        "NO_CONTACTS_MSG" : ", probeer het later opnieuw of neem contact met onze support afdeling"
 
     },
     "USER_CORRECT" : {
-        "BUTTON" : "User correctNL",
-        "TITLE" : "User correctNL",
-        "DESCRIPTION" : "Here should be a description what 'User correct' feature meansNL",
-        "SUBMIT" : "SendNL"
+        "BUTTON" : "User correct",
+        "TITLE" : "User correct",
+        "DESCRIPTION" : "Here should be a description what 'User correct' feature means",
+        "SUBMIT" : "Send"
 
     },
     "ATTACHMENT" : {
-        "TITLE" : "Capture AttachmentNL",
-        "ADD" : "AddNL",
-        "RELOAD" : "ReloadNL",
-        "NEW_TITLE" : "New AttachmentNL",
-        "FILENAME" : "FilenameNL",
-        "SAVE" : "SaveNL"
+        "TITLE" : "Vastleggen bijlage",
+        "LOADING" : "Vastleggen foto",
+
+        "ADD" : "Toevoegen",
+        "RELOAD" : "Herladen",
+        "NEW_TITLE" : "Nieuwe bijlage",
+        "FILENAME" : "Bestandsnaam",
+        "FILENAME_NOT_UNIQUE" : "Bestandsnaam is niet uniek",
+        "SAVE" : "Opslaan",
+        "SAVE_SUCCESS" : "Foto opgeslagen",
+        "SAVE_FAILED" : "Foto niet opgeslagen"
     },
     "CHANGE_PASSWORD" : {
-        "TITLE" : "Change PasswordNL",
-        "REPEAT_PASSWORD" : "Repeat PasswordNL",
-        "PASSWORD_MATCH" : "* Passwords don't matchNL",
-        "SUBMIT" : "Change PasswordNL",
-        "RECOVER_PASSWORD" : "Recover PasswordNL",
-        "RESTORE_SUBMIT" : "RestoreNL"
+        "TITLE" : "Wachtwoord wijzigen",
+        "REPEAT_PASSWORD" : "Wachtwoord herhalen",
+        "PASSWORD_MATCH" : "* Wachtwoorden komen niet overeen",
+        "SUBMIT" : "Wijzigen wachtwoord",
+        "RECOVER_PASSWORD" : "Wachtwoord herstellen",
+        "RESTORE_SUBMIT" : "Herstellen"
     },
     "FAVORITES" : {
-        "TITLE" : "FavoritesNL"
+        "TITLE" : "Favorieten",
+        "EMPTY_MSG"  : "Hier is nog geen informatie. Start met ontdekken!"
     },
     "MESSAGES" : {
-        "HISTORY_TITLE" : "Messages HistoryNL",
-        "DETAILS_TITLE" : "Message DetailsNL"
+        "HISTORY_TITLE" : "Contacts Overview",
+        "DETAILS_TITLE" : "Contactmoment",
+        "LOADING" : "Laden details ..",
+        "LOADING_LIST" : "Laden berichten",
+        "LOAD_FAILED" : "Laden mislukt",
+        "NOTE_BUTTON" : "Tekstnotitie",
+        "PHOTO_BUTTON" : "Foto vastleggen",
+        "NOTE_TITLE" : "Notities",
+        "SAVING" : "Notitie opslaan",
+        "SAVING_FAILED" : "Opslaan mislukt",
+        "NOTE_TITLE" : "Berichtnotitie"
+
     },
     "REGISTER" : {
-        "TITLE" : "RegisterNL",
-        "MOBILE" : "MobileNL",
-        "EMAIL" : "EmailNL",
-        "SUBMIT_BUTTON" : "RegisterNL"
+        "LOADING" : "Laden...",
+        "TITLE" : "Registeren",
+        "MOBILE" : "Mobiel",
+        "EMAIL" : "Email",
+        "SUBMIT_BUTTON" : "Registeren",
+        "FAILED" : "Registratie mislukt"
     },
     "INTRO" : {
-        "TITLE" : "WelcomeNL",
-        "TEXT" : "WelcomeNL, ",
-        "DESCRIPTION" : "Now you can search any business, choose your question and contactNL",
-        "SEARCH_BUTTON" : "Search companiesNL"
+        "TITLE" : "Welkom",
+        "TEXT" : "Welkom, ",
+        "DESCRIPTION" : "Now you can search any business, choose your question and contact",
+        "SEARCH_BUTTON" : "Zoeken bedrijven"
     },
     "OFFLINE" : {
-        "TITLE" : "OfflineNL",
-        "TEXT" : "No internet connectionNL",
-        "DESCRIPTION" : "Currently app doesn't support offline modeNL",
-        "REFRESH" : "RefreshNL"
+        "TITLE" : "Offline",
+        "TEXT" : "Geen internetverbinding",
+        "DESCRIPTION" : "Momenteel ondersteunen we geen offline modus",
+        "REFRESH" : "Refresh"
+    },
+    "ROUTING" : {
+        "LOADING" : "Laden ..",
+        "FAILED" : "Mislukt"
+    },
+    "RATING" : {
+        "TITLE" : "Beoordelen",
+        "TEXT" : "Graag uw beoordeling van wrapper",
+        "DESCRIPTION" : "Zou je familie/vrienden het gebruik van wrapper adviseren?",
+        "THANKS" : "Bedankt voor uw beoordeling!"
     }
 }

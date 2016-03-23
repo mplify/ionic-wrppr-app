@@ -15,7 +15,10 @@
         "SERVER_ERROR_TITLE" : "Service is temporarily not available",
         "SERVER_ERROR_TEXT" : "BUT we are working hard to fix it",
         "HI" : "Hi,",
-        "WELCOME" : "Welcome back"
+        "WELCOME" : "Welcome back",
+        "PRIVACY_WARNING" : "By pressing 'Register' button, you also agree with",
+        "TERMS_AND_CONDS" : "Terms and Conditons",
+        "PRIVACY_POLICY" : "Privacy Policy"
     },
 
 

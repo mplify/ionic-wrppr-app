@@ -368,9 +368,7 @@ angular.module('App.directives', [])
 				preImgController.hideSpinner();
 		  });
 
-            element.bind('error', function(){
-                preImgController.hideSpinner();
-            });
+
 		}
 	};
 })

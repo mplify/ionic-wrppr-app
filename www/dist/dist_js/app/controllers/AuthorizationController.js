@@ -43,6 +43,7 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$rootScope', '$ionicLoad
                 BasicAuthorizationService.generateToken($scope.loginData.UserName, $scope.loginData.Password);
 
                 $rootScope.currentUsername = $scope.loginData.UserName;
+                $rootScope.profilePhoto = "img/photo.jpg";
 
 
                 $scope.resetLoginForm();

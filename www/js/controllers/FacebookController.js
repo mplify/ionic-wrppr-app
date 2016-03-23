@@ -93,6 +93,8 @@ controllers.controller('FacebookCtrl', function ($scope, $rootScope, $state, $st
 
         profileInfo.accessToken = accessToken;
         profileInfo.picture = "http://graph.facebook.com/" + profileInfo.userID + "/picture?type=large";
+
+        $rootScope.profilePhoto = profileInfo.picture;
         LocalDataService.saveFacebookResponse(profileInfo);
 
         $log.info('logged in via facebook', user);

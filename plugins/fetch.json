@@ -82,8 +82,8 @@
         },
         "is_top_level": true,
         "variables": {
-            "APP_ID": "758543534250966",
-            "APP_NAME": "test"
+            "APP_ID": "922803477837964",
+            "APP_NAME": "wrapper"
         }
     },
     "cordova-plugin-inappbrowser": {

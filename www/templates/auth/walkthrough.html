@@ -11,10 +11,12 @@
         <div class="bottom-content" style="height: 35%;">
             <div class="row">
                 <div class="col col-center">
-                    <a class="login button button-block button-stable" ng-controller="FacebookCtrl"
+                    <a class="login button button-block button-stable facebook-button" ng-controller="FacebookCtrl"
                        ng-show="facebookLoginEnabled" ng-init="facebookAutoLogin()" ng-click="facebookManualLogin()">
+                        <i class="icon ion-social-facebook"></i>
                         {{'DASHBOARD.FACEBOOK_LOGIN' | translate}}
                     </a>
+
                     <a class="login button button-block button-stable" ng-controller="TwitterCtrl"
                        ng-show="twitterLoginEnabled" ng-click="twitterLogin()">
                         {{'DASHBOARD.TWITTER_LOGIN' | translate}}
@@ -28,12 +30,12 @@
             <div class="row">
                 <div class="col col-center" style="text-align: center;">
                     <a class="button button-small button-clear button-light" ui-sref="auth.login">
-                        Log In
+                        {{'LOGIN_BUTTON' | translate}}
                     </a>
                 </div>
                 <div class="col col-center" style="text-align: center;">
                     <a class="button button-small button-clear button-light" ui-sref="auth.signup">
-                        Sign Up
+                        {{'DASHBOARD.REGISTER' | translate}}
                     </a>
                 </div>
             </div>

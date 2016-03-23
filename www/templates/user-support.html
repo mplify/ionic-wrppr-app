@@ -1,6 +1,6 @@
 <ion-modal-view>
     <ion-header-bar align-title="left">
-        <h1 class="title">Support</h1>
+        <h1 class="title">{{'GENERIC.SUPPORT' | translate}}</h1>
         <div class="buttons">
             <button class="button button-clear" ng-click="closeModal();">{{'GENERIC_CLOSE' | translate}}</button>
         </div>
@@ -9,12 +9,12 @@
         <form  ng-submit="submitUserCorrect('support', comment )" novalidate>
             <div class="list">
                 <label class="item">
-                    How can we help you
+                    {{'GENERIC.SUPPORT_MSG' | translate}}
                 </label>
 
 
                 <label class="item item-input">
-                    <span class="input-label">Comment</span>
+                    <span class="input-label">{{'GENERIC.COMMENT' | translate}}</span>
                     <input type="text" name="username" ng-model="comment">
 
                 </label>

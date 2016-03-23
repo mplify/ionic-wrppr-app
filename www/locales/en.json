@@ -6,11 +6,16 @@
     "GENERIC"  : {
         "REFRESH" : "Pull to refresh",
         "FEEDBACK" : "Feedback",
+        "FEEDBACK_MSG" : "Feedback description",
         "SUPPORT" : "Support",
+        "SUPPORT_MSG" : "Support description",
+        "COMMENT" : "Comment",
         "CLOSE" : "Close",
         "CANCEL" : "Cancel",
         "SERVER_ERROR_TITLE" : "Service is temporarily not available",
-        "SERVER_ERROR_TEXT" : "BUT we are working hard to fix it"
+        "SERVER_ERROR_TEXT" : "BUT we are working hard to fix it",
+        "HI" : "Hi,",
+        "WELCOME" : "Welcome back"
     },
 
 
@@ -73,7 +78,9 @@
         "WEBPAGE_SOCIAL" : "Community",
         "CALL_PROCESS" : "Calling ...",
         "CALL_FAILED"  : "Call failed",
-        "MESSAGE_SAVE_FAIL" : "Failed to save a message"
+        "MESSAGE_SAVE_FAIL" : "Failed to save a message",
+        "NO_CONTACTS_TITLE" : "We don't have any contacts for",
+        "NO_CONTACTS_MSG" : ", please try later or contact our support"
 
     },
     "USER_CORRECT" : {
@@ -105,7 +112,8 @@
         "RESTORE_SUBMIT" : "Restore"
     },
     "FAVORITES" : {
-        "TITLE" : "Favorites"
+        "TITLE" : "Favorites",
+        "EMPTY_MSG"  : "There's nothing here yet. Start exploring!"
     },
     "MESSAGES" : {
         "HISTORY_TITLE" : "Contacts Overview",
@@ -117,7 +125,8 @@
         "PHOTO_BUTTON" : "Capture Photo",
         "NOTE_TITLE" : "Notes",
         "SAVING" : "Saving note",
-        "SAVING_FAILED" : "Saving failed"
+        "SAVING_FAILED" : "Saving failed",
+        "NOTE_TITLE" : "Message Note"
 
     },
     "REGISTER" : {

@@ -53,6 +53,10 @@
 			float: right;
 		}
 	}
+
+    p {
+       color : $theme-color-2;
+    }
 }
 
 .toggle-view-anchor
@@ -70,4 +74,21 @@
 	{
 		color: $show-hide-password-color;
 	}
+}
+
+.facebook-button {
+  background-color: #3b5998 !important;
+
+  .icon {
+
+    position: absolute;
+    left: 20px;
+    border-right-style: solid;
+    border-right-color: #a9A9a9;
+    border-right-width: 1px;
+    height: 47px;
+    padding-right: 15px;
+    color: white;
+
+  }
 }

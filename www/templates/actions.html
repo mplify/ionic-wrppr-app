@@ -14,8 +14,8 @@
              ng-show="contacts.call == null && contacts.twitter == null && contacts.email == null">
 
             <div class="ion-sad-outline" style="font-size: 86px; color: lightgray;"></div>
-            <h4 class="title" style="width: 100%; text-align: center;">We don't have any contacts for
-                {{currentOrganization}}, please try later or contact our support</h4>
+            <h4 class="title" style="width: 100%; text-align: center;">{{'ACTIONS.NO_CONTACTS_TITLE' | translate}}
+                {{currentOrganization}}{{'ACTIONS.NO_CONTACTS_MSG' | translate}}</h4>
 
 
         </div>

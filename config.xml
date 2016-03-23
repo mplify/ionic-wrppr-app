@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.wrppr.wrppr" ios-CFBundleVersion="0.4.5" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.wrppr.wrppr" ios-CFBundleVersion="0.4.6" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>wrapper</name>
   <description>
         wrapper
@@ -80,7 +80,7 @@
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <plugin name="cordova-plugin-facebook4" spec="~1.6.3">
-    <variable name="APP_ID" value="758543534250966"/>
-    <variable name="APP_NAME" value="test"/>
+    <variable name="APP_ID" value="922803477837964"/>
+    <variable name="APP_NAME" value="wrapper"/>
   </plugin>
 </widget>

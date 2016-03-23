@@ -1,6 +1,6 @@
 {
 
-    "APP_TITLE" : "wrppr",
+    "APP_TITLE" : "wrapper",
     "CONTACT_NAME" : "wrapper",
     "GENERIC_CLOSE" : "Close",
     "GENERIC"  : {
@@ -13,11 +13,11 @@
         "CLOSE" : "Close",
         "CANCEL" : "Cancel",
         "SERVER_ERROR_TITLE" : "Service is temporarily not available",
-        "SERVER_ERROR_TEXT" : "BUT we are working hard to fix it",
+        "SERVER_ERROR_TEXT" : "We are working hard to fix it",
         "HI" : "Hi,",
         "WELCOME" : "Welcome back",
-        "PRIVACY_WARNING" : "By pressing 'Register' button, you also agree with",
-        "TERMS_AND_CONDS" : "Terms and Conditons",
+        "PRIVACY_WARNING" : "By pressing 'Register' button, you agree with",
+        "TERMS_AND_CONDS" : "Disclaimer, User Terms",
         "PRIVACY_POLICY" : "Privacy Policy"
     },
 
@@ -32,19 +32,19 @@
     },
 
     "DASHBOARD" : {
-        "TITLE" : "Your business contacts",
-        "DESCRIPTION" : "Search any business, choose your question and contact",
-        "FACEBOOK_LOGIN" : "Sign in with Facebook",
-        "TWITTER_LOGIN" : "Sign in with Twitter",
+        "TITLE" : "Your Business Contacts",
+        "DESCRIPTION" : "Search any business, choose your question and get in touch",
+        "FACEBOOK_LOGIN" : "Facebook login",
+        "TWITTER_LOGIN" : "Twitter login",
         "LOGIN" : "Sign In",
         "REGISTER" : "Register"
     },
     "LOGIN" : {
-        "LOADING" : "Login In...",
+        "LOADING" : "Logging in...",
         "FAILED" : "Login failed"
      },
     "FACEBOOK" : {
-        "LOADING" : "Login In via Facebook",
+        "LOADING" : "Logging in via Facebook...",
         "FAILED" : "Login failed"
 
      },
@@ -82,14 +82,14 @@
         "CALL_PROCESS" : "Calling ...",
         "CALL_FAILED"  : "Call failed",
         "MESSAGE_SAVE_FAIL" : "Failed to save a message",
-        "NO_CONTACTS_TITLE" : "We don't have any contacts for",
-        "NO_CONTACTS_MSG" : ", please try later or contact our support"
+        "NO_CONTACTS_TITLE" : "We don't have any contactdetails for",
+        "NO_CONTACTS_MSG" : ", please try again later or contact our support team"
 
     },
     "USER_CORRECT" : {
         "BUTTON" : "User correct",
         "TITLE" : "User correct",
-        "DESCRIPTION" : "Here should be a description what 'User correct' feature means",
+        "DESCRIPTION" : "Do you have an improvement, let us know, thanks!",
         "SUBMIT" : "Send"
 
     },
@@ -121,15 +121,15 @@
     "MESSAGES" : {
         "HISTORY_TITLE" : "Contacts Overview",
         "DETAILS_TITLE" : "Contact Moment",
-        "LOADING" : "Loading details ..",
+        "LOADING" : "Loading details...",
         "LOADING_LIST" : "Loading messages",
         "LOAD_FAILED" : "Load failed",
         "NOTE_BUTTON" : "Text Note",
-        "PHOTO_BUTTON" : "Capture Photo",
+        "PHOTO_BUTTON" : "Capture photo",
         "NOTE_TITLE" : "Notes",
         "SAVING" : "Saving note",
         "SAVING_FAILED" : "Saving failed",
-        "NOTE_TITLE" : "Message Note"
+        "NOTE_TITLE" : "Message note"
 
     },
     "REGISTER" : {
@@ -149,7 +149,7 @@
     "OFFLINE" : {
         "TITLE" : "Offline",
         "TEXT" : "No internet connection",
-        "DESCRIPTION" : "Currently app doesn't support offline mode",
+        "DESCRIPTION" : "Currently we don't support offline mode",
         "REFRESH" : "Refresh"
     },
     "ROUTING" : {
@@ -159,7 +159,7 @@
     "RATING" : {
         "TITLE" : "Rate",
         "TEXT" : "Please rate wrapper",
-        "DESCRIPTION" : "Would you tip a friend to use wrapper?",
-        "THANKS" : "Thank you for rating wrapper"
+        "DESCRIPTION" : "Would you tip family/friends to use wrapper?",
+        "THANKS" : "Thank you for rating wrapper!"
     }
 }

@@ -1,8 +1,16 @@
-<ion-view class="category-feeds-view" ng-controller="MessageHistoryCtrl">
+<ion-view class="category-feeds-view bookmarks-view" ng-controller="MessageHistoryCtrl">
     <ion-nav-title>
         <span>{{'MESSAGES.HISTORY_TITLE' | translate}}</span>
     </ion-nav-title>
     <ion-content>
+        <div ng-if="messages.length === 0" class="row bookmarks-container">
+            <div class="col col-center">
+                <div class="empty-results">
+                    <i class="icon ion-bookmark"></i>
+                    <h3 class="no-bookmarks">{{"FAVORITES.EMPTY_MSG" | translate}}</h3>
+                </div>
+            </div>
+        </div>
         <div class="list category-feeds">
             <a ng-repeat="message in messages track by message.id" class="item item-icon-right"
                ng-click="selectMessage(message)">

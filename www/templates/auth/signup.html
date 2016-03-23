@@ -1,4 +1,4 @@
-<ion-view class="signup-view auth-view" cache-view="false">
+<ion-view class="signup-view auth-view" cache-view="false" can-swipe-back="false">
   <ion-content scroll="false">
     <div class="row">
       <div class="col col-center">
@@ -23,7 +23,7 @@
                     <p ng-show="registerForm.Password.$error.maxlength">{{'PASSWORD_MAX_LENGTH_VALIDATOR' | translate}}</p>
                 </label>
                 <label class="item item-input">
-                    <input placeholder="{{'REGISTER.MOBILE' | translate}}" type="tel" pattern="+[0-9]*" ng-model="registerData.mobile" required>
+                    <input placeholder="{{'REGISTER.MOBILE' | translate}}" type="tel" pattern="+[0-9]*" ng-model="registerData.mobile">
                 </label>
                 <label class="item item-input">
                     <input placeholder="{{'REGISTER.EMAIL' | translate}}" type="email" name="Email" ng-model="registerData.Emailaddress" required>
@@ -45,8 +45,8 @@
               {{'LOGIN_BUTTON' | translate}}
           </a>
           <p class="log-in button-small button-clear button-light" style="text-align: center; padding-top: 20px;" >{{'GENERIC.PRIVACY_WARNING' |  translate}}
-              <a href="http://www.mplify.nl/-temporary-slug-fe56b1f7-97e5-46fc-9835-0327a9cdb7bb?hs_preview=hXKmSMPB-3990019867" target="_system">{{'GENERIC.TERMS_AND_CONDS' |  translate}}</a>
-              , <a href="http://www.mplify.nl/-temporary-slug-fe56b1f7-97e5-46fc-9835-0327a9cdb7bb?hs_preview=hXKmSMPB-3990019867" target="_system">{{'GENERIC.PRIVACY_POLICY' |  translate}}</a> </p>
+              <a ui-sref="policy">{{'GENERIC.TERMS_AND_CONDS' |  translate}}</a>
+              , <a ui-sref="policy">{{'GENERIC.PRIVACY_POLICY' |  translate}}</a> </p>
         </div>
       </div>
     </div>

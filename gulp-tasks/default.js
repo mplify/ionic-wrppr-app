@@ -19,7 +19,7 @@ var paths = {
 };
 
 
-gulp.task('ng_annotate', function (done) {
+gulp.task('ng_annotate', ['templatecache'], function (done) {
     gulp.src(paths.ng_annotate)
         .pipe(ngAnnotate({single_quotes: true}))
         .pipe(gulp.dest('./www/dist/dist_js/app'))
@@ -46,7 +46,7 @@ gulp.task('templatecache', function (done) {
 });
 
 
-gulp.task('useref', function (done) {
+gulp.task('useref', ['ng_annotate'], function (done) {
 
     gulp.src('./www/*.html')
 

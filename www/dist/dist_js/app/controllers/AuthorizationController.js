@@ -87,6 +87,9 @@ controllers.controller('AuthorizationCtrl', ['$scope', '$rootScope', '$ionicLoad
             var user = response;
             LocalDataService.saveUser(user);
 
+            $rootScope.currentUsername = $scope.registerData.UserName;
+            $rootScope.profilePhoto = "img/photo.jpg";
+
 
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.wrppr.wrppr" ios-CFBundleVersion="0.4.8" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.wrppr.wrppr" ios-CFBundleVersion="0.4.13" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>wrapper</name>
   <description>
         wrapper
     </description>
   <author email="marykiselova@gmail.com" href="http://mplify.nl/">
-      Marija Kiselova
+      mplify
     </author>
   <content src="index.html"/>
   <access origin="*"/>

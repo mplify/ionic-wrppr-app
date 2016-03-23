@@ -255,7 +255,15 @@ angular.module('starter', [
                         templateUrl: 'document-details.html'
                     }
                 }
+            })
+
+            .state('policy', {
+                url: '/policy',
+                templateUrl: 'privacy-policy.html'
             });
+
+
+
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/auth/walkthrough');

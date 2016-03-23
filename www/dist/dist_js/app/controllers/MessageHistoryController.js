@@ -15,9 +15,11 @@ controllers.controller('MessageHistoryCtrl', ['$scope', '$rootScope', '$state', 
     ];
 
 
-    $scope.userID = LocalDataService.loadUser().id;
+
 
     $scope.load = function () {
+        $scope.userID = LocalDataService.loadUser().id;
+
         $ionicLoading.show({
             template: $translate.instant("MESSAGES.LOADING_LIST")
         });

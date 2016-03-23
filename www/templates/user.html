@@ -23,15 +23,21 @@
             <div class="user-bio">
                 <p></p>
             </div>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Language
+                </div>
+                <select ng-model="currentLanguage" ng-change="switchLanguage(currentLanguage)">
+                    <option value="en">English</option>
+                    <option value="nl">Dutch</option>
+                </select>
+            </label>
         </div>
 
 
     </ion-content>
     <ion-footer-bar class="post-footer bar bar-footer bar-dark">
         <div class="row">
-            <div class="col col-50 col-offset-10 col-center">
-                <a class="button button-icon icon icon-right ion-at"  ng-click="switchLanguage();"></a>
-            </div>
             <div class="col col-50 col-offset-10 col-center">
                 <a class="button button-icon icon icon-right ion-android-walk"  ng-click="logout();"></a>
             </div>

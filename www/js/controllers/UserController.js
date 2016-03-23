@@ -29,14 +29,21 @@ controllers.controller('UserCtrl', function ($scope, $rootScope, $log, $translat
         if($scope.localUser.id){
             $scope.loadUserDetails($scope.localUser.id);
         }
+
+
+
+        $scope.currentLanguage = $translate.use();
+
+
+
     };
 
     $scope.load();
     $scope.$on('$ionicView.enter', function(){$scope.load();});
 
-    $scope.switchLanguage = function(){
+    $scope.switchLanguage = function(language){
         $log.info('switch to english');
-        $translate.use("en");
+        $translate.use(language);
 
         $ionicLoading.show({
             template: 'Switching language ...'

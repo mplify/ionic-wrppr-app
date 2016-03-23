@@ -1,6 +1,6 @@
 angular.module('App.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $state, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $q, $ionicActionSheet, $templateCache, $translate, $timeout, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
+    .controller('AppCtrl', function ($scope, $rootScope, $state, $cordovaInAppBrowser, $window, $log, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $ionicHistory, $q, $ionicActionSheet, $templateCache, $translate, $timeout, BasicAuthorizationService, UserService, $cordovaOauth,  api, $http, LocalDataService, NetworkService, SupportService) {
 
         $rootScope.debugMode = false;
 
@@ -79,18 +79,18 @@ angular.module('App.controllers', [])
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text : "User correct"},
-                    { text : "Feedback"}
+                    { text : $translate.instant("USER_CORRECT.BUTTON")},
+                    { text : $translate.instant("GENERIC.SUPPORT")}
 
                 ],
-                titleText: 'Feedback',
-                cancelText: 'Cancel',
+                titleText: $translate.instant("GENERIC.SUPPORT"),
+                cancelText: $translate.instant("GENERIC.CANCEL"),
                 buttonClicked: function (index) {
                     if(index === 0){
                         $scope.showUserCorrect();
                     }
                     else if(index === 1){
-                        $scope.mailFeedback();
+                        $scope.mailSupport();
                     }
 
 
@@ -207,6 +207,21 @@ angular.module('App.controllers', [])
         $scope.closeRating = function(){
             $scope.isRated = false;
             $scope.closeModal();
+        };
+
+        $scope.openExternalUrl = function(){
+            alert('test');
+             var url = "http://www.mplify.nl/-temporary-slug-fe56b1f7-97e5-46fc-9835-0327a9cdb7bb?hs_preview=hXKmSMPB-3990019867";
+
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'no'
+            };
+
+            $cordovaInAppBrowser.open(url, '_blank', options);
+
+
         };
 
 

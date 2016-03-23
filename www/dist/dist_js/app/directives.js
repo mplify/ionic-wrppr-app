@@ -75,7 +75,7 @@ angular.module('App.directives', [])
 		scope: {
 		},
 		controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-			$scope.show = false;
+			$scope.show = true;
 
 			$scope.toggleType = function($event){
 				$event.stopPropagation();

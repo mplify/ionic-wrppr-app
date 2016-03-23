@@ -50,6 +50,11 @@ services.service('MessageService', ['$http', '$q', '$log', 'api', function ($htt
                         'sort' : 'createdAt DESC'
                     };
                 }
+                else {
+                    $log.error('trying to load message with no user');
+                    defer.reject(err);
+                }
+
 
                 if(orgID){
                     params.OrgID = orgID;

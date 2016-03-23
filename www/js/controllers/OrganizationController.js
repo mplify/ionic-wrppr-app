@@ -1,6 +1,6 @@
 var controllers = angular.module('App.controllers');
 
-controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService, OptionService) {
+controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $timeout, $ionicLoading, $ionicModal, $templateCache, $state, $log, OrganizationService, LocalDataService, OptionService) {
     $log.info('init organizations controller');
     $scope.introVisited = LocalDataService.getIntroScreenVisited();
 
@@ -39,6 +39,8 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
 
     ];
 
+    $scope.requests = [];
+
 
 
     $scope.noMoreItemsAvailable = false;
@@ -58,11 +60,18 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
             template: 'Loading...'
         });
 
+        if($scope.requests.length > 0){
+            $scope.cancel($scope.requests.pop());
+        }
 
 
         $scope.isLoading = true;
 
-        OrganizationService.getOrganizations(searchText, $scope.organizations.length).then(function(response) {
+        var request = OrganizationService.getOrganizations(searchText, $scope.organizations.length);
+        $scope.requests.push(request);
+
+
+        request.promise.then(function(response) {
 
             if(response.length === 0){
                $scope.noMoreItemsAvailable = true;
@@ -73,8 +82,10 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
 
 
 
+
             $ionicLoading.hide();
             $scope.isLoading = false;
+            $scope.clearRequest(request);
 
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -83,12 +94,23 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
         function(error){
             $log.error('Failed to load organizations', error);
             $ionicLoading.hide();
-            $scope.isLoading = false;
 
+            $scope.isLoading = false;
+            $scope.request = {};
 
 
         }
         );
+    };
+
+
+    $scope.cancel = function(request){
+        request.cancel("User cancelled");
+        $scope.clearRequest(request);
+    };
+
+    $scope.clearRequest = function(request){
+        $scope.requests.splice($scope.requests.indexOf(request), 1);
     };
 
     $scope.loadNext = function(){
@@ -127,11 +149,12 @@ controllers.controller('OrganizationsCtrl', function ($scope, $rootScope, $ionic
     };
 
     $scope.$watch('search.model', function(newVal, oldVal){
-        // wait till prev load done
+        /* wait till prev load done
         if($scope.isLoading){
             $log.debug('skipped loading organization, prev is not done');
             return;
-        }
+        }*/
+
 
         $log.info('search organization model changed: ' + newVal + oldVal);
         $scope.reload(newVal);
